@@ -7,11 +7,15 @@ output:
       toc: true
 ---
 
-```{r, setup, include=FALSE}
+```{r}
+#| label: setup
+#| include: false
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-```{r load_packages, message=FALSE}
+```{r}
+#| label: load_packages
+#| message: false
 # Get tidyverse & a few other packages
 
 # If they are not installed, uncomment and run these commands first
@@ -29,7 +33,8 @@ library(ggpmisc) # For ggplot2 extensions
 
 Now lets explore the data, load it, and re-run a recent plot
 
-```{r load_data}
+```{r}
+#| label: load_data
 ?complete_old
 
 # Add data to R environment

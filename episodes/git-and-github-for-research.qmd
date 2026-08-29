@@ -11,11 +11,15 @@ params:
 #toc: yes
 ---
 
-```{r, setup1, include=FALSE}
+```{r}
+#| label: setup1
+#| include: false
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-```{bash, setup2, include=FALSE}
+```{bash}
+#| label: setup2
+#| include: false
 mkdir ~/awesomeproject
 touch ~/awesomeproject/data.csv ~/awesomeproject/analysis_script_final.1.R \
 ~/awesomeproject/analysis_script_final.R ~/awesomeproject/analysis_script_v1.R \
@@ -67,7 +71,8 @@ Research can become a "garden of forking paths"
 
 ## Inside a "simple" data analysis project
 
-```{bash, awesomeproject}
+```{bash}
+#| label: awesomeproject
 ls ~/awesomeproject/
 ```
 
@@ -79,7 +84,8 @@ The researcher has gone down different paths, each resulting in a new file:
 
 ## Using Git simplifies things 
 
-```{bash, awesomeproject_git}
+```{bash}
+#| label: awesomeproject_git
 # The -a lists hidden files like .git
 ls -a ~/awesomeproject_git/
 ```
@@ -110,11 +116,14 @@ divergent changes from the original
 
 ## An annotated list of "commits" {.smaller}
 
-```{bash, commits}
+```{bash}
+#| label: commits
 git -C ~/awesomeproject_git/ log
 ```
 
-```{r, cleanup_1, include=FALSE}
+```{r}
+#| label: cleanup_1
+#| include: false
 unlink('~/awesomeproject', recursive=TRUE)
 unlink('~/awesomeproject_git', recursive=TRUE)
 ```
@@ -127,7 +136,8 @@ We will do this in the system shell. So, open a terminal with `bash`, `zsh`,
 or another shell (you may have installed one with Git on Windows), and then
 type the following command.
 
-```{bash, check_for_git}
+```{bash}
+#| label: check_for_git
 git --version
 ```
 If you got the output above, or similar, you have Git installed and it is
@@ -141,7 +151,9 @@ usually follow a `git verb options` pattern, where `verb` is the action you need
 to take, and `options` give some specifics of how to do the action. For 
 configuration, lets first, tell `git` who you are.
 
-```{bash, tell_git_who_u_are, eval=FALSE}
+```{bash}
+#| label: tell_git_who_u_are
+#| eval: false
 git config --global user.name "Marie Curie"
 git config --global user.email "marie@sorbonne.fr"
 ```
@@ -151,20 +163,26 @@ in text files. Correspondingly, you will want to tell Git how to handle this for
 you, and the configuration for MS Windows machines will be different than for
 Mac and Linux machines. For Mac and Linux, the recommended setting is:
 
-```{bash, line-endings_mac, eval=FALSE}
+```{bash}
+#| label: line-endings_mac
+#| eval: false
 git config --global core.autocrlf input
 ```
 
 And for Windows it is:
 
-```{bash, line-endings_win, eval=FALSE}
+```{bash}
+#| label: line-endings_win
+#| eval: false
 git config --global core.autocrlf true
 ```
 
 Since we'll be using GitHub, which names its repository main branches `main`,
 we should make sure our local `git` follows the same convention.
 
-```{bash, config_main, eval=FALSE}
+```{bash}
+#| label: config_main
+#| eval: false
 git config --global init.defaultBranch main
 ```
 
@@ -178,12 +196,15 @@ You can show your Git configurations anytime with `git config --list` command.
 Now lets make a new directory and add a text file to it. We will turn this into
 a Git repository in a moment.
 
-```{bash, start_repo}
+```{bash}
+#| label: start_repo
 mkdir ~/my_repo
 touch ~/my_repo/script.R
 cd ~/my_repo
 ```
-```{r, setup3, include=FALSE}
+```{r}
+#| label: setup3
+#| include: false
 # Have to change working directory
 knitr::opts_knit$set(root.dir = '~/my_repo')
 #setwd('~/my_repo')
@@ -191,20 +212,23 @@ knitr::opts_knit$set(root.dir = '~/my_repo')
 
 Now that we are in our project directory, lets make it a Git repository
 
-```{bash, init_repo}
+```{bash}
+#| label: init_repo
 git init
 ```
 
 We can use the `ls -a` shell command to see if we made a `.git` directory to
 to store the changes we will make to our files.
 
-```{bash, list_repo}
+```{bash}
+#| label: list_repo
 ls -a
 ```
 The `.git/` directory is there. Now lets ask Git to tell us the status of our
 repository.
 
-```{bash, repo_status}
+```{bash}
+#| label: repo_status
 git status
 ```
 
@@ -216,14 +240,16 @@ we made - `script.R` - that is not being tracked.
 Lets tell Git to track that file. We do that with the `add` verb, which 
 "stages" the file to be added to a new commit.
 
-```{bash, stage_file}
+```{bash}
+#| label: stage_file
 git add script.R
 ```
 
 If we want to check the status now, we'll see that `script.R` is staged to be 
 added as a new file, under the "Changes to be committed" list.
 
-```{bash, status_staged}
+```{bash}
+#| label: status_staged
 git status
 ```
 
@@ -233,7 +259,8 @@ we are ready to add these changes, for us just one new file, to our `git`
 repository, we `commit` the changes to the repository, which will store the
 initial version of our file in Git's history.
 
-```{bash, commit_file}
+```{bash}
+#| label: commit_file
 git commit -m 'Adding the first R script'
 ```
 
@@ -242,12 +269,15 @@ changes to the repository as well. **Open up your `script.R` file in a text edit
 and add a couple lines of "code", then save this file again**. After it is saved
 you can check your repository status with `git status` again.
 
-```{bash, add_lines, include=FALSE}
+```{bash}
+#| label: add_lines
+#| include: false
 echo "Load the data..." >> script.R
 echo "Fit a linear model..." >> script.R
 ```
 
-```{bash, status_script}
+```{bash}
+#| label: status_script
 git status
 ```
 
@@ -256,7 +286,8 @@ staged yet. To get line-by-line details about what changed in your file, you can
 "diff" the file to show the difference between the last committed version, and
 what it looks like after you added some code.
 
-```{bash, diff_script}
+```{bash}
+#| label: diff_script
 git diff script.R
 ```
 
@@ -265,7 +296,8 @@ Lines starting with `-` would show you what was removed, but we haven't removed
 anything. This seems like a reasonable change, so lets stage the updated file
 with `git add` and add it to our repository with `git commit`.
 
-```{bash, commit_script}
+```{bash}
+#| label: commit_script
 git add script.R
 git commit -m 'I updated the script with 2 lines'
 ```
@@ -278,17 +310,22 @@ you commit something, put a little thought into how you will describe the change
 
 Lets take a quick look at our history now:
 
-```{bash, log_after_changes}
+```{bash}
+#| label: log_after_changes
 git log
 ```
 
 We can see our progress so far. There are two commits, with the first adding the
 new `script.R` file, and the second one adding a couple of lines to it.
 
-```{r, setup_4, include=FALSE}
+```{r}
+#| label: setup_4
+#| include: false
 knitr::opts_knit$set(root.dir = '~/GitHub/JEDS/episodes')
 ```
-```{r, cleanup_2, include=FALSE}
+```{r}
+#| label: cleanup_2
+#| include: false
 unlink('~/my_repo', recursive=TRUE)
 ```
 
@@ -312,7 +349,9 @@ networked, collaborative way
 
 **Clone or sync changes (`push` and `pull`) with GitHub repositories using `git`**
 
-```{bash, clone_GitHub_ex, eval=FALSE}
+```{bash}
+#| label: clone_GitHub_ex
+#| eval: false
 git clone https://github.com/jornada-im/JEDS.git
 ```
 
@@ -356,7 +395,9 @@ First make a place on your local machine to put the repository. Return to your
 system shell and make a new directory called `GitHub` to hold local repositories
 you clone from GitHub.
 
-```{bash, mkdir_GitHub, eval=FALSE}
+```{bash}
+#| label: mkdir_GitHub
+#| eval: false
 mkdir GitHub
 ```
 
@@ -369,7 +410,9 @@ address (2 overlapping squares). The address for your repository is now in your
 system clipboard. Return to your shell, navigate to the `GitHub` directory, and 
 `git clone` the repository at that address:
 
-```{bash, clone_my_gh_repo, eval=T}
+```{bash}
+#| label: clone_my_gh_repo
+#| eval: !expr T
 cd ~/GitHub/ #Note: you can put GitHub/ somewhere other than the home directory (~)
 git clone https://github.com/gremau/my_gh_repo.git
 ```
@@ -378,11 +421,15 @@ Now you should have a clone, or copy, of the `my_gh_repo` repository you just
 made that is ready to work with in your local `GitHub/` directory. Lets enter
 that directory and look around.
 
-```{r, setup_5, include=FALSE}
+```{r}
+#| label: setup_5
+#| include: false
 # Keep the correct path
 knitr::opts_knit$set(root.dir = '~/GitHub')
 ```
-```{bash, look_at_clone, eval=T}
+```{bash}
+#| label: look_at_clone
+#| eval: !expr T
 cd my_gh_repo/
 ls -a
 ```
@@ -397,16 +444,21 @@ editor to open up the `README.md` file inside your `my_gh_repo` repository
 folder and add a couple new lines of text. Once you do, Git should notice the
 change when checking the repository status.
 
-```{r, setup_6, include=FALSE}
+```{r}
+#| label: setup_6
+#| include: false
 # Keep the correct path
 knitr::opts_knit$set(root.dir = '~/GitHub/my_gh_repo/')
 ```
-```{bash, change_gh_repo, include=FALSE}
+```{bash}
+#| label: change_gh_repo
+#| include: false
 echo "This repository does this" >> README.md
 echo "This repository does that" >> README.md
 ```
 
-```{bash, new_repo_status}
+```{bash}
+#| label: new_repo_status
 git status
 ```
 
@@ -415,7 +467,8 @@ Notice that `git status` now tells us the repository status in relation to the
 in this case the repository on GitHub that we cloned from. We can list our
 remote repositories, and inspect the origin with the `git remote` command.
 
-```{bash, check origin1}
+```{bash}
+#| label: check origin1
 git remote -v # -v is for "verbose"
 ```
 
@@ -423,14 +476,16 @@ This tells us we have one remote repository, called `origin`, and we can push to
 and pull from this repository. We can also see some other details about
 branches, and where the push and pull operations will go.
 
-```{bash, check origin2}
+```{bash}
+#| label: check origin2
 git remote show origin # This gives details of origin
 ```
 
 Getting back to the changes we made, if we are content with our local changes we
 can stage them and commit them.
 
-```{bash, new_repo_commit}
+```{bash}
+#| label: new_repo_commit
 git add README.md
 git commit -m "Added two lines to the README file"
 ```
@@ -439,7 +494,8 @@ Great! But now our local clone of the repository has a commit that is not at the
 `origin` repository on GitHub. How do we fix this? First lets look at what
 `git status` says.
 
-```{bash, new_repo_status2}
+```{bash}
+#| label: new_repo_status2
 git status
 ```
 
@@ -473,7 +529,9 @@ Now that you have copied the token you can use `git push` to push the changes
 to `origin` on GitHub. You will be asked for your username and password. For the
 password you will paste the PAT token into the terminal.
 
-```{bash, push new_repo, eval=FALSE}
+```{bash}
+#| label: push new_repo
+#| eval: false
 git push
 # Username for 'https://github.com': {enter your GitHub username}
 # Password for 'https://gremau@github.com': {PASTE the "PAT" here}
@@ -484,10 +542,14 @@ If this is successful, the most recent commit adding two new lines to the README
 file will be added to the GitHub repository, thus syncing up the local and
 remote versions of our files.
 
-```{r, setup_7, include=FALSE}
+```{r}
+#| label: setup_7
+#| include: false
 knitr::opts_knit$set(root.dir = '~/GitHub/JEDS/episodes')
 ```
-```{r, cleanup_3, include=FALSE}
+```{r}
+#| label: cleanup_3
+#| include: false
 unlink('~/GitHub/my_gh_repo', recursive=TRUE)
 ```
 
@@ -517,11 +579,15 @@ On your new JEDS repository fork page, click the <button style="background-color
 open the dialogue, then select "HTTPS", and copy the link to the repository (copy 
 with the overlapping squares). Now clone that into your GitHub directory.
 
-```{bash, clone_JEDS2, eval=T}
+```{bash}
+#| label: clone_JEDS2
+#| eval: !expr T
 cd ~/GitHub/
 git clone https://github.com/gremau/JEDS.git JEDS_fork #JEDS_fork is optional
 ```
-```{r, setup_8, include=FALSE}
+```{r}
+#| label: setup_8
+#| include: false
 knitr::opts_knit$set(root.dir = '~/GitHub/JEDS_fork')
 ```
 
@@ -529,13 +595,17 @@ Now you have a local copy of your fork (`your_username/JEDS`). If you want to
 interact with the original repository (`jornada-im/JEDS`) then we need to make sure
 there is a link to that. Lets go to that repository
 
-```{bash, cd_JEDS2, eval=FALSE}
+```{bash}
+#| label: cd_JEDS2
+#| eval: false
 cd JEDS_fork/
 ```
 
 and check the status of our remote repositories.
 
-```{bash, remotes_JEDS2, eval=T}
+```{bash}
+#| label: remotes_JEDS2
+#| eval: !expr T
 git remote -v
 ```
 
@@ -559,7 +629,9 @@ the `main` branch until we decide to `merge` them in. Creating and working with
 branches in `git` is simple, just create a new named branch and then `git checkout`
 the branch to begin work there.
 
-```{bash, branch_JEDS2, eval=T}
+```{bash}
+#| label: branch_JEDS2
+#| eval: !expr T
 git branch my_changes
 git checkout my_changes
 ```
@@ -573,18 +645,24 @@ repository.
 Now lets make those changes. Look inside the `episodes` folder and find the
 `learner_changes.md` file.
 
-```{bash, find_JEDS2_file, eval=T}
+```{bash}
+#| label: find_JEDS2_file
+#| eval: !expr T
 ls episodes/
 ``` 
 
 Open this file in a text editor and and correct some of the problems in the
 spelling or the code. Save your changes and then stage and commit the changes.
 
-```{bash, change_JEDS2_repo, include=FALSE}
+```{bash}
+#| label: change_JEDS2_repo
+#| include: false
 echo "This repository does this" >> episodes/learner_changes.md
 echo "This repository does that" >> episodes/learner_changes.md
 ```
-```{bash, commit_JEDS2_file, eval=T}
+```{bash}
+#| label: commit_JEDS2_file
+#| eval: !expr T
 git add episodes/learner_changes.md
 git commit -m 'I made this file better'
 ``` 
@@ -595,7 +673,9 @@ GitHub repository (`your_username/JEDS`). To publish the `my_changes` branch to
 GitHub we can use a variation on `git push` that creates an "upstream" branch in
 the origin repository (again - `your_username/JEDS`).
 
-```{bash, push_JEDS2_file, eval=T}
+```{bash}
+#| label: push_JEDS2_file
+#| eval: !expr T
 git push --set-upstream origin my_changes
 ``` 
 
@@ -640,18 +720,27 @@ and the maintainer of `jornada-im/JEDS` will be able to respond to it by making
 further comments/requests, merging it into the source repository, or rejecting
 it. 
 
-```{bash, cleanup_4, include=FALSE}
+```{bash}
+#| label: cleanup_4
+#| include: false
 git push -d origin my_changes
 git checkout main
 git branch -D my_changes
 ```
-```{r, setup_9, include=FALSE }
+```{r }
+#| label: setup_9
+#| include: false
 knitr::opts_knit$set(root.dir = '~/GitHub/JEDS/episodes')
 ```
-```{r, cleanup_5, include=FALSE}
+```{r}
+#| label: cleanup_5
+#| include: false
 unlink('~/GitHub/JEDS_fork', recursive=TRUE)
 ```
-```{bash, cleanup, include=FALSE, eval=FALSE}
+```{bash}
+#| label: cleanup
+#| include: false
+#| eval: false
 #gh repo create my_gh_repo --public
 #rm -r ~/awesomeproject_git;
 #rm -r ~/my_repo;

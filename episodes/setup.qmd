@@ -7,7 +7,9 @@ output:
       toc: true
 ---
 
-```{r, setup, include=FALSE}
+```{r}
+#| label: setup
+#| include: false
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
@@ -30,7 +32,9 @@ or in a workshop, you should have both installed according to the instructions b
 Visualization in R for Ecologists](https://datacarpentry.org/R-ecology-lesson/)"
 lesson (Eunice, 2022)*
 
-```{r results="asis", echo=FALSE}
+```{r}
+#| results: asis
+#| echo: false
 # This brings in DC R ecology content for installing R and R studio
 dc_lines <- readLines('https://github.com/datacarpentry/R-ecology-lesson/raw/refs/heads/main/learners/setup.md')
 cat(dc_lines[14:89], sep = '\n')
@@ -47,7 +51,8 @@ command into the console window (look for a blinking cursor on the bottom left),
 then press the <kbd>Enter</kbd> (Windows and Linux) or <kbd>Return</kbd> (MacOS) 
 to execute the command.
 
-```{r eval=FALSE}
+```{r}
+#| eval: false
 install.packages(c("tidyverse", "nlme", "lme4", "emmeans", "ratdat"))
 ```
 
@@ -59,7 +64,8 @@ R tries to download and install the packages on your machine. When the
 installation has finished, you can load the packages by pasting the following 
 code into the console:
 
-```{r eval=FALSE}
+```{r}
+#| eval: false
 library(tidyverse)
 library(nlme)
 library(lme4)
@@ -75,7 +81,9 @@ instructions about packages required for for your workshop. It is a good idea to
 install these in advance, using commands like those above, and let your
 instructors know if you have any problems.
 
-```{r results="asis", echo=FALSE}
+```{r}
+#| results: asis
+#| echo: false
 # This brings in DC R ecology content for updating R packages
 #dc_lines <- readLines('https://github.com/datacarpentry/R-ecology-lesson/raw/main/index.Rmd')
 cat(dc_lines[111:120], sep = '\n')
@@ -113,7 +121,10 @@ clients are [GitKraken](https://www.gitkraken.com/),
 [SourceTree](https://www.sourcetreeapp.com/), and [GitHub Desktop](https://desktop.github.com/).
 More discussion of clients is available over at [Happy Git with R](https://happygitwithr.com/git-client.html).
 
-```{r results="asis", include=FALSE, echo=FALSE}
+```{r}
+#| results: asis
+#| include: false
+#| echo: false
 # This brings in SC Shell/Git content for installing git
 sc_lines <- readLines('https://github.com/carpentries/workshop-template/raw/gh-pages/_includes/install_instructions/git.html')
 cat(sc_lines, sep = '\n')

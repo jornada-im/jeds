@@ -7,7 +7,9 @@ output:
       toc: true
 ---
 
-```{r, setup, include=FALSE}
+```{r}
+#| label: setup
+#| include: false
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
@@ -46,7 +48,9 @@ EDI. You can learn more about this dataset on the [teaching datasets]('./teachin
 `read_csv()` function to read in the data from EDI. Then we'll look at the
 structure of this data.
 
-```{r load_data, message=FALSE}
+```{r}
+#| label: load_data
+#| message: false
 # Get tidyverse & the NPP data
 library(tidyverse)
 
@@ -69,7 +73,8 @@ ggplot(anpp, aes(x = year, y = npp_g_m2, col = site, group = site)) +
 
 ## Comparing the mean of two samples (t-tests)
 
-```{r, include=FALSE}
+```{r}
+#| include: false
 ##
 ## Comparing two samples
 ##
@@ -179,7 +184,8 @@ mixed model.
 
 ### How do we know which comparison (t-test) to use?
 
-```{r, include=FALSE}
+```{r}
+#| include: false
 ##
 ## How do we know which comparison (t-test) to use?
 ##
@@ -364,7 +370,8 @@ the smaller $p$ gets from 0.1, the stronger the evidence. Numbers greater than
 
 ## Comparing sample means with simple linear models
 
-```{r, include=FALSE}
+```{r}
+#| include: false
 ##
 ## Comparing sample means with simple linear models
 ##
@@ -412,7 +419,8 @@ We can also compare the means using one-way ANOVA. The function to do this is
 `aov()`, but under the hood this is really just fitting an `lm` model again,
 which we can see by looking at the function documentation.
 
-```{r, message=FALSE}
+```{r}
+#| message: false
 ?aov
 ```
 
@@ -478,7 +486,8 @@ paired t-test. This also suggests that we can use linear models to partition
 variance according to the groups in our data. Why would we want to do that?
 
 ## Comparing grouped data using linear models
-```{r, include=FALSE}
+```{r}
+#| include: false
 ##
 ## Comparing group means with ANOVA results
 ##
@@ -564,7 +573,8 @@ diagnostic plots for a fitted linear model can be accessed using `plot()`. For
 ANOVA, however, we are primarily interested in the Q-Q normal plot, which we
 will use to examine the residuals of our fitted ANOVA model.
 
-```{r, fig.height=6}
+```{r}
+#| fig-height: 6
 # Standard lm diagnostic plots - we could put them all on one page
 #par(mfrow = c(2, 2), oma = c(0, 0, 2, 0)) -> opar
 #plot(lm.ANOVA)
@@ -590,7 +600,8 @@ be "normal enough"!
 
 ### Post-hoc tests and pairwise comparisons
 
-```{r, include=FALSE}
+```{r}
+#| include: false
 ##
 ## Post-hoc tests and pairwise comparisons
 ##
@@ -741,7 +752,8 @@ vegetation zones had different means.
 
 ## Into the wilderness with linear mixed models
 
-```{r, include=FALSE}
+```{r}
+#| include: false
 ##
 ## Into the wilderness with linear mixed models
 ##
@@ -774,7 +786,8 @@ Here, we will introduce some basics.
 There are two primary `R` packages for linear mixed modeling. `nlme` and `lme4`.
 Lets load them.
 
-```{r, message = FALSE}
+```{r}
+#| message: false
 library(nlme)
 library(lme4)
 ```
@@ -881,7 +894,9 @@ emmeans(model.ar.level, ~ zone*factor(year), lmer.df = "kenward-roger")
 
 It is a little more difficult to extract correlation and variance estimates.
 
-```{r, include=FALSE, purl=FALSE}
+```{r}
+#| include: false
+#| purl: false
 # Get correlation and variance estimates
 coef(model.ar.level$modelStruct$corStruct, uncons = FALSE, allCoef = TRUE)
 coef(model.ar.level$modelStruct$varStruct, uncons = FALSE, allCoef = TRUE) 

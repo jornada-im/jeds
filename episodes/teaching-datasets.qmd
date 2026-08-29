@@ -7,7 +7,9 @@ output:
       toc: true
 ---
 
-```{r, setup, include=FALSE}
+```{r}
+#| label: setup
+#| include: false
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
@@ -41,7 +43,8 @@ The annual data are in this EDI dataset:
 
 First we will need to load the `tidyverse` library.
 
-```{r, message=FALSE}
+```{r}
+#| message: false
 library(tidyverse)
 ```
 
@@ -50,7 +53,8 @@ repository, each file in a dataset is assigned a download URL. This can be
 passed to the `tidyverse::read_csv()` function to read that file into a
 dataframe.
 
-```{r load_ds1}
+```{r}
+#| label: load_ds1
 # Assign the address for the csv file hosted on EDI to a variable
 infile <- "https://pasta.lternet.edu/package/data/eml/knb-lter-jrn/210011003/105/127124b0f04a1c71f34148e3d40a5c72"
 
