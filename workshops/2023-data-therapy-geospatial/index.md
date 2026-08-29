@@ -1,3 +1,12 @@
+---
+title: "April 2023 Data Therapy: Geospatial Data Access"
+author:
+  - Gregory Maurer
+date: "2023-04-20"
+date-modified: "2026-08-29"
+draft: False
+---
+
 # April 2023 Data Therapy: Geospatial Data Access
 {:.no_toc}
 

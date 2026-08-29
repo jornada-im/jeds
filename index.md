@@ -1,4 +1,10 @@
-## Welcome!
+---
+title: JEDS!
+format:
+  html:
+    css: styles.css
+from: markdown+emoji
+---
 
 Our aim is to teach environmental data science concepts and skills to Jornada researchers using accessible methods and relatable data.
 

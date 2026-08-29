@@ -1,3 +1,14 @@
+---
+title: "JEDS @ 2022 Jornada Ecology Short Course"
+author:
+  - Darren James
+  - Gregory Maurer
+date: "2022-06-29"
+date-modified: "2026-08-29"
+draft: False
+---
+
+
 # JEDS @ 2022 Jornada Ecology Short Course
 
 **Date and time:** Wednesday June 29, 2022 at 1:00pm Mountain time
