@@ -47,7 +47,6 @@ header-includes: |
   - Other
 
 
-
 ## A little background
 
 - Jornada Basin has been an intensive research site for a long time.

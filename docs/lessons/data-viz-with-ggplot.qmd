@@ -2,9 +2,11 @@
 title: "Data visualization with ggplot"
 author: "Darren James"
 date: '2025-08-06'
-output:
-    html_document:
-      toc: true
+#execute:
+#  eval: false
+# output:
+#     html_document:
+#       toc: true
 ---
 
 ```{r}
@@ -69,6 +71,7 @@ ggplot(data = complete_old, mapping = aes(x = species_id)) +
   scale_y_continuous(breaks = seq(from = 0, to = 6000, by = 200)) +
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5))
 ```
+
 Now use the fill aesthetic to show the breakdown in counts by sex
 ```{r}
 ggplot(data = complete_old, mapping = aes(x = species_id, fill = sex)) +
@@ -171,7 +174,6 @@ Dipodomys <- complete_old %>%
 with(Dipodomys, table(species_name))
 unique(Dipodomys$sex)
 ```
-
 
 Create boxplots of weight
 

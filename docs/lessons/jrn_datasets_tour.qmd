@@ -1,5 +1,5 @@
 ---
-title: "Teaching Datasets"
+title: "Jornada Datasets Tour"
 author: "Greg Maurer, Darren James"
 date: '2022-06-19'
 execute:
@@ -10,8 +10,8 @@ execute:
 ---
 
 ```{r}
-#| label: setup
-#| include: false
+#| label = "setup",
+#| include = FALSE
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
@@ -56,7 +56,8 @@ passed to the `tidyverse::read_csv()` function to read that file into a
 dataframe.
 
 ```{r}
-#| label: load_ds1
+#| label: "load_ds1"
+#| eval: false
 # Assign the address for the csv file hosted on EDI to a variable
 infile <- "https://pasta.lternet.edu/package/data/eml/knb-lter-jrn/210011003/105/127124b0f04a1c71f34148e3d40a5c72"
 
@@ -71,6 +72,7 @@ the data. To do this we are using the `ggplot()` function, which is part of the
 `ggplot2` library that was attached when we loaded the `tidyverse` package`
 
 ```{r}
+#| eval: false
 ggplot(anpp.annual, aes(x = year, y = npp_g_m2, col = site, group = site)) +
   geom_line() +
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5))
@@ -80,5 +82,6 @@ Now, lets output this into our `data/` directory so that we can load it easily
 next time.
 
 ```{r}
+#| eval: false
 write_csv(anpp.annual, '../data/td01_anpp.annual.csv')
 ```

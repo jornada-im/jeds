@@ -2,9 +2,11 @@
 title: "Statistical inference with general linear models and mixed models"
 author: "Greg Maurer, Darren James"
 date: '2022-06-19'
-output:
-    html_document:
-      toc: true
+execute:
+  eval: false
+# output:
+#     html_document:
+#       toc: true
 ---
 
 ```{r}
@@ -233,6 +235,7 @@ null hypothesis that the data are normally distributed.
 # Test for normality of the data
 shapiro.test(anpp.17.18$npp_g_m2)
 ```
+
 We have a low p-value here, so we have strong evidence that we are actually
 working with non-normally distributed data. Since that is the case, we might
 want to test for unequal variances using one of two other tests, the Fligner
@@ -242,6 +245,7 @@ test or the Levene test.
 # Fligner test for homoscedasticity
 fligner.test(npp_g_m2 ~ as.factor(year), data = anpp.17.18)
 ```
+
 There is evidence for heteroscedasticity here. What about Levene?
 
 ```{r}
@@ -529,6 +533,7 @@ Lets get our ANOVA summary results a few different ways. First, lets use
 ```{r}
 summary(lm.ANOVA)
 ```
+
 This gives us a bunch of information, including an estimated intercept with 
 a significant t-test, indicating that we can reject the null hypothesis that the
 intercept is zero. We also have a global F test on `zone`, which is the p-value
@@ -559,6 +564,7 @@ squares. Now lets use the `car` way, which gives Type III sums of squares
 ```{r}
 car::Anova(lm.ANOVA, type = "III", test.statistic = "F")
 ```
+
 Here we see a significant F test that the intercept of the model (overall means
 of the zones) are different than zero, and the same global F test for `zone`
 (at least one `zone` is significantly different than another). In this model,
@@ -681,6 +687,7 @@ agree on methods.
 emmeans(lm.ANOVA, ~ zone, adjust = "Tukey") %>%
   multcomp::cld(Letters = LETTERS)
 ```
+
 Should we be using the Sidak confidence interval adjustment? The statistician
 who wrote `emmeans` thinks so.
 
@@ -884,6 +891,7 @@ model.ar.level <- gls(npp_g_m2 ~ zone + factor(year) + zone*factor(year),
 
 AIC(model.ar.level)
 ```
+
 The AIC value dropped, which suggests that grouping by the new `level` category
 is improving the fit of this model. Now we can compare the estimated means
 from this mixed model using `emmeans` again.
@@ -932,6 +940,7 @@ AIC(model.ar.level.gls)
 AIC(model.ar.level.lme)
 AIC(model.ar.level.lmer)
 ```
+
 These are not compared with Kenward-Rogers method because this is not 
 available in `gls` yet.
 
@@ -968,6 +977,7 @@ mod.compare %>%
   dplyr::select(zone, year, .group, model) %>%
   spread(model, .group)
 ```
+
 Overall they agree, but we are finding some small differences between the
 different methods.
 

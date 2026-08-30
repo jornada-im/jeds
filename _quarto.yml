@@ -22,7 +22,7 @@ website:
     location: navbar
   navbar:
     logo: img/jrn-logo-light.png
-    #background: light
+    background: primary
     left:
       - text: "Lessons"
         href: docs/lessons/index.qmd
@@ -43,19 +43,19 @@ website:
 
   sidebar:
     - title: "Lessons"
-      #id: researcher_docs
+      id: lessons_sb
       style: floating
       collapse-level: 2
-      contents: "lessons/*.qmd"
+      contents: "docs/lessons/*.qmd"
         # - href: docs/lessons/index.qmd
         #   text: "Introduction"
         # - href: docs/researcher/starting-research.qmd
         #   text: "Starting research"
     - title: "Presentations"
-      #id: im_docs
+      id: slides_sb
       style: floating
       collapse-level: 2
-      contents: "slides/*.qmd"
+      contents: "docs/slides/*.qmd"
 
 execute:
   freeze: auto

@@ -1,0 +1,9 @@
+---
+title: "JEDS Presentations"
+listing: 
+  contents: ./*.qmd
+  #sort: "date desc"
+  type: table
+  categories: true
+sidebar: slides_sb
+---

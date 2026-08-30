@@ -1,0 +1,9 @@
+---
+title: "JEDS Lessons"
+listing: 
+  contents: ./*.qmd
+  #sort: "date desc"
+  type: table
+  categories: true
+sidebar: lessons_sb
+---

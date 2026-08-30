@@ -2,9 +2,6 @@
 title: "JEDS Introduction and Setup"
 author: "Greg Maurer, Darren James"
 date: '2022-09-01'
-output:
-    html_document:
-      toc: true
 ---
 
 ```{r}
