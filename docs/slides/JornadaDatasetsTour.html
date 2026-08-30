@@ -1,0 +1,1333 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<link href="../../img/jrn-logo-light.png" rel="icon" type="image/png">
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-html/tabby.min.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.10.18">
+
+  <title>Jornada Environmental Data Science – Working with the long-term data of the Jornada Basin</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="../../site_libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="../../site_libs/revealjs/dist/reveal.css">
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: 1.5em;}
+    div.column{flex: auto;}
+    @media screen {
+    div.columns{gap: min(4vw, 1.5em);}
+    div.column{overflow-x: auto;}
+    }
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+      vertical-align: middle;
+    }
+  </style>
+  <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-2740581606dc327e82f18f789b69d8a0.css">
+  <link href="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="../../site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+  <style>
+  .reveal .slides section {
+    font-size: 0.78em;
+  }
+  .reveal .slides section h2 {
+    font-size: 1.45em;
+    margin-bottom: 0.3em;
+  }
+  .reveal .slides section ul,
+  .reveal .slides section ol {
+    margin-top: 0.2em;
+    margin-bottom: 0.2em;
+  }
+  .reveal .slides section li {
+    margin-bottom: 0.15em;
+  }
+  .reveal .slides section li > ul,
+  .reveal .slides section li > ol {
+    margin-top: 0.1em;
+  }
+  </style>
+</head>
+<body class="quarto-light">
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide" class="quarto-title-block center">
+  <h1 class="title">Working with the long-term data of the Jornada Basin</h1>
+  <p class="subtitle">A guided tour &amp; hands-on workshop</p>
+
+<div class="quarto-title-authors">
+</div>
+
+</section>
+<section id="agenda" class="slide level2">
+<h2>Agenda</h2>
+<ul>
+<li>Tour of Jornada datasets</li>
+<li>Finding Jornada data
+<ul>
+<li>JRN data catalog</li>
+<li>Data viewer</li>
+<li>EDI repository portal</li>
+<li>Jornada GeoPortal</li>
+<li>Other</li>
+</ul></li>
+<li>Accessing and using Jornada data (hands-on)
+<ul>
+<li>Web access (website, EDI, GeoPortal)</li>
+<li>EDIutils</li>
+<li>Other</li>
+</ul></li>
+</ul>
+</section>
+<section id="a-little-background" class="slide level2">
+<h2>A little background</h2>
+<ul>
+<li>Jornada Basin has been an intensive research site for a long time.</li>
+<li>Jornada Experimental Range (JER), established in 1912</li>
+<li>Jornada Basin LTER (JRN), established in 1982</li>
+<li>Many other programs collect, or have collected, data in the Jornada Basin.</li>
+</ul>
+<div style="display:flex; justify-content:center;">
+<p><img src="img/slide03_img1.jpg" style="max-height:36vh; max-width:85%; object-fit:contain;"></p>
+</div>
+</section>
+<section id="here-are-a-few" class="slide level2">
+<h2>Here are a few…</h2>
+<div style="display:flex; justify-content:center; align-items:center; gap:8px; flex-wrap:wrap;">
+<p><img src="img/slide04_img1.png" style="height:75px; max-width:130px; object-fit:contain; margin:8px;"> <img src="img/slide04_img2.png" style="height:75px; max-width:130px; object-fit:contain; margin:8px;"> <img src="img/slide04_img3.jpg" style="height:75px; max-width:130px; object-fit:contain; margin:8px;"> <img src="img/slide04_img4.png" style="height:75px; max-width:130px; object-fit:contain; margin:8px;"> <img src="img/slide04_img5.png" style="height:75px; max-width:130px; object-fit:contain; margin:8px;"> <img src="img/slide04_img6.jpg" style="height:75px; max-width:130px; object-fit:contain; margin:8px;"> <img src="img/slide04_img7.png" style="height:75px; max-width:130px; object-fit:contain; margin:8px;"></p>
+</div>
+</section>
+<section id="data-collection-management-and-use-have-evolved" class="slide level2">
+<h2>Data collection, management, and use have evolved</h2>
+<ul>
+<li>People, their studies and research priorities turn over</li>
+<li>Funding for programs can be unsteady</li>
+<li>As researchers, we’re not always perfect about data management</li>
+<li>Open data is a relatively new priority</li>
+<li>Managing and curating Jornada data is a continual work in progress…</li>
+</ul>
+<div style="display:flex; justify-content:center;">
+<p><img src="img/slide05_img1.png" style="max-height:36vh; max-width:85%; object-fit:contain;"></p>
+</div>
+</section>
+<section id="our-objectives-today" class="slide level2">
+<h2>Our objectives today</h2>
+<ul>
+<li>Learn what Jornada data are available and how they can be used in your research.</li>
+<li>Get practical experience working with Jornada data.</li>
+<li>Please take time to do the activities and ask questions. We are learning by doing!</li>
+</ul>
+</section>
+<section id="get-ready" class="slide level2">
+<h2>Get ready</h2>
+<ul>
+<li>Visit <a href="http://jornada-im.github.io">jornada-im.github.io</a> and find the workshop page. Slides and communal notes are available here.</li>
+<li>Make a workshop folder on your laptop to download data.</li>
+<li>Open up your favorite data analysis platform (R, Excel, etc.) and a GIS program if you want.</li>
+</ul>
+</section>
+<section id="how-do-we-classify-jornada-data" class="slide level2">
+<h2>How do we classify Jornada data?</h2>
+<ul>
+<li><strong>Core:</strong> long-term datasets collected or directly supported by JRN and JER research staff</li>
+<li><strong>Contributed:</strong> shorter term (usually) datasets collected by any researchers funded by, or formally affiliated with, JRN and/or JER</li>
+<li><strong>Partner:</strong> datasets collected by external partners, like other federal agencies or research networks.</li>
+<li>Core and contributed datasets are further organized by 3 digit <strong>study ID:</strong></li>
+<li><strong>210011001 = site manager, study ID, dataset ID</strong></li>
+</ul>
+</section>
+<section id="how-do-we-classify-jornada-data-1" class="slide level2">
+<h2>How do we classify Jornada data?</h2>
+<ul>
+<li><strong>Core:</strong> long-term datasets collected or directly supported by JRN and JER research staff</li>
+<li><strong>Contributed:</strong> shorter term (usually) datasets collected by any researchers funded by, or formally affiliated with, JRN and/or JER</li>
+<li><strong>Partner:</strong> datasets collected by external partners, like other federal agencies or research networks.</li>
+<li>Core and contributed datasets are further organized by 3 digit <strong>study ID:</strong></li>
+<li><strong>210011001 = site manager, study ID, dataset ID</strong></li>
+<li>Not everything fits cleanly into this scheme</li>
+<li>Synthesis and remote sensing data don’t receive a study ID</li>
+<li>Occasionally we republish <strong>partner</strong> data with Jornada study IDs</li>
+</ul>
+</section>
+<section id="we-also-classify-by-research-themes-or-data-types" class="slide level2">
+<h2>We also classify by research themes or data types</h2>
+<ul>
+<li>For today:</li>
+<li>Long term vegetation data</li>
+<li>Weather and climate</li>
+<li>Geospatial data (GIS)</li>
+<li>Remote sensing &amp; airborne imagery</li>
+<li><strong>Vegetation dynamics</strong></li>
+<li><strong>Climate &amp; environmental monitoring</strong></li>
+<li><strong>Management &amp; restoration</strong></li>
+<li><strong>Biogeochemistry</strong></li>
+<li><strong>Hydrology</strong></li>
+<li><strong>Aeolian processes</strong></li>
+<li><strong>Trophic interactions</strong></li>
+<li><strong>Physical geography &amp; soils</strong></li>
+<li><strong>Sensor network data</strong></li>
+<li><strong>Remote sensing</strong></li>
+<li><strong>Modeling</strong></li>
+<li><strong>Sequencing/microbiome</strong></li>
+<li><strong>Animals</strong></li>
+<li><strong>EC fluxes</strong></li>
+</ul>
+</section>
+<section id="long-term-vegetation-data" class="slide level2">
+<h2>Long-term vegetation data</h2>
+<ul>
+<li>Primary production</li>
+<li>Cover</li>
+</ul>
+</section>
+<section id="primary-production-data" class="slide level2">
+<h2>Primary production data</h2>
+<ul>
+<li>Biomass or carbon accumulation by primary producers (plants, usually)</li>
+<li><strong>Variable:</strong> Gross or net primary production, aboveground or belowground</li>
+<li><strong>Units:</strong> <em>g biomass · m-2 · day -1</em> or <em>g C · m-2 · day -1</em></li>
+</ul>
+</section>
+<section id="jornada-npp-a-non-destructive-npp-method-for-drylands" class="slide level2">
+<h2>Jornada NPP: a non-destructive NPP method for drylands</h2>
+<ul>
+<li>1m2 long-term quadrats installed at 15 Jornada sites in 1989</li>
+<li>Field datasets:</li>
+<li>Replicate species harvests (dimensions &amp; biomass)</li>
+<li>Plant dimensions (only) collected in long-term quadrats</li>
+<li>Allometric method to estimate biomass</li>
+<li>Huenneke, Clason, and Muldavin described the method in 2001</li>
+</ul>
+<div style="display:flex; justify-content:center; align-items:center; gap:20px; flex-wrap:wrap;">
+<p><img src="img/slide13_img1.jpg" style="max-height:30vh; max-width:48%; object-fit:contain;"> <img src="img/slide13_img2.jpg" style="max-height:30vh; max-width:48%; object-fit:contain;"></p>
+</div>
+</section>
+<section id="used-in-numerous-jrn-pubs-cross-site-syntheses" class="slide level2">
+<h2>Used in numerous JRN pubs &amp; cross-site syntheses</h2>
+<ul>
+<li>NPP sites anchor many other Jornada studies</li>
+<li>Meteorology, soil profile characterization, soil water/temperature, plant traits, aerial photos, terrain/elevation models, phenology, animal studies, short-term grad student projects</li>
+<li>Validating new research methods (UAV/Remote sensing, models)</li>
+</ul>
+<div style="display:flex; justify-content:center; align-items:center; gap:20px; flex-wrap:wrap;">
+<p><img src="img/slide14_img1.jpg" style="max-height:30vh; max-width:48%; object-fit:contain;"> <img src="img/slide14_img2.jpg" style="max-height:30vh; max-width:48%; object-fit:contain;"></p>
+</div>
+</section>
+<section id="jornada-anpp-data" class="slide level2">
+<h2>Jornada ANPP data</h2>
+<ul>
+<li>Jornada NPP study sites (15 sites)</li>
+<li>Ecotone project (Bestelmeyer - 5 sites)</li>
+<li>Global change experiment (Sala - 1 site, slightly different method)</li>
+<li><strong>Variable names differ, same units, same temporal resolution</strong></li>
+<li>Red = 15 NPP sites; Orange = Ecotone, Green = GlobalChange</li>
+</ul>
+<div style="display:flex; justify-content:center;">
+<p><img src="img/slide15_img1.jpg" style="max-height:36vh; max-width:85%; object-fit:contain;"></p>
+</div>
+</section>
+<section id="other-datasets-about-production" class="slide level2">
+<h2>Other datasets about production</h2>
+<ul>
+<li>Eddy covariance fluxes (NEE, partitioned fluxes)</li>
+<li>Belowground NPP (root biomass production) - not common but not unheard-of</li>
+</ul>
+</section>
+<section id="plant-cover" class="slide level2">
+<h2>Plant cover</h2>
+<ul>
+<li>Cover of plant species of functional type in an area.</li>
+<li><strong>Variable:</strong> percent or fractional cover</li>
+<li><strong>Units:</strong> <em>dimensionless</em></li>
+</ul>
+</section>
+<section id="jornada-permanent-quadrats" class="slide level2">
+<h2>Jornada permanent quadrats</h2>
+<ul>
+<li>Plant type, cover, and density measured since 1915</li>
+<li>Yearly to 1970s, break until early 90s, resuming at 5-year frequency</li>
+<li>122 locations across the Jornada Experimental Range</li>
+</ul>
+<div style="display:flex; justify-content:center;">
+<p><img src="img/slide18_img1.jpg" style="max-height:36vh; max-width:85%; object-fit:contain;"></p>
+</div>
+</section>
+<section id="useful-for-assessing-long-term-vegetation-change" class="slide level2">
+<h2>Useful for assessing long-term vegetation change</h2>
+<ul>
+<li>such as grass-shrub transitions</li>
+<li>Also, potentially useful for biodiversity research</li>
+</ul>
+<div style="display:flex; justify-content:center;">
+<p><img src="img/slide19_img1.jpg" style="max-height:36vh; max-width:85%; object-fit:contain;"></p>
+</div>
+</section>
+<section id="jornada-quadrat-cover-data" class="slide level2">
+<h2>Jornada quadrat cover data</h2>
+<ul>
+<li>Jornada permanent quadrats (122, starting 1915)</li>
+<li>Ecotone quadrats (5, starting 2005)</li>
+<li>SMES (2, starting 1995)</li>
+<li>Different variable names, different units, different temporal resolution, different treatments</li>
+<li>Red = Perm Quads; Orange = Ecotone, Green = SMES</li>
+</ul>
+<div style="display:flex; justify-content:center;">
+<p><img src="img/slide20_img1.jpg" style="max-height:36vh; max-width:85%; object-fit:contain;"></p>
+</div>
+</section>
+<section id="more-plant-cover-data" class="slide level2">
+<h2>More plant cover data…</h2>
+<ul>
+<li>Gibbens 2005 vegetation maps</li>
+<li>Line-point intercept data from multiple projects</li>
+<li>Jornada LTER transect <a href="https://portal.edirepository.org/nis/mapbrowse?scope=knb-lter-jrn&amp;identifier=210119001">knb-lter-jrn.210119001</a></li>
+<li>SMES <a href="https://portal.edirepository.org/nis/mapbrowse?scope=knb-lter-jrn&amp;identifier=210086001">knb-lter-jrn.210086001</a></li>
+<li>ConMod pilot <a href="https://portal.edirepository.org/nis/mapbrowse?scope=knb-lter-jrn&amp;identifier=210308002">knb-lter-jrn.210308002</a></li>
+</ul>
+<div style="display:flex; justify-content:center;">
+<p><img src="img/slide21_img1.jpg" style="max-height:36vh; max-width:85%; object-fit:contain;"></p>
+</div>
+</section>
+<section id="weather-and-climate" class="slide level2">
+<h2>Weather and climate</h2>
+<ul>
+<li>Jornada met stations</li>
+<li>Rain gauges</li>
+<li>Soil moisture</li>
+</ul>
+</section>
+<section id="meteorology-data" class="slide level2">
+<h2>Meteorology data</h2>
+<ul>
+<li>Data collected from weather stations, including air temperature and RH, wind speed/direction, and precipitation.</li>
+</ul>
+<div style="display:flex; justify-content:center;">
+<p><img src="img/slide23_img1.jpg" style="max-height:36vh; max-width:85%; object-fit:contain;"></p>
+</div>
+</section>
+<section id="longest-term-weather-stations" class="slide level2">
+<h2>Longest-term weather stations</h2>
+<ul>
+<li>JER headquarters NOAA station. Collecting data 1914-present.
+<ul>
+<li><a href="https://www.ncdc.noaa.gov/cdo-web/datasets/GHCND/stations/GHCND:USC00294426/detail">Data available at NCDC</a></li>
+<li>There are other NOAA stations in the region with similar records</li>
+</ul></li>
+<li>LTER weather station. Collecting data 1983-present
+<ul>
+<li><a href="https://portal.edirepository.org/nis/mapbrowse?scope=knb-lter-jrn&amp;identifier=210126001">Data at EDI</a></li>
+<li>Some data issues being worked on</li>
+</ul></li>
+</ul>
+</section>
+<section id="npp-and-cross-scale-weather-stations" class="slide level2">
+<h2>NPP and Cross-scale weather stations</h2>
+<ul>
+<li>Collecting continuously since 2013, multiple frequencies</li>
+<li>Data are regularly quality assured and sent to EDI</li>
+<li>There are some estimated/gapfilled precipitation datasets (since 1989) too</li>
+</ul>
+<div style="display:flex; justify-content:center;">
+<p><img src="img/slide25_img1.jpg" style="max-height:36vh; max-width:85%; object-fit:contain;"></p>
+</div>
+</section>
+<section id="rain-gauges" class="slide level2">
+<h2>Rain gauges</h2>
+<ul>
+<li>There is a very extensive rain gauge network with multiple gauge types, varying temporal records. Rain is very unevenly distributed in NM.</li>
+<li>Monthly standard cans (cumulative)</li>
+<li>Weighing gauges</li>
+<li>Tipping-bucket (regular timeseries or event-based)</li>
+<li>Best practices is to ask the field crew or IM team which rain gauge</li>
+</ul>
+</section>
+<section id="other-meteorology-data" class="slide level2">
+<h2>Other meteorology data</h2>
+<ul>
+<li>Several wind profile weather stations</li>
+<li>Individual experiments sometimes have their own rain gauge</li>
+<li>Eddy covariance towers
+<ul>
+<li>Tromble watershed, UTEP Bajada &amp; Red Lake Playa on AmeriFlux</li>
+<li>JER DuRP project towers (3)</li>
+<li>Army research lab - 30+ EC towers</li>
+</ul></li>
+</ul>
+</section>
+<section id="activity-1" class="slide level2">
+<h2>Activity 1</h2>
+<ul>
+<li>Lets practice finding a Jornada meteorology dataset on EDI. Visit the EDI data portal - <a href="https://portal.edirepository.org">https://portal.edirepository.org</a> - and use the search function to look for a Jornada weather or climate dataset that might be useful to you. Put the link to a dataset you found in our notes document.</li>
+</ul>
+</section>
+<section id="activity-1-1" class="slide level2">
+<h2>Activity 1</h2>
+<ul>
+<li>Lets practice finding a Jornada meteorology dataset on EDI. Visit the EDI data portal - <a href="https://portal.edirepository.org">https://portal.edirepository.org</a> - and use the search function to look for a Jornada weather or climate dataset that might be useful to you. Put the link to a dataset you found in our notes document.</li>
+<li>Were you successful? Lets look at <a href="https://portal.edirepository.org/nis/mapbrowse?packageid=knb-lter-jrn.210437007.44">an example</a>.</li>
+</ul>
+</section>
+<section id="soil-water-at-npp-sites" class="slide level2">
+<h2>Soil water at NPP sites</h2>
+<div style="display:flex; justify-content:center;">
+<p><img src="img/slide30_img1.jpg" style="max-height:36vh; max-width:85%; object-fit:contain;"></p>
+</div>
+</section>
+<section id="soil-moisture-data" class="slide level2">
+<h2>Soil moisture data</h2>
+<ul>
+<li>NPP and CSIS sites have automated soil profile sensors (VWC, T, EC) since 2013</li>
+<li>Long-term neutron probe data since 1989 (NPP sites and more)</li>
+<li>Many experiments have their own instrumentation or probe data</li>
+</ul>
+<div style="display:flex; justify-content:center;">
+<p><img src="img/slide31_img1.jpg" style="max-height:36vh; max-width:85%; object-fit:contain;"></p>
+</div>
+</section>
+<section id="spatial-data-gis" class="slide level2">
+<h2>Spatial data (GIS)</h2>
+<ul>
+<li>Vector and raster datasets about Jornada Basin</li>
+<li>Research locations</li>
+</ul>
+</section>
+<section id="what-are-spatial-data-gis" class="slide level2">
+<h2>What are spatial data &amp; GIS?</h2>
+<ul>
+<li><strong>(Geo)spatial data:</strong> Any data with location or geographic coordinates attached to the observation</li>
+<li><strong>Geographic information systems (GIS):</strong> Integrated computer hardware and software that store, manage, analyze, edit, output, and visualize geographic data</li>
+</ul>
+<div style="display:flex; justify-content:center;">
+<p><img src="img/slide33_img1.jpg" style="max-height:36vh; max-width:85%; object-fit:contain;"></p>
+</div>
+</section>
+<section id="why-do-we-care-at-the-jornada" class="slide level2">
+<h2>Why do we care at the Jornada?</h2>
+<ul>
+<li>Drylands are spatially heterogeneous</li>
+<li>We work in a large area</li>
+<li>We want to place our research in landscape context</li>
+</ul>
+<div style="display:flex; justify-content:center;">
+<p><img src="img/slide34_img1.jpg" style="max-height:36vh; max-width:85%; object-fit:contain;"></p>
+</div>
+</section>
+<section id="the-jornada-spatial-data-catalog" class="slide level2">
+<h2>The Jornada Spatial Data Catalog</h2>
+<ul>
+<li>There are well over 1000 datasets</li>
+<li>Study &amp; measurement locations</li>
+<li>Instrumentation, fences, roads, boundaries, buildings</li>
+<li>Physical geography</li>
+<li>Vegetation and soil survey products</li>
+<li>Remote sensing data</li>
+<li>Model outputs</li>
+<li>Only a small amount of datasets have been published or made accessible</li>
+</ul>
+<div style="display:flex; justify-content:center;">
+<p><img src="img/slide35_img1.jpg" style="max-height:36vh; max-width:85%; object-fit:contain;"></p>
+</div>
+</section>
+<section id="how-is-it-managed" class="slide level2">
+<h2>How is it managed?</h2>
+<ul>
+<li>Somewhat decentralized and siloed</li>
+<li>There are some great USDA GIS staff</li>
+<li>The LTER produces lots of data</li>
+<li>Researchers often manage their own pile of GIS data</li>
+<li>Some data are restricted access</li>
+<li>We are working out improved coordination and access methods</li>
+<li>A data commons is one goal…</li>
+</ul>
+<div style="display:flex; justify-content:center; align-items:center; gap:12px; flex-wrap:nowrap;">
+<p><img src="img/slide36_img1.png" style="max-height:20vh; max-width:20%; object-fit:contain;"> <img src="img/slide36_img2.jpg" style="max-height:20vh; max-width:20%; object-fit:contain;"> <img src="img/slide36_img3.jpg" style="max-height:20vh; max-width:20%; object-fit:contain;"> <img src="img/slide36_img4.png" style="max-height:20vh; max-width:20%; object-fit:contain;"></p>
+</div>
+</section>
+<section id="how-do-i-find-spatial-data" class="slide level2">
+<h2>How do I find spatial data?</h2>
+<ul>
+<li>The <a href="https://lter.jornada.nmsu.edu">LTER website</a> lists public layers</li>
+<li>The <a href="https://jornada-geoportal-nmsu.hub.arcgis.com/">Jornada GeoPortal</a> is our current “enterprise GIS” system</li>
+<li>Some spatial datasets are published to EDI</li>
+<li>Ask someone!</li>
+<li>Amy Slaughter (<a href="mailto:amalia.slaughter@usda.gov">amalia.slaughter@usda.gov</a>)</li>
+<li>Greg Maurer (<a href="mailto:gmaurer@nmsu.edu">gmaurer@nmsu.edu</a>)</li>
+<li>John Anderson, Darren James, Scott Schrader</li>
+</ul>
+</section>
+<section id="data" class="slide level2">
+<h2>Data:</h2>
+<ul>
+<li>Datasets in public repositories</li>
+<li>Real-time data</li>
+<li>Spatial data from the Jornada GeoPortal</li>
+<li><strong>https://lter.jornada.nmsu.edu</strong></li>
+</ul>
+<div style="display:flex; justify-content:center;">
+<p><img src="img/slide38_img1.jpg" style="max-height:36vh; max-width:85%; object-fit:contain;"></p>
+</div>
+</section>
+<section id="the-jornada-geoportal" class="slide level2">
+<h2>The Jornada GeoPortal</h2>
+<ul>
+<li><a href="https://jornada-geoportal-nmsu.hub.arcgis.com/">https://jornada-geoportal-nmsu.hub.arcgis.com/</a></li>
+<li>This is a new, under-construction system</li>
+<li>Based on ArcGIS Online (AGOL), provided by NMSU</li>
+<li>All previously available GIS layers are there now</li>
+<li>Restricted layers available on login (request access)</li>
+<li>Permissions management is important for spatial data</li>
+</ul>
+<div style="display:flex; justify-content:center;">
+<p><img src="img/slide39_img1.jpg" style="max-height:36vh; max-width:85%; object-fit:contain;"></p>
+</div>
+</section>
+<section id="how-data-are-categorized-and-made-searchable" class="slide level2">
+<h2>How data are categorized and made searchable</h2>
+<div style="display:flex; justify-content:center;">
+<p><img src="img/slide40_img1.jpg" style="max-height:36vh; max-width:85%; object-fit:contain;"></p>
+</div>
+</section>
+<section id="online-interaction-with-spatial-data" class="slide level2">
+<h2>Online interaction with spatial data</h2>
+<ul>
+<li>Maps, web apps, “StoryMaps”, etc.</li>
+<li><a href="https://experience.arcgis.com/experience/6ce49f3f2ff941429b15d50e7a46b466">Here is a basic map</a> of the Jornada’s spatial data</li>
+<li>With an account you can log in and create these yourself</li>
+</ul>
+<div style="display:flex; justify-content:center;">
+<p><img src="img/slide41_img1.jpg" style="max-height:36vh; max-width:85%; object-fit:contain;"></p>
+</div>
+</section>
+<section id="activity-2-lets-go-find-and-download-spatial-data" class="slide level2">
+<h2>Activity 2: Lets go find and download spatial data!</h2>
+<ul>
+<li>Visit the Jornada GeoPortal to find:</li>
+<li>Boundaries of JER and CDRRC</li>
+<li>Soil and vegetation survey layers (JER/CDRRC 1998)</li>
+<li>NPP plot locations</li>
+<li>Then, load them up in your favorite GIS application.</li>
+</ul>
+</section>
+<section id="activity-2-lets-go-find-and-download-spatial-data-1" class="slide level2">
+<h2>Activity 2: Lets go find and download spatial data!</h2>
+<ul>
+<li>Visit the <a href="https://jornada-geoportal-nmsu.hub.arcgis.com/">Jornada GeoPortal</a> to find:</li>
+<li>Boundaries of JER and CDRRC</li>
+<li>Soil and vegetation survey layers (JER/CDRRC 1998)</li>
+<li>NPP plot locations</li>
+<li>Then, load them up in your favorite GIS application.</li>
+<li>Where did you encounter trouble?</li>
+</ul>
+</section>
+<section id="join-the-jornadagis_users-group" class="slide level2">
+<h2>Join the JornadaGIS_users group</h2>
+<ul>
+<li>There is more data available to authenticated users!</li>
+<li>Steps to get access:</li>
+<li>Make an AGOL account - institutional or <a href="https://doc.arcgis.com/en/arcgis-online/get-started/create-account.htm#ESRI_SECTION1_D91DD2A709AE4FB68A9CC095F1688E05">public</a></li>
+<li>Fill out the <a href="https://docs.google.com/forms/d/e/1FAIpQLSdJijSKE4C9G5pgB__yGelBx5j9OPBSKOoCg4MJP-eb-Isiew/viewform?usp=sf_link">Jornada Spatial Data Agreement</a>
+<ul>
+<li>Submit your AGOL username in the form!</li>
+</ul></li>
+<li>I’ll add you to the group</li>
+<li>Keep in mind you are testing a new system…</li>
+<li><em>Help wanted making nice maps!</em></li>
+</ul>
+<div style="display:flex; justify-content:center;">
+<p><img src="img/slide44_img1.jpg" style="max-height:36vh; max-width:85%; object-fit:contain;"></p>
+</div>
+</section>
+<section id="other-data-sources" class="slide level2">
+<h2>Other data sources</h2>
+<ul>
+<li>USGS:</li>
+<li>Earth Explorer: <a href="https://earthexplorer.usgs.gov/">https://earthexplorer.usgs.gov/</a></li>
+<li>The National Map: <a href="https://apps.nationalmap.gov/downloader/">https://apps.nationalmap.gov/downloader/</a></li>
+<li>NASA:</li>
+<li>Earthdata: <a href="https://www.earthdata.nasa.gov/data/catalog">https://www.earthdata.nasa.gov/data/catalog</a></li>
+<li>ESRI:</li>
+<li>Living Atlas of the World: <a href="https://livingatlas.arcgis.com/en/home/">https://livingatlas.arcgis.com/en/home/</a></li>
+<li>Daymet:</li>
+<li>Daily weather and climate: <a href="https://daymet.ornl.gov/">https://daymet.ornl.gov/</a></li>
+</ul>
+<aside class="notes">
+<p>Can find satellite imagery (Landsat, MODIS, Copernicus, etc) and most other layers you may need (elevation, Lidar, etc)</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="remote-sensingaerial-imagery" class="slide level2">
+<h2>Remote sensing/aerial imagery</h2>
+<ul>
+<li>Satellite/aerial imagery &amp; derived products</li>
+<li>Drones and UAVs</li>
+</ul>
+</section>
+<section id="there-is-lots-of-remote-sensing-data-available" class="slide level2">
+<h2>There is lots of remote-sensing data available</h2>
+<ul>
+<li>NEON AOP covers part of the J. Basin</li>
+<li>NASA Earthdata: <a href="https://www.earthdata.nasa.gov/data/catalog">https://www.earthdata.nasa.gov/data/catalog</a></li>
+<li>Google Earth Engine: <a href="https://earthengine.google.com/">https://earthengine.google.com/</a></li>
+<li>Also check out: <a href="https://gee-community-catalog.org">https://gee-community-catalog.org</a></li>
+<li>JRN has a growing UAV program</li>
+</ul>
+</section>
+<section id="what-is-rap" class="slide level2">
+<h2>What is RAP?</h2>
+<ul>
+<li><a href="https://rangelands.app/">https://rangelands.app</a></li>
+<li><em>Allred et al.&nbsp;2021, 2025, Jones et al.&nbsp;2021</em></li>
+</ul>
+<div style="display:flex; justify-content:center; align-items:center; gap:8px; flex-wrap:wrap;">
+<p><img src="img/slide48_img1.png" style="height:75px; max-width:130px; object-fit:contain; margin:8px;"> <img src="img/slide48_img2.jpg" style="height:75px; max-width:130px; object-fit:contain; margin:8px;"> <img src="img/slide48_img3.jpg" style="height:75px; max-width:130px; object-fit:contain; margin:8px;"> <img src="img/slide48_img4.jpg" style="height:75px; max-width:130px; object-fit:contain; margin:8px;"> <img src="img/slide48_img5.jpg" style="height:75px; max-width:130px; object-fit:contain; margin:8px;"> <img src="img/slide48_img6.jpg" style="height:75px; max-width:130px; object-fit:contain; margin:8px;"> <img src="img/slide48_img7.jpg" style="height:75px; max-width:130px; object-fit:contain; margin:8px;"> <img src="img/slide48_img8.jpg" style="height:75px; max-width:130px; object-fit:contain; margin:8px;"> <img src="img/slide48_img9.png" style="height:75px; max-width:130px; object-fit:contain; margin:8px;"> <img src="img/slide48_img10.png" style="height:75px; max-width:130px; object-fit:contain; margin:8px;"> <img src="img/slide48_img11.jpg" style="height:75px; max-width:130px; object-fit:contain; margin:8px;"> <img src="img/slide48_img12.jpg" style="height:75px; max-width:130px; object-fit:contain; margin:8px;"></p>
+</div>
+<aside class="notes">
+<p>RAP is two things: 1) Remotely-sensed vegetation data, 2) a simple web application that puts this data at your fingertips for free.</p>
+<p>Specifically, the data products include vegetation cover and production data layers representing various plant functional groups at various spatial scales and through time. Most data layers are available across the entire US.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="ways-to-access-rap" class="slide level2">
+<h2>Ways to access RAP</h2>
+<ul>
+<li><strong>Data access</strong></li>
+<li>Web map: <a href="https://rangelands.app/rap/">https://rangelands.app/rap</a></li>
+<li>Google Earth Engine ImageCollection: ‘projects/rap-data-365417/assets/vegetation-cover-v3’</li>
+<li>Google Earth Engine Community Catalog <a href="https://gee-community-catalog.org/projects/rap/">https://gee-community-catalog.org/projects/rap/</a></li>
+<li>GeoTIFFS: <a href="http://rangeland.ntsg.umt.edu/data/rap/rap-vegetation-cover/">http://rangeland.ntsg.umt.edu/data/rap/rap-vegetation-cover/</a></li>
+<li>GIS Tiles: <a href="https://rangelands.app/support/19-viewing-rap-data-in-your-gis">https://rangelands.app/support/19-viewing-rap-data-in-your-gis</a></li>
+<li>Cloud Optimized GeoTIFFS (COGs) in GIS: <a href="https://rangelands.app/support/20-analyzing-rap-data-in-your-gis">https://rangelands.app/support/20-analyzing-rap-data-in-your-gis</a></li>
+<li>The <em>rapr</em> R package: <a href="https://humus.rocks/rapr/">https://humus.rocks/rapr/</a></li>
+</ul>
+</section>
+<section id="finding-and-using-the-data" class="slide level2">
+<h2>Finding and using the data</h2>
+<ul>
+<li>A garden of forking paths!</li>
+</ul>
+</section>
+<section id="tab-1-core-long-term-data" class="slide level2">
+<h2>Tab 1: Core long-term data</h2>
+<ul>
+<li>Long-term data underpinning JRN LTER’s core research themes. Most of this is in EDI.</li>
+</ul>
+<div style="display:flex; justify-content:center;">
+<p><img src="img/slide51_img1.jpg" style="max-height:36vh; max-width:85%; object-fit:contain;"></p>
+</div>
+</section>
+<section id="tab-2-primary-data-catalog" class="slide level2">
+<h2>Tab 2: Primary data catalog</h2>
+<ul>
+<li>The full JRN LTER data catalog hosted by EDI repository. 366 datasets searchable by metadata fields here</li>
+</ul>
+<div style="display:flex; justify-content:center;">
+<p><img src="img/slide52_img1.jpg" style="max-height:36vh; max-width:85%; object-fit:contain;"></p>
+</div>
+</section>
+<section id="tab-3-data-in-other-repositories" class="slide level2">
+<h2>Tab 3: Data in other repositories</h2>
+<ul>
+<li>Search Jornada data holdings in other repositories (Dryad, NCBI, AmeriFlux). Includes citeable datasets &amp; portals for partner networks. “Special” data types.</li>
+</ul>
+<div style="display:flex; justify-content:center;">
+<p><img src="img/slide53_img1.jpg" style="max-height:36vh; max-width:85%; object-fit:contain;"></p>
+</div>
+</section>
+<section id="tab-4-spatial-data" class="slide level2">
+<h2>Tab 4: Spatial data</h2>
+<ul>
+<li>Selected geospatial/GIS datasets available for download. This is a small fraction of available spatial data.</li>
+</ul>
+<div style="display:flex; justify-content:center;">
+<p><img src="img/slide54_img1.png" style="max-height:36vh; max-width:85%; object-fit:contain;"></p>
+</div>
+</section>
+<section id="tab-5-data-partnerships" class="slide level2">
+<h2>Tab 5: Data partnerships</h2>
+<ul>
+<li>Data from other research networks &amp; agencies operating in the Jornada Basin. Some of these are in Tab 3 also.</li>
+</ul>
+<div style="display:flex; justify-content:center;">
+<p><img src="img/slide55_img1.jpg" style="max-height:36vh; max-width:85%; object-fit:contain;"></p>
+</div>
+</section>
+<section id="jornada-data-in" class="slide level2">
+<h2>Jornada data in</h2>
+<div style="display:flex; justify-content:center;">
+<p><img src="img/slide56_img1.png" style="max-height:36vh; max-width:85%; object-fit:contain;"></p>
+</div>
+</section>
+<section id="environmental-data-initiative-repository-edi" class="slide level2">
+<h2>Environmental Data Initiative repository (EDI)</h2>
+<ul>
+<li><a href="https://edirepository.org/">https://edirepository.org</a></li>
+<li>A “generalist” repository for LTER &amp; other environmental data</li>
+<li>High quality, searchable metadata</li>
+<li>Most LTER datasets go here</li>
+<li>USDA datasets are increasingly going here too</li>
+<li>Searchable at EDI or <strong>Tab 2</strong></li>
+</ul>
+<div style="display:flex; justify-content:center;">
+<p><img src="img/slide57_img1.png" style="max-height:36vh; max-width:85%; object-fit:contain;"></p>
+</div>
+</section>
+<section id="dex" class="slide level2">
+<h2>DeX</h2>
+<ul>
+<li>Profile, subset and plot tabular datasets in EDI</li>
+</ul>
+<div style="display:flex; justify-content:center; align-items:center; gap:20px; flex-wrap:wrap;">
+<p><img src="img/slide58_img1.jpg" style="max-height:30vh; max-width:48%; object-fit:contain;"> <img src="img/slide58_img2.png" style="max-height:30vh; max-width:48%; object-fit:contain;"></p>
+</div>
+</section>
+<section id="ediutils-r-package" class="slide level2">
+<h2>EDIutils R package</h2>
+<ul>
+<li>EDIutils - an API client for the EDI repository</li>
+<li><a href="https://docs.ropensci.org/EDIutils/">https://docs.ropensci.org/EDIutils/</a></li>
+<li>Search/Access data in EDI</li>
+<li>Also has data management tools…</li>
+<li>There will be a quick demo….</li>
+</ul>
+<div style="display:flex; justify-content:center;">
+<p><img src="img/slide59_img1.png" style="max-height:36vh; max-width:85%; object-fit:contain;"></p>
+</div>
+</section>
+<section id="demo-edi-jornada-edi-catalog" class="slide level2">
+<h2>[DEMO – EDI &amp; Jornada EDI catalog]</h2>
+</section>
+<section id="specialized-jornada-data-in-other-repositories" class="slide level2">
+<h2>Specialized Jornada data in other repositories</h2>
+</section>
+<section id="some-data-are-special" class="slide level2">
+<h2>Some data are special</h2>
+<ul>
+<li>Specialized data is best archived with similar data
+<ul>
+<li>Nucleotide sequencing &amp; genomic data</li>
+<li>Eddy covariance (flux) data</li>
+<li>Imagery data</li>
+</ul></li>
+<li>Shared data formats, variables, methods, or metadata standards</li>
+<li>Archived in <strong>specialized data repositories</strong></li>
+<li>This data is supported by the JRN LTER, so we provide access</li>
+<li>Searchable in <strong>Tab 3</strong>, but less metadata available</li>
+<li><strong>PhenoCam</strong></li>
+</ul>
+<div style="display:flex; justify-content:center; align-items:center; gap:20px; flex-wrap:wrap;">
+<p><img src="img/slide62_img1.png" style="max-height:30vh; max-width:48%; object-fit:contain;"> <img src="img/slide62_img2.png" style="max-height:30vh; max-width:48%; object-fit:contain;"></p>
+</div>
+</section>
+<section id="demo-ncbi-ameriflux" class="slide level2">
+<h2>[DEMO – NCBI &amp; AmeriFlux]</h2>
+</section>
+<section id="jornada-geospatial-data" class="slide level2">
+<h2>Jornada geospatial data</h2>
+</section>
+<section id="spatial-data-are-special-too" class="slide level2">
+<h2>Spatial data are special too</h2>
+<ul>
+<li>For “historical” reasons, Jornada geospatial data is not as open</li>
+<li>Selected data available through the <a href="https://jornada-geoportal-nmsu.hub.arcgis.com/">Jornada Geoportal</a></li>
+<li>The IM team can add you to the</li>
+<li>It is a good idea to also ask
+<ul>
+<li>The Jornada IM team ( <a href="mailto:jornada.data@nmsu.edu">jornada.data@nmsu.edu</a>, or <a href="mailto:gmaurer@nmsu.edu">gmaurer@nmsu.edu</a> )</li>
+<li>JER’s Amy Slaughter ( <a href="mailto:amalia.slaughter@usda.gov">amalia.slaughter@usda.gov</a> )</li>
+</ul></li>
+</ul>
+</section>
+<section id="demo---jornada-geoportal" class="slide level2">
+<h2>[DEMO - Jornada Geoportal]</h2>
+</section>
+<section id="partnerships-and-other-jornada-data" class="slide level2">
+<h2>Partnerships and “other” Jornada data</h2>
+</section>
+<section id="there-is-lots-of-other-jornada-data" class="slide level2">
+<h2>There is lots of other Jornada data</h2>
+<ul>
+<li>We don’t directly manage ALL Jornada data
+<ul>
+<li>NEON</li>
+<li>CZNet</li>
+<li>Remote sensing data (NASA, USGS, Sentinel, etc)</li>
+<li>NOAA &amp; NRCS stations</li>
+<li>Collections data (specimens &amp; physical samples)</li>
+</ul></li>
+<li>We usually provide access via links to other data portals</li>
+<li>“Data Partnerships” are listed in <strong>Tab 5</strong> and some datasets/portals in <strong>Tab 3</strong></li>
+<li>We can help - let us know what you are looking for!</li>
+</ul>
+<div style="display:flex; justify-content:center; align-items:center; gap:12px; flex-wrap:nowrap;">
+<p><img src="img/slide68_img1.png" style="max-height:20vh; max-width:27%; object-fit:contain;"> <img src="img/slide68_img2.png" style="max-height:20vh; max-width:27%; object-fit:contain;"> <img src="img/slide68_img3.png" style="max-height:20vh; max-width:27%; object-fit:contain;"></p>
+</div>
+</section>
+<section id="demo-partner-data" class="slide level2">
+<h2>[DEMO – Partner data]</h2>
+</section>
+<section id="more-ways-to-explore-jornada-data" class="slide level2">
+<h2>More ways to explore Jornada data</h2>
+</section>
+<section id="the-interactive-data-viewer" class="slide level2">
+<h2>The Interactive data viewer</h2>
+<ul>
+<li>R Shiny app showing met station locations (NPP &amp; CSIS) and providing access to “provisional” met data.</li>
+</ul>
+<div style="display:flex; justify-content:center;">
+<p><img src="img/slide71_img1.jpg" style="max-height:36vh; max-width:85%; object-fit:contain;"></p>
+</div>
+</section>
+<section id="interactive-data-viewer" class="slide level2">
+<h2>Interactive data viewer</h2>
+<ul>
+<li>Met data current to yesterday</li>
+<li>Subset &amp; download data</li>
+<li>No QA/QC (!), but links to published data available</li>
+<li>Good for general orientation and answering the question “Did it rain at my site yesterday?”</li>
+</ul>
+<div style="display:flex; justify-content:center;">
+<p><img src="img/slide72_img1.jpg" style="max-height:36vh; max-width:85%; object-fit:contain;"></p>
+</div>
+</section>
+<section id="demo-interactive-data-viewer" class="slide level2">
+<h2>[DEMO – Interactive data viewer]</h2>
+</section>
+<section id="dataone" class="slide level2">
+<h2>DataOne</h2>
+<ul>
+<li>Metadata aggregator</li>
+<li>Many “member nodes”
+<ul>
+<li>All LTER repositories (EDI, BCO-DMO, ADC)</li>
+<li>Dryad et al.</li>
+<li>Some fed agency data</li>
+</ul></li>
+<li>Standard tabular datasets</li>
+<li>No NCBI, AmeriFlux, etc</li>
+<li>Good for cross-site synthesis, challenging for site-specific data</li>
+</ul>
+<div style="display:flex; justify-content:center;">
+<p><img src="img/slide74_img1.jpg" style="max-height:36vh; max-width:85%; object-fit:contain;"></p>
+</div>
+</section>
+<section id="activity-3-what-else-is-there" class="slide level2">
+<h2>Activity 3: What else is there?</h2>
+<ul>
+<li>What have we missed here? Form small groups and discuss the kinds of data that are most useful in your research and whether you think you can find them given the information presented today. You can make notes in the community doc.</li>
+<li>Then, lets discuss.</li>
+</ul>
+</section>
+<section id="using-the-data" class="slide level2">
+<h2>Using the data</h2>
+<ul>
+<li>Hands on time!</li>
+</ul>
+
+
+</section>
+    </div>
+  <div class="quarto-auto-generated-content" style="display: none;">
+<div class="footer footer-default">
+
+</div>
+</div></div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="../../site_libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="../../site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="../../site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="../../site_libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="../../site_libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="../../site_libs/revealjs/plugin/search/search.js"></script>
+  <script src="../../site_libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="../../site_libs/revealjs/plugin/math/math.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': false,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'jumpToSlide': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'smaller': false,
+ 
+        // Display controls in the bottom right corner
+        controls: false,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: 'c/t',
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'fade',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'none',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1050,
+
+        height: 700,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0.1,
+
+        math: {
+          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, QuartoSupport,
+
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    <script id="quarto-html-after-body" type="application/javascript">
+      window.document.addEventListener("DOMContentLoaded", function (event) {
+        const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+        tabsets.forEach(function(tabset) {
+          const tabby = new Tabby('#' + tabset.id);
+        });
+        const isCodeAnnotation = (el) => {
+          for (const clz of el.classList) {
+            if (clz.startsWith('code-annotation-')) {                     
+              return true;
+            }
+          }
+          return false;
+        }
+        const onCopySuccess = function(e) {
+          // button target
+          const button = e.trigger;
+          // don't keep focus
+          button.blur();
+          // flash "checked"
+          button.classList.add('code-copy-button-checked');
+          var currentTitle = button.getAttribute("title");
+          button.setAttribute("title", "Copied!");
+          let tooltip;
+          if (window.bootstrap) {
+            button.setAttribute("data-bs-toggle", "tooltip");
+            button.setAttribute("data-bs-placement", "left");
+            button.setAttribute("data-bs-title", "Copied!");
+            tooltip = new bootstrap.Tooltip(button, 
+              { trigger: "manual", 
+                customClass: "code-copy-button-tooltip",
+                offset: [0, -8]});
+            tooltip.show();    
+          }
+          setTimeout(function() {
+            if (tooltip) {
+              tooltip.hide();
+              button.removeAttribute("data-bs-title");
+              button.removeAttribute("data-bs-toggle");
+              button.removeAttribute("data-bs-placement");
+            }
+            button.setAttribute("title", currentTitle);
+            button.classList.remove('code-copy-button-checked');
+          }, 1000);
+          // clear code selection
+          e.clearSelection();
+        }
+        const getTextToCopy = function(trigger) {
+          const outerScaffold = trigger.parentElement.cloneNode(true);
+          const codeEl = outerScaffold.querySelector('code');
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+        }
+        const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+          text: getTextToCopy
+        });
+        clipboard.on('success', onCopySuccess);
+        if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+          const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+            text: getTextToCopy,
+            container: window.document.getElementById('quarto-embedded-source-code-modal')
+          });
+          clipboardModal.on('success', onCopySuccess);
+        }
+          var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+          var mailtoRegex = new RegExp(/^mailto:/);
+            var filterRegex = new RegExp("https:\/\/jornada-im\.github\.io\/jeds\/");
+          var isInternal = (href) => {
+              return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+          }
+          // Inspect non-navigation links and adorn them if external
+         var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+          for (var i=0; i<links.length; i++) {
+            const link = links[i];
+            if (!isInternal(link.href)) {
+              // undo the damage that might have been done by quarto-nav.js in the case of
+              // links that we want to consider external
+              if (link.dataset.originalHref !== undefined) {
+                link.href = link.dataset.originalHref;
+              }
+            }
+          }
+        function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+          const config = {
+            allowHTML: true,
+            maxWidth: 500,
+            delay: 100,
+            arrow: false,
+            appendTo: function(el) {
+                return el.closest('section.slide') || el.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'light-border',
+            placement: 'bottom-start',
+          };
+          if (contentFn) {
+            config.content = contentFn;
+          }
+          if (onTriggerFn) {
+            config.onTrigger = onTriggerFn;
+          }
+          if (onUntriggerFn) {
+            config.onUntrigger = onUntriggerFn;
+          }
+            config['offset'] = [0,0];
+            config['maxWidth'] = 700;
+          window.tippy(el, config); 
+        }
+        const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+        for (var i=0; i<noterefs.length; i++) {
+          const ref = noterefs[i];
+          tippyHover(ref, function() {
+            // use id or data attribute instead here
+            let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+            try { href = new URL(href).hash; } catch {}
+            const id = href.replace(/^#\/?/, "");
+            const note = window.document.getElementById(id);
+            if (note) {
+              return note.innerHTML;
+            } else {
+              return "";
+            }
+          });
+        }
+        const findCites = (el) => {
+          const parentEl = el.parentElement;
+          if (parentEl) {
+            const cites = parentEl.dataset.cites;
+            if (cites) {
+              return {
+                el,
+                cites: cites.split(' ')
+              };
+            } else {
+              return findCites(el.parentElement)
+            }
+          } else {
+            return undefined;
+          }
+        };
+        var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+        for (var i=0; i<bibliorefs.length; i++) {
+          const ref = bibliorefs[i];
+          const citeInfo = findCites(ref);
+          if (citeInfo) {
+            tippyHover(citeInfo.el, function() {
+              var popup = window.document.createElement('div');
+              citeInfo.cites.forEach(function(cite) {
+                var citeDiv = window.document.createElement('div');
+                citeDiv.classList.add('hanging-indent');
+                citeDiv.classList.add('csl-entry');
+                var biblioDiv = window.document.getElementById('ref-' + cite);
+                if (biblioDiv) {
+                  citeDiv.innerHTML = biblioDiv.innerHTML;
+                }
+                popup.appendChild(citeDiv);
+              });
+              return popup.innerHTML;
+            });
+          }
+        }
+      });
+      </script>
+    
+
+</body></html>

@@ -1,0 +1,1387 @@
+[
+  {
+    "objectID": "docs/lessons/git-and-github-for-research.html",
+    "href": "docs/lessons/git-and-github-for-research.html",
+    "title": "Git and GitHub for researchers",
+    "section": "",
+    "text": "free & open-source distributed version control system (DVCS)\nfirst authored by Linus Torvalds for development of the Linux kernel\nvery widely used to “version control” software dev projects\nexcels at tracking changes to computer code files (plain text)\ngood for collaborative workflows\n\n\n\n\n\nscientists write lots of computer code and documentation\nwe revise things often\npaths of inquiry get abandoned, or revisited later\nscientists work collaboratively\nresearch projects evolve and diversify with time\n\nResearch can become a “garden of forking paths”\nVersion control records changes and helps manage the complexity\n\n\n\n\nls ~/awesomeproject/\n\nanalysis_script.R\nanalysis_script_Darren.R\nanalysis_script_MLtest.R\nanalysis_script_final.1.R\nanalysis_script_final.R\nanalysis_script_v1.R\nanalysis_script_v2.R\ndata.csv\n\n\nThe researcher has gone down different paths, each resulting in a new file:\n\nlinear, polynomial, and machine learning models\ninput from a collaborator\na “final product” for a report or paper\n\n\n\n\n\n# The -a lists hidden files like .git\nls -a ~/awesomeproject_git/\n\n.\n..\n.git\nanalysis_script.R\ndata.csv\n\n\nThis is a Git repository for the same analysis project\n\nThere is only one script (analysis_script.R).\nGit commands (git ...) help manage and version control files.\nChanges to the script (and other files) are recorded in the .git directory.\n\n\n\n\nGit keeps track of what changed in analysis_script.R, who changed it, when it changed, and why (as long as you tell it to). \n\n\n\n\n\nrepository: a directory with a history of changes recorded by Git, meaning it must contain a .git subdirectory.\ncommit: Git’s basic unit of version control that records exactly which lines changed in which files, and how, plus annotations about person, time, etc.\nversion: the state of repository files produced by a particular line of development that includes one or more commits to the repository\nbranch: a version of repository files that diverges (with separate commits) from the main line of development (the main branch) in the repository\nfork: a complete copy of a Git repository that then undergoes divergent changes from the original\n\n\n\n\n\n\ngit -C ~/awesomeproject_git/ log\n\ncommit c2472f36558c17f2565a6160eb3d6f1caf0426d3\nAuthor: Quarto GHA Workflow Runner &lt;quarto-github-actions-publish@example.com&gt;\nDate:   Sun Aug 30 18:28:36 2026 +0000\n\n    Statistics and figures for report 1\n\ncommit c506dad8bd002abeba1054003e7aabf01a9587fb\nAuthor: Quarto GHA Workflow Runner &lt;quarto-github-actions-publish@example.com&gt;\nDate:   Sun Aug 30 18:28:36 2026 +0000\n\n    Fit polynomial model\n\ncommit 2071a3d05713349e5dde4cbb0aff8a96dae73beb\nAuthor: Quarto GHA Workflow Runner &lt;quarto-github-actions-publish@example.com&gt;\nDate:   Sun Aug 30 18:28:36 2026 +0000\n\n    Fit linear model to the data\n\ncommit ca0ed4608abd9a0de542a31126edd6408683cf50\nAuthor: Quarto GHA Workflow Runner &lt;quarto-github-actions-publish@example.com&gt;\nDate:   Sun Aug 30 18:28:36 2026 +0000\n\n    Initial commit - add analysis script",
+    "crumbs": [
+      "Git and GitHub for researchers"
+    ]
+  },
+  {
+    "objectID": "docs/lessons/git-and-github-for-research.html#what-is-git",
+    "href": "docs/lessons/git-and-github-for-research.html#what-is-git",
+    "title": "Git and GitHub for researchers",
+    "section": "",
+    "text": "free & open-source distributed version control system (DVCS)\nfirst authored by Linus Torvalds for development of the Linux kernel\nvery widely used to “version control” software dev projects\nexcels at tracking changes to computer code files (plain text)\ngood for collaborative workflows",
+    "crumbs": [
+      "Git and GitHub for researchers"
+    ]
+  },
+  {
+    "objectID": "docs/lessons/git-and-github-for-research.html#why-use-version-control-as-a-researcher",
+    "href": "docs/lessons/git-and-github-for-research.html#why-use-version-control-as-a-researcher",
+    "title": "Git and GitHub for researchers",
+    "section": "",
+    "text": "scientists write lots of computer code and documentation\nwe revise things often\npaths of inquiry get abandoned, or revisited later\nscientists work collaboratively\nresearch projects evolve and diversify with time\n\nResearch can become a “garden of forking paths”\nVersion control records changes and helps manage the complexity",
+    "crumbs": [
+      "Git and GitHub for researchers"
+    ]
+  },
+  {
+    "objectID": "docs/lessons/git-and-github-for-research.html#inside-a-simple-data-analysis-project",
+    "href": "docs/lessons/git-and-github-for-research.html#inside-a-simple-data-analysis-project",
+    "title": "Git and GitHub for researchers",
+    "section": "",
+    "text": "ls ~/awesomeproject/\n\nanalysis_script.R\nanalysis_script_Darren.R\nanalysis_script_MLtest.R\nanalysis_script_final.1.R\nanalysis_script_final.R\nanalysis_script_v1.R\nanalysis_script_v2.R\ndata.csv\n\n\nThe researcher has gone down different paths, each resulting in a new file:\n\nlinear, polynomial, and machine learning models\ninput from a collaborator\na “final product” for a report or paper",
+    "crumbs": [
+      "Git and GitHub for researchers"
+    ]
+  },
+  {
+    "objectID": "docs/lessons/git-and-github-for-research.html#using-git-simplifies-things",
+    "href": "docs/lessons/git-and-github-for-research.html#using-git-simplifies-things",
+    "title": "Git and GitHub for researchers",
+    "section": "",
+    "text": "# The -a lists hidden files like .git\nls -a ~/awesomeproject_git/\n\n.\n..\n.git\nanalysis_script.R\ndata.csv\n\n\nThis is a Git repository for the same analysis project\n\nThere is only one script (analysis_script.R).\nGit commands (git ...) help manage and version control files.\nChanges to the script (and other files) are recorded in the .git directory.",
+    "crumbs": [
+      "Git and GitHub for researchers"
+    ]
+  },
+  {
+    "objectID": "docs/lessons/git-and-github-for-research.html#what-is-recorded-in-.git",
+    "href": "docs/lessons/git-and-github-for-research.html#what-is-recorded-in-.git",
+    "title": "Git and GitHub for researchers",
+    "section": "",
+    "text": "Git keeps track of what changed in analysis_script.R, who changed it, when it changed, and why (as long as you tell it to).",
+    "crumbs": [
+      "Git and GitHub for researchers"
+    ]
+  },
+  {
+    "objectID": "docs/lessons/git-and-github-for-research.html#some-terminology",
+    "href": "docs/lessons/git-and-github-for-research.html#some-terminology",
+    "title": "Git and GitHub for researchers",
+    "section": "",
+    "text": "repository: a directory with a history of changes recorded by Git, meaning it must contain a .git subdirectory.\ncommit: Git’s basic unit of version control that records exactly which lines changed in which files, and how, plus annotations about person, time, etc.\nversion: the state of repository files produced by a particular line of development that includes one or more commits to the repository\nbranch: a version of repository files that diverges (with separate commits) from the main line of development (the main branch) in the repository\nfork: a complete copy of a Git repository that then undergoes divergent changes from the original",
+    "crumbs": [
+      "Git and GitHub for researchers"
+    ]
+  },
+  {
+    "objectID": "docs/lessons/git-and-github-for-research.html#an-annotated-list-of-commits",
+    "href": "docs/lessons/git-and-github-for-research.html#an-annotated-list-of-commits",
+    "title": "Git and GitHub for researchers",
+    "section": "",
+    "text": "git -C ~/awesomeproject_git/ log\n\ncommit c2472f36558c17f2565a6160eb3d6f1caf0426d3\nAuthor: Quarto GHA Workflow Runner &lt;quarto-github-actions-publish@example.com&gt;\nDate:   Sun Aug 30 18:28:36 2026 +0000\n\n    Statistics and figures for report 1\n\ncommit c506dad8bd002abeba1054003e7aabf01a9587fb\nAuthor: Quarto GHA Workflow Runner &lt;quarto-github-actions-publish@example.com&gt;\nDate:   Sun Aug 30 18:28:36 2026 +0000\n\n    Fit polynomial model\n\ncommit 2071a3d05713349e5dde4cbb0aff8a96dae73beb\nAuthor: Quarto GHA Workflow Runner &lt;quarto-github-actions-publish@example.com&gt;\nDate:   Sun Aug 30 18:28:36 2026 +0000\n\n    Fit linear model to the data\n\ncommit ca0ed4608abd9a0de542a31126edd6408683cf50\nAuthor: Quarto GHA Workflow Runner &lt;quarto-github-actions-publish@example.com&gt;\nDate:   Sun Aug 30 18:28:36 2026 +0000\n\n    Initial commit - add analysis script",
+    "crumbs": [
+      "Git and GitHub for researchers"
+    ]
+  },
+  {
+    "objectID": "docs/lessons/git-and-github-for-research.html#finding-and-configuring-git",
+    "href": "docs/lessons/git-and-github-for-research.html#finding-and-configuring-git",
+    "title": "Git and GitHub for researchers",
+    "section": "Finding and configuring git",
+    "text": "Finding and configuring git\nWe will do this in the system shell. So, open a terminal with bash, zsh, or another shell (you may have installed one with Git on Windows), and then type the following command.\n\ngit --version\n\ngit version 2.55.0\n\n\nIf you got the output above, or similar, you have Git installed and it is available with git commands in your shell. If you didn’t get that output you need to return to the setup instructions and install Git for your system.\nIf Git is newly installed on your system, you probably need to configure a couple of things. As you start using git commands, it helps to know that they usually follow a git verb options pattern, where verb is the action you need to take, and options give some specifics of how to do the action. For configuration, lets first, tell git who you are.\n\ngit config --global user.name \"Marie Curie\"\ngit config --global user.email \"marie@sorbonne.fr\"\n\nThere are some differences in how computer platforms handle line endings in text files. Correspondingly, you will want to tell Git how to handle this for you, and the configuration for MS Windows machines will be different than for Mac and Linux machines. For Mac and Linux, the recommended setting is:\n\ngit config --global core.autocrlf input\n\nAnd for Windows it is:\n\ngit config --global core.autocrlf true\n\nSince we’ll be using GitHub, which names its repository main branches main, we should make sure our local git follows the same convention.\n\ngit config --global init.defaultBranch main\n\nFinally, you might also want to configure Git to use your favorite text editor for writing commit messages. More information about that here.\nYou can show your Git configurations anytime with git config --list command.",
+    "crumbs": [
+      "Git and GitHub for researchers"
+    ]
+  },
+  {
+    "objectID": "docs/lessons/git-and-github-for-research.html#making-your-first-repository",
+    "href": "docs/lessons/git-and-github-for-research.html#making-your-first-repository",
+    "title": "Git and GitHub for researchers",
+    "section": "Making your first repository",
+    "text": "Making your first repository\nNow lets make a new directory and add a text file to it. We will turn this into a Git repository in a moment.\n\nmkdir ~/my_repo\ntouch ~/my_repo/script.R\ncd ~/my_repo\n\nNow that we are in our project directory, lets make it a Git repository\n\ngit init\n\nhint: Using 'master' as the name for the initial branch. This default branch name\nhint: will change to \"main\" in Git 3.0. To configure the initial branch name\nhint: to use in all of your new repositories, which will suppress this warning,\nhint: call:\nhint:\nhint:   git config --global init.defaultBranch &lt;name&gt;\nhint:\nhint: Names commonly chosen instead of 'master' are 'main', 'trunk' and\nhint: 'development'. The just-created branch can be renamed via this command:\nhint:\nhint:   git branch -m &lt;name&gt;\nhint:\nhint: Disable this message with \"git config set advice.defaultBranchName false\"\nInitialized empty Git repository in /home/runner/my_repo/.git/\n\n\nWe can use the ls -a shell command to see if we made a .git directory to to store the changes we will make to our files.\n\nls -a\n\n.\n..\n.git\nscript.R\n\n\nThe .git/ directory is there. Now lets ask Git to tell us the status of our repository.\n\ngit status\n\nOn branch master\n\nNo commits yet\n\nUntracked files:\n  (use \"git add &lt;file&gt;...\" to include in what will be committed)\n    script.R\n\nnothing added to commit but untracked files present (use \"git add\" to track)\n\n\nWe are on the main branch, there are no commits yet, and there is a file that we made - script.R - that is not being tracked.",
+    "crumbs": [
+      "Git and GitHub for researchers"
+    ]
+  },
+  {
+    "objectID": "docs/lessons/git-and-github-for-research.html#adding-files-and-tracking-changes",
+    "href": "docs/lessons/git-and-github-for-research.html#adding-files-and-tracking-changes",
+    "title": "Git and GitHub for researchers",
+    "section": "Adding files and tracking changes",
+    "text": "Adding files and tracking changes\nLets tell Git to track that file. We do that with the add verb, which “stages” the file to be added to a new commit.\n\ngit add script.R\n\nIf we want to check the status now, we’ll see that script.R is staged to be added as a new file, under the “Changes to be committed” list.\n\ngit status\n\nOn branch master\n\nNo commits yet\n\nChanges to be committed:\n  (use \"git rm --cached &lt;file&gt;...\" to unstage)\n    new file:   script.R\n\n\nThis staging step lets you compose multiple changes to your repository files into a group of updates to your history (sometimes called a change-set). When we are ready to add these changes, for us just one new file, to our git repository, we commit the changes to the repository, which will store the initial version of our file in Git’s history.\n\ngit commit -m 'Adding the first R script'\n\n[master (root-commit) bf50383] Adding the first R script\n 1 file changed, 0 insertions(+), 0 deletions(-)\n create mode 100644 script.R\n\n\nSooner or later we’ll add something to this file, and we’ll want to commit those changes to the repository as well. Open up your script.R file in a text editor and add a couple lines of “code”, then save this file again. After it is saved you can check your repository status with git status again.\n\ngit status\n\nOn branch master\nChanges not staged for commit:\n  (use \"git add &lt;file&gt;...\" to update what will be committed)\n  (use \"git restore &lt;file&gt;...\" to discard changes in working directory)\n    modified:   script.R\n\nno changes added to commit (use \"git add\" and/or \"git commit -a\")\n\n\nThis tells us that script.R was modified, but those changes haven’t been staged yet. To get line-by-line details about what changed in your file, you can “diff” the file to show the difference between the last committed version, and what it looks like after you added some code.\n\ngit diff script.R\n\ndiff --git a/script.R b/script.R\nindex e69de29..4cd5370 100644\n--- a/script.R\n+++ b/script.R\n@@ -0,0 +1,2 @@\n+Load the data...\n+Fit a linear model...\n\n\nThe lines prepended with a + show what has been added since the last commit. Lines starting with - would show you what was removed, but we haven’t removed anything. This seems like a reasonable change, so lets stage the updated file with git add and add it to our repository with git commit.\n\ngit add script.R\ngit commit -m 'I updated the script with 2 lines'\n\n[master 846c670] I updated the script with 2 lines\n 1 file changed, 2 insertions(+)\n\n\nTake note that when you commit something to your repository’s history it is wise to explain what was changed using a “commit message” That is what we are doing with the -m option followed by a quoted message. Commit messages are invaluable in helping you understand how and why your repository is changing, so before you commit something, put a little thought into how you will describe the changes.\nLets take a quick look at our history now:\n\ngit log\n\ncommit 846c6709fc2da5c209186a61e15208737bf9f6bd\nAuthor: Quarto GHA Workflow Runner &lt;quarto-github-actions-publish@example.com&gt;\nDate:   Sun Aug 30 18:28:37 2026 +0000\n\n    I updated the script with 2 lines\n\ncommit bf50383d0d8de63953efa2439c536fe7a030f03b\nAuthor: Quarto GHA Workflow Runner &lt;quarto-github-actions-publish@example.com&gt;\nDate:   Sun Aug 30 18:28:37 2026 +0000\n\n    Adding the first R script\n\n\nWe can see our progress so far. There are two commits, with the first adding the new script.R file, and the second one adding a couple of lines to it.",
+    "crumbs": [
+      "Git and GitHub for researchers"
+    ]
+  },
+  {
+    "objectID": "docs/lessons/git-and-github-for-research.html#what-is-github",
+    "href": "docs/lessons/git-and-github-for-research.html#what-is-github",
+    "title": "Git and GitHub for researchers",
+    "section": "What is GitHub?",
+    "text": "What is GitHub?\n\nhttps://github.com\nSoftware development and collaboration platform\nA host for git repositories with web-based tools for working in a highly networked, collaborative way\nOwned by Microsoft now\nVery widely used",
+    "crumbs": [
+      "Git and GitHub for researchers"
+    ]
+  },
+  {
+    "objectID": "docs/lessons/git-and-github-for-research.html#how-to-use-github",
+    "href": "docs/lessons/git-and-github-for-research.html#how-to-use-github",
+    "title": "Git and GitHub for researchers",
+    "section": "How to use GitHub",
+    "text": "How to use GitHub\nInteract with the GitHub website with a browser\n\nFor example, this tutorial is in a repository on GitHub.\nWith an account you can create git repositories and much more.\n\nClone or sync changes (push and pull) with GitHub repositories using git\n\ngit clone https://github.com/jornada-im/jeds.git\n\nGitHub also has a bunch of APIs, a command-line tool, GitHub Desktop…",
+    "crumbs": [
+      "Git and GitHub for researchers"
+    ]
+  },
+  {
+    "objectID": "docs/lessons/git-and-github-for-research.html#when-should-researchers-use-github",
+    "href": "docs/lessons/git-and-github-for-research.html#when-should-researchers-use-github",
+    "title": "Git and GitHub for researchers",
+    "section": "When should researchers use GitHub?",
+    "text": "When should researchers use GitHub?\n\nIf you do scientific computing/software development\nFor collaborative…\n\ndata analysis\nwriting\nproject management\nteaching\n(and computing/software dev)\n\nPersonal/professional/project/educational websites\nAutomating tasks",
+    "crumbs": [
+      "Git and GitHub for researchers"
+    ]
+  },
+  {
+    "objectID": "docs/lessons/git-and-github-for-research.html#create-and-clone-a-github-repository",
+    "href": "docs/lessons/git-and-github-for-research.html#create-and-clone-a-github-repository",
+    "title": "Git and GitHub for researchers",
+    "section": "Create and clone a GitHub repository",
+    "text": "Create and clone a GitHub repository\nLets create a repository on GitHub, initialize it with some files, and then use our local git commands to pull the new repository to our computer. We can then make some changes and push them back to GitHub.\n\nLog into https://github.com with your account credentials (or make an account if you didn’t in advance).\nPress the little green New button to create a new repository\nName the repository my_gh_repo\nCheck the box to “Add a README file”\nClick the Create repository button\n\nNow your repository is created and you should be in its landing page. To move the new repository to your local machine, you must “clone” it from GitHub. First make a place on your local machine to put the repository. Return to your system shell and make a new directory called GitHub to hold local repositories you clone from GitHub.\n\nmkdir -p GitHub # -p option is \"if it doesn't exist already\"\n\nNow you need to use git to clone my_gh_repo from GitHub using its web address. Returning to your repository page (https://github.com/{username}/my_gh_repo), look in the top right of this repository’s landing page, and there is a Code button. Click it to open a dialogue that gives you the option to copy an address. Use the “HTTPS” option and press the “Copy” button to the right of the address (2 overlapping squares). The address for your repository is now in your system clipboard. Return to your shell, navigate to the GitHub directory, and git clone the repository at that address:\n\ncd ~/GitHub/ #Note: you can put GitHub/ somewhere other than the home directory (~)\ngit clone https://github.com/gremau/my_gh_repo.git\n\nCloning into 'my_gh_repo'...\n\n\nNow you should have a clone, or copy, of the my_gh_repo repository you just made that is ready to work with in your local GitHub/ directory. Lets enter that directory and look around.\n\ncd my_gh_repo/\nls -a\n\n.\n..\n.git\n.gitignore\nLICENSE\nREADME.md\n\n\nWe can see the README.md file that we created on GitHub, plus the .git folder ready and waiting for us.",
+    "crumbs": [
+      "Git and GitHub for researchers"
+    ]
+  },
+  {
+    "objectID": "docs/lessons/git-and-github-for-research.html#make-changes-and-push-to-github",
+    "href": "docs/lessons/git-and-github-for-research.html#make-changes-and-push-to-github",
+    "title": "Git and GitHub for researchers",
+    "section": "Make changes and push to GitHub",
+    "text": "Make changes and push to GitHub\nLets make some changes to our new repository on our local system. Use a text editor to open up the README.md file inside your my_gh_repo repository folder and add a couple new lines of text. Once you do, Git should notice the change when checking the repository status.\n\ngit status\n\nOn branch main\nYour branch is up to date with 'origin/main'.\n\nChanges not staged for commit:\n  (use \"git add &lt;file&gt;...\" to update what will be committed)\n  (use \"git restore &lt;file&gt;...\" to discard changes in working directory)\n    modified:   README.md\n\nno changes added to commit (use \"git add\" and/or \"git commit -a\")\n\n\nNotice that git status now tells us the repository status in relation to the “origin”. The origin is a remote repository that your local copy is linked to, in this case the repository on GitHub that we cloned from. We can list our remote repositories, and inspect the origin with the git remote command.\n\ngit remote -v # -v is for \"verbose\"\n\norigin  https://github.com/gremau/my_gh_repo.git (fetch)\norigin  https://github.com/gremau/my_gh_repo.git (push)\n\n\nThis tells us we have one remote repository, called origin, and we can push to and pull from this repository. We can also see some other details about branches, and where the push and pull operations will go.\n\ngit remote show origin # This gives details of origin\n\n* remote origin\n  Fetch URL: https://github.com/gremau/my_gh_repo.git\n  Push  URL: https://github.com/gremau/my_gh_repo.git\n  HEAD branch: main\n  Remote branch:\n    main tracked\n  Local branch configured for 'git pull':\n    main merges with remote main\n  Local ref configured for 'git push':\n    main pushes to main (up to date)\n\n\nGetting back to the changes we made, if we are content with our local changes we can stage them and commit them.\n\ngit add README.md\ngit commit -m \"Added two lines to the README file\"\n\n[main b739d8a] Added two lines to the README file\n 1 file changed, 2 insertions(+)\n\n\nGreat! But now our local clone of the repository has a commit that is not at the origin repository on GitHub. How do we fix this? First lets look at what git status says.\n\ngit status\n\nOn branch main\nYour branch is ahead of 'origin/main' by 1 commit.\n  (use \"git push\" to publish your local commits)\n\nnothing to commit, working tree clean\n\n\nOur local repository is one commit ahead of origin now. To bring the GitHub repository up to date, we need to git push the changes there. Note that this isn’t going to work unless you have something called a “Personal Access Token” (PAT), or have configured SSH access to GitHub. We can quickly create a PAT on GitHub with these steps (taken from here):\n\nGo back to https://github.com - you should be logged in with your account credentials already\nOpen the dropdown at the very top right corner of your page to see GitHub user account options, and choose Settings.\nIn the left sidebar choose Developer settings\nIn the left sidebar (again) choose Personal access tokens\nGive it a name, expiration date, and give the token repo access by checking the first check box under Select scopes\nClick the Generate token button at the bottom, and then copy the resulting token to your clipboard (the copy button is the overlapping squares again).\n\nFor now, SSH access is beyond the scope of this tutorial, but it is highly recommended. See here to learn how to set up SSH access for your machine and GitHub.\nNow that you have copied the token you can use git push to push the changes to origin on GitHub. You will be asked for your username and password. For the password you will paste the PAT token into the terminal.\n\ngit push\n# Username for 'https://github.com': {enter your GitHub username}\n# Password for 'https://gremau@github.com': {PASTE the \"PAT\" here}\n\nIf this is successful, the most recent commit adding two new lines to the README file will be added to the GitHub repository, thus syncing up the local and remote versions of our files.",
+    "crumbs": [
+      "Git and GitHub for researchers"
+    ]
+  },
+  {
+    "objectID": "docs/lessons/git-and-github-for-research.html#forking-a-repository",
+    "href": "docs/lessons/git-and-github-for-research.html#forking-a-repository",
+    "title": "Git and GitHub for researchers",
+    "section": "“Forking” a repository",
+    "text": "“Forking” a repository\nYou can copy any public repository on GitHub to your own account by “Forking” the repository. Essentially, this creates a clone of someone else’s repository for you, in your own GitHub account. To demonstrate this, lets clone the repository that contains this tutorial (jornada-im/jeds). Return to GitHub in your browser and follow these steps.\n\nNavigate to https://github.com/jornada-im/jeds\nIn the upper right of the repository page click the “Fork” button between “Star” and “Watch”.\nYou’ll have the option to change the name and owner, but you can leave everything as it is and click the Create fork button, which will create the fork and take you to its landing page.\n\nYou’ll now have a fork of the “jeds” repository in your own GitHub account (your_username/jeds). In the upper left of the page, under the repository name you should see a link back to the original repository (jornada-im/jeds). Now lets clone this to our local GitHub folder and make some changes.\nOn your new jeds repository fork page, click the Code to open the dialogue, then select “HTTPS”, and copy the link to the repository (copy with the overlapping squares). Now clone that into your GitHub directory.\n\ncd ~/GitHub/\ngit clone https://github.com/gremau/jeds.git jeds_fork #jeds_fork is optional\n\nCloning into 'jeds_fork'...\n\n\nNow you have a local copy of your fork (your_username/jeds). If you want to interact with the original repository (jornada-im/jeds) then we need to make sure there is a link to that. Lets go to that repository\n\ncd jeds_fork/\n\nand check the status of our remote repositories.\n\ngit remote -v\n\norigin  https://github.com/gremau/jeds.git (fetch)\norigin  https://github.com/gremau/jeds.git (push)\n\n\nIt looks like our only “remote” repository is our fork on GitHub (your_username/jeds). This is OK, but not ideal for collaboration purposes. It would be better if we also had the original repository (jornada-im/jeds) configured as an “upstream” source repository. This way, we could pull any changes made to the source repository directly into our local clone. Instead, we currently need to do this indirectly through GitHub. There are several ways to configure an upstream source repository (see methods in Happy Git for example), but we’re going to set that aside today and focus on the simplest possible method to make changes.",
+    "crumbs": [
+      "Git and GitHub for researchers"
+    ]
+  },
+  {
+    "objectID": "docs/lessons/git-and-github-for-research.html#branching-and-pushing-to-forks",
+    "href": "docs/lessons/git-and-github-for-research.html#branching-and-pushing-to-forks",
+    "title": "Git and GitHub for researchers",
+    "section": "Branching and pushing to forks",
+    "text": "Branching and pushing to forks\nLets continue by making some changes to a local file in our fork of the jeds repository. Before we do this, we should create a branch to make the changes in. A branch is a separate, named path of development within a repository. When we create a branch and make changes in it, they do not effect the main branch until we decide to merge them in. Creating and working with branches in git is simple, just create a new named branch and then git checkout the branch to begin work there.\n\ngit branch my_changes\ngit checkout my_changes\n\nSwitched to branch 'my_changes'\n\n\nYou could also use a shorthand command for this - git checkout -b my_changes. We have now created a branch within our repository, called my_changes that we can develop without changing anything in main. This is a great way to partition your changes until you are sure your changes work well with the rest of the repository.\nNow lets make those changes. Look inside the docs/lessons folder and find the learner_changes.md file.\n\nls docs/lessons/\n\ndata-viz-with-ggplot.qmd\ngit-and-github-for-research.qmd\nimg\nlearner_changes.md\nsetup.qmd\nstatistical-inference-linear-and-mixed.qmd\nteaching-datasets.qmd\n\n\nOpen this file in a text editor and and correct some of the problems in the spelling or the code. Save your changes and then stage and commit the changes.\n\ngit add docs/lessons/learner_changes.md\ngit commit -m 'I made this file better'\n\n[my_changes adc1cba] I made this file better\n 1 file changed, 2 insertions(+)\n\n\nWe have committed the changes to the my_changes branch. If we want to share these changes, the new branch will need to be accessible to others in the forked GitHub repository (your_username/jeds). To publish the my_changes branch to GitHub we can use a variation on git push that creates an “upstream” branch in the origin repository (again - your_username/jeds).\n\ngit push --set-upstream origin my_changes\n\nNow if we return to GitHub, we can see that the new branch has been added to the repository there, and it will contain any changes we made to docs/lessons/learner_changes.md. If we want to contribute the changes in our new branch back to the source repository (jornada-im/jeds), we can issue something called a “pull request” in GitHub, which notifies the maintainer of the source repository that somebody wants to merge changes into it.",
+    "crumbs": [
+      "Git and GitHub for researchers"
+    ]
+  },
+  {
+    "objectID": "docs/lessons/git-and-github-for-research.html#issuing-pull-requests",
+    "href": "docs/lessons/git-and-github-for-research.html#issuing-pull-requests",
+    "title": "Git and GitHub for researchers",
+    "section": "Issuing pull requests",
+    "text": "Issuing pull requests\nWhen you have made changes to a forked repository on GitHub, you have the opportunity to contribute those back to the source repository. GitHub makes this operation, called a “Pull request,” available in a number of ways.\nReturn to your fork of the jeds repository on GitHub (https://github.com/{your_username}/jeds) and look for the my_changes branch. By default you will be viewing the main branch, which should be apparent in the dropdown menu to the top left of your repository’s code. You may also see a banner notification about the recent push to the my_changes branch that you just did. To view the my_changes branch, you can either follow the link in the banner, or use the dropdown to select the my_changes branch.\nOnce you select the new branch, the repository page will change slightly and you can now view all files in my_changes. If you like, open docs/lessons/learner_changes.md to see that your modifications to the file are there (they are not in main). You will also notice a banner above the code that says “This branch is 1 commit ahead of jornada-im:main” with options to “Contribute” or “Sync.” This is telling you that the my_changes branch in your fork has one commit that is not present in the original source you forked from, the main branch of jornada-im/jeds. To contribute your changes back to this source, you can issue a pull request by clicking the “Contribute” dropdown and selecting the Open pull request button.\nWhen you open the pull request, notice that the new pull request template opens in the jornada-im/jeds repository. GitHub will then check whether your branch can be merged into the main branch of this source repository. If it can, you will see the exact changes that will be made, and you have the opportunity to add a comment that will be seen by the person who will receive your pull request (whoever maintains the source repository, in this case Greg). When you have provided your comments and reviewed the pull request press Create pull request and the maintainer of jornada-im/jeds will be able to respond to it by making further comments/requests, merging it into the source repository, or rejecting it.",
+    "crumbs": [
+      "Git and GitHub for researchers"
+    ]
+  },
+  {
+    "objectID": "docs/lessons/statistical-inference-linear-and-mixed.html",
+    "href": "docs/lessons/statistical-inference-linear-and-mixed.html",
+    "title": "Statistical inference with general linear models and mixed models",
+    "section": "",
+    "text": "This lesson introduces statistical inference using a sequence of approaches building from mean comparison procedures (t-tests), to simple linear models (often called general linear models), through linear mixed models. The lesson centers on the assumptions that underlie the process of fitting linear models. These, in order of increasing importance, are:\n\nThe samples are drawn from a normal population, and therefore the residuals, or errors, are normally distributed (not necessarily the whole dataset).\nThe samples drawn from our population, or our groups, from have constant variance (they are homoscedastic).\nThe observations in each group, or sample, are independent of one another.\n\nWe should try to meet these assumptions when fitting linear models1, but when analyzing ecological data they are easily violated. So, as this lesson introduces various types of statistical inference around linear models, we will also show ways to test these assumptions with our data, and fit alternative models (such as mixed models) when they can’t be met.\n\n\nIn addition to tidyverse, you will need to have the car package installed, which adds some options for inspecting fitted regression models, such as type-II and -III ANOVA output tables. You will also need emmeans, multcomp, and multcompViewfor post-hoc comparisons of groups in fitted linear models, and lme4 and lmerTest to fit and test some mixed models.\nData for the exercises here come from the Jornada annual NPP data package on EDI. You can learn more about this dataset on the teaching datasets page. To load the data we will first load the tidyverse and use its read_csv() function to read in the data from EDI. Then we’ll look at the structure of this data.\n\n# Get tidyverse & the NPP data\nlibrary(tidyverse)\n\nanpp &lt;- read_csv('https://pasta.lternet.edu/package/data/eml/knb-lter-jrn/210011003/105/127124b0f04a1c71f34148e3d40a5c72')\n\nstr(anpp)\n\nWe have four columns: year is a number representing the year of observation, zone is a character representing one of the 5 major vegetation zones at the Jornada, site is a string representing one of the 15 NPP study sites at the Jornada, and npp_g_m2 is our observed NPP value in \\(g\\cdot m^{-2}\\).\n\n# Then, make a summary figure\nggplot(anpp, aes(x = year, y = npp_g_m2, col = site, group = site)) +\n  geom_line() +\n  theme(axis.text.x = element_text(angle = 90, vjust = 0.5))",
+    "crumbs": [
+      "Statistical inference with general linear models and mixed models"
+    ]
+  },
+  {
+    "objectID": "docs/lessons/statistical-inference-linear-and-mixed.html#introduction",
+    "href": "docs/lessons/statistical-inference-linear-and-mixed.html#introduction",
+    "title": "Statistical inference with general linear models and mixed models",
+    "section": "",
+    "text": "This lesson introduces statistical inference using a sequence of approaches building from mean comparison procedures (t-tests), to simple linear models (often called general linear models), through linear mixed models. The lesson centers on the assumptions that underlie the process of fitting linear models. These, in order of increasing importance, are:\n\nThe samples are drawn from a normal population, and therefore the residuals, or errors, are normally distributed (not necessarily the whole dataset).\nThe samples drawn from our population, or our groups, from have constant variance (they are homoscedastic).\nThe observations in each group, or sample, are independent of one another.\n\nWe should try to meet these assumptions when fitting linear models1, but when analyzing ecological data they are easily violated. So, as this lesson introduces various types of statistical inference around linear models, we will also show ways to test these assumptions with our data, and fit alternative models (such as mixed models) when they can’t be met.\n\n\nIn addition to tidyverse, you will need to have the car package installed, which adds some options for inspecting fitted regression models, such as type-II and -III ANOVA output tables. You will also need emmeans, multcomp, and multcompViewfor post-hoc comparisons of groups in fitted linear models, and lme4 and lmerTest to fit and test some mixed models.\nData for the exercises here come from the Jornada annual NPP data package on EDI. You can learn more about this dataset on the teaching datasets page. To load the data we will first load the tidyverse and use its read_csv() function to read in the data from EDI. Then we’ll look at the structure of this data.\n\n# Get tidyverse & the NPP data\nlibrary(tidyverse)\n\nanpp &lt;- read_csv('https://pasta.lternet.edu/package/data/eml/knb-lter-jrn/210011003/105/127124b0f04a1c71f34148e3d40a5c72')\n\nstr(anpp)\n\nWe have four columns: year is a number representing the year of observation, zone is a character representing one of the 5 major vegetation zones at the Jornada, site is a string representing one of the 15 NPP study sites at the Jornada, and npp_g_m2 is our observed NPP value in \\(g\\cdot m^{-2}\\).\n\n# Then, make a summary figure\nggplot(anpp, aes(x = year, y = npp_g_m2, col = site, group = site)) +\n  geom_line() +\n  theme(axis.text.x = element_text(angle = 90, vjust = 0.5))",
+    "crumbs": [
+      "Statistical inference with general linear models and mixed models"
+    ]
+  },
+  {
+    "objectID": "docs/lessons/statistical-inference-linear-and-mixed.html#comparing-the-mean-of-two-samples-t-tests",
+    "href": "docs/lessons/statistical-inference-linear-and-mixed.html#comparing-the-mean-of-two-samples-t-tests",
+    "title": "Statistical inference with general linear models and mixed models",
+    "section": "Comparing the mean of two samples (t-tests)",
+    "text": "Comparing the mean of two samples (t-tests)\nWe commonly need to compare two samples from a set of observations. In this lesson, we examine net primary production data (NPP) collected at the Jornada. This dataset has been collected for over 3 decades, and as shown above, there is significant variability from year to year. Lets begin by comparing observations in two years only, 2019 and 2020, to see if they are markedly different using a t-test.\nFirst, create a dataframe that is subset of our full anpp dataframe.\n\n# Create a 2-year data subset\nanpp.19.20 &lt;- anpp %&gt;%\n  dplyr::filter(year %in% 2019:2020)\n\nIn t-tests we are usually testing whether the mean of two groups is different. Lets look at some summary statistics from our two years of data first.\n\n# Summary statistics\nanpp.19.20.stats &lt;- anpp.19.20 %&gt;%\n  group_by(year) %&gt;%\n  summarise(n = n(),\n            mean = mean(npp_g_m2),\n            std.dev = sd(npp_g_m2)) %&gt;%\n  mutate(std.err = std.dev/sqrt(n))\n\nanpp.19.20.stats\n\nFrom this we see that the means for each year are offset, increasing by about 19 \\(g\\cdot m^{-2}\\) from 2019 to 2020. There are also differences in the variance around the means, which we see as different standard deviation and error statistics.\nFor a t-test we first need to put data into “wide” form, with observations for the different years in separate columns.\n\n# Spread to wide form\nanpp.19.20.wide &lt;- anpp.19.20 %&gt;%\n  spread(year, npp_g_m2)\n\nhead(anpp.19.20.wide)\n\nNow do a t-test for differences in mean NPP in 2019 and 2020, using the t.test() function.\n\n# A default 2-sample t-test in R\nt.test(x = anpp.19.20.wide$`2019`, \n       y = anpp.19.20.wide$`2020`)\n\nWe see that the default here is a “Welch Two Sample t-test”, which is an unequal variance test. That means that the test is designed to account for differences in variance between the 2019 and 2020 sample. We’ll see later that testing two samples with different variances is something we could also do with a mixed model. This test tells us that there isn’t a “significant” difference in the means since the p-value is greater than 0.05, which is our \\(\\alpha\\) value, or the threshold we use to reject the null hypothesis that the two means are the same.\nLets look at some other variations on the t-test. First, a standard Student’s t-test with equal, or pooled, variance.\n\n# t-test with equal variance\nt.test(x = anpp.19.20.wide$`2019`, \n       y = anpp.19.20.wide$`2020`, \n       var.equal = TRUE)\n\nThis lowers the p-value a tad, but is that a good thing? We’ve pooled the variance for 2019 and 2020, even though we saw from our summary statistics that the variances might be unequal, i.e., the standard deviation of the 2020 observations are higher.\nNext lets try a paired t-test, which assumes that the observations in each sample are not independent. We know this is the case since we’re measuring the same sites each year, and therefore comparing two samples of the same experimental or statistical units (sites). In a paired t-test, the question becomes whether the difference between the two samples, 2019 and 2020 observations, is itself different than zero. Therefore, if we already know that we have unequal variances in our samples, taking the difference is a quick way to get around that issue.\n\n# Paired t-test\nt.test(x = anpp.19.20.wide$`2019`, \n       y = anpp.19.20.wide$`2020`, \n       paired = TRUE)\n\nWe have a significant result here (p-value &lt; 0.05) which tells us that we can reject the null hypothesis that the difference between these two years of data is equal to zero. So, NPP changed from 2019 to 2020.\nWe’ll see later that paired t-test can also be formulated as a type of linear mixed model.\n\nHow do we know which comparison (t-test) to use?\nIt can be challenging to know whether the data are paired, or whether they have unequal variance. It is a good idea to be fairly systematic and examine assumptions as you go. Lets take a slightly larger slice of our original dataset and compare years 2017 and 2018 this time.\n\n# Create a slightly different data subset - 2017 and 2018\nanpp.17.18 &lt;- anpp %&gt;%\n  dplyr::filter(year %in% 2017:2018)\n\nHow would we test whether there are unequal variances within these two 1-year samples (i.e., whether the data are heteroscedastic) ? If we plot the data, we will see some visual cues, and boxplots are a nice method for this.\n\nggplot(anpp.17.18, aes(x = year, y = npp_g_m2, color = factor(year))) +\n  geom_boxplot()\n\nWe see here that 2017 has much wider box, suggesting higher variance, than 2018. We can use some additional tests to quantify that range in variance. The first is the Bartlett test, which tests the null hypothesis that the variance in each sample, or group, is equal.\n\n# Bartlett test for unequal variance (homescedasticity)\nbartlett.test(npp_g_m2 ~ year, data = anpp.17.18)\n\nThe low p-value here suggestst that we don’t have equal variance in 2017 and 2018. No big surprise given the boxplots we made.\nHowever, perhaps our data are not normally distributed, in which case the Bartlett test is inadequate because it is sensitive to non-normal data. Lets first check if the data are normal using the Shapiro-Wilks test, which tests the null hypothesis that the data are normally distributed.\n\n# Test for normality of the data\nshapiro.test(anpp.17.18$npp_g_m2)\n\nWe have a low p-value here, so we have strong evidence that we are actually working with non-normally distributed data. Since that is the case, we might want to test for unequal variances using one of two other tests, the Fligner test or the Levene test.\n\n# Fligner test for homoscedasticity\nfligner.test(npp_g_m2 ~ as.factor(year), data = anpp.17.18)\n\nThere is evidence for heteroscedasticity here. What about Levene?\n\n# Levene test for homoscedasticity, which is in the `car` R package\ncar::leveneTest(npp_g_m2 ~ as.factor(year), data = anpp.17.18)\n\nEach of these tests appears to reject the null hypothesis that observations occurring in these two years have the same variance.\nInteresting, so it is beginning to look like the data are non-normal and have unequal variance (are heteroscedastic). Are they independent? Well, as we know from learning about the experimental design and inspecting the data, the same sites are measured year after year. This means the measurements in 2017 and 2018 are not independent. So, to compare the means of these years we want to do a paired t-test again.\n\n# Spread to wide form\nanpp.17.18.wide &lt;- anpp.17.18 %&gt;%\n  spread(year, npp_g_m2)\n\n# Paired t-test\nt.test(x = anpp.17.18.wide$`2017`, \n       y = anpp.17.18.wide$`2018`, \n       paired = TRUE,\n       equal_variance=FALSE) # This is the default, we don't have to specify\n\nWe get a nice low p-value here, strong evidence that mean NPP changed from 2017 to 2018.",
+    "crumbs": [
+      "Statistical inference with general linear models and mixed models"
+    ]
+  },
+  {
+    "objectID": "docs/lessons/statistical-inference-linear-and-mixed.html#interlude-statistical-inference-and-hypothesis-testing-with-p-values",
+    "href": "docs/lessons/statistical-inference-linear-and-mixed.html#interlude-statistical-inference-and-hypothesis-testing-with-p-values",
+    "title": "Statistical inference with general linear models and mixed models",
+    "section": "Interlude: Statistical inference and hypothesis testing with p-values",
+    "text": "Interlude: Statistical inference and hypothesis testing with p-values\nYou might be wondering why we are doing these types of hypothesis testing procedures and using p-values, especially since other statistical approaches are gaining favor with modern statisticians and data scientists. Lets give a few definitions and talk about the reasons for this approach.\n\nInference with hypothesis tests\nFirst, in this lesson we’re learning how to do inferential statistics. This is a class of statistical analysis where the objective is to use samples drawn from a larger population to make inferences, or draw logical conclusions, about the larger population. To do this, we commonly go through a process of hypothesis testing where the objective is to identify “significant” differences between samples by ruling out chance or sampling error as the most plausible explanation for those differences. Hypothesis tests are usually framed with two competing hypotheses:\n\nThe null hypothesis (\\(H_0\\)) that there is no statistical relationship.\nThe alternative hypothesis (\\(H_a\\)) that there is one or more statistical relationship of interest.\n\nThe reason for learning this method is partly that it is useful, and partly that it is convention. It is common in ecology to want to distinguish groups in our data, and hypothesis testing is an effective way to do that. It is also, for better or worse, a very common approach in scientific literature, which means understanding hypothesis testing will help you understand literature. Hypothesis testing is not always the best approach to apply in modern ecological data analysis, but it remains a useful tool to know.\nA couple examples of hypothesis testing using common procedures are below\nGlobal F-test for a fixed-effect in ANOVA\n\n\\(H_0\\): all levels of the effect have equal means\n\\(H_a\\): at least one level has a different mean than another level\n\nThe Shapiro-Wilk test for normality\n\n\\(H_0\\): data follow a normal distribution\n\\(H_a\\): data do not follow a normal distribution\n\nWhen we make inferences using statistical procedures like these, it is common practice to select between \\(H_0\\) and \\(H_a\\) using the the evidence we get from some probability tests, usually in the form of a p-value. So then, the basic procedure underlying inference with hypothesis testing and p-values is:\n\nDefine \\(H_0\\) and \\(H_a\\)\nIdentify a test statistic with that is known under \\(H_0\\) is known (\\(t\\), \\(f\\), \\(\\chi^2\\), etc)\nCalculate the test statistic for the data.\nCompare the test statistic to its distribution under \\(H_0\\), and the probability of observing a test statistic more extreme (p-value).\n\nThe software we are using (R hopefully), generally does at least steps 2 through 4. If the resulting p-value is sufficiently low (5% or less is usual for biologists), we reject \\(H_0\\) in favor of \\(H_a\\). If we fail to reject \\(H_0\\), we proceed as though it is true. Note that we haven’t proven \\(H_0\\) true, but we can say are data are consistent with it.\n\n\nWhats up with p-values?\nThe p-value is a probability value that gets returned to us from many types of hypothesis tests that we use in inferential statistics. What is the definition? Its a little bit clumsy, and commonly misunderstood. A p-value is\n\nthe conditional probability of observing a statistic as extreme as or more extreme than the one computed from the current data, across hypothetical repetitions of the experiment.\n\nor alternatively,\n\nthe probability of the data given that it was generated under the null hypothesis (\\(H_0\\)).\n\nIts also useful to talk about what p-values are not. P-values are NOT\n\nthe probability of \\(H_0\\) being true.\nthe probability of falsely rejecting \\(H_0\\) (i.e. the probability of a Type I error)\n\nP-values are a bit controversial and are commonly misused. Its easy to look for a small number, or a threshold, and then declare a significant result, but it pays to understand the model being fit and what the p-values really represent. So, there are a few other points to keep in mind.\n\nThe first is that you can’t interpret a p-value without knowing what the null hypothesis is. Make sure to have a clear understanding of \\(H_0\\).\nA p-value is a conditional probability, representing the probability of an event given that other events have already occurred. They are conditional on \\(H_0\\) being testable, model structure, model assumptions, sample size, experimental design, sampling methods, using the statistical software correctly, the software being “correct”, etc.\nThe threshold for rejecting \\(H_0\\), usually called \\(\\alpha\\) and set at \\(p \\le 0.05\\), is not a magic number. It is better to think of p-values as a continuum, where p values below 0.1 indicate evidence for rejecting \\(H_0\\), and the smaller \\(p\\) gets from 0.1, the stronger the evidence. Numbers greater than 0.1, however, are no better than random noise2.",
+    "crumbs": [
+      "Statistical inference with general linear models and mixed models"
+    ]
+  },
+  {
+    "objectID": "docs/lessons/statistical-inference-linear-and-mixed.html#comparing-sample-means-with-simple-linear-models",
+    "href": "docs/lessons/statistical-inference-linear-and-mixed.html#comparing-sample-means-with-simple-linear-models",
+    "title": "Statistical inference with general linear models and mixed models",
+    "section": "Comparing sample means with simple linear models",
+    "text": "Comparing sample means with simple linear models\nComparing the mean of different samples, as we have done with t-tests, is also possible using simple linear models (sometimes referred to as general linear models), a class of procedures often used in standard statistics that includes linear regression, one- and multi-way analysis of variance (ANOVA), and analysis of covariance (ANCOVA). All of these are variations of “straight-line-fitting” statistics, and R uses the lm()function for all these procedures. Instead of comparing sample means directly, we are essentially comparing best-fit lines drawn between the mean values of the samples.\nLooking back at our 2019 and 2020 dataframe, lets compare some simple linear models to the t-tests we did earlier in the lesson. A mean comparison test can be done as a linear regression, using lm directly. We will fit a model and then ask for summary results.\n\n# Two-sample mean comparison using a linear regression model\nlm.ttest &lt;- lm(npp_g_m2 ~ year, data = anpp.19.20)\nsummary(lm.ttest)\n\nWe get quite a few details on the linear model fit here, and see that we have estimated the same difference in means and the same p-value as we had in the earlier equal-variance two-sample t-test.\nIf we want to look at how this model is being fit visually, we can make a plot using ggplot, which allows us to fitted models to a plot with geom_smooth. We need to specify the type of model as “lm” to get a linear model.\n\nggplot(data=anpp.19.20, aes(x=year, y=npp_g_m2)) +\n  geom_point() +\n  geom_smooth(method=\"lm\")\n\nNotice the difference in the means, represented by the slope of the line, and the difference in the variance (vertical range of the points) between the 2019 and 2020 samples.\nWe can also compare the means using one-way ANOVA. The function to do this is aov(), but under the hood this is really just fitting an lm model again, which we can see by looking at the function documentation.\n\n?aov\n\nOne nuance here is that when given numerical predictor variables, like year, lm interprets these as a continuous variable. For ANOVA, we aim to analyze differences between discrete categories, so we should make sure we are using a factor, which is how R represents categorical variables. Lets convert year to a factor first.\n\nanpp.19.20.f &lt;- anpp.19.20\nanpp.19.20.f$year &lt;- factor(anpp.19.20.f$year)\n\nNow we can fit the ANOVA model using aov(), first specifying the linear model and dataframe to use, and then ask R for summary statistics.\n\n# One-way ANOVA equivalent to the 2-sample t-test\naov.ttest &lt;- aov(npp_g_m2 ~ year, data = anpp.19.20.f)\nsummary(aov.ttest)\n# We could also use car::Anova here, but the results are the same\n#car::Anova(lm.ttest, type = \"III\")\n\nNotice that here, and when we used lm, our hypothesis test results were the same as with the unpaired, equal-variance, two sample t-test that we tried earlier. This suggests that by default, lm is making some assumptions that our observations are independent. We already know that they aren’t. Later, we’ll see some ways to account for this.\nWhen we have multiple categories in our data, we can do a multi-way ANOVA by adding additional factors to the model. In our case we have aother categorical variable, called zone, that assigns each NPP site to one of the five major vegetation zones at Jornada. Since this is a character column lm, or aov, will interpret that column as a factor, and we don’t need to convert it first.\n\n# Two-way ANOVA using year and vegetation zone\naov.2way &lt;- aov(npp_g_m2 ~ year + zone, data = anpp.19.20.f)\nsummary(aov.2way)\n\nIn our two-way ANOVA, we see that vegetation zone has a p-value below 0.05, which suggests that we might be able to reject the null hypothesis that all the vegetation zones have the same mean NPP value in 2019 and 2020.\nThis is all instructive, but we know that we should be using a paired model since our observations are not independent. In ANOVA, the term for this is repeated measures. To use repeated measures with aov we must add an “Error” term to our model that partitions the observed variance between years according to site, since site is our experimental unit or subject.\n\n# One-way, repeated measures ANOVA using year and site\naov.1way.rm &lt;- aov(npp_g_m2 ~ year + Error(site/year),\n                   data = anpp.19.20.f)\nsummary(aov.1way.rm)\n\nSomewhat unsurprisingly here, we have gotten the same result as with the earlier paired t-test. This also suggests that we can use linear models to partition variance according to the groups in our data. Why would we want to do that?",
+    "crumbs": [
+      "Statistical inference with general linear models and mixed models"
+    ]
+  },
+  {
+    "objectID": "docs/lessons/statistical-inference-linear-and-mixed.html#comparing-grouped-data-using-linear-models",
+    "href": "docs/lessons/statistical-inference-linear-and-mixed.html#comparing-grouped-data-using-linear-models",
+    "title": "Statistical inference with general linear models and mixed models",
+    "section": "Comparing grouped data using linear models",
+    "text": "Comparing grouped data using linear models\nWhen we did a two-way ANOVA above, we saw some evidence that Jornada vegetation types, indicated by the zone variable in our dataset, have different mean values. Lets dig into this using the 2017 data and try compare the different zones. First lets subset the data and plot it by zone.\n\n# Subset to 2017\nanpp.2017 &lt;- anpp %&gt;%\n  dplyr::filter(year == \"2017\") %&gt;%\n  mutate(zone = factor(zone))\n\n# Graph data by zone with boxplots\nggplot(anpp.2017, aes(x = zone, y = npp_g_m2, fill = zone)) +\n  geom_boxplot()\n\nWe see several things here, including some we noticed earlier. Some vegetation zones, like P (for Playa grassland), have high variance, and some, like T (for Tarbush shrubland), have low variance. We also see some pretty big differences in observed NPP between the zones.\nWe can use a linear model to tell us about differences between those groups. As we do that, we should again check some of our linear model assumptions. Lets fit the model using lm. Since zone is a factor this will be treated as an ANOVA.\n\n# Run ANOVA with lm()\nlm.ANOVA &lt;- lm(npp_g_m2 ~ zone, data = anpp.2017)\n\nLets get our ANOVA summary results a few different ways. First, lets use summary() to look at the fitted model.\n\nsummary(lm.ANOVA)\n\nThis gives us a bunch of information, including an estimated intercept with a significant t-test, indicating that we can reject the null hypothesis that the intercept is zero. We also have a global F test on zone, which is the p-value on the lower right, that suggests we can reject the null hypothesis that the means of different vegetation zones are all the same. The summary() output however, is a little funny in the case of an ANOVA. Notice that there are also t-tests for all the estimated coefficients of zone, EXCEPT for zoneC. In comparing the five groups, R must assume the effect of one group is zero, and thus made zoneC the intercept and compared the other four groups to it. These comparisons do suggest that zoneP is significantly different than zoneC, but it will be challenging to interpret the rest. So, be careful reading summary() outputs for ANOVA models. It is probably easier to use the options below.\nAnother standard R method for evaluating an ANOVA model is to use the anova() function with our model.\n\nanova(lm.ANOVA)\n\nHere we see the same low p-value for the global F test for zone that we saw in the summary above, and notice that there is no intercept in this case.\nBoth of the summary methods above compare the groups using Type I sums of squares. Now lets use the car way, which gives Type III sums of squares (Darren recommends this).\n\ncar::Anova(lm.ANOVA, type = \"III\", test.statistic = \"F\")\n\nHere we see a significant F test that the intercept of the model (overall means of the zones) are different than zero, and the same global F test for zone (at least one zone is significantly different than another). In this model, the results are same with the Type III sums of squares as with Type I.\nThe results above are interesting, and suggest that mean NPP is different between the vegetation zones. We have more interpretation of this ahead, but first we should look a little more closely at how this model is meeting linear model assumptions. R gives us some nice ways to evaluate fitted lm models, including information about the normality of the residuals. A suite of diagnostic plots for a fitted linear model can be accessed using plot(). For ANOVA, however, we are primarily interested in the Q-Q normal plot, which we will use to examine the residuals of our fitted ANOVA model.\n\n# Standard lm diagnostic plots - we could put them all on one page\n#par(mfrow = c(2, 2), oma = c(0, 0, 2, 0)) -&gt; opar\n#plot(lm.ANOVA)\n\n# But this gives us just the plot we need\nqqnorm(resid(lm.ANOVA))\nqqline(resid(lm.ANOVA))\n\nIn this kind of plot, points that diverge from a 1:1 line suggests that the residuals of the model are not completely normal, violating one of our ANOVA assumptions. In our figure there are only a couple of outliers from the 1:1 line, so the residuals may be more-or-less normally distributed. Lets also test this directly using the Shapiro-Wilk test.\n\n# Test for normality of residuals\nresid(lm.ANOVA) %&gt;% shapiro.test()\n\nActually its not too bad. We don’t have enough evidence to reject the null hypothesis here (\\(H_0\\) is that the data are normal). So, the residuals seem to be “normal enough”!\n\nPost-hoc tests and pairwise comparisons\nThe ANOVA we did for the 2017 data gave us some useful information. We can see that from the zone coefficients and p-values that vegetation type has a large effect on the mean NPP values. That is useful information, but the ANOVA summary table isn’t enough to determine which vegetation zones have means that are different than each other.\nMaking comparisons between groups is typically something we do after fitting an ANOVA model, and is called a post-hoc comparison or test3. The multcomp and emmeans packages are commonly used for these types of comparisons.\nThe first step, after loading emmeans, is to examine the estimated marginal means of the vegetation zone groups in our fitted ANOVA model. Note that these are equivalent to least-squares means in this model, but if there were additional effects than zone, the means would be adjusted for those.\n\nlibrary(emmeans)\n# Get the estimated marginal means of each zone\nemmeans(lm.ANOVA, ~ zone)\n\nThis gives an estimated mean and upper and lower 95% confidence levels. We can do some pairwise comparisons of these means, comparing each zone to the four other zones to determine which are “significantly different”. Note that the formula for the number if independent comparisons is always \\(n(n-1)/2\\), where \\(n\\) is the number of groups.\n\n# Pairwise comparisons of least squares means\ncontrast(emmeans(lm.ANOVA, specs= ~zone), method = \"pairwise\")\n\nThis gives us ten mean comparisons using the Tukey method. Because there are ten comparisons at an \\(\\alpha\\) of 0.05, we are elevating our false positive rate to \\(0.05 \\times 10\\), or 0.5. The Tukey method adjusts the p-values, making them stricter, to account for these multiple comparisons. So, this set of contrasts contrasts shows ten estimated differences between group means, and in some cases the adjusted p-values indicate that we can reject the null hypothesis that the differences equal zero4. But, it would be nice to condense this output in a way that tells us which groups are statistically different, and which are not. We do that by adding a “compact letter display” with multcomp::cld. The default multiple comparisons adjustment is, again, the Tukey method.\n\n# Letter separations (efficient way to display)\nemmeans.Tukey &lt;- emmeans(lm.ANOVA, ~ zone) %&gt;%\n  multcomp::cld(Letters = LETTERS)\n\nemmeans.Tukey\n\nThis groups the comparisons, telling us that group P, or Playa grasslands are significantly more productive in 2017, while the other four groups are statistically the same.\nBe prepared to encounter issues with interpreting the intent and statistical meaning of some procedures in R. For example, below, emmeans comparisons using the adjust = \"Tukey\" parameter give us some difficult-to-parse warnings about the confidence interval adjustment. You will need to read up on issues like this and be aware that statisticians developing R packages don’t always agree on methods.\n\n# Problem: emmeans switches to Sidak when adjust = \"Tukey\" is specified\n# I actually found this from Russ Lenth:\n#    https://stats.stackexchange.com/questions/508055/unclear-why-adjust-tukey-was-changed-to-sidak\n# It seems the confidence limits are being adjusted when you specify adjust = \n# \"Tukey\" but not the means themselves. This is intended I guess, but I'm still\n# fuzzy on the statistical meaning.\nemmeans(lm.ANOVA, ~ zone, adjust = \"Tukey\") %&gt;%\n  multcomp::cld(Letters = LETTERS)\n\nShould we be using the Sidak confidence interval adjustment? The statistician who wrote emmeans thinks so.\nWe’ve based these mean comparison letters on the default Tukey method and its confidence intervals. However, there are other methods that might be more or less conservative. Lets compare results from Tukey and Scheffe methods, by re-doing the comparison, binding the tables, and making a figure. Sheffe is a more conservative method of comparing groups.\n\n# First get comparisons from Scheffe\nemmeans.Scheffe &lt;- emmeans(lm.ANOVA, specs = ~ zone) %&gt;% \n  multcomp::cld(Letters = LETTERS, adjust = \"scheffe\") %&gt;%\n  as_tibble() %&gt;%\n  mutate(method = \"Scheffe\")\n\n# Put the Tukey results in a tibble\nemmeans.Tukey &lt;- emmeans.Tukey %&gt;% as_tibble() %&gt;% mutate(method = \"Tukey\")\n\n# Look at least squares means and 95% confidence intervals for\n# Tukey and Scheffe\nbind_rows(emmeans.Scheffe, emmeans.Tukey) %&gt;%\n  mutate(.group = trimws(.group)) %&gt;%\n  ggplot(aes(x = zone, y = emmean, col = zone)) +\n  geom_point() +\n  geom_errorbar(aes(ymin=lower.CL, ymax=upper.CL), width=.1) +\n  geom_text(aes(x = zone, y = emmean, label = .group),\n            hjust = -0.5, show.legend = FALSE) +\n  facet_wrap(~ method, ncol = 1) +\n  ggtitle(\"2017 ANPP by Vegetation Zone\", \n          subtitle = \"Same-letter means are not different at alpha = 0.05\") +\n  ylab(\"Model-based mean ANPP (g/m^2) +/- 95% CI\")\n\nThe Tukey and Sheffe pairwise contrast methods are similar but not the same, and you can see that the error bars, here showing the 95% confidence intervals estimated by each method, are wider for Sheffe since it is more conservative. Also note that groups that are significantly different according to the pairwise contrast (in different letter groups), can still have overlapping error bars. So, you must rely on the outcome of the pairwise contrast, not just the confidence intervals to distinguish groups.\nIn scientific papers, the convention is to plot figures like this with standard error bars instead of confidence intervals. The meaning of standard error is an estimate of where the mean might fall if you did your experiment again. The confidence interval estimate for a fitted model or contrast is broader. Lets take a look at the difference.\n\n# Look at least squares means and standard errors\n# This kind of figure is the one most commonly reported in scientific papers\nbind_rows(emmeans.Tukey, emmeans.Scheffe) %&gt;%\n  mutate(.group = trimws(.group)) %&gt;%\n  ggplot(aes(x = zone, y = emmean, col = zone)) +\n  geom_point() +\n  geom_errorbar(aes(ymin=emmean-SE, ymax=emmean+SE), width=.1) +\n  geom_text(aes(x = zone, y = emmean, label = .group), \n            hjust = - 0.5, show.legend = FALSE) +\n  facet_wrap(~ method, ncol = 1) +\n  ggtitle(\"2017 ANPP by Vegetation Zone\", \n          subtitle = \"Same-letter means are not different at alpha = 0.05\") +\n  ylab(\"Model-based mean ANPP (g/m^2) +/- S.E.\")\n\nNotice that the error bars, now showing standard errors, are much narrower. If we were ignoring the pairwise contrasts and basing our comparisons on standard error bar overlaps alone, we would draw a different conclusion about which vegetation zones had different means.",
+    "crumbs": [
+      "Statistical inference with general linear models and mixed models"
+    ]
+  },
+  {
+    "objectID": "docs/lessons/statistical-inference-linear-and-mixed.html#into-the-wilderness-with-linear-mixed-models",
+    "href": "docs/lessons/statistical-inference-linear-and-mixed.html#into-the-wilderness-with-linear-mixed-models",
+    "title": "Statistical inference with general linear models and mixed models",
+    "section": "Into the wilderness with linear mixed models",
+    "text": "Into the wilderness with linear mixed models\nIn the last section we learned to compare the means across all the groups in our dataset. We were using a very restricted dataset of one year, so there was no issue with independence, but we’ve already seen that we need approaches like paired t-tests and repeated measures ANOVA when observations aren’t independent. We also ignored the somewhat unequal variance among groups in our observations, even though we know that it exists. As we look at additional years of data, we will need to reconsider both of these assumptions when fitting linear models.\nMixed models help us get around two of the main assumptions behind linear models. In particular they are useful for fitting linear models in cases where:\n\nthere is unequal variance between groups in the data\nthe observations or samples are not independent, like we often see in an ecological time series\n\nThey do this using something called random effects. These are different than the fixed effects we have been examining in ANOVA models.\nMixed models are potentially very complex, and there is not perfect agreement in the statistics community on the best way to fit them. Additionally, in R there are more than the usual number of approaches and packages for fitting mixed models. Prepare to be a little confused sometimes, and to do your own research. Here, we will introduce some basics.\nThere are two primary R packages for linear mixed modeling. nlme and lme4. Lets load them.\n\nlibrary(nlme)\nlibrary(lme4)\n\nTo get started, lets look at a four-year NPP dataset- 2017 to 2020. First we’ll subset and plot the dataset.\n\n# Subset the data between 2017 and 2020\nanpp.17.20 &lt;- anpp %&gt;%\n  dplyr::filter(year %in% 2017:2020) \n\n# Plot the data\nggplot(anpp.17.20, aes(x = year, y = npp_g_m2, col = zone, group = site)) +\n  geom_point() +\n  geom_line(linetype=\"dashed\", size = .05) +\n  scale_x_continuous(breaks = 2017:2020)\n\nSome summary statistics will show us that these data have unequal variance, in particular higher variance in 2017.\n\n# Variance is highest in 2017\nanpp.17.20 %&gt;%\n  group_by(year) %&gt;%\n  summarise(mean = mean(npp_g_m2),\n            std.dev = sd(npp_g_m2))\n\nOther than 2017, the other three years, 2018-2020, seem to have fairly similar variances. Perhaps we will want to model 2017 as being in its own high-variance group.\nSince we have a time series of non-independent measurements, and unequal variance in our samples, we should account for this when we fit a linear model. We’ll begin by fitting a repeated measures model with gls from the nlme package. The correlation structure here is unstructured, so the correlation parameter can be used to specify the off-diagonal values in our R matrix, while weights specifies heterogenous variances in the the diagonals (years here) in that matrix.\n\n# Fit a repeated measures model (unstructured correlated errors)\nmodel.un &lt;- gls(npp_g_m2 ~ zone + factor(year) + zone*factor(year),\n                correlation = corSymm(form = ~ 1 | site),\n                weights = varIdent(form=~1|factor(year)),\n                data = anpp.17.20)\n\nThe model above has specifies and unstructured correlation between error terms. Since this is a time series, we can also reasonably assume that each observation at a site is correlated with previous observations at the site, which is something we can also specify in this model. Using corAR1 correlates the errors with an autoregressive structure. Lets do that and compare the fitted models.\n\n# Fit a repeated measures model (correlated errors with autoregressive\n# covariance structure)\nmodel.ar &lt;- gls(npp_g_m2 ~ zone + factor(year) + zone*factor(year),  \n                correlation = corAR1(form = ~ 1 | site), \n                weights = varIdent(form=~1|factor(year)), \n                data = anpp.17.20)\n\nNow we’ll compare these two models using the Akaike Information Criterion, or AIC (the function in R is AIC()). Comparing models this way is part of the information theoretic approach to model selection. A lower AIC value for the same data, indicates a better-fitting, and more parsimonious model.\n\nAIC(model.un)\nAIC(model.ar)\n\nWe can see that the model with an autoregressive covariance structure is a “better” model.\nTo improve our model further, we could break the data into high variance and low variance groups (called level), since we know there is unequal variance during different years. We’ll assign 2017 to a high variance group, and the other years to a low variance group, and then fit a model that includes a random effect of the level variance group. We’ll also re-calculate the AIC value.\n\n# Assign 2017 to high variance group, other years to low\nanpp.17.20 &lt;- anpp.17.20 %&gt;%\n  mutate(anpp_level = if_else(year == 2017, \"high\", \"low\")) \n\n# Re-fit a model with a variance level\nmodel.ar.level &lt;- gls(npp_g_m2 ~ zone + factor(year) + zone*factor(year),  \n                      correlation = corAR1(form = ~ 1 | site), \n                      weights = varIdent(form=~1|anpp_level), \n                      data = anpp.17.20)\n\nAIC(model.ar.level)\n\nThe AIC value dropped, which suggests that grouping by the new level category is improving the fit of this model. Now we can compare the estimated means from this mixed model using emmeans again.\n\nemmeans(model.ar.level, ~ zone*factor(year), lmer.df = \"kenward-roger\") \n\nIt is a little more difficult to extract correlation and variance estimates.\nNow lets compare the fit of three different mixed models that are specified similarly, but using 2 different functions from nlme, and one from lme4. Take note of how the models are specified differently in the arguments to each function.\n\n# R-side model from nlme::gls()\nmodel.ar.level.gls &lt;- gls(npp_g_m2 ~ zone + factor(year) + zone*factor(year),  \n                          correlation = corAR1(form = ~ 1 | site), \n                          weights = varIdent(form=~1|anpp_level), \n                          data = anpp.17.20,\n                          method = 'REML')\n\n# G-side model from nlme::lme()\nmodel.ar.level.lme &lt;- lme(fixed = npp_g_m2 ~ zone + factor(year) +\n                            zone*factor(year),  \n                          random = ~ 1 | site,\n                          weights = varIdent(form = ~ 1 | anpp_level),\n                          data = anpp.17.20,\n                          method = 'REML')\n\n# G-side model from lme4::lmer()\nmodel.ar.level.lmer &lt;- lmer(npp_g_m2 ~ zone + factor(year) + zone*factor(year) + \n                              (anpp_level | site),\n                            data = anpp.17.20)\n\nAIC(model.ar.level.gls)\nAIC(model.ar.level.lme)\nAIC(model.ar.level.lmer)\n\nThese are not compared with Kenward-Rogers method because this is not available in gls yet.\n\nmod.compare &lt;- emmeans(model.ar.level.gls, ~zone*factor(year),\n                       lmer.df = \"satterthwaite\") %&gt;%\n  multcomp::cld(alpha = 0.05, Letters = LETTERS) %&gt;%\n  mutate(model = \"gls\") %&gt;%\n  bind_rows(emmeans(model.ar.level.lme, ~zone*factor(year),\n                    lmer.df = \"satterthwaite\") %&gt;%\n              multcomp::cld(alpha = 0.05, Letters = LETTERS) %&gt;%\n              mutate(model = \"lme\")) %&gt;%\n  bind_rows(emmeans(model.ar.level.lmer, ~zone*factor(year),\n                    lmer.df = \"satterthwaite\") %&gt;%\n              multcomp::cld(alpha = 0.05, Letters = LETTERS) %&gt;%\n              mutate(model = \"lmer\"))\n\nThey compare.\n\n# Compare means ... should all be the same\nmod.compare %&gt;%\n  dplyr::select(zone, year, emmean, model) %&gt;%\n  spread(model, emmean)\n\n# Compare standard errors\nmod.compare %&gt;%\n  dplyr::select(zone, year, SE, model) %&gt;%\n  spread(model, SE)\n\n# Compare mean comparison results\nmod.compare %&gt;%\n  dplyr::select(zone, year, .group, model) %&gt;%\n  spread(model, .group)\n\nOverall they agree, but we are finding some small differences between the different methods.\n\npd &lt;- position_dodge(0.5)\nggplot(mod.compare, aes(x = year, y = emmean, group = zone, colour = zone)) +\n  geom_point(position=pd) +\n  geom_line(position=pd) +\n  geom_errorbar(aes(ymin = emmean - SE , ymax = emmean + SE), width=0.2, position=pd) +\n  geom_text(aes(label = .group, y = emmean), \n            position = pd, hjust = -0.1, col = \"black\", size = 2.5) +\n  facet_wrap(~ model, ncol = 1, strip.position = \"right\") +\n  theme(legend.position = \"top\")\n\nThe three models specified in the three different packages give the same estimates, only some standard errors and the mean comparisons were slightly different.",
+    "crumbs": [
+      "Statistical inference with general linear models and mixed models"
+    ]
+  },
+  {
+    "objectID": "docs/lessons/statistical-inference-linear-and-mixed.html#footnotes",
+    "href": "docs/lessons/statistical-inference-linear-and-mixed.html#footnotes",
+    "title": "Statistical inference with general linear models and mixed models",
+    "section": "Footnotes",
+    "text": "Footnotes\n\n\nA fourth assumption is that the continuous predictor variables, or covariates, are measured without error, but that one is pretty tough to meet.↩︎\nRamsey, Fred, and Daniel Schafer. The statistical sleuth: a course in methods of data analysis. Cengage Learning, 2012.↩︎\nAs with other statistical procedures, post-hoc comparisons have other names, like pairwise comparisons or multiple comparisons.↩︎\nThis should be equivalent to using TukeyHSD() with an aov object, if you are used to that.↩︎",
+    "crumbs": [
+      "Statistical inference with general linear models and mixed models"
+    ]
+  },
+  {
+    "objectID": "docs/lessons/index.html",
+    "href": "docs/lessons/index.html",
+    "title": "JEDS Lessons",
+    "section": "",
+    "text": "Order By\n      Default\n      \n        Date - Oldest\n      \n      \n        Date - Newest\n      \n      \n        Title\n      \n      \n        Author\n      \n    \n  \n    \n      \n      \n    \n\n\n\n\n\n\nDate\n\n\n\nTitle\n\n\n\nAuthor\n\n\n\n\n\n\n\n\nJul 31, 2026\n\n\nAccessing Jornada data in EDI\n\n\nGreg Maurer, Darren James\n\n\n\n\n\n\nAug 6, 2025\n\n\nData visualization with ggplot\n\n\nDarren James\n\n\n\n\n\n\nSep 1, 2022\n\n\nGit and GitHub for researchers\n\n\nGreg Maurer\n\n\n\n\n\n\nSep 1, 2022\n\n\nJEDS Introduction and Setup\n\n\nGreg Maurer, Darren James\n\n\n\n\n\n\nJun 19, 2022\n\n\nJornada Datasets Tour\n\n\nGreg Maurer, Darren James\n\n\n\n\n\n\nJun 19, 2022\n\n\nStatistical inference with general linear models and mixed models\n\n\nGreg Maurer, Darren James\n\n\n\n\n\n\nJun 19, 2022\n\n\nTeaching Datasets\n\n\nGreg Maurer, Darren James\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "docs/lessons/setup.html",
+    "href": "docs/lessons/setup.html",
+    "title": "JEDS Introduction and Setup",
+    "section": "",
+    "text": "Welcome to the Jornada Environmental Data Science education site (JEDS!). Our aim is to teach introductory and intermediate elements of data science (data management, analysis, statistics, visualization, etc.) to Jornada researchers using open-source software tools, and real data from the Jornada.",
+    "crumbs": [
+      "JEDS Introduction and Setup"
+    ]
+  },
+  {
+    "objectID": "docs/lessons/setup.html#introduction",
+    "href": "docs/lessons/setup.html#introduction",
+    "title": "JEDS Introduction and Setup",
+    "section": "",
+    "text": "Welcome to the Jornada Environmental Data Science education site (JEDS!). Our aim is to teach introductory and intermediate elements of data science (data management, analysis, statistics, visualization, etc.) to Jornada researchers using open-source software tools, and real data from the Jornada.",
+    "crumbs": [
+      "JEDS Introduction and Setup"
+    ]
+  },
+  {
+    "objectID": "docs/lessons/setup.html#setup-for-an-r-lesson",
+    "href": "docs/lessons/setup.html#setup-for-an-r-lesson",
+    "title": "JEDS Introduction and Setup",
+    "section": "Setup for an R lesson",
+    "text": "Setup for an R lesson\nMany JEDS tutorials use the R programming language, and additional packages from the R software ecosystem, as the primary software tools, especially for statistical analysis. During R-based JEDS workshops we teach using the RStudio development environment as our primary programming and analysis environment. For working through these tutorials, either on your own or in a workshop, you should have both installed according to the instructions below.\nThe section below borrows heavily from the “Data Carpentry: Data Analysis and Visualization in R for Ecologists” lesson (Eunice, 2022)\nIf the computer is managed by their organization’s IT department they might need help from an IT administrator.\n\nInstall R and RStudio\nR and RStudio are two separate pieces of software:\n\nR is a programming language and software used to run code written in R.\nRStudio is an integrated development environment (IDE) that makes using R easier. In this course we use RStudio to interact with R.\n\nIf you don’t already have R and RStudio installed, follow the instructions for your operating system below. You have to install R before you install RStudio.",
+    "crumbs": [
+      "JEDS Introduction and Setup"
+    ]
+  },
+  {
+    "objectID": "docs/lessons/setup.html#for-windows",
+    "href": "docs/lessons/setup.html#for-windows",
+    "title": "JEDS Introduction and Setup",
+    "section": "For Windows",
+    "text": "For Windows\n\nDownload R from the CRAN website.\nRun the .exe file that was just downloaded\nGo to the RStudio download section of the RStudio User Guide on the Posit site\nUnder Installers select Windows - RSTUDIO-xxxx.yy.z-zzz.exe (where x = year, y = month, and z represent version numbers)\nDouble click the file to install it\nOnce it’s installed, open RStudio to make sure it works and you don’t get any error messages.",
+    "crumbs": [
+      "JEDS Introduction and Setup"
+    ]
+  },
+  {
+    "objectID": "docs/lessons/setup.html#for-macos",
+    "href": "docs/lessons/setup.html#for-macos",
+    "title": "JEDS Introduction and Setup",
+    "section": "For MacOS",
+    "text": "For MacOS\n\nDownload R from the CRAN website.\nSelect the .pkg file for the latest R version\nDouble click on the downloaded file to install R\nIt is also a good idea to install XQuartz (needed by some packages)\nGo to the RStudio download section of the RStudio User Guide on the Posit site\nUnder Installers select Mac OS 13+ - RSTUDIO-xxxx.yy.z-zzz.dmg (where x = year, y = month, and z represent version numbers)\nDouble click the file to install RStudio\nOnce it’s installed, open RStudio to make sure it works and you don’t get any error messages.",
+    "crumbs": [
+      "JEDS Introduction and Setup"
+    ]
+  },
+  {
+    "objectID": "docs/lessons/setup.html#for-linux",
+    "href": "docs/lessons/setup.html#for-linux",
+    "title": "JEDS Introduction and Setup",
+    "section": "For Linux",
+    "text": "For Linux\n\nClick on your distribution in the Linux folder of the CRAN website. Linux Mint users should follow instructions for Ubuntu.\nGo through the instructions for your distribution to install R.\nGo to the RStudio download section of the RStudio User Guide on the Posit site\nSelect the relevant installer for your Linux system (Ubuntu/Debian or Fedora)\nDouble click the file to install RStudio\nOnce it’s installed, open RStudio to make sure it works and you don’t get any error messages.",
+    "crumbs": [
+      "JEDS Introduction and Setup"
+    ]
+  },
+  {
+    "objectID": "docs/lessons/setup.html#setup-for-shell-git-and-github-lessons",
+    "href": "docs/lessons/setup.html#setup-for-shell-git-and-github-lessons",
+    "title": "JEDS Introduction and Setup",
+    "section": "Setup for shell, git and GitHub lessons",
+    "text": "Setup for shell, git and GitHub lessons\ngit is a distributed version control system and is the underlying technology behind GitHub, the web-based software development and collaboration platform. It is common to use git together with a “shell”, which is a command-line interface to your computer. So, for JEDS tutorials that involve git and GitHub, please complete three steps using the recommended resources:\n\nInstall git to your computer\nMake sure you have access to a shell\nSign up for a GitHub account\n\nIf you are on MacOS or Linux, you should have a shell installed already, just make sure you can open it. For Windows you can install git and the bash shell together. There are two good resources for getting git and related software ready for a one of the JEDS tutorials.\n\nThe Carpentries git installation instructions gives succinct platform-based instructions.\nHappy Git with R has more detailed instructions that cover a few edge-cases.\n\nIf you want, you can also install a GUI client for git to help visualize and manage what is happening with repositories you are working with. A few recommended clients are GitKraken, SourceTree, and GitHub Desktop. More discussion of clients is available over at Happy Git with R.",
+    "crumbs": [
+      "JEDS Introduction and Setup"
+    ]
+  },
+  {
+    "objectID": "docs/lessons/setup.html#preparing-for-jeds-workshops",
+    "href": "docs/lessons/setup.html#preparing-for-jeds-workshops",
+    "title": "JEDS Introduction and Setup",
+    "section": "Preparing for JEDS workshops",
+    "text": "Preparing for JEDS workshops\nThese workshops are based on “live coding,” so instructors will be running example R code while learners are expected to follow along on their own machine. To follow along successfully during a JEDS workshop, please ensure you have a laptop or other Windows, MacOS, or Linux device that has R and RStudio, and any necessary R packages, installed and up to date. Look for instructions provided by instructors in advance of the workshop about what R packages to install, and any other materials you may need to download or bring. Also, always bring a charger for your device.\nIf the workshop is in a virtual format we will be using the Zoom platform, so make sure you have Zoom installed and up-to-date on your machine as well.",
+    "crumbs": [
+      "JEDS Introduction and Setup"
+    ]
+  },
+  {
+    "objectID": "docs/lessons/learner_changes.html",
+    "href": "docs/lessons/learner_changes.html",
+    "title": "Learner changes for the git/GitHub episode",
+    "section": "",
+    "text": "Misspling is a tarrable prblem in ouir world that we shuld rilly correct.\n\n\n\nA simple “Hello world” program in python is:\nprint('Hello world'\nbut for some reason it doesn’t work."
+  },
+  {
+    "objectID": "docs/lessons/learner_changes.html#misspelling",
+    "href": "docs/lessons/learner_changes.html#misspelling",
+    "title": "Learner changes for the git/GitHub episode",
+    "section": "",
+    "text": "Misspling is a tarrable prblem in ouir world that we shuld rilly correct."
+  },
+  {
+    "objectID": "docs/lessons/learner_changes.html#coding-problems",
+    "href": "docs/lessons/learner_changes.html#coding-problems",
+    "title": "Learner changes for the git/GitHub episode",
+    "section": "",
+    "text": "A simple “Hello world” program in python is:\nprint('Hello world'\nbut for some reason it doesn’t work."
+  },
+  {
+    "objectID": "docs/slides/JornadaDatasetsTour.html#agenda",
+    "href": "docs/slides/JornadaDatasetsTour.html#agenda",
+    "title": "Working with the long-term data of the Jornada Basin",
+    "section": "Agenda",
+    "text": "Agenda\n\nTour of Jornada datasets\nFinding Jornada data\n\nJRN data catalog\nData viewer\nEDI repository portal\nJornada GeoPortal\nOther\n\nAccessing and using Jornada data (hands-on)\n\nWeb access (website, EDI, GeoPortal)\nEDIutils\nOther",
+    "crumbs": [
+      "Working with the long-term data of the Jornada Basin"
+    ]
+  },
+  {
+    "objectID": "docs/slides/JornadaDatasetsTour.html#a-little-background",
+    "href": "docs/slides/JornadaDatasetsTour.html#a-little-background",
+    "title": "Working with the long-term data of the Jornada Basin",
+    "section": "A little background",
+    "text": "A little background\n\nJornada Basin has been an intensive research site for a long time.\nJornada Experimental Range (JER), established in 1912\nJornada Basin LTER (JRN), established in 1982\nMany other programs collect, or have collected, data in the Jornada Basin.",
+    "crumbs": [
+      "Working with the long-term data of the Jornada Basin"
+    ]
+  },
+  {
+    "objectID": "docs/slides/JornadaDatasetsTour.html#here-are-a-few",
+    "href": "docs/slides/JornadaDatasetsTour.html#here-are-a-few",
+    "title": "Working with the long-term data of the Jornada Basin",
+    "section": "Here are a few…",
+    "text": "Here are a few…",
+    "crumbs": [
+      "Working with the long-term data of the Jornada Basin"
+    ]
+  },
+  {
+    "objectID": "docs/slides/JornadaDatasetsTour.html#data-collection-management-and-use-have-evolved",
+    "href": "docs/slides/JornadaDatasetsTour.html#data-collection-management-and-use-have-evolved",
+    "title": "Working with the long-term data of the Jornada Basin",
+    "section": "Data collection, management, and use have evolved",
+    "text": "Data collection, management, and use have evolved\n\nPeople, their studies and research priorities turn over\nFunding for programs can be unsteady\nAs researchers, we’re not always perfect about data management\nOpen data is a relatively new priority\nManaging and curating Jornada data is a continual work in progress…",
+    "crumbs": [
+      "Working with the long-term data of the Jornada Basin"
+    ]
+  },
+  {
+    "objectID": "docs/slides/JornadaDatasetsTour.html#our-objectives-today",
+    "href": "docs/slides/JornadaDatasetsTour.html#our-objectives-today",
+    "title": "Working with the long-term data of the Jornada Basin",
+    "section": "Our objectives today",
+    "text": "Our objectives today\n\nLearn what Jornada data are available and how they can be used in your research.\nGet practical experience working with Jornada data.\nPlease take time to do the activities and ask questions. We are learning by doing!",
+    "crumbs": [
+      "Working with the long-term data of the Jornada Basin"
+    ]
+  },
+  {
+    "objectID": "docs/slides/JornadaDatasetsTour.html#get-ready",
+    "href": "docs/slides/JornadaDatasetsTour.html#get-ready",
+    "title": "Working with the long-term data of the Jornada Basin",
+    "section": "Get ready",
+    "text": "Get ready\n\nVisit jornada-im.github.io and find the workshop page. Slides and communal notes are available here.\nMake a workshop folder on your laptop to download data.\nOpen up your favorite data analysis platform (R, Excel, etc.) and a GIS program if you want.",
+    "crumbs": [
+      "Working with the long-term data of the Jornada Basin"
+    ]
+  },
+  {
+    "objectID": "docs/slides/JornadaDatasetsTour.html#how-do-we-classify-jornada-data",
+    "href": "docs/slides/JornadaDatasetsTour.html#how-do-we-classify-jornada-data",
+    "title": "Working with the long-term data of the Jornada Basin",
+    "section": "How do we classify Jornada data?",
+    "text": "How do we classify Jornada data?\n\nCore: long-term datasets collected or directly supported by JRN and JER research staff\nContributed: shorter term (usually) datasets collected by any researchers funded by, or formally affiliated with, JRN and/or JER\nPartner: datasets collected by external partners, like other federal agencies or research networks.\nCore and contributed datasets are further organized by 3 digit study ID:\n210011001 = site manager, study ID, dataset ID",
+    "crumbs": [
+      "Working with the long-term data of the Jornada Basin"
+    ]
+  },
+  {
+    "objectID": "docs/slides/JornadaDatasetsTour.html#how-do-we-classify-jornada-data-1",
+    "href": "docs/slides/JornadaDatasetsTour.html#how-do-we-classify-jornada-data-1",
+    "title": "Working with the long-term data of the Jornada Basin",
+    "section": "How do we classify Jornada data?",
+    "text": "How do we classify Jornada data?\n\nCore: long-term datasets collected or directly supported by JRN and JER research staff\nContributed: shorter term (usually) datasets collected by any researchers funded by, or formally affiliated with, JRN and/or JER\nPartner: datasets collected by external partners, like other federal agencies or research networks.\nCore and contributed datasets are further organized by 3 digit study ID:\n210011001 = site manager, study ID, dataset ID\nNot everything fits cleanly into this scheme\nSynthesis and remote sensing data don’t receive a study ID\nOccasionally we republish partner data with Jornada study IDs",
+    "crumbs": [
+      "Working with the long-term data of the Jornada Basin"
+    ]
+  },
+  {
+    "objectID": "docs/slides/JornadaDatasetsTour.html#we-also-classify-by-research-themes-or-data-types",
+    "href": "docs/slides/JornadaDatasetsTour.html#we-also-classify-by-research-themes-or-data-types",
+    "title": "Working with the long-term data of the Jornada Basin",
+    "section": "We also classify by research themes or data types",
+    "text": "We also classify by research themes or data types\n\nFor today:\nLong term vegetation data\nWeather and climate\nGeospatial data (GIS)\nRemote sensing & airborne imagery\nVegetation dynamics\nClimate & environmental monitoring\nManagement & restoration\nBiogeochemistry\nHydrology\nAeolian processes\nTrophic interactions\nPhysical geography & soils\nSensor network data\nRemote sensing\nModeling\nSequencing/microbiome\nAnimals\nEC fluxes",
+    "crumbs": [
+      "Working with the long-term data of the Jornada Basin"
+    ]
+  },
+  {
+    "objectID": "docs/slides/JornadaDatasetsTour.html#long-term-vegetation-data",
+    "href": "docs/slides/JornadaDatasetsTour.html#long-term-vegetation-data",
+    "title": "Working with the long-term data of the Jornada Basin",
+    "section": "Long-term vegetation data",
+    "text": "Long-term vegetation data\n\nPrimary production\nCover",
+    "crumbs": [
+      "Working with the long-term data of the Jornada Basin"
+    ]
+  },
+  {
+    "objectID": "docs/slides/JornadaDatasetsTour.html#primary-production-data",
+    "href": "docs/slides/JornadaDatasetsTour.html#primary-production-data",
+    "title": "Working with the long-term data of the Jornada Basin",
+    "section": "Primary production data",
+    "text": "Primary production data\n\nBiomass or carbon accumulation by primary producers (plants, usually)\nVariable: Gross or net primary production, aboveground or belowground\nUnits: g biomass · m-2 · day -1 or g C · m-2 · day -1",
+    "crumbs": [
+      "Working with the long-term data of the Jornada Basin"
+    ]
+  },
+  {
+    "objectID": "docs/slides/JornadaDatasetsTour.html#jornada-npp-a-non-destructive-npp-method-for-drylands",
+    "href": "docs/slides/JornadaDatasetsTour.html#jornada-npp-a-non-destructive-npp-method-for-drylands",
+    "title": "Working with the long-term data of the Jornada Basin",
+    "section": "Jornada NPP: a non-destructive NPP method for drylands",
+    "text": "Jornada NPP: a non-destructive NPP method for drylands\n\n1m2 long-term quadrats installed at 15 Jornada sites in 1989\nField datasets:\nReplicate species harvests (dimensions & biomass)\nPlant dimensions (only) collected in long-term quadrats\nAllometric method to estimate biomass\nHuenneke, Clason, and Muldavin described the method in 2001",
+    "crumbs": [
+      "Working with the long-term data of the Jornada Basin"
+    ]
+  },
+  {
+    "objectID": "docs/slides/JornadaDatasetsTour.html#used-in-numerous-jrn-pubs-cross-site-syntheses",
+    "href": "docs/slides/JornadaDatasetsTour.html#used-in-numerous-jrn-pubs-cross-site-syntheses",
+    "title": "Working with the long-term data of the Jornada Basin",
+    "section": "Used in numerous JRN pubs & cross-site syntheses",
+    "text": "Used in numerous JRN pubs & cross-site syntheses\n\nNPP sites anchor many other Jornada studies\nMeteorology, soil profile characterization, soil water/temperature, plant traits, aerial photos, terrain/elevation models, phenology, animal studies, short-term grad student projects\nValidating new research methods (UAV/Remote sensing, models)",
+    "crumbs": [
+      "Working with the long-term data of the Jornada Basin"
+    ]
+  },
+  {
+    "objectID": "docs/slides/JornadaDatasetsTour.html#jornada-anpp-data",
+    "href": "docs/slides/JornadaDatasetsTour.html#jornada-anpp-data",
+    "title": "Working with the long-term data of the Jornada Basin",
+    "section": "Jornada ANPP data",
+    "text": "Jornada ANPP data\n\nJornada NPP study sites (15 sites)\nEcotone project (Bestelmeyer - 5 sites)\nGlobal change experiment (Sala - 1 site, slightly different method)\nVariable names differ, same units, same temporal resolution\nRed = 15 NPP sites; Orange = Ecotone, Green = GlobalChange",
+    "crumbs": [
+      "Working with the long-term data of the Jornada Basin"
+    ]
+  },
+  {
+    "objectID": "docs/slides/JornadaDatasetsTour.html#other-datasets-about-production",
+    "href": "docs/slides/JornadaDatasetsTour.html#other-datasets-about-production",
+    "title": "Working with the long-term data of the Jornada Basin",
+    "section": "Other datasets about production",
+    "text": "Other datasets about production\n\nEddy covariance fluxes (NEE, partitioned fluxes)\nBelowground NPP (root biomass production) - not common but not unheard-of",
+    "crumbs": [
+      "Working with the long-term data of the Jornada Basin"
+    ]
+  },
+  {
+    "objectID": "docs/slides/JornadaDatasetsTour.html#plant-cover",
+    "href": "docs/slides/JornadaDatasetsTour.html#plant-cover",
+    "title": "Working with the long-term data of the Jornada Basin",
+    "section": "Plant cover",
+    "text": "Plant cover\n\nCover of plant species of functional type in an area.\nVariable: percent or fractional cover\nUnits: dimensionless",
+    "crumbs": [
+      "Working with the long-term data of the Jornada Basin"
+    ]
+  },
+  {
+    "objectID": "docs/slides/JornadaDatasetsTour.html#jornada-permanent-quadrats",
+    "href": "docs/slides/JornadaDatasetsTour.html#jornada-permanent-quadrats",
+    "title": "Working with the long-term data of the Jornada Basin",
+    "section": "Jornada permanent quadrats",
+    "text": "Jornada permanent quadrats\n\nPlant type, cover, and density measured since 1915\nYearly to 1970s, break until early 90s, resuming at 5-year frequency\n122 locations across the Jornada Experimental Range",
+    "crumbs": [
+      "Working with the long-term data of the Jornada Basin"
+    ]
+  },
+  {
+    "objectID": "docs/slides/JornadaDatasetsTour.html#useful-for-assessing-long-term-vegetation-change",
+    "href": "docs/slides/JornadaDatasetsTour.html#useful-for-assessing-long-term-vegetation-change",
+    "title": "Working with the long-term data of the Jornada Basin",
+    "section": "Useful for assessing long-term vegetation change",
+    "text": "Useful for assessing long-term vegetation change\n\nsuch as grass-shrub transitions\nAlso, potentially useful for biodiversity research",
+    "crumbs": [
+      "Working with the long-term data of the Jornada Basin"
+    ]
+  },
+  {
+    "objectID": "docs/slides/JornadaDatasetsTour.html#jornada-quadrat-cover-data",
+    "href": "docs/slides/JornadaDatasetsTour.html#jornada-quadrat-cover-data",
+    "title": "Working with the long-term data of the Jornada Basin",
+    "section": "Jornada quadrat cover data",
+    "text": "Jornada quadrat cover data\n\nJornada permanent quadrats (122, starting 1915)\nEcotone quadrats (5, starting 2005)\nSMES (2, starting 1995)\nDifferent variable names, different units, different temporal resolution, different treatments\nRed = Perm Quads; Orange = Ecotone, Green = SMES",
+    "crumbs": [
+      "Working with the long-term data of the Jornada Basin"
+    ]
+  },
+  {
+    "objectID": "docs/slides/JornadaDatasetsTour.html#more-plant-cover-data",
+    "href": "docs/slides/JornadaDatasetsTour.html#more-plant-cover-data",
+    "title": "Working with the long-term data of the Jornada Basin",
+    "section": "More plant cover data…",
+    "text": "More plant cover data…\n\nGibbens 2005 vegetation maps\nLine-point intercept data from multiple projects\nJornada LTER transect knb-lter-jrn.210119001\nSMES knb-lter-jrn.210086001\nConMod pilot knb-lter-jrn.210308002",
+    "crumbs": [
+      "Working with the long-term data of the Jornada Basin"
+    ]
+  },
+  {
+    "objectID": "docs/slides/JornadaDatasetsTour.html#weather-and-climate",
+    "href": "docs/slides/JornadaDatasetsTour.html#weather-and-climate",
+    "title": "Working with the long-term data of the Jornada Basin",
+    "section": "Weather and climate",
+    "text": "Weather and climate\n\nJornada met stations\nRain gauges\nSoil moisture",
+    "crumbs": [
+      "Working with the long-term data of the Jornada Basin"
+    ]
+  },
+  {
+    "objectID": "docs/slides/JornadaDatasetsTour.html#meteorology-data",
+    "href": "docs/slides/JornadaDatasetsTour.html#meteorology-data",
+    "title": "Working with the long-term data of the Jornada Basin",
+    "section": "Meteorology data",
+    "text": "Meteorology data\n\nData collected from weather stations, including air temperature and RH, wind speed/direction, and precipitation.",
+    "crumbs": [
+      "Working with the long-term data of the Jornada Basin"
+    ]
+  },
+  {
+    "objectID": "docs/slides/JornadaDatasetsTour.html#longest-term-weather-stations",
+    "href": "docs/slides/JornadaDatasetsTour.html#longest-term-weather-stations",
+    "title": "Working with the long-term data of the Jornada Basin",
+    "section": "Longest-term weather stations",
+    "text": "Longest-term weather stations\n\nJER headquarters NOAA station. Collecting data 1914-present.\n\nData available at NCDC\nThere are other NOAA stations in the region with similar records\n\nLTER weather station. Collecting data 1983-present\n\nData at EDI\nSome data issues being worked on",
+    "crumbs": [
+      "Working with the long-term data of the Jornada Basin"
+    ]
+  },
+  {
+    "objectID": "docs/slides/JornadaDatasetsTour.html#npp-and-cross-scale-weather-stations",
+    "href": "docs/slides/JornadaDatasetsTour.html#npp-and-cross-scale-weather-stations",
+    "title": "Working with the long-term data of the Jornada Basin",
+    "section": "NPP and Cross-scale weather stations",
+    "text": "NPP and Cross-scale weather stations\n\nCollecting continuously since 2013, multiple frequencies\nData are regularly quality assured and sent to EDI\nThere are some estimated/gapfilled precipitation datasets (since 1989) too",
+    "crumbs": [
+      "Working with the long-term data of the Jornada Basin"
+    ]
+  },
+  {
+    "objectID": "docs/slides/JornadaDatasetsTour.html#rain-gauges",
+    "href": "docs/slides/JornadaDatasetsTour.html#rain-gauges",
+    "title": "Working with the long-term data of the Jornada Basin",
+    "section": "Rain gauges",
+    "text": "Rain gauges\n\nThere is a very extensive rain gauge network with multiple gauge types, varying temporal records. Rain is very unevenly distributed in NM.\nMonthly standard cans (cumulative)\nWeighing gauges\nTipping-bucket (regular timeseries or event-based)\nBest practices is to ask the field crew or IM team which rain gauge",
+    "crumbs": [
+      "Working with the long-term data of the Jornada Basin"
+    ]
+  },
+  {
+    "objectID": "docs/slides/JornadaDatasetsTour.html#other-meteorology-data",
+    "href": "docs/slides/JornadaDatasetsTour.html#other-meteorology-data",
+    "title": "Working with the long-term data of the Jornada Basin",
+    "section": "Other meteorology data",
+    "text": "Other meteorology data\n\nSeveral wind profile weather stations\nIndividual experiments sometimes have their own rain gauge\nEddy covariance towers\n\nTromble watershed, UTEP Bajada & Red Lake Playa on AmeriFlux\nJER DuRP project towers (3)\nArmy research lab - 30+ EC towers",
+    "crumbs": [
+      "Working with the long-term data of the Jornada Basin"
+    ]
+  },
+  {
+    "objectID": "docs/slides/JornadaDatasetsTour.html#activity-1",
+    "href": "docs/slides/JornadaDatasetsTour.html#activity-1",
+    "title": "Working with the long-term data of the Jornada Basin",
+    "section": "Activity 1",
+    "text": "Activity 1\n\nLets practice finding a Jornada meteorology dataset on EDI. Visit the EDI data portal - https://portal.edirepository.org - and use the search function to look for a Jornada weather or climate dataset that might be useful to you. Put the link to a dataset you found in our notes document.",
+    "crumbs": [
+      "Working with the long-term data of the Jornada Basin"
+    ]
+  },
+  {
+    "objectID": "docs/slides/JornadaDatasetsTour.html#activity-1-1",
+    "href": "docs/slides/JornadaDatasetsTour.html#activity-1-1",
+    "title": "Working with the long-term data of the Jornada Basin",
+    "section": "Activity 1",
+    "text": "Activity 1\n\nLets practice finding a Jornada meteorology dataset on EDI. Visit the EDI data portal - https://portal.edirepository.org - and use the search function to look for a Jornada weather or climate dataset that might be useful to you. Put the link to a dataset you found in our notes document.\nWere you successful? Lets look at an example.",
+    "crumbs": [
+      "Working with the long-term data of the Jornada Basin"
+    ]
+  },
+  {
+    "objectID": "docs/slides/JornadaDatasetsTour.html#soil-water-at-npp-sites",
+    "href": "docs/slides/JornadaDatasetsTour.html#soil-water-at-npp-sites",
+    "title": "Working with the long-term data of the Jornada Basin",
+    "section": "Soil water at NPP sites",
+    "text": "Soil water at NPP sites",
+    "crumbs": [
+      "Working with the long-term data of the Jornada Basin"
+    ]
+  },
+  {
+    "objectID": "docs/slides/JornadaDatasetsTour.html#soil-moisture-data",
+    "href": "docs/slides/JornadaDatasetsTour.html#soil-moisture-data",
+    "title": "Working with the long-term data of the Jornada Basin",
+    "section": "Soil moisture data",
+    "text": "Soil moisture data\n\nNPP and CSIS sites have automated soil profile sensors (VWC, T, EC) since 2013\nLong-term neutron probe data since 1989 (NPP sites and more)\nMany experiments have their own instrumentation or probe data",
+    "crumbs": [
+      "Working with the long-term data of the Jornada Basin"
+    ]
+  },
+  {
+    "objectID": "docs/slides/JornadaDatasetsTour.html#spatial-data-gis",
+    "href": "docs/slides/JornadaDatasetsTour.html#spatial-data-gis",
+    "title": "Working with the long-term data of the Jornada Basin",
+    "section": "Spatial data (GIS)",
+    "text": "Spatial data (GIS)\n\nVector and raster datasets about Jornada Basin\nResearch locations",
+    "crumbs": [
+      "Working with the long-term data of the Jornada Basin"
+    ]
+  },
+  {
+    "objectID": "docs/slides/JornadaDatasetsTour.html#what-are-spatial-data-gis",
+    "href": "docs/slides/JornadaDatasetsTour.html#what-are-spatial-data-gis",
+    "title": "Working with the long-term data of the Jornada Basin",
+    "section": "What are spatial data & GIS?",
+    "text": "What are spatial data & GIS?\n\n(Geo)spatial data: Any data with location or geographic coordinates attached to the observation\nGeographic information systems (GIS): Integrated computer hardware and software that store, manage, analyze, edit, output, and visualize geographic data",
+    "crumbs": [
+      "Working with the long-term data of the Jornada Basin"
+    ]
+  },
+  {
+    "objectID": "docs/slides/JornadaDatasetsTour.html#why-do-we-care-at-the-jornada",
+    "href": "docs/slides/JornadaDatasetsTour.html#why-do-we-care-at-the-jornada",
+    "title": "Working with the long-term data of the Jornada Basin",
+    "section": "Why do we care at the Jornada?",
+    "text": "Why do we care at the Jornada?\n\nDrylands are spatially heterogeneous\nWe work in a large area\nWe want to place our research in landscape context",
+    "crumbs": [
+      "Working with the long-term data of the Jornada Basin"
+    ]
+  },
+  {
+    "objectID": "docs/slides/JornadaDatasetsTour.html#the-jornada-spatial-data-catalog",
+    "href": "docs/slides/JornadaDatasetsTour.html#the-jornada-spatial-data-catalog",
+    "title": "Working with the long-term data of the Jornada Basin",
+    "section": "The Jornada Spatial Data Catalog",
+    "text": "The Jornada Spatial Data Catalog\n\nThere are well over 1000 datasets\nStudy & measurement locations\nInstrumentation, fences, roads, boundaries, buildings\nPhysical geography\nVegetation and soil survey products\nRemote sensing data\nModel outputs\nOnly a small amount of datasets have been published or made accessible",
+    "crumbs": [
+      "Working with the long-term data of the Jornada Basin"
+    ]
+  },
+  {
+    "objectID": "docs/slides/JornadaDatasetsTour.html#how-is-it-managed",
+    "href": "docs/slides/JornadaDatasetsTour.html#how-is-it-managed",
+    "title": "Working with the long-term data of the Jornada Basin",
+    "section": "How is it managed?",
+    "text": "How is it managed?\n\nSomewhat decentralized and siloed\nThere are some great USDA GIS staff\nThe LTER produces lots of data\nResearchers often manage their own pile of GIS data\nSome data are restricted access\nWe are working out improved coordination and access methods\nA data commons is one goal…",
+    "crumbs": [
+      "Working with the long-term data of the Jornada Basin"
+    ]
+  },
+  {
+    "objectID": "docs/slides/JornadaDatasetsTour.html#how-do-i-find-spatial-data",
+    "href": "docs/slides/JornadaDatasetsTour.html#how-do-i-find-spatial-data",
+    "title": "Working with the long-term data of the Jornada Basin",
+    "section": "How do I find spatial data?",
+    "text": "How do I find spatial data?\n\nThe LTER website lists public layers\nThe Jornada GeoPortal is our current “enterprise GIS” system\nSome spatial datasets are published to EDI\nAsk someone!\nAmy Slaughter (amalia.slaughter@usda.gov)\nGreg Maurer (gmaurer@nmsu.edu)\nJohn Anderson, Darren James, Scott Schrader",
+    "crumbs": [
+      "Working with the long-term data of the Jornada Basin"
+    ]
+  },
+  {
+    "objectID": "docs/slides/JornadaDatasetsTour.html#data",
+    "href": "docs/slides/JornadaDatasetsTour.html#data",
+    "title": "Working with the long-term data of the Jornada Basin",
+    "section": "Data:",
+    "text": "Data:\n\nDatasets in public repositories\nReal-time data\nSpatial data from the Jornada GeoPortal\nhttps://lter.jornada.nmsu.edu",
+    "crumbs": [
+      "Working with the long-term data of the Jornada Basin"
+    ]
+  },
+  {
+    "objectID": "docs/slides/JornadaDatasetsTour.html#the-jornada-geoportal",
+    "href": "docs/slides/JornadaDatasetsTour.html#the-jornada-geoportal",
+    "title": "Working with the long-term data of the Jornada Basin",
+    "section": "The Jornada GeoPortal",
+    "text": "The Jornada GeoPortal\n\nhttps://jornada-geoportal-nmsu.hub.arcgis.com/\nThis is a new, under-construction system\nBased on ArcGIS Online (AGOL), provided by NMSU\nAll previously available GIS layers are there now\nRestricted layers available on login (request access)\nPermissions management is important for spatial data",
+    "crumbs": [
+      "Working with the long-term data of the Jornada Basin"
+    ]
+  },
+  {
+    "objectID": "docs/slides/JornadaDatasetsTour.html#how-data-are-categorized-and-made-searchable",
+    "href": "docs/slides/JornadaDatasetsTour.html#how-data-are-categorized-and-made-searchable",
+    "title": "Working with the long-term data of the Jornada Basin",
+    "section": "How data are categorized and made searchable",
+    "text": "How data are categorized and made searchable",
+    "crumbs": [
+      "Working with the long-term data of the Jornada Basin"
+    ]
+  },
+  {
+    "objectID": "docs/slides/JornadaDatasetsTour.html#online-interaction-with-spatial-data",
+    "href": "docs/slides/JornadaDatasetsTour.html#online-interaction-with-spatial-data",
+    "title": "Working with the long-term data of the Jornada Basin",
+    "section": "Online interaction with spatial data",
+    "text": "Online interaction with spatial data\n\nMaps, web apps, “StoryMaps”, etc.\nHere is a basic map of the Jornada’s spatial data\nWith an account you can log in and create these yourself",
+    "crumbs": [
+      "Working with the long-term data of the Jornada Basin"
+    ]
+  },
+  {
+    "objectID": "docs/slides/JornadaDatasetsTour.html#activity-2-lets-go-find-and-download-spatial-data",
+    "href": "docs/slides/JornadaDatasetsTour.html#activity-2-lets-go-find-and-download-spatial-data",
+    "title": "Working with the long-term data of the Jornada Basin",
+    "section": "Activity 2: Lets go find and download spatial data!",
+    "text": "Activity 2: Lets go find and download spatial data!\n\nVisit the Jornada GeoPortal to find:\nBoundaries of JER and CDRRC\nSoil and vegetation survey layers (JER/CDRRC 1998)\nNPP plot locations\nThen, load them up in your favorite GIS application.",
+    "crumbs": [
+      "Working with the long-term data of the Jornada Basin"
+    ]
+  },
+  {
+    "objectID": "docs/slides/JornadaDatasetsTour.html#activity-2-lets-go-find-and-download-spatial-data-1",
+    "href": "docs/slides/JornadaDatasetsTour.html#activity-2-lets-go-find-and-download-spatial-data-1",
+    "title": "Working with the long-term data of the Jornada Basin",
+    "section": "Activity 2: Lets go find and download spatial data!",
+    "text": "Activity 2: Lets go find and download spatial data!\n\nVisit the Jornada GeoPortal to find:\nBoundaries of JER and CDRRC\nSoil and vegetation survey layers (JER/CDRRC 1998)\nNPP plot locations\nThen, load them up in your favorite GIS application.\nWhere did you encounter trouble?",
+    "crumbs": [
+      "Working with the long-term data of the Jornada Basin"
+    ]
+  },
+  {
+    "objectID": "docs/slides/JornadaDatasetsTour.html#join-the-jornadagis_users-group",
+    "href": "docs/slides/JornadaDatasetsTour.html#join-the-jornadagis_users-group",
+    "title": "Working with the long-term data of the Jornada Basin",
+    "section": "Join the JornadaGIS_users group",
+    "text": "Join the JornadaGIS_users group\n\nThere is more data available to authenticated users!\nSteps to get access:\nMake an AGOL account - institutional or public\nFill out the Jornada Spatial Data Agreement\n\nSubmit your AGOL username in the form!\n\nI’ll add you to the group\nKeep in mind you are testing a new system…\nHelp wanted making nice maps!",
+    "crumbs": [
+      "Working with the long-term data of the Jornada Basin"
+    ]
+  },
+  {
+    "objectID": "docs/slides/JornadaDatasetsTour.html#other-data-sources",
+    "href": "docs/slides/JornadaDatasetsTour.html#other-data-sources",
+    "title": "Working with the long-term data of the Jornada Basin",
+    "section": "Other data sources",
+    "text": "Other data sources\n\nUSGS:\nEarth Explorer: https://earthexplorer.usgs.gov/\nThe National Map: https://apps.nationalmap.gov/downloader/\nNASA:\nEarthdata: https://www.earthdata.nasa.gov/data/catalog\nESRI:\nLiving Atlas of the World: https://livingatlas.arcgis.com/en/home/\nDaymet:\nDaily weather and climate: https://daymet.ornl.gov/\n\n\nCan find satellite imagery (Landsat, MODIS, Copernicus, etc) and most other layers you may need (elevation, Lidar, etc)",
+    "crumbs": [
+      "Working with the long-term data of the Jornada Basin"
+    ]
+  },
+  {
+    "objectID": "docs/slides/JornadaDatasetsTour.html#remote-sensingaerial-imagery",
+    "href": "docs/slides/JornadaDatasetsTour.html#remote-sensingaerial-imagery",
+    "title": "Working with the long-term data of the Jornada Basin",
+    "section": "Remote sensing/aerial imagery",
+    "text": "Remote sensing/aerial imagery\n\nSatellite/aerial imagery & derived products\nDrones and UAVs",
+    "crumbs": [
+      "Working with the long-term data of the Jornada Basin"
+    ]
+  },
+  {
+    "objectID": "docs/slides/JornadaDatasetsTour.html#there-is-lots-of-remote-sensing-data-available",
+    "href": "docs/slides/JornadaDatasetsTour.html#there-is-lots-of-remote-sensing-data-available",
+    "title": "Working with the long-term data of the Jornada Basin",
+    "section": "There is lots of remote-sensing data available",
+    "text": "There is lots of remote-sensing data available\n\nNEON AOP covers part of the J. Basin\nNASA Earthdata: https://www.earthdata.nasa.gov/data/catalog\nGoogle Earth Engine: https://earthengine.google.com/\nAlso check out: https://gee-community-catalog.org\nJRN has a growing UAV program",
+    "crumbs": [
+      "Working with the long-term data of the Jornada Basin"
+    ]
+  },
+  {
+    "objectID": "docs/slides/JornadaDatasetsTour.html#what-is-rap",
+    "href": "docs/slides/JornadaDatasetsTour.html#what-is-rap",
+    "title": "Working with the long-term data of the Jornada Basin",
+    "section": "What is RAP?",
+    "text": "What is RAP?\n\nhttps://rangelands.app\nAllred et al. 2021, 2025, Jones et al. 2021\n\n\n           \n\n\nRAP is two things: 1) Remotely-sensed vegetation data, 2) a simple web application that puts this data at your fingertips for free.\nSpecifically, the data products include vegetation cover and production data layers representing various plant functional groups at various spatial scales and through time. Most data layers are available across the entire US.",
+    "crumbs": [
+      "Working with the long-term data of the Jornada Basin"
+    ]
+  },
+  {
+    "objectID": "docs/slides/JornadaDatasetsTour.html#ways-to-access-rap",
+    "href": "docs/slides/JornadaDatasetsTour.html#ways-to-access-rap",
+    "title": "Working with the long-term data of the Jornada Basin",
+    "section": "Ways to access RAP",
+    "text": "Ways to access RAP\n\nData access\nWeb map: https://rangelands.app/rap\nGoogle Earth Engine ImageCollection: ‘projects/rap-data-365417/assets/vegetation-cover-v3’\nGoogle Earth Engine Community Catalog https://gee-community-catalog.org/projects/rap/\nGeoTIFFS: http://rangeland.ntsg.umt.edu/data/rap/rap-vegetation-cover/\nGIS Tiles: https://rangelands.app/support/19-viewing-rap-data-in-your-gis\nCloud Optimized GeoTIFFS (COGs) in GIS: https://rangelands.app/support/20-analyzing-rap-data-in-your-gis\nThe rapr R package: https://humus.rocks/rapr/",
+    "crumbs": [
+      "Working with the long-term data of the Jornada Basin"
+    ]
+  },
+  {
+    "objectID": "docs/slides/JornadaDatasetsTour.html#finding-and-using-the-data",
+    "href": "docs/slides/JornadaDatasetsTour.html#finding-and-using-the-data",
+    "title": "Working with the long-term data of the Jornada Basin",
+    "section": "Finding and using the data",
+    "text": "Finding and using the data\n\nA garden of forking paths!",
+    "crumbs": [
+      "Working with the long-term data of the Jornada Basin"
+    ]
+  },
+  {
+    "objectID": "docs/slides/JornadaDatasetsTour.html#tab-1-core-long-term-data",
+    "href": "docs/slides/JornadaDatasetsTour.html#tab-1-core-long-term-data",
+    "title": "Working with the long-term data of the Jornada Basin",
+    "section": "Tab 1: Core long-term data",
+    "text": "Tab 1: Core long-term data\n\nLong-term data underpinning JRN LTER’s core research themes. Most of this is in EDI.",
+    "crumbs": [
+      "Working with the long-term data of the Jornada Basin"
+    ]
+  },
+  {
+    "objectID": "docs/slides/JornadaDatasetsTour.html#tab-2-primary-data-catalog",
+    "href": "docs/slides/JornadaDatasetsTour.html#tab-2-primary-data-catalog",
+    "title": "Working with the long-term data of the Jornada Basin",
+    "section": "Tab 2: Primary data catalog",
+    "text": "Tab 2: Primary data catalog\n\nThe full JRN LTER data catalog hosted by EDI repository. 366 datasets searchable by metadata fields here",
+    "crumbs": [
+      "Working with the long-term data of the Jornada Basin"
+    ]
+  },
+  {
+    "objectID": "docs/slides/JornadaDatasetsTour.html#tab-3-data-in-other-repositories",
+    "href": "docs/slides/JornadaDatasetsTour.html#tab-3-data-in-other-repositories",
+    "title": "Working with the long-term data of the Jornada Basin",
+    "section": "Tab 3: Data in other repositories",
+    "text": "Tab 3: Data in other repositories\n\nSearch Jornada data holdings in other repositories (Dryad, NCBI, AmeriFlux). Includes citeable datasets & portals for partner networks. “Special” data types.",
+    "crumbs": [
+      "Working with the long-term data of the Jornada Basin"
+    ]
+  },
+  {
+    "objectID": "docs/slides/JornadaDatasetsTour.html#tab-4-spatial-data",
+    "href": "docs/slides/JornadaDatasetsTour.html#tab-4-spatial-data",
+    "title": "Working with the long-term data of the Jornada Basin",
+    "section": "Tab 4: Spatial data",
+    "text": "Tab 4: Spatial data\n\nSelected geospatial/GIS datasets available for download. This is a small fraction of available spatial data.",
+    "crumbs": [
+      "Working with the long-term data of the Jornada Basin"
+    ]
+  },
+  {
+    "objectID": "docs/slides/JornadaDatasetsTour.html#tab-5-data-partnerships",
+    "href": "docs/slides/JornadaDatasetsTour.html#tab-5-data-partnerships",
+    "title": "Working with the long-term data of the Jornada Basin",
+    "section": "Tab 5: Data partnerships",
+    "text": "Tab 5: Data partnerships\n\nData from other research networks & agencies operating in the Jornada Basin. Some of these are in Tab 3 also.",
+    "crumbs": [
+      "Working with the long-term data of the Jornada Basin"
+    ]
+  },
+  {
+    "objectID": "docs/slides/JornadaDatasetsTour.html#jornada-data-in",
+    "href": "docs/slides/JornadaDatasetsTour.html#jornada-data-in",
+    "title": "Working with the long-term data of the Jornada Basin",
+    "section": "Jornada data in",
+    "text": "Jornada data in",
+    "crumbs": [
+      "Working with the long-term data of the Jornada Basin"
+    ]
+  },
+  {
+    "objectID": "docs/slides/JornadaDatasetsTour.html#environmental-data-initiative-repository-edi",
+    "href": "docs/slides/JornadaDatasetsTour.html#environmental-data-initiative-repository-edi",
+    "title": "Working with the long-term data of the Jornada Basin",
+    "section": "Environmental Data Initiative repository (EDI)",
+    "text": "Environmental Data Initiative repository (EDI)\n\nhttps://edirepository.org\nA “generalist” repository for LTER & other environmental data\nHigh quality, searchable metadata\nMost LTER datasets go here\nUSDA datasets are increasingly going here too\nSearchable at EDI or Tab 2",
+    "crumbs": [
+      "Working with the long-term data of the Jornada Basin"
+    ]
+  },
+  {
+    "objectID": "docs/slides/JornadaDatasetsTour.html#dex",
+    "href": "docs/slides/JornadaDatasetsTour.html#dex",
+    "title": "Working with the long-term data of the Jornada Basin",
+    "section": "DeX",
+    "text": "DeX\n\nProfile, subset and plot tabular datasets in EDI",
+    "crumbs": [
+      "Working with the long-term data of the Jornada Basin"
+    ]
+  },
+  {
+    "objectID": "docs/slides/JornadaDatasetsTour.html#ediutils-r-package",
+    "href": "docs/slides/JornadaDatasetsTour.html#ediutils-r-package",
+    "title": "Working with the long-term data of the Jornada Basin",
+    "section": "EDIutils R package",
+    "text": "EDIutils R package\n\nEDIutils - an API client for the EDI repository\nhttps://docs.ropensci.org/EDIutils/\nSearch/Access data in EDI\nAlso has data management tools…\nThere will be a quick demo….",
+    "crumbs": [
+      "Working with the long-term data of the Jornada Basin"
+    ]
+  },
+  {
+    "objectID": "docs/slides/JornadaDatasetsTour.html#demo-edi-jornada-edi-catalog",
+    "href": "docs/slides/JornadaDatasetsTour.html#demo-edi-jornada-edi-catalog",
+    "title": "Working with the long-term data of the Jornada Basin",
+    "section": "[DEMO – EDI & Jornada EDI catalog]",
+    "text": "[DEMO – EDI & Jornada EDI catalog]",
+    "crumbs": [
+      "Working with the long-term data of the Jornada Basin"
+    ]
+  },
+  {
+    "objectID": "docs/slides/JornadaDatasetsTour.html#specialized-jornada-data-in-other-repositories",
+    "href": "docs/slides/JornadaDatasetsTour.html#specialized-jornada-data-in-other-repositories",
+    "title": "Working with the long-term data of the Jornada Basin",
+    "section": "Specialized Jornada data in other repositories",
+    "text": "Specialized Jornada data in other repositories",
+    "crumbs": [
+      "Working with the long-term data of the Jornada Basin"
+    ]
+  },
+  {
+    "objectID": "docs/slides/JornadaDatasetsTour.html#some-data-are-special",
+    "href": "docs/slides/JornadaDatasetsTour.html#some-data-are-special",
+    "title": "Working with the long-term data of the Jornada Basin",
+    "section": "Some data are special",
+    "text": "Some data are special\n\nSpecialized data is best archived with similar data\n\nNucleotide sequencing & genomic data\nEddy covariance (flux) data\nImagery data\n\nShared data formats, variables, methods, or metadata standards\nArchived in specialized data repositories\nThis data is supported by the JRN LTER, so we provide access\nSearchable in Tab 3, but less metadata available\nPhenoCam",
+    "crumbs": [
+      "Working with the long-term data of the Jornada Basin"
+    ]
+  },
+  {
+    "objectID": "docs/slides/JornadaDatasetsTour.html#demo-ncbi-ameriflux",
+    "href": "docs/slides/JornadaDatasetsTour.html#demo-ncbi-ameriflux",
+    "title": "Working with the long-term data of the Jornada Basin",
+    "section": "[DEMO – NCBI & AmeriFlux]",
+    "text": "[DEMO – NCBI & AmeriFlux]",
+    "crumbs": [
+      "Working with the long-term data of the Jornada Basin"
+    ]
+  },
+  {
+    "objectID": "docs/slides/JornadaDatasetsTour.html#jornada-geospatial-data",
+    "href": "docs/slides/JornadaDatasetsTour.html#jornada-geospatial-data",
+    "title": "Working with the long-term data of the Jornada Basin",
+    "section": "Jornada geospatial data",
+    "text": "Jornada geospatial data",
+    "crumbs": [
+      "Working with the long-term data of the Jornada Basin"
+    ]
+  },
+  {
+    "objectID": "docs/slides/JornadaDatasetsTour.html#spatial-data-are-special-too",
+    "href": "docs/slides/JornadaDatasetsTour.html#spatial-data-are-special-too",
+    "title": "Working with the long-term data of the Jornada Basin",
+    "section": "Spatial data are special too",
+    "text": "Spatial data are special too\n\nFor “historical” reasons, Jornada geospatial data is not as open\nSelected data available through the Jornada Geoportal\nThe IM team can add you to the\nIt is a good idea to also ask\n\nThe Jornada IM team ( jornada.data@nmsu.edu, or gmaurer@nmsu.edu )\nJER’s Amy Slaughter ( amalia.slaughter@usda.gov )",
+    "crumbs": [
+      "Working with the long-term data of the Jornada Basin"
+    ]
+  },
+  {
+    "objectID": "docs/slides/JornadaDatasetsTour.html#demo---jornada-geoportal",
+    "href": "docs/slides/JornadaDatasetsTour.html#demo---jornada-geoportal",
+    "title": "Working with the long-term data of the Jornada Basin",
+    "section": "[DEMO - Jornada Geoportal]",
+    "text": "[DEMO - Jornada Geoportal]",
+    "crumbs": [
+      "Working with the long-term data of the Jornada Basin"
+    ]
+  },
+  {
+    "objectID": "docs/slides/JornadaDatasetsTour.html#partnerships-and-other-jornada-data",
+    "href": "docs/slides/JornadaDatasetsTour.html#partnerships-and-other-jornada-data",
+    "title": "Working with the long-term data of the Jornada Basin",
+    "section": "Partnerships and “other” Jornada data",
+    "text": "Partnerships and “other” Jornada data",
+    "crumbs": [
+      "Working with the long-term data of the Jornada Basin"
+    ]
+  },
+  {
+    "objectID": "docs/slides/JornadaDatasetsTour.html#there-is-lots-of-other-jornada-data",
+    "href": "docs/slides/JornadaDatasetsTour.html#there-is-lots-of-other-jornada-data",
+    "title": "Working with the long-term data of the Jornada Basin",
+    "section": "There is lots of other Jornada data",
+    "text": "There is lots of other Jornada data\n\nWe don’t directly manage ALL Jornada data\n\nNEON\nCZNet\nRemote sensing data (NASA, USGS, Sentinel, etc)\nNOAA & NRCS stations\nCollections data (specimens & physical samples)\n\nWe usually provide access via links to other data portals\n“Data Partnerships” are listed in Tab 5 and some datasets/portals in Tab 3\nWe can help - let us know what you are looking for!",
+    "crumbs": [
+      "Working with the long-term data of the Jornada Basin"
+    ]
+  },
+  {
+    "objectID": "docs/slides/JornadaDatasetsTour.html#demo-partner-data",
+    "href": "docs/slides/JornadaDatasetsTour.html#demo-partner-data",
+    "title": "Working with the long-term data of the Jornada Basin",
+    "section": "[DEMO – Partner data]",
+    "text": "[DEMO – Partner data]",
+    "crumbs": [
+      "Working with the long-term data of the Jornada Basin"
+    ]
+  },
+  {
+    "objectID": "docs/slides/JornadaDatasetsTour.html#more-ways-to-explore-jornada-data",
+    "href": "docs/slides/JornadaDatasetsTour.html#more-ways-to-explore-jornada-data",
+    "title": "Working with the long-term data of the Jornada Basin",
+    "section": "More ways to explore Jornada data",
+    "text": "More ways to explore Jornada data",
+    "crumbs": [
+      "Working with the long-term data of the Jornada Basin"
+    ]
+  },
+  {
+    "objectID": "docs/slides/JornadaDatasetsTour.html#the-interactive-data-viewer",
+    "href": "docs/slides/JornadaDatasetsTour.html#the-interactive-data-viewer",
+    "title": "Working with the long-term data of the Jornada Basin",
+    "section": "The Interactive data viewer",
+    "text": "The Interactive data viewer\n\nR Shiny app showing met station locations (NPP & CSIS) and providing access to “provisional” met data.",
+    "crumbs": [
+      "Working with the long-term data of the Jornada Basin"
+    ]
+  },
+  {
+    "objectID": "docs/slides/JornadaDatasetsTour.html#interactive-data-viewer",
+    "href": "docs/slides/JornadaDatasetsTour.html#interactive-data-viewer",
+    "title": "Working with the long-term data of the Jornada Basin",
+    "section": "Interactive data viewer",
+    "text": "Interactive data viewer\n\nMet data current to yesterday\nSubset & download data\nNo QA/QC (!), but links to published data available\nGood for general orientation and answering the question “Did it rain at my site yesterday?”",
+    "crumbs": [
+      "Working with the long-term data of the Jornada Basin"
+    ]
+  },
+  {
+    "objectID": "docs/slides/JornadaDatasetsTour.html#demo-interactive-data-viewer",
+    "href": "docs/slides/JornadaDatasetsTour.html#demo-interactive-data-viewer",
+    "title": "Working with the long-term data of the Jornada Basin",
+    "section": "[DEMO – Interactive data viewer]",
+    "text": "[DEMO – Interactive data viewer]",
+    "crumbs": [
+      "Working with the long-term data of the Jornada Basin"
+    ]
+  },
+  {
+    "objectID": "docs/slides/JornadaDatasetsTour.html#dataone",
+    "href": "docs/slides/JornadaDatasetsTour.html#dataone",
+    "title": "Working with the long-term data of the Jornada Basin",
+    "section": "DataOne",
+    "text": "DataOne\n\nMetadata aggregator\nMany “member nodes”\n\nAll LTER repositories (EDI, BCO-DMO, ADC)\nDryad et al.\nSome fed agency data\n\nStandard tabular datasets\nNo NCBI, AmeriFlux, etc\nGood for cross-site synthesis, challenging for site-specific data",
+    "crumbs": [
+      "Working with the long-term data of the Jornada Basin"
+    ]
+  },
+  {
+    "objectID": "docs/slides/JornadaDatasetsTour.html#activity-3-what-else-is-there",
+    "href": "docs/slides/JornadaDatasetsTour.html#activity-3-what-else-is-there",
+    "title": "Working with the long-term data of the Jornada Basin",
+    "section": "Activity 3: What else is there?",
+    "text": "Activity 3: What else is there?\n\nWhat have we missed here? Form small groups and discuss the kinds of data that are most useful in your research and whether you think you can find them given the information presented today. You can make notes in the community doc.\nThen, lets discuss.",
+    "crumbs": [
+      "Working with the long-term data of the Jornada Basin"
+    ]
+  },
+  {
+    "objectID": "docs/slides/JornadaDatasetsTour.html#using-the-data",
+    "href": "docs/slides/JornadaDatasetsTour.html#using-the-data",
+    "title": "Working with the long-term data of the Jornada Basin",
+    "section": "Using the data",
+    "text": "Using the data\n\nHands on time!",
+    "crumbs": [
+      "Working with the long-term data of the Jornada Basin"
+    ]
+  },
+  {
+    "objectID": "workshops/20220629-jrn-ecology-short-course/index.html",
+    "href": "workshops/20220629-jrn-ecology-short-course/index.html",
+    "title": "JEDS @ 2022 Jornada Ecology Short Course",
+    "section": "",
+    "text": "Date and time: Wednesday June 29, 2022 at 1:00pm Mountain time\nLocation: Garcia Hall conference room at Jornada Experimental Range HQ\nInstructors: Darren James and Greg Maurer\nWelcome to our ecological statistics and models workshop for the 2022 Jornada Desert Ecology Short Course. This workshop is the first of what we hope will be a series of “JEDS” (formerly JEST) workshops, with the aim of teaching introductory and intermediate data analysis and statistics skills to Jornada researchers using hands-on programming in R. This is the first-ever JEDS workshop, so please be patient with us.\nThis workshop will teach elements of statistical inference with ecological data, building from relatively simple linear models up to the (potentially) more complex use of mixed models. Mixed models are an active area of research and development in the statistics community, and there are numerous pitfalls and briar patches in the mixed model landscape. We’ll discuss them and demonstrate the basics, but our goal is primarily to give you the confidence needed to start exploring these methods on your own (and perhaps prepare you for a future mixed model workshop).\n\n\nThe lessons we are teaching have been developed using R, and we are expecting learners to code along with us as we subset the data, fit models, and interpret results. Please follow the general setup instructions to be prepared with a working version of R and RStudio. We will download data directly from the EDI repository at the start of the workshop (see more info on the teaching datasets page).\nIn addition to the basic preparations above, you should:\n\nInstall these R packages: tidyverse, car, emmeans, multcomp, multcompView, lme4, and lmerTest.\nDownload the code handout (DRAFT - be sure to update before the workshop)\n\nIf you have trouble preparing or need help please contact Greg (gmaurer@nmsu.edu).\n\n\n\nWe have one big lesson for the workshop, and we will touch on only a few sections of it. Please keep in mind that this is a draft.\n\nStatistical inference with general linear models and mixed models\n\nHere are the slides for the workshop:\n\njesc20220629_workshop_slides.pdf\n\n\n\n\nPlease tell us how the workshop went in the post-workshop survey. We’ll use your anonymous feedback to improve future workshops and lessons."
+  },
+  {
+    "objectID": "workshops/20220629-jrn-ecology-short-course/index.html#getting-set-up",
+    "href": "workshops/20220629-jrn-ecology-short-course/index.html#getting-set-up",
+    "title": "JEDS @ 2022 Jornada Ecology Short Course",
+    "section": "",
+    "text": "The lessons we are teaching have been developed using R, and we are expecting learners to code along with us as we subset the data, fit models, and interpret results. Please follow the general setup instructions to be prepared with a working version of R and RStudio. We will download data directly from the EDI repository at the start of the workshop (see more info on the teaching datasets page).\nIn addition to the basic preparations above, you should:\n\nInstall these R packages: tidyverse, car, emmeans, multcomp, multcompView, lme4, and lmerTest.\nDownload the code handout (DRAFT - be sure to update before the workshop)\n\nIf you have trouble preparing or need help please contact Greg (gmaurer@nmsu.edu)."
+  },
+  {
+    "objectID": "workshops/20220629-jrn-ecology-short-course/index.html#lesson-materials",
+    "href": "workshops/20220629-jrn-ecology-short-course/index.html#lesson-materials",
+    "title": "JEDS @ 2022 Jornada Ecology Short Course",
+    "section": "",
+    "text": "We have one big lesson for the workshop, and we will touch on only a few sections of it. Please keep in mind that this is a draft.\n\nStatistical inference with general linear models and mixed models\n\nHere are the slides for the workshop:\n\njesc20220629_workshop_slides.pdf"
+  },
+  {
+    "objectID": "workshops/20220629-jrn-ecology-short-course/index.html#post-workshop-feedback",
+    "href": "workshops/20220629-jrn-ecology-short-course/index.html#post-workshop-feedback",
+    "title": "JEDS @ 2022 Jornada Ecology Short Course",
+    "section": "",
+    "text": "Please tell us how the workshop went in the post-workshop survey. We’ll use your anonymous feedback to improve future workshops and lessons."
+  },
+  {
+    "objectID": "workshops/2023-data-therapy-geospatial/index.html",
+    "href": "workshops/2023-data-therapy-geospatial/index.html",
+    "title": "April 2023 Data Therapy: Geospatial Data Access",
+    "section": "",
+    "text": "{:.no_toc}\nONLINE - 20 April 2023: Data Therapy\nInstructors: Greg Maurer\nContents\n\nTOC {:toc}\n\n\n\n\n\n\nThe Jornada LTER website spatial data catalog has a limited selection of useful layers ad KMZ files. We will be expanding this over the next year.\nThe Jornada Experimental Range (JER) geodatabase is the most reliable archive of the Jornada’s spatial data layers that have been created and collected over decades of Jornada research. It is not public-facing, but if you request data (see below) someone can usually get you what you need.\nThe Jornada IM team’s geodatabase is under development. For the most part it contains the same layers as are in the JER geodatabase, but we are working on improving metadata and usability of these layers. It is not public facing yet, but this will soon be the source of data for the Jornada website spatial data catalog.\nA few spatial datasets are published in the Environmental Data Initiative repository (EDI), and we are working on publishing more. You can search those through the Jornada LTER website or directly at EDI.\n\n\n\n\nMost of the time you should ask a Jornada data manager (jornada.data@nmsu.edu) and/or Amy Slaughter (amalia.slaughter@usda.gov), who maintains the JER geodatabase. This may be more efficient than searching our data catalogs.\n\n\n\nIts up to you, but a few tools we can recommend:\n\nQGIS is open-source, free, and powerful, and is installable on Mac, Windows, and Linux platforms.\nGoogle Earth Pro is also free and cross-platform, but a bit less powerful.\nArcGIS Desktop or ArcGIS Pro are great you have a license for them and use Windows (not available for Mac or Linux). Sometimes you can get a license through your institution. Many institutions also offer access to ArcGIS Online, a cloud-native GIS platform that integrates with both ArcGIS Desktop and Pro.\nFor R users, you may install the R packages terra and sf, which are highly functional for raster and vector data, respectively.\nFor python users, a good place to start might be GeoPandas, but there are many more options.\n\n\n\n\n\nWe demonstrated how to use the vector datasets from the Jornada LTER spatial data catalog in QGIS and R.\n\nIn QGIS, one can copy the URL of a desired zip archive listed on the data catalog (such as ‘https://lter.jornada.nmsu.edu/spatialfiles/JER_Fences.zip’), paste it into “Vector data” dialog of the “Open Data Source Manager”, and click “Add”, and QGIS will unpack the zip file and add the KMZ layers to the map.\nIn R, there is no automated unpacking of zip files, so they must be downloaded and unzipped first. Then, the resulting KMZ files can be loaded as R objects using functions in sf, such as:\n  fences &lt;- sf::st_read('~/my_downloads/JER_fences/JER_Fences.kmz')\n\n\n\n\nWe identified a number spatial datasets people at the Jornada would find useful to have around.\n\nDetailed aerial imagery is useful in lots of contexts. NAIP, Quickbird, and lots of other programs and platforms generate this kind of data, and the JER GIS office has archived a fair amount of it on local servers. Let us know what you need. Its big, and behind a VPN, so putting it on a Dropbox might be necessary.\nMost researchers have some need to make maps or other graphics with geospatial data. Background layers are really useful for this sometimes, and it doesn’t make lots of sense to re-make them every time. Useful imagery mosaics, hillshades, or other nice map backgrounds would be nice to have easily available in a spatial catalog.\nData resolution for things like DEMs and images keeps improving, so we need to update periodically with improved products.\n\n\n\n\nWe’re looking for feedback as we design a new spatial data catalog for the Jornada. This survey will help determine how that catalog will work and what data to include there.\n\n\n\n\nGeospatial data in R Carpentries workshop (3 lessons)"
+  },
+  {
+    "objectID": "workshops/2023-data-therapy-geospatial/index.html#questions-we-covered",
+    "href": "workshops/2023-data-therapy-geospatial/index.html#questions-we-covered",
+    "title": "April 2023 Data Therapy: Geospatial Data Access",
+    "section": "",
+    "text": "The Jornada LTER website spatial data catalog has a limited selection of useful layers ad KMZ files. We will be expanding this over the next year.\nThe Jornada Experimental Range (JER) geodatabase is the most reliable archive of the Jornada’s spatial data layers that have been created and collected over decades of Jornada research. It is not public-facing, but if you request data (see below) someone can usually get you what you need.\nThe Jornada IM team’s geodatabase is under development. For the most part it contains the same layers as are in the JER geodatabase, but we are working on improving metadata and usability of these layers. It is not public facing yet, but this will soon be the source of data for the Jornada website spatial data catalog.\nA few spatial datasets are published in the Environmental Data Initiative repository (EDI), and we are working on publishing more. You can search those through the Jornada LTER website or directly at EDI.\n\n\n\n\nMost of the time you should ask a Jornada data manager (jornada.data@nmsu.edu) and/or Amy Slaughter (amalia.slaughter@usda.gov), who maintains the JER geodatabase. This may be more efficient than searching our data catalogs.\n\n\n\nIts up to you, but a few tools we can recommend:\n\nQGIS is open-source, free, and powerful, and is installable on Mac, Windows, and Linux platforms.\nGoogle Earth Pro is also free and cross-platform, but a bit less powerful.\nArcGIS Desktop or ArcGIS Pro are great you have a license for them and use Windows (not available for Mac or Linux). Sometimes you can get a license through your institution. Many institutions also offer access to ArcGIS Online, a cloud-native GIS platform that integrates with both ArcGIS Desktop and Pro.\nFor R users, you may install the R packages terra and sf, which are highly functional for raster and vector data, respectively.\nFor python users, a good place to start might be GeoPandas, but there are many more options."
+  },
+  {
+    "objectID": "workshops/2023-data-therapy-geospatial/index.html#demonstrations",
+    "href": "workshops/2023-data-therapy-geospatial/index.html#demonstrations",
+    "title": "April 2023 Data Therapy: Geospatial Data Access",
+    "section": "",
+    "text": "We demonstrated how to use the vector datasets from the Jornada LTER spatial data catalog in QGIS and R.\n\nIn QGIS, one can copy the URL of a desired zip archive listed on the data catalog (such as ‘https://lter.jornada.nmsu.edu/spatialfiles/JER_Fences.zip’), paste it into “Vector data” dialog of the “Open Data Source Manager”, and click “Add”, and QGIS will unpack the zip file and add the KMZ layers to the map.\nIn R, there is no automated unpacking of zip files, so they must be downloaded and unzipped first. Then, the resulting KMZ files can be loaded as R objects using functions in sf, such as:\n  fences &lt;- sf::st_read('~/my_downloads/JER_fences/JER_Fences.kmz')"
+  },
+  {
+    "objectID": "workshops/2023-data-therapy-geospatial/index.html#discussion-on-improving-the-spatial-data-catalog",
+    "href": "workshops/2023-data-therapy-geospatial/index.html#discussion-on-improving-the-spatial-data-catalog",
+    "title": "April 2023 Data Therapy: Geospatial Data Access",
+    "section": "",
+    "text": "We identified a number spatial datasets people at the Jornada would find useful to have around.\n\nDetailed aerial imagery is useful in lots of contexts. NAIP, Quickbird, and lots of other programs and platforms generate this kind of data, and the JER GIS office has archived a fair amount of it on local servers. Let us know what you need. Its big, and behind a VPN, so putting it on a Dropbox might be necessary.\nMost researchers have some need to make maps or other graphics with geospatial data. Background layers are really useful for this sometimes, and it doesn’t make lots of sense to re-make them every time. Useful imagery mosaics, hillshades, or other nice map backgrounds would be nice to have easily available in a spatial catalog.\nData resolution for things like DEMs and images keeps improving, so we need to update periodically with improved products."
+  },
+  {
+    "objectID": "workshops/2023-data-therapy-geospatial/index.html#survey",
+    "href": "workshops/2023-data-therapy-geospatial/index.html#survey",
+    "title": "April 2023 Data Therapy: Geospatial Data Access",
+    "section": "",
+    "text": "We’re looking for feedback as we design a new spatial data catalog for the Jornada. This survey will help determine how that catalog will work and what data to include there."
+  },
+  {
+    "objectID": "workshops/2023-data-therapy-geospatial/index.html#some-other-helpful-resources",
+    "href": "workshops/2023-data-therapy-geospatial/index.html#some-other-helpful-resources",
+    "title": "April 2023 Data Therapy: Geospatial Data Access",
+    "section": "",
+    "text": "Geospatial data in R Carpentries workshop (3 lessons)"
+  },
+  {
+    "objectID": "workshops/index.html",
+    "href": "workshops/index.html",
+    "title": "JEDS Workshops",
+    "section": "",
+    "text": "April 2023 Data Therapy: Geospatial Data Access\n\n\n\n\n\n\n\n\nApr 20, 2023\n\n\nGregory Maurer\n\n\n\n\n\n\n\n\n\n\n\n\n2022 Data Therapy: Git/GitHub Sessions\n\n\n\n\n\n\n\n\nSep 8, 2022\n\n\nGregory Maurer\n\n\n\n\n\n\n\n\n\n\n\n\nJEDS @ 2022 Jornada Ecology Short Course\n\n\n\n\n\n\n\n\nJun 29, 2022\n\n\nDarren James, Gregory Maurer\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "workshops/2022-data-therapy-git-github/index.html",
+    "href": "workshops/2022-data-therapy-git-github/index.html",
+    "title": "2022 Data Therapy: Git/GitHub Sessions",
+    "section": "",
+    "text": "ONLINE -Date and time: See the calendar invite\nInstructors: Greg Maurer\nWe will start this with a 1-hour beginner-level tutorial on using git and GitHub as a researcher. You’ll learn a little about why you might want to incorporate git into your scientific workflows, and how to get started doing that. Future sessions will cover more advanced topics. Using git and GitHub effectively takes quite a bit of practice, so we’ll cover the basics and leave room for adding more tutorials down the road (open to suggestions on that).\n\n\nBasically you will need to install git and make yourself an account at https://github.com. There are quite a few ways to do this, but check the JEDS setup instructions for some recommended ones.\nIf you have trouble preparing or need help please contact Greg (gmaurer@nmsu.edu).\n\n\n\n\nUsing git and GitHub as a researcher\n\n\n\n\n\nHappy Git with R\nKarl Broman’s minimal tutorial\nSWC Version Control with git\ngit commands documentation, including links to cheatsheets"
+  },
+  {
+    "objectID": "workshops/2022-data-therapy-git-github/index.html#getting-set-up",
+    "href": "workshops/2022-data-therapy-git-github/index.html#getting-set-up",
+    "title": "2022 Data Therapy: Git/GitHub Sessions",
+    "section": "",
+    "text": "Basically you will need to install git and make yourself an account at https://github.com. There are quite a few ways to do this, but check the JEDS setup instructions for some recommended ones.\nIf you have trouble preparing or need help please contact Greg (gmaurer@nmsu.edu)."
+  },
+  {
+    "objectID": "workshops/2022-data-therapy-git-github/index.html#lesson-materials",
+    "href": "workshops/2022-data-therapy-git-github/index.html#lesson-materials",
+    "title": "2022 Data Therapy: Git/GitHub Sessions",
+    "section": "",
+    "text": "Using git and GitHub as a researcher"
+  },
+  {
+    "objectID": "workshops/2022-data-therapy-git-github/index.html#some-other-helpful-resources",
+    "href": "workshops/2022-data-therapy-git-github/index.html#some-other-helpful-resources",
+    "title": "2022 Data Therapy: Git/GitHub Sessions",
+    "section": "",
+    "text": "Happy Git with R\nKarl Broman’s minimal tutorial\nSWC Version Control with git\ngit commands documentation, including links to cheatsheets"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "JEDS!",
+    "section": "",
+    "text": "Our aim is to teach environmental data science concepts and skills to Jornada researchers using accessible methods and relatable data."
+  },
+  {
+    "objectID": "index.html#setting-up-your-environment",
+    "href": "index.html#setting-up-your-environment",
+    "title": "JEDS!",
+    "section": "Setting up your environment",
+    "text": "Setting up your environment\nMost tutorials have been developed for learners using R, python, and other open-source tools. To set up an environment to work through lessons on your own or in a workshop, follow the setup instructions that apply to your lesson. Lessons rely on either simulated data or Jornada data hosted at EDI. The teaching datasets page will introduce these datasets and how to load them. Additional required software packages and suggestions for loading the data are given at the start of each lesson."
+  },
+  {
+    "objectID": "index.html#lessons",
+    "href": "index.html#lessons",
+    "title": "JEDS!",
+    "section": "Lessons",
+    "text": "Lessons\n\nHypothesis testing with general linear models and mixed models\nUsing git and GitHub as a researcher\nExtras: Data visualization with ggplot"
+  },
+  {
+    "objectID": "index.html#upcoming-workshops",
+    "href": "index.html#upcoming-workshops",
+    "title": "JEDS!",
+    "section": "Upcoming workshops",
+    "text": "Upcoming workshops\n\nSpring 2023 Data Therapy geospatial data tutorials\nThe 2023 Jornada Desert Ecology Short Course will include a Data Carpentries R workshop."
+  },
+  {
+    "objectID": "index.html#past-workshops",
+    "href": "index.html#past-workshops",
+    "title": "JEDS!",
+    "section": "Past workshops",
+    "text": "Past workshops\n\nFall 2022 Data Therapy Git/GitHub tutorials\n2022-06-29 - Jornada Desert Ecology Short Course"
+  },
+  {
+    "objectID": "docs/slides/index.html",
+    "href": "docs/slides/index.html",
+    "title": "JEDS Presentations",
+    "section": "",
+    "text": "Order By\n      Default\n      \n        Title\n      \n      \n        Author\n      \n    \n  \n    \n      \n      \n    \n\n\n\n\n\n\nTitle\n\n\n\nAuthor\n\n\n\n\n\n\n\n\nWorking with the long-term data of the Jornada Basin\n\n\n \n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "docs/lessons/access_EDI_data.html",
+    "href": "docs/lessons/access_EDI_data.html",
+    "title": "Accessing Jornada data in EDI",
+    "section": "",
+    "text": "This lesson will teach you several methods for accessing Jornada data at the Environmental Data Initiative (EDI) repository. EDI has recently become more strict about data access and now requires authentication for downloading data files.",
+    "crumbs": [
+      "Accessing Jornada data in EDI"
+    ]
+  },
+  {
+    "objectID": "docs/lessons/access_EDI_data.html#introduction",
+    "href": "docs/lessons/access_EDI_data.html#introduction",
+    "title": "Accessing Jornada data in EDI",
+    "section": "",
+    "text": "This lesson will teach you several methods for accessing Jornada data at the Environmental Data Initiative (EDI) repository. EDI has recently become more strict about data access and now requires authentication for downloading data files.",
+    "crumbs": [
+      "Accessing Jornada data in EDI"
+    ]
+  },
+  {
+    "objectID": "docs/lessons/access_EDI_data.html#downloading-from-the-portal",
+    "href": "docs/lessons/access_EDI_data.html#downloading-from-the-portal",
+    "title": "Accessing Jornada data in EDI",
+    "section": "1. Downloading from the portal",
+    "text": "1. Downloading from the portal\nThe EDI Portal (portal.edirepository.org) is the main graphical interface to the repository. It provides a search interface and landing pages for all datasets, and provides a way to download the files published as a part of any dataset.\nDownloading data requires “authentication” - i.e. you have to be logged in with a non-anonymous account. EDI makes it easy to use your pre-existing Google or GitHub account to authenticate.",
+    "crumbs": [
+      "Accessing Jornada data in EDI"
+    ]
+  },
+  {
+    "objectID": "docs/lessons/access_EDI_data.html#ediutils",
+    "href": "docs/lessons/access_EDI_data.html#ediutils",
+    "title": "Accessing Jornada data in EDI",
+    "section": "2. EDIutils",
+    "text": "2. EDIutils\nThe EDIutils R package is a wrapper around the EDI repository’s API. It provides functions to search and access the data published in EDI from the comfort of your R scripts\n\nlibrary(tidyverse)\n\nThen, load a comma-separated value file from the EDI repository. At the EDI repository, each file in a dataset is assigned a download URL. This can be passed to the tidyverse::read_csv() function to read that file into a dataframe.\n\n# Assign the address for the csv file hosted on EDI to a variable\ninfile &lt;- \"https://pasta.lternet.edu/package/data/eml/knb-lter-jrn/210011003/105/127124b0f04a1c71f34148e3d40a5c72\"\n\n# Read this file into a tibble with `tidyverse::read_csv()`\nanpp.annual &lt;- read_csv(infile, na=c('NA', '', '.'))\n\nR tells us that we have two character data columns (zone and site), and two floating point (dbl) columns that contain the year of measurement - year - and estimated annual NPP values (npp_g_m2). Lets make a simple plot to look at the data. To do this we are using the ggplot() function, which is part of the ggplot2 library that was attached when we loaded the tidyverse package`\n\nggplot(anpp.annual, aes(x = year, y = npp_g_m2, col = site, group = site)) +\n  geom_line() +\n  theme(axis.text.x = element_text(angle = 90, vjust = 0.5))\n\nNow, lets output this into our data/ directory so that we can load it easily next time.\n\nwrite_csv(anpp.annual, '../data/td01_anpp.annual.csv')",
+    "crumbs": [
+      "Accessing Jornada data in EDI"
+    ]
+  },
+  {
+    "objectID": "docs/lessons/teaching-datasets.html",
+    "href": "docs/lessons/teaching-datasets.html",
+    "title": "Teaching Datasets",
+    "section": "",
+    "text": "This page contains descriptions and the reproducible workflows used to create and load the teaching datasets used in our lessons. In general these start as Jornada data files downloaded from a data repository like EDI. We often use tidyverse to do some data manipulation, and then all finished datasets are output to the repository’s data/ directory.\nThe complete code needed to generate and load the teaching datasets are in the sections below. To use each teaching dataset, you can either run this code before you start a lesson, or you can download and load the pre-made datasets from the data/ directory. Suggestions for how to proceed are found at the start of each lesson.",
+    "crumbs": [
+      "Teaching Datasets"
+    ]
+  },
+  {
+    "objectID": "docs/lessons/teaching-datasets.html#introduction",
+    "href": "docs/lessons/teaching-datasets.html#introduction",
+    "title": "Teaching Datasets",
+    "section": "",
+    "text": "This page contains descriptions and the reproducible workflows used to create and load the teaching datasets used in our lessons. In general these start as Jornada data files downloaded from a data repository like EDI. We often use tidyverse to do some data manipulation, and then all finished datasets are output to the repository’s data/ directory.\nThe complete code needed to generate and load the teaching datasets are in the sections below. To use each teaching dataset, you can either run this code before you start a lesson, or you can download and load the pre-made datasets from the data/ directory. Suggestions for how to proceed are found at the start of each lesson.",
+    "crumbs": [
+      "Teaching Datasets"
+    ]
+  },
+  {
+    "objectID": "docs/lessons/teaching-datasets.html#teaching-dataset-1---jornada-anpp-data",
+    "href": "docs/lessons/teaching-datasets.html#teaching-dataset-1---jornada-anpp-data",
+    "title": "Teaching Datasets",
+    "section": "Teaching dataset 1 - Jornada ANPP data",
+    "text": "Teaching dataset 1 - Jornada ANPP data\nThis dataset contains annual net primary production (NPP) data, measured in grams biomass per square meter, from the Jornada NPP study sites. There are 15 NPP study sites, in 5 different vegetation zones, across the Jornada Basin. At each site there are 49 1x1 meter quadrats where repeated measures of plant volume by species take place several each year. These volume data have been converted to biomass using an allometric method, and then to net primary production using the increment in biomass from one measurement to the next.\nThe annual data are in this EDI dataset:\n\nPeters, D. and L. Huenneke. 2022. Annual mean estimates of aboveground net primary production (NPP) at 15 sites at Jornada Basin LTER, 1989-ongoing ver 105. Environmental Data Initiative. https://doi.org/10.6073/pasta/925c86b094c123fae4ddabf31cf92a30\n\nFirst we will need to load the tidyverse library.\n\nlibrary(tidyverse)\n\nThen, load a comma-separated value file from the EDI repository. At the EDI repository, each file in a dataset is assigned a download URL. This can be passed to the tidyverse::read_csv() function to read that file into a dataframe.\n\n# Assign the address for the csv file hosted on EDI to a variable\ninfile &lt;- \"https://pasta.lternet.edu/package/data/eml/knb-lter-jrn/210011003/105/127124b0f04a1c71f34148e3d40a5c72\"\n\n# Read this file into a tibble with `tidyverse::read_csv()`\nanpp.annual &lt;- read_csv(infile, na=c('NA', '', '.'))\n\nR tells us that we have two character data columns (zone and site), and two floating point (dbl) columns that contain the year of measurement - year - and estimated annual NPP values (npp_g_m2). Lets make a simple plot to look at the data. To do this we are using the ggplot() function, which is part of the ggplot2 library that was attached when we loaded the tidyverse package`\n\nggplot(anpp.annual, aes(x = year, y = npp_g_m2, col = site, group = site)) +\n  geom_line() +\n  theme(axis.text.x = element_text(angle = 90, vjust = 0.5))\n\nNow, lets output this into our data/ directory so that we can load it easily next time.\n\nwrite_csv(anpp.annual, '../data/td01_anpp.annual.csv')",
+    "crumbs": [
+      "Teaching Datasets"
+    ]
+  },
+  {
+    "objectID": "docs/lessons/jrn_datasets_tour.html",
+    "href": "docs/lessons/jrn_datasets_tour.html",
+    "title": "Jornada Datasets Tour",
+    "section": "",
+    "text": "This page contains descriptions and the reproducible workflows used to create and load the teaching datasets used in our lessons. In general these start as Jornada data files downloaded from a data repository like EDI. We often use tidyverse to do some data manipulation, and then all finished datasets are output to the repository’s data/ directory.\nThe complete code needed to generate and load the teaching datasets are in the sections below. To use each teaching dataset, you can either run this code before you start a lesson, or you can download and load the pre-made datasets from the data/ directory. Suggestions for how to proceed are found at the start of each lesson.",
+    "crumbs": [
+      "Jornada Datasets Tour"
+    ]
+  },
+  {
+    "objectID": "docs/lessons/jrn_datasets_tour.html#introduction",
+    "href": "docs/lessons/jrn_datasets_tour.html#introduction",
+    "title": "Jornada Datasets Tour",
+    "section": "",
+    "text": "This page contains descriptions and the reproducible workflows used to create and load the teaching datasets used in our lessons. In general these start as Jornada data files downloaded from a data repository like EDI. We often use tidyverse to do some data manipulation, and then all finished datasets are output to the repository’s data/ directory.\nThe complete code needed to generate and load the teaching datasets are in the sections below. To use each teaching dataset, you can either run this code before you start a lesson, or you can download and load the pre-made datasets from the data/ directory. Suggestions for how to proceed are found at the start of each lesson.",
+    "crumbs": [
+      "Jornada Datasets Tour"
+    ]
+  },
+  {
+    "objectID": "docs/lessons/jrn_datasets_tour.html#teaching-dataset-1---jornada-anpp-data",
+    "href": "docs/lessons/jrn_datasets_tour.html#teaching-dataset-1---jornada-anpp-data",
+    "title": "Jornada Datasets Tour",
+    "section": "Teaching dataset 1 - Jornada ANPP data",
+    "text": "Teaching dataset 1 - Jornada ANPP data\nThis dataset contains annual net primary production (NPP) data, measured in grams biomass per square meter, from the Jornada NPP study sites. There are 15 NPP study sites, in 5 different vegetation zones, across the Jornada Basin. At each site there are 49 1x1 meter quadrats where repeated measures of plant volume by species take place several each year. These volume data have been converted to biomass using an allometric method, and then to net primary production using the increment in biomass from one measurement to the next.\nThe annual data are in this EDI dataset:\n\nPeters, D. and L. Huenneke. 2022. Annual mean estimates of aboveground net primary production (NPP) at 15 sites at Jornada Basin LTER, 1989-ongoing ver 105. Environmental Data Initiative. https://doi.org/10.6073/pasta/925c86b094c123fae4ddabf31cf92a30\n\nFirst we will need to load the tidyverse library.\n\nlibrary(tidyverse)\n\nThen, load a comma-separated value file from the EDI repository. At the EDI repository, each file in a dataset is assigned a download URL. This can be passed to the tidyverse::read_csv() function to read that file into a dataframe.\n\n# Assign the address for the csv file hosted on EDI to a variable\ninfile &lt;- \"https://pasta.lternet.edu/package/data/eml/knb-lter-jrn/210011003/105/127124b0f04a1c71f34148e3d40a5c72\"\n\n# Read this file into a tibble with `tidyverse::read_csv()`\nanpp.annual &lt;- read_csv(infile, na=c('NA', '', '.'))\n\nR tells us that we have two character data columns (zone and site), and two floating point (dbl) columns that contain the year of measurement - year - and estimated annual NPP values (npp_g_m2). Lets make a simple plot to look at the data. To do this we are using the ggplot() function, which is part of the ggplot2 library that was attached when we loaded the tidyverse package`\n\nggplot(anpp.annual, aes(x = year, y = npp_g_m2, col = site, group = site)) +\n  geom_line() +\n  theme(axis.text.x = element_text(angle = 90, vjust = 0.5))\n\nNow, lets output this into our data/ directory so that we can load it easily next time.\n\nwrite_csv(anpp.annual, '../data/td01_anpp.annual.csv')",
+    "crumbs": [
+      "Jornada Datasets Tour"
+    ]
+  },
+  {
+    "objectID": "docs/lessons/data-viz-with-ggplot.html",
+    "href": "docs/lessons/data-viz-with-ggplot.html",
+    "title": "Data visualization with ggplot",
+    "section": "",
+    "text": "# Get tidyverse & a few other packages\n\n# If they are not installed, uncomment and run these commands first\n# install.packages(\"tidyverse\")\n# install.packages(\"ratdat\")\n# install.packages(\"RColorBrewer\")\n# install.packages(\"ggpmisc\")\n\n# Now load them into your environment\nlibrary(tidyverse) # Includes ggplot2\nlibrary(ratdat) # For example data, complete_old\nlibrary(RColorBrewer) # For color palettes\nlibrary(ggpmisc) # For ggplot2 extensions\n\nNow lets explore the data, load it, and re-run a recent plot\n\n?complete_old\n\n# Add data to R environment\ndata(complete_old)\n\n# Most recent plot from lesson\nggplot(data = complete_old, mapping = aes(x = plot_type, y = hindfoot_length)) +\n  geom_jitter(aes(color = plot_type), alpha = 0.2) +\n  geom_boxplot(outlier.shape = NA, fill = NA) +\n  theme_bw() +\n  theme(axis.title = element_text(size = 14), \n        panel.grid.major.x = element_blank(), \n        legend.position = \"none\")\n\nWarning: Removed 2733 rows containing non-finite outside the scale range\n(`stat_boxplot()`).\n\n\nWarning: Removed 2733 rows containing missing values or values outside the scale range\n(`geom_point()`).\n\n\n\n\n\n\n\n\n\nThese boxplots are not ideal for describing these data The points reveal underlying patterns not accounted for by the boxplots Notice that these data contain observations from multiple species and taxa\n\n?complete_old\nunique(complete_old$taxa)\n\n[1] \"Rodent\"  NA        \"Rabbit\"  \"Bird\"    \"Reptile\"\n\nunique(complete_old$species_id)\n\n [1] \"NL\" \"DM\" \"PF\" \"PE\" \"DS\" \"PP\" \"SH\" \"OT\" \"DO\" \"OX\" \"SS\" \"OL\" \"RM\" \"\"   \"SA\"\n[16] \"PM\" \"AH\" \"DX\" \"AB\" \"CB\" \"CM\" \"CQ\" \"RF\" \"PC\" \"PG\" \"PH\" \"PU\" \"CV\" \"UR\" \"UP\"\n[31] \"ZL\" \"UL\" \"CS\" \"SC\" \"BA\" \"SF\"\n\n\nMake a barplot of the total counts of each species, then rotate to the x-axis labels to make them more readable.\n\nggplot(data = complete_old, mapping = aes(x = species_id)) +\n  geom_bar(stat = \"count\") +\n  scale_y_continuous(breaks = seq(from = 0, to = 6000, by = 200)) +\n  theme(axis.text.x = element_text(angle = 90, vjust = 0.5))\n\n\n\n\n\n\n\n\nNow use the fill aesthetic to show the breakdown in counts by sex\n\nggplot(data = complete_old, mapping = aes(x = species_id, fill = sex)) +\n  geom_bar(stat = \"count\") +\n  scale_y_continuous(breaks = seq(from = 0, to = 6000, by = 200)) +\n  theme(axis.text.x = element_text(angle = 90, vjust = 0.5)) \n\n\n\n\n\n\n\n\nLets choose a color palette from RColorBrewer\n\ndisplay.brewer.all()\n\n\n\n\n\n\n\nggplot(data = complete_old, mapping = aes(x = species_id, fill = sex)) +\n  geom_bar(stat = \"count\") +\n  scale_y_continuous(breaks = seq(from = 0, to = 6000, by = 200)) +\n  theme(axis.text.x = element_text(angle = 90, vjust = 0.5)) +\n  scale_fill_brewer(palette = \"Dark2\")\n\n\n\n\n\n\n\n\nNow add a horizontal line at count = 400\n\nggplot(data = complete_old, mapping = aes(x = species_id, fill = sex)) +\n  geom_bar(stat = \"count\") +\n  scale_y_continuous(breaks = seq(from = 0, to = 6000, by = 200)) +\n  theme(axis.text.x = element_text(angle = 90, vjust = 0.5)) +\n  scale_fill_brewer(palette = \"Dark2\") +\n  geom_hline(yintercept = 400, col = \"black\")\n\n\n\n\n\n\n\n\nLook at only the species who occur 400 or more times\n\nspecies_400 &lt;- complete_old %&gt;%\n  group_by(species_id) %&gt;%\n  summarise(total_obs = n()) %&gt;%\n  dplyr::filter(total_obs &gt;= 400)\n\nSubset the data to include only the species occurring 400 or more times\n\nspecies_400_data &lt;- complete_old %&gt;%\n  dplyr::filter(species_id %in% species_400$species_id)\n\nRecreate previous boxplots with jittered points, but facet by each species. Don’t suppress the outliers!\n\nggplot(data = species_400_data, mapping = aes(x = plot_type, y = hindfoot_length)) +\n  geom_jitter(aes(color = plot_type), alpha = 0.2) +\n  geom_boxplot(fill = NA) +\n  theme_bw() +\n  theme(axis.title = element_text(size = 14), \n        panel.grid.major.x = element_blank(), \n        legend.position = \"none\") +\n  facet_wrap(~species_id) +\n  scale_color_brewer(palette = \"Set3\")\n\nWarning: Removed 1656 rows containing non-finite outside the scale range\n(`stat_boxplot()`).\n\n\nWarning: Removed 1656 rows containing missing values or values outside the scale range\n(`geom_point()`).\n\n\n\n\n\n\n\n\n\nNow rotate x-axis label. Allow for different y-axis scale for each species, and extend whiskers to max and mix.\n\nggplot(data = species_400_data, mapping = aes(x = plot_type, y = hindfoot_length)) +\n  geom_jitter(aes(color = plot_type), alpha = 0.2) +\n  geom_boxplot(coef= NULL, fill = NA) +\n  theme_bw() +\n  theme(axis.title = element_text(size = 14), \n        panel.grid.major.x = element_blank(), \n        legend.position = \"none\") +\n  scale_color_brewer(palette = \"Set3\") +\n  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1)) +\n  facet_wrap(~species_id, scales = \"free_y\") \n\nWarning: Removed 1656 rows containing non-finite outside the scale range\n(`stat_boxplot()`).\n\n\nWarning: Removed 1656 rows containing missing values or values outside the scale range\n(`geom_point()`).\n\n\n\n\n\n\n\n\n\nCreate a new boxplot figure that lumps all plot_types together but has separate boxplots for each species\n\nggplot(data = species_400_data, mapping = aes(x = species_id, y = hindfoot_length, color = species_id)) +\n  geom_jitter(alpha = 0.2) +\n  geom_boxplot(coef = NULL, col = \"black\", alpha = 0.2) +\n  theme(axis.title = element_text(size = 14), \n        panel.grid.major.x = element_blank(), \n        legend.position = \"none\")\n\nWarning: Removed 1656 rows containing non-finite outside the scale range\n(`stat_boxplot()`).\n\n\nWarning: Removed 1656 rows containing missing values or values outside the scale range\n(`geom_point()`).\n\n\n\n\n\n\n\n\n\nSubset the Dipodomys species and remove the species identified only to genus. Then, remove the species with unassigned sex and create species name by pasting togther genus and species.\n\nDipodomys &lt;- complete_old %&gt;%\n  dplyr::filter(genus == \"Dipodomys\") %&gt;%\n  dplyr::filter(species != \"sp.\") %&gt;% # Remove the unidentified individuals\n  dplyr::filter(sex != \"\") %&gt;%\n  mutate(species_name = paste(genus, species, sep = \" \"))\n\nwith(Dipodomys, table(species_name))\n\nspecies_name\n   Dipodomys merriami       Dipodomys ordii Dipodomys spectabilis \n                 5630                  1482                  2367 \n\nunique(Dipodomys$sex)\n\n[1] \"F\" \"M\"\n\n\nCreate boxplots of weight\n\nggplot(data = Dipodomys, mapping = aes(x = plot_type, y = hindfoot_length)) +\n  geom_jitter(aes(color = plot_type), alpha = 0.2) +\n  geom_boxplot(fill = NA) +\n  facet_wrap(~species_name, nrow = 1) +\n  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1)) +\n  theme(axis.title = element_text(size = 14), \n        panel.grid.major.x = element_blank(), \n        legend.position = \"none\")\n\nWarning: Removed 936 rows containing non-finite outside the scale range\n(`stat_boxplot()`).\n\n\nWarning: Removed 936 rows containing missing values or values outside the scale range\n(`geom_point()`).\n\n\n\n\n\n\n\n\n\nNow transpose the data so that hindfoot_length and weight are in the same column, identified by a new column called “variable”.\n\nDipodomys_long &lt;- Dipodomys %&gt;%\n  pivot_longer(cols = c(hindfoot_length, weight),\n               names_to = \"variable\",\n               values_to = \"value\")\n\nggplot(data = Dipodomys_long, mapping = aes(x = plot_type, y = value)) +\n  geom_jitter(aes(color = plot_type), alpha = 0.2) +\n  geom_boxplot(fill = NA) +\n  facet_grid(variable ~ species_name) +\n  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1)) +\n  theme(axis.title = element_text(size = 14), \n        panel.grid.major.x = element_blank(), \n        legend.position = \"none\")\n\nWarning: Removed 1276 rows containing non-finite outside the scale range\n(`stat_boxplot()`).\n\n\nWarning: Removed 1276 rows containing missing values or values outside the scale range\n(`geom_point()`).\n\n\n\n\n\n\n\n\n\nAllow for different y-axis scales\n\nggplot(data = Dipodomys_long, mapping = aes(x = plot_type, y = value)) +\n  theme_bw() +\n  geom_jitter(aes(color = plot_type), alpha = 0.2) +\n  geom_boxplot(fill = NA) +\n  facet_grid(variable ~ species_name, scales = \"free_y\") +\n  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1)) +\n  theme(axis.title = element_text(size = 14), \n        panel.grid.major.x = element_blank(), \n        legend.position = \"none\")\n\nWarning: Removed 1276 rows containing non-finite outside the scale range\n(`stat_boxplot()`).\n\n\nWarning: Removed 1276 rows containing missing values or values outside the scale range\n(`geom_point()`).\n\n\n\n\n\n\n\n\n\nWork with Dipodomys spectabilis (Banner-tailed kangaroo rat)\n\nbanner_tailed &lt;- Dipodomys %&gt;%\n  dplyr::filter(species_name == \"Dipodomys spectabilis\")\n\nLook at the density of points across weight and hindfoot_length\n\nggplot(banner_tailed, aes(x=weight)) +\n  geom_density()\n\nWarning: Removed 128 rows containing non-finite outside the scale range\n(`stat_density()`).\n\n\n\n\n\n\n\n\nggplot(banner_tailed, aes(x=hindfoot_length)) +\n  geom_density()\n\nWarning: Removed 326 rows containing non-finite outside the scale range\n(`stat_density()`).\n\n\n\n\n\n\n\n\n\nWeight is continuous but hindfoot_length is discrete\n\nggplot(banner_tailed, aes(x=hindfoot_length)) +\n  geom_bar(state = \"count\") +\n  scale_x_continuous(breaks = unique(banner_tailed$hindfoot_length))\n\nWarning in geom_bar(state = \"count\"): Ignoring unknown parameters: `state`\n\n\nWarning: Removed 326 rows containing non-finite outside the scale range\n(`stat_count()`).\n\n\n\n\n\n\n\n\n\nUse geom_density_2d to show the density\n\nggplot(banner_tailed , aes(x = weight, y = hindfoot_length)) +\n  geom_point() +\n  geom_density_2d()\n\nWarning: Removed 429 rows containing non-finite outside the scale range\n(`stat_density2d()`).\n\n\nWarning: Removed 429 rows containing missing values or values outside the scale range\n(`geom_point()`).\n\n\n\n\n\n\n\n\n\nFit LOESS regression line (default for geom_smooth)\n\nggplot(banner_tailed, aes(x = weight, y = hindfoot_length)) +\n  geom_point() +\n  geom_smooth()\n\n`geom_smooth()` using method = 'gam' and formula = 'y ~ s(x, bs = \"cs\")'\n\n\nWarning: Removed 429 rows containing non-finite outside the scale range\n(`stat_smooth()`).\n\n\nWarning: Removed 429 rows containing missing values or values outside the scale range\n(`geom_point()`).\n\n\n\n\n\n\n\n\n\nLinear regression\n\nggplot(banner_tailed, aes(x = weight, y = hindfoot_length)) +\n  geom_point() +\n  geom_smooth(method = \"lm\", se = FALSE)\n\n`geom_smooth()` using formula = 'y ~ x'\n\n\nWarning: Removed 429 rows containing non-finite outside the scale range\n(`stat_smooth()`).\n\n\nWarning: Removed 429 rows containing missing values or values outside the scale range\n(`geom_point()`).\n\n\n\n\n\n\n\n\n\nPolynomial regression\n\nggplot(banner_tailed, aes(x = weight, y = hindfoot_length)) +\n  geom_point() +\n  stat_smooth(method='lm', formula = y~poly(x,2))\n\nWarning: Removed 429 rows containing non-finite outside the scale range\n(`stat_smooth()`).\n\n\nWarning: Removed 429 rows containing missing values or values outside the scale range\n(`geom_point()`).\n\n\n\n\n\n\n\n\n\nLinear regression with regression equation and summary statistics\n\nggplot(banner_tailed, aes(x = weight, y = hindfoot_length)) +\n  geom_point() +\n  geom_smooth(method = \"lm\", se = FALSE) +\n  stat_poly_eq(use_label(c(\"eq\", \"adj.R2\", \"f\", \"p\", \"n\"))) \n\n`geom_smooth()` using formula = 'y ~ x'\n\n\nWarning: Removed 429 rows containing non-finite outside the scale range\n(`stat_smooth()`).\n\n\nWarning: Removed 429 rows containing non-finite outside the scale range\n(`stat_poly_eq()`).\n\n\nWarning: Removed 429 rows containing missing values or values outside the scale range\n(`geom_point()`).\n\n\n\n\n\n\n\n\n\nThese regression statistics are consistent with lm() regression function\n\nlm(weight ~ hindfoot_length, data = banner_tailed) %&gt;% summary()\n\n\nCall:\nlm(formula = weight ~ hindfoot_length, data = banner_tailed)\n\nResiduals:\n     Min       1Q   Median       3Q      Max \n-113.979  -10.516    3.094   14.094   64.021 \n\nCoefficients:\n                 Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)     -156.3933    11.3708  -13.75   &lt;2e-16 ***\nhindfoot_length    5.5367     0.2271   24.38   &lt;2e-16 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 20.39 on 1936 degrees of freedom\n  (429 observations deleted due to missingness)\nMultiple R-squared:  0.2348,    Adjusted R-squared:  0.2344 \nF-statistic: 594.1 on 1 and 1936 DF,  p-value: &lt; 2.2e-16\n\n\nUse separate colors for sex\n\nggplot(banner_tailed, aes(x = weight, y = hindfoot_length, col = sex)) +\n  geom_point() +\n  geom_smooth(method = \"lm\", se = FALSE) +\n  stat_poly_eq(use_label(c(\"eq\", \"adj.R2\", \"f\", \"p\", \"n\"))) \n\n`geom_smooth()` using formula = 'y ~ x'\n\n\nWarning: Removed 429 rows containing non-finite outside the scale range\n(`stat_smooth()`).\n\n\nWarning: Removed 429 rows containing non-finite outside the scale range\n(`stat_poly_eq()`).\n\n\nWarning: Removed 429 rows containing missing values or values outside the scale range\n(`geom_point()`).\n\n\n\n\n\n\n\n\n\nIs there evidence for different slopes between males and females?\n\nlm(weight ~ hindfoot_length*sex, data = banner_tailed) %&gt;% summary()\n\n\nCall:\nlm(formula = weight ~ hindfoot_length * sex, data = banner_tailed)\n\nResiduals:\n     Min       1Q   Median       3Q      Max \n-114.958  -10.503    2.902   13.972   65.883 \n\nCoefficients:\n                      Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)          -114.9518    17.4479  -6.588 5.72e-11 ***\nhindfoot_length         4.6876     0.3513  13.344  &lt; 2e-16 ***\nsexM                  -67.6397    23.2678  -2.907  0.00369 ** \nhindfoot_length:sexM    1.3820     0.4654   2.969  0.00302 ** \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 20.34 on 1934 degrees of freedom\n  (429 observations deleted due to missingness)\nMultiple R-squared:  0.2392,    Adjusted R-squared:  0.238 \nF-statistic: 202.6 on 3 and 1934 DF,  p-value: &lt; 2.2e-16\n\n\nUse facet_grid to apply regression to all the species in the Dipodomys data.frame Allow for different y-axis scales\n\nggplot(Dipodomys, aes(x = weight, y = hindfoot_length)) +\n  geom_point(col = \"black\") +\n  geom_smooth(method = \"lm\", se = FALSE) +\n  stat_poly_eq(mapping = use_label(\"eq\", \"adj.R2\")) +\n  # stat_poly_eq(x = 100, y = 60, mapping = use_label(\"adj.R2\", \"n\")) +\n  facet_grid(sex ~ species_name, scales = \"free\") +\n  theme(legend.position = \"none\")\n\n`geom_smooth()` using formula = 'y ~ x'\n\n\nWarning: Removed 1215 rows containing non-finite outside the scale range\n(`stat_smooth()`).\n\n\nWarning: Removed 1215 rows containing non-finite outside the scale range\n(`stat_poly_eq()`).\n\n\nWarning: Removed 1215 rows containing missing values or values outside the scale range\n(`geom_point()`).",
+    "crumbs": [
+      "Data visualization with ggplot"
+    ]
+  }
+]

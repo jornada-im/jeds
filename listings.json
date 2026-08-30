@@ -1,0 +1,28 @@
+[
+  {
+    "listing": "/docs/lessons/index.html",
+    "items": [
+      "/docs/lessons/access_EDI_data.html",
+      "/docs/lessons/data-viz-with-ggplot.html",
+      "/docs/lessons/git-and-github-for-research.html",
+      "/docs/lessons/setup.html",
+      "/docs/lessons/jrn_datasets_tour.html",
+      "/docs/lessons/statistical-inference-linear-and-mixed.html",
+      "/docs/lessons/teaching-datasets.html"
+    ]
+  },
+  {
+    "listing": "/workshops/index.html",
+    "items": [
+      "/workshops/2023-data-therapy-geospatial/index.html",
+      "/workshops/2022-data-therapy-git-github/index.html",
+      "/workshops/20220629-jrn-ecology-short-course/index.html"
+    ]
+  },
+  {
+    "listing": "/docs/slides/index.html",
+    "items": [
+      "/docs/slides/JornadaDatasetsTour.html"
+    ]
+  }
+]

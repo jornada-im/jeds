@@ -1,0 +1,1274 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Greg Maurer, Darren James">
+<meta name="dcterms.date" content="2022-06-19">
+
+<title>Statistical inference with general linear models and mixed models – Jornada Environmental Data Science</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../docs/lessons/teaching-datasets.html" rel="next">
+<link href="../../docs/lessons/setup.html" rel="prev">
+<link href="../../img/jrn-logo-light.png" rel="icon" type="image/png">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-aced932c6eb97d642153b8e218288f9f.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-33c54f292d46a1421402a05ca36be767.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="../../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../../img/jrn-logo-light.png" alt="" class="navbar-logo light-content">
+    <img src="../../img/jrn-logo-light.png" alt="" class="navbar-logo dark-content">
+    </a>
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Jornada Environmental Data Science</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../docs/lessons/index.html"> 
+<span class="menu-text">Lessons</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../docs/slides/index.html"> 
+<span class="menu-text">Presentations</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../workshops/index.html"> 
+<span class="menu-text">Workshops</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-more" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">More</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-more">    
+        <li class="dropdown-header">downloads/index.qmd</li>
+        <li class="dropdown-header">docs/project-procedures/index.qmd</li>
+        <li class="dropdown-header">docs/proposals-and-reports/index.qmd</li>
+        <li class="dropdown-header">archive/index.qmd</li>
+    </ul>
+  </li>
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+    <a href="https://github.com/jornada-im/jeds" title="The JEDS repository" class="quarto-navigation-tool px-1" aria-label="The JEDS repository"><i class="bi bi-github"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../docs/lessons/statistical-inference-linear-and-mixed.html">Statistical inference with general linear models and mixed models</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../docs/lessons/access_EDI_data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Accessing Jornada data in EDI</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../docs/lessons/data-viz-with-ggplot.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Data visualization with ggplot</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../docs/lessons/git-and-github-for-research.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Git and GitHub for researchers</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../docs/lessons/jrn_datasets_tour.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Jornada Datasets Tour</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../docs/lessons/setup.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">JEDS Introduction and Setup</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../docs/lessons/statistical-inference-linear-and-mixed.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Statistical inference with general linear models and mixed models</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../docs/lessons/teaching-datasets.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Teaching Datasets</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a>
+  <ul class="collapse">
+  <li><a href="#our-data-and-r-packages" id="toc-our-data-and-r-packages" class="nav-link" data-scroll-target="#our-data-and-r-packages">Our data and R packages</a></li>
+  </ul></li>
+  <li><a href="#comparing-the-mean-of-two-samples-t-tests" id="toc-comparing-the-mean-of-two-samples-t-tests" class="nav-link" data-scroll-target="#comparing-the-mean-of-two-samples-t-tests">Comparing the mean of two samples (t-tests)</a>
+  <ul class="collapse">
+  <li><a href="#how-do-we-know-which-comparison-t-test-to-use" id="toc-how-do-we-know-which-comparison-t-test-to-use" class="nav-link" data-scroll-target="#how-do-we-know-which-comparison-t-test-to-use">How do we know which comparison (t-test) to use?</a></li>
+  </ul></li>
+  <li><a href="#interlude-statistical-inference-and-hypothesis-testing-with-p-values" id="toc-interlude-statistical-inference-and-hypothesis-testing-with-p-values" class="nav-link" data-scroll-target="#interlude-statistical-inference-and-hypothesis-testing-with-p-values">Interlude: Statistical inference and hypothesis testing with p-values</a>
+  <ul class="collapse">
+  <li><a href="#inference-with-hypothesis-tests" id="toc-inference-with-hypothesis-tests" class="nav-link" data-scroll-target="#inference-with-hypothesis-tests">Inference with hypothesis tests</a></li>
+  <li><a href="#whats-up-with-p-values" id="toc-whats-up-with-p-values" class="nav-link" data-scroll-target="#whats-up-with-p-values">Whats up with p-values?</a></li>
+  </ul></li>
+  <li><a href="#comparing-sample-means-with-simple-linear-models" id="toc-comparing-sample-means-with-simple-linear-models" class="nav-link" data-scroll-target="#comparing-sample-means-with-simple-linear-models">Comparing sample means with simple linear models</a></li>
+  <li><a href="#comparing-grouped-data-using-linear-models" id="toc-comparing-grouped-data-using-linear-models" class="nav-link" data-scroll-target="#comparing-grouped-data-using-linear-models">Comparing grouped data using linear models</a>
+  <ul class="collapse">
+  <li><a href="#post-hoc-tests-and-pairwise-comparisons" id="toc-post-hoc-tests-and-pairwise-comparisons" class="nav-link" data-scroll-target="#post-hoc-tests-and-pairwise-comparisons">Post-hoc tests and pairwise comparisons</a></li>
+  </ul></li>
+  <li><a href="#into-the-wilderness-with-linear-mixed-models" id="toc-into-the-wilderness-with-linear-mixed-models" class="nav-link" data-scroll-target="#into-the-wilderness-with-linear-mixed-models">Into the wilderness with linear mixed models</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/jornada-im/jeds/edit/main/docs/lessons/statistical-inference-linear-and-mixed.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/jornada-im/jeds/issues/new/choose" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Statistical inference with general linear models and mixed models</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Greg Maurer, Darren James </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">June 19, 2022</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>This lesson introduces statistical inference using a sequence of approaches building from mean comparison procedures (t-tests), to simple linear models (often called general linear models), through linear mixed models. The lesson centers on the assumptions that underlie the process of fitting linear models. These, in order of increasing importance, are:</p>
+<ol type="1">
+<li>The samples are drawn from a normal population, and therefore the residuals, or errors, are normally distributed (not necessarily the whole dataset).</li>
+<li>The samples drawn from our population, or our groups, from have constant variance (they are <em>homoscedastic</em>).</li>
+<li>The observations in each group, or sample, are independent of one another.</li>
+</ol>
+<p>We should try to meet these assumptions when fitting linear models<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>, but when analyzing ecological data they are easily violated. So, as this lesson introduces various types of statistical inference around linear models, we will also show ways to test these assumptions with our data, and fit alternative models (such as mixed models) when they can’t be met.</p>
+<section id="our-data-and-r-packages" class="level3">
+<h3 class="anchored" data-anchor-id="our-data-and-r-packages">Our data and R packages</h3>
+<p>In addition to <code>tidyverse</code>, you will need to have the <code>car</code> package installed, which adds some options for inspecting fitted regression models, such as type-II and -III ANOVA output tables. You will also need <code>emmeans</code>, <code>multcomp</code>, and <code>multcompView</code>for post-hoc comparisons of groups in fitted linear models, and <code>lme4</code> and <code>lmerTest</code> to fit and test some mixed models.</p>
+<p>Data for the exercises here come from the Jornada annual NPP data package on EDI. You can learn more about this dataset on the <a href="'./teaching_datasets.Rmd#Teaching-dataset-1'">teaching datasets</a> page. To load the data we will first load the <code>tidyverse</code> and use its <code>read_csv()</code> function to read in the data from EDI. Then we’ll look at the structure of this data.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get tidyverse &amp; the NPP data</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>anpp <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">'https://pasta.lternet.edu/package/data/eml/knb-lter-jrn/210011003/105/127124b0f04a1c71f34148e3d40a5c72'</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(anpp)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>We have four columns: <code>year</code> is a number representing the year of observation, <code>zone</code> is a character representing one of the 5 major vegetation zones at the Jornada, <code>site</code> is a string representing one of the 15 NPP study sites at the Jornada, and <code>npp_g_m2</code> is our observed NPP value in <span class="math inline">\(g\cdot m^{-2}\)</span>.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Then, make a summary figure</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(anpp, <span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> npp_g_m2, <span class="at">col =</span> site, <span class="at">group =</span> site)) <span class="sc">+</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">vjust =</span> <span class="fl">0.5</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+</section>
+<section id="comparing-the-mean-of-two-samples-t-tests" class="level2">
+<h2 class="anchored" data-anchor-id="comparing-the-mean-of-two-samples-t-tests">Comparing the mean of two samples (t-tests)</h2>
+<p>We commonly need to compare two samples from a set of observations. In this lesson, we examine net primary production data (NPP) collected at the Jornada. This dataset has been collected for over 3 decades, and as shown above, there is significant variability from year to year. Lets begin by comparing observations in two years only, 2019 and 2020, to see if they are markedly different using a t-test.</p>
+<p>First, create a dataframe that is subset of our full <code>anpp</code> dataframe.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a 2-year data subset</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>anpp.<span class="fl">19.20</span> <span class="ot">&lt;-</span> anpp <span class="sc">%&gt;%</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(year <span class="sc">%in%</span> <span class="dv">2019</span><span class="sc">:</span><span class="dv">2020</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>In t-tests we are usually testing whether the mean of two groups is different. Lets look at some summary statistics from our two years of data first.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Summary statistics</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>anpp.<span class="dv">19</span>.<span class="fl">20.</span>stats <span class="ot">&lt;-</span> anpp.<span class="fl">19.20</span> <span class="sc">%&gt;%</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(year) <span class="sc">%&gt;%</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n =</span> <span class="fu">n</span>(),</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">mean =</span> <span class="fu">mean</span>(npp_g_m2),</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">std.dev =</span> <span class="fu">sd</span>(npp_g_m2)) <span class="sc">%&gt;%</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">std.err =</span> std.dev<span class="sc">/</span><span class="fu">sqrt</span>(n))</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>anpp.<span class="dv">19</span>.<span class="fl">20.</span>stats</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>From this we see that the means for each year are offset, increasing by about 19 <span class="math inline">\(g\cdot m^{-2}\)</span> from 2019 to 2020. There are also differences in the variance around the means, which we see as different standard deviation and error statistics.</p>
+<p>For a t-test we first need to put data into “wide” form, with observations for the different years in separate columns.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Spread to wide form</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>anpp.<span class="dv">19</span>.<span class="fl">20.</span>wide <span class="ot">&lt;-</span> anpp.<span class="fl">19.20</span> <span class="sc">%&gt;%</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">spread</span>(year, npp_g_m2)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(anpp.<span class="dv">19</span>.<span class="fl">20.</span>wide)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Now do a t-test for differences in mean NPP in 2019 and 2020, using the <code>t.test()</code> function.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># A default 2-sample t-test in R</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(<span class="at">x =</span> anpp.<span class="dv">19</span>.<span class="fl">20.</span>wide<span class="sc">$</span><span class="st">`</span><span class="at">2019</span><span class="st">`</span>, </span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> anpp.<span class="dv">19</span>.<span class="fl">20.</span>wide<span class="sc">$</span><span class="st">`</span><span class="at">2020</span><span class="st">`</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>We see that the default here is a “Welch Two Sample t-test”, which is an unequal variance test. That means that the test is designed to account for differences in variance between the 2019 and 2020 sample. We’ll see later that testing two samples with different variances is something we could also do with a mixed model. This test tells us that there isn’t a “significant” difference in the means since the p-value is greater than 0.05, which is our <span class="math inline">\(\alpha\)</span> value, or the threshold we use to reject the null hypothesis that the two means are the same.</p>
+<p>Lets look at some other variations on the t-test. First, a standard Student’s t-test with equal, or pooled, variance.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># t-test with equal variance</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(<span class="at">x =</span> anpp.<span class="dv">19</span>.<span class="fl">20.</span>wide<span class="sc">$</span><span class="st">`</span><span class="at">2019</span><span class="st">`</span>, </span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> anpp.<span class="dv">19</span>.<span class="fl">20.</span>wide<span class="sc">$</span><span class="st">`</span><span class="at">2020</span><span class="st">`</span>, </span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">var.equal =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>This lowers the p-value a tad, but is that a good thing? We’ve pooled the variance for 2019 and 2020, even though we saw from our summary statistics that the variances might be unequal, i.e., the standard deviation of the 2020 observations are higher.</p>
+<p>Next lets try a paired t-test, which assumes that the observations in each sample are not independent. We know this is the case since we’re measuring the same sites each year, and therefore comparing two samples of the same experimental or statistical units (sites). In a paired t-test, the question becomes whether the difference between the two samples, 2019 and 2020 observations, is itself different than zero. Therefore, if we already know that we have unequal variances in our samples, taking the difference is a quick way to get around that issue.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Paired t-test</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(<span class="at">x =</span> anpp.<span class="dv">19</span>.<span class="fl">20.</span>wide<span class="sc">$</span><span class="st">`</span><span class="at">2019</span><span class="st">`</span>, </span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> anpp.<span class="dv">19</span>.<span class="fl">20.</span>wide<span class="sc">$</span><span class="st">`</span><span class="at">2020</span><span class="st">`</span>, </span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">paired =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>We have a significant result here (p-value &lt; 0.05) which tells us that we can reject the null hypothesis that the difference between these two years of data is equal to zero. So, NPP changed from 2019 to 2020.</p>
+<p>We’ll see later that paired t-test can also be formulated as a type of linear mixed model.</p>
+<section id="how-do-we-know-which-comparison-t-test-to-use" class="level3">
+<h3 class="anchored" data-anchor-id="how-do-we-know-which-comparison-t-test-to-use">How do we know which comparison (t-test) to use?</h3>
+<p>It can be challenging to know whether the data are paired, or whether they have unequal variance. It is a good idea to be fairly systematic and examine assumptions as you go. Lets take a slightly larger slice of our original dataset and compare years 2017 and 2018 this time.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a slightly different data subset - 2017 and 2018</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>anpp.<span class="fl">17.18</span> <span class="ot">&lt;-</span> anpp <span class="sc">%&gt;%</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(year <span class="sc">%in%</span> <span class="dv">2017</span><span class="sc">:</span><span class="dv">2018</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>How would we test whether there are unequal variances within these two 1-year samples (i.e., whether the data are <em>heteroscedastic</em>) ? If we plot the data, we will see some visual cues, and boxplots are a nice method for this.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(anpp.<span class="fl">17.18</span>, <span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> npp_g_m2, <span class="at">color =</span> <span class="fu">factor</span>(year))) <span class="sc">+</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>We see here that 2017 has much wider box, suggesting higher variance, than 2018. We can use some additional tests to quantify that range in variance. The first is the Bartlett test, which tests the null hypothesis that the variance in each sample, or group, is equal.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Bartlett test for unequal variance (homescedasticity)</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">bartlett.test</span>(npp_g_m2 <span class="sc">~</span> year, <span class="at">data =</span> anpp.<span class="fl">17.18</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>The low p-value here suggestst that we don’t have equal variance in 2017 and 2018. No big surprise given the boxplots we made.</p>
+<p>However, perhaps our data are not normally distributed, in which case the Bartlett test is inadequate because it is sensitive to non-normal data. Lets first check if the data are normal using the Shapiro-Wilks test, which tests the null hypothesis that the data are normally distributed.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Test for normality of the data</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">shapiro.test</span>(anpp.<span class="fl">17.18</span><span class="sc">$</span>npp_g_m2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>We have a low p-value here, so we have strong evidence that we are actually working with non-normally distributed data. Since that is the case, we might want to test for unequal variances using one of two other tests, the Fligner test or the Levene test.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fligner test for homoscedasticity</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">fligner.test</span>(npp_g_m2 <span class="sc">~</span> <span class="fu">as.factor</span>(year), <span class="at">data =</span> anpp.<span class="fl">17.18</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>There is evidence for heteroscedasticity here. What about Levene?</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Levene test for homoscedasticity, which is in the `car` R package</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>car<span class="sc">::</span><span class="fu">leveneTest</span>(npp_g_m2 <span class="sc">~</span> <span class="fu">as.factor</span>(year), <span class="at">data =</span> anpp.<span class="fl">17.18</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Each of these tests appears to reject the null hypothesis that observations occurring in these two years have the same variance.</p>
+<p>Interesting, so it is beginning to look like the data are non-normal and have unequal variance (are <em>heteroscedastic</em>). Are they independent? Well, as we know from learning about the experimental design and inspecting the data, the same sites are measured year after year. This means the measurements in 2017 and 2018 are not independent. So, to compare the means of these years we want to do a paired t-test again.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Spread to wide form</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>anpp.<span class="dv">17</span>.<span class="fl">18.</span>wide <span class="ot">&lt;-</span> anpp.<span class="fl">17.18</span> <span class="sc">%&gt;%</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">spread</span>(year, npp_g_m2)</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Paired t-test</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(<span class="at">x =</span> anpp.<span class="dv">17</span>.<span class="fl">18.</span>wide<span class="sc">$</span><span class="st">`</span><span class="at">2017</span><span class="st">`</span>, </span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> anpp.<span class="dv">17</span>.<span class="fl">18.</span>wide<span class="sc">$</span><span class="st">`</span><span class="at">2018</span><span class="st">`</span>, </span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">paired =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">equal_variance=</span><span class="cn">FALSE</span>) <span class="co"># This is the default, we don't have to specify</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>We get a nice low p-value here, strong evidence that mean NPP changed from 2017 to 2018.</p>
+</section>
+</section>
+<section id="interlude-statistical-inference-and-hypothesis-testing-with-p-values" class="level2">
+<h2 class="anchored" data-anchor-id="interlude-statistical-inference-and-hypothesis-testing-with-p-values">Interlude: Statistical inference and hypothesis testing with p-values</h2>
+<p>You might be wondering why we are doing these types of hypothesis testing procedures and using p-values, especially since other statistical approaches are gaining favor with modern statisticians and data scientists. Lets give a few definitions and talk about the reasons for this approach.</p>
+<section id="inference-with-hypothesis-tests" class="level3">
+<h3 class="anchored" data-anchor-id="inference-with-hypothesis-tests">Inference with hypothesis tests</h3>
+<p>First, in this lesson we’re learning how to do <em>inferential statistics</em>. This is a class of statistical analysis where the objective is to use samples drawn from a larger population to make inferences, or draw logical conclusions, about the larger population. To do this, we commonly go through a process of <em>hypothesis testing</em> where the objective is to identify “significant” differences between samples by ruling out chance or sampling error as the most plausible explanation for those differences. Hypothesis tests are usually framed with two competing hypotheses:</p>
+<ol type="1">
+<li>The null hypothesis (<span class="math inline">\(H_0\)</span>) that there is no statistical relationship.</li>
+<li>The alternative hypothesis (<span class="math inline">\(H_a\)</span>) that there is one or more statistical relationship of interest.</li>
+</ol>
+<p>The reason for learning this method is partly that it is useful, and partly that it is convention. It is common in ecology to want to distinguish groups in our data, and hypothesis testing is an effective way to do that. It is also, for better or worse, a very common approach in scientific literature, which means understanding hypothesis testing will help you understand literature. Hypothesis testing is not always the best approach to apply in modern ecological data analysis, but it remains a useful tool to know.</p>
+<p>A couple examples of hypothesis testing using common procedures are below</p>
+<p><strong>Global F-test for a fixed-effect in ANOVA</strong></p>
+<ul>
+<li><span class="math inline">\(H_0\)</span>: all levels of the effect have equal means</li>
+<li><span class="math inline">\(H_a\)</span>: at least one level has a different mean than another level</li>
+</ul>
+<p><strong>The Shapiro-Wilk test for normality</strong></p>
+<ul>
+<li><span class="math inline">\(H_0\)</span>: data follow a normal distribution</li>
+<li><span class="math inline">\(H_a\)</span>: data do not follow a normal distribution</li>
+</ul>
+<p>When we make inferences using statistical procedures like these, it is common practice to select between <span class="math inline">\(H_0\)</span> and <span class="math inline">\(H_a\)</span> using the the evidence we get from some probability tests, usually in the form of a <em>p-value</em>. So then, the basic procedure underlying inference with hypothesis testing and p-values is:</p>
+<ol type="1">
+<li>Define <span class="math inline">\(H_0\)</span> and <span class="math inline">\(H_a\)</span></li>
+<li>Identify a test statistic with that is known under <span class="math inline">\(H_0\)</span> is known (<span class="math inline">\(t\)</span>, <span class="math inline">\(f\)</span>, <span class="math inline">\(\chi^2\)</span>, etc)</li>
+<li>Calculate the test statistic for the data.</li>
+<li>Compare the test statistic to its distribution under <span class="math inline">\(H_0\)</span>, and the probability of observing a test statistic more extreme (p-value).</li>
+</ol>
+<p>The software we are using (<code>R</code> hopefully), generally does at least steps 2 through 4. If the resulting p-value is sufficiently low (5% or less is usual for biologists), we reject <span class="math inline">\(H_0\)</span> in favor of <span class="math inline">\(H_a\)</span>. If we fail to reject <span class="math inline">\(H_0\)</span>, we proceed as though it is true. Note that we haven’t proven <span class="math inline">\(H_0\)</span> true, but we can say are data are consistent with it.</p>
+</section>
+<section id="whats-up-with-p-values" class="level3">
+<h3 class="anchored" data-anchor-id="whats-up-with-p-values">Whats up with p-values?</h3>
+<p>The <em>p-value</em> is a probability value that gets returned to us from many types of hypothesis tests that we use in inferential statistics. What is the definition? Its a little bit clumsy, and commonly misunderstood. A p-value is</p>
+<ul>
+<li>the conditional probability of observing a statistic as extreme as or more extreme than the one computed from the current data, across hypothetical repetitions of the experiment.</li>
+</ul>
+<p>or alternatively,</p>
+<ul>
+<li>the probability of the data given that it was generated under the null hypothesis (<span class="math inline">\(H_0\)</span>).</li>
+</ul>
+<p>Its also useful to talk about what p-values are not. P-values are NOT</p>
+<ul>
+<li>the probability of <span class="math inline">\(H_0\)</span> being true.</li>
+<li>the probability of falsely rejecting <span class="math inline">\(H_0\)</span> (i.e.&nbsp;the probability of a Type I error)</li>
+</ul>
+<p>P-values are a bit controversial and are commonly misused. Its easy to look for a small number, or a threshold, and then declare a significant result, but it pays to understand the model being fit and what the p-values really represent. So, there are a few other points to keep in mind.</p>
+<ul>
+<li>The first is that you can’t interpret a p-value without knowing what the null hypothesis is. Make sure to have a clear understanding of <span class="math inline">\(H_0\)</span>.</li>
+<li>A p-value is a conditional probability, representing the probability of an event given that other events have already occurred. They are conditional on <span class="math inline">\(H_0\)</span> being testable, model structure, model assumptions, sample size, experimental design, sampling methods, using the statistical software correctly, the software being “correct”, etc.</li>
+<li>The threshold for rejecting <span class="math inline">\(H_0\)</span>, usually called <span class="math inline">\(\alpha\)</span> and set at <span class="math inline">\(p \le 0.05\)</span>, is not a magic number. It is better to think of p-values as a continuum, where p values below 0.1 indicate evidence for rejecting <span class="math inline">\(H_0\)</span>, and the smaller <span class="math inline">\(p\)</span> gets from 0.1, the stronger the evidence. Numbers greater than 0.1, however, are no better than random noise<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>.</li>
+</ul>
+</section>
+</section>
+<section id="comparing-sample-means-with-simple-linear-models" class="level2">
+<h2 class="anchored" data-anchor-id="comparing-sample-means-with-simple-linear-models">Comparing sample means with simple linear models</h2>
+<p>Comparing the mean of different samples, as we have done with t-tests, is also possible using simple linear models (sometimes referred to as <em>general linear models</em>), a class of procedures often used in standard statistics that includes linear regression, one- and multi-way analysis of variance (ANOVA), and analysis of covariance (ANCOVA). All of these are variations of “straight-line-fitting” statistics, and <code>R</code> uses the <code>lm()</code>function for all these procedures. Instead of comparing sample means directly, we are essentially comparing best-fit lines drawn between the mean values of the samples.</p>
+<p>Looking back at our 2019 and 2020 dataframe, lets compare some simple linear models to the t-tests we did earlier in the lesson. A mean comparison test can be done as a linear regression, using <code>lm</code> directly. We will fit a model and then ask for summary results.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Two-sample mean comparison using a linear regression model</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>lm.ttest <span class="ot">&lt;-</span> <span class="fu">lm</span>(npp_g_m2 <span class="sc">~</span> year, <span class="at">data =</span> anpp.<span class="fl">19.20</span>)</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lm.ttest)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>We get quite a few details on the linear model fit here, and see that we have estimated the same difference in means and the same p-value as we had in the earlier equal-variance two-sample t-test.</p>
+<p>If we want to look at how this model is being fit visually, we can make a plot using <code>ggplot</code>, which allows us to fitted models to a plot with <code>geom_smooth</code>. We need to specify the type of model as “lm” to get a linear model.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>anpp.<span class="fl">19.20</span>, <span class="fu">aes</span>(<span class="at">x=</span>year, <span class="at">y=</span>npp_g_m2)) <span class="sc">+</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method=</span><span class="st">"lm"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Notice the difference in the means, represented by the slope of the line, and the difference in the variance (vertical range of the points) between the 2019 and 2020 samples.</p>
+<p>We can also compare the means using one-way ANOVA. The function to do this is <code>aov()</code>, but under the hood this is really just fitting an <code>lm</code> model again, which we can see by looking at the function documentation.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>?aov</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>One nuance here is that when given numerical predictor variables, like <code>year</code>, <code>lm</code> interprets these as a continuous variable. For ANOVA, we aim to analyze differences between discrete categories, so we should make sure we are using a <code>factor</code>, which is how <code>R</code> represents categorical variables. Lets convert <code>year</code> to a factor first.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>anpp.<span class="dv">19</span>.<span class="fl">20.</span>f <span class="ot">&lt;-</span> anpp.<span class="fl">19.20</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>anpp.<span class="dv">19</span>.<span class="fl">20.</span>f<span class="sc">$</span>year <span class="ot">&lt;-</span> <span class="fu">factor</span>(anpp.<span class="dv">19</span>.<span class="fl">20.</span>f<span class="sc">$</span>year)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Now we can fit the ANOVA model using <code>aov()</code>, first specifying the linear model and dataframe to use, and then ask R for summary statistics.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># One-way ANOVA equivalent to the 2-sample t-test</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>aov.ttest <span class="ot">&lt;-</span> <span class="fu">aov</span>(npp_g_m2 <span class="sc">~</span> year, <span class="at">data =</span> anpp.<span class="dv">19</span>.<span class="fl">20.</span>f)</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(aov.ttest)</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="co"># We could also use car::Anova here, but the results are the same</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="co">#car::Anova(lm.ttest, type = "III")</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Notice that here, and when we used <code>lm</code>, our hypothesis test results were the same as with the unpaired, equal-variance, two sample t-test that we tried earlier. This suggests that by default, <code>lm</code> is making some assumptions that our observations are independent. We already know that they aren’t. Later, we’ll see some ways to account for this.</p>
+<p>When we have multiple categories in our data, we can do a multi-way ANOVA by adding additional factors to the model. In our case we have aother categorical variable, called <code>zone</code>, that assigns each NPP site to one of the five major vegetation zones at Jornada. Since this is a character column <code>lm</code>, or <code>aov</code>, will interpret that column as a factor, and we don’t need to convert it first.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Two-way ANOVA using year and vegetation zone</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>aov<span class="fl">.2</span>way <span class="ot">&lt;-</span> <span class="fu">aov</span>(npp_g_m2 <span class="sc">~</span> year <span class="sc">+</span> zone, <span class="at">data =</span> anpp.<span class="dv">19</span>.<span class="fl">20.</span>f)</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(aov<span class="fl">.2</span>way)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>In our two-way ANOVA, we see that vegetation zone has a p-value below 0.05, which suggests that we might be able to reject the null hypothesis that all the vegetation zones have the same mean NPP value in 2019 and 2020.</p>
+<p>This is all instructive, but we know that we should be using a paired model since our observations are not independent. In ANOVA, the term for this is <em>repeated measures</em>. To use repeated measures with <code>aov</code> we must add an “Error” term to our model that partitions the observed variance between years according to <code>site</code>, since <code>site</code> is our experimental unit or subject.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># One-way, repeated measures ANOVA using year and site</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>aov<span class="fl">.1</span>way.rm <span class="ot">&lt;-</span> <span class="fu">aov</span>(npp_g_m2 <span class="sc">~</span> year <span class="sc">+</span> <span class="fu">Error</span>(site<span class="sc">/</span>year),</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>                   <span class="at">data =</span> anpp.<span class="dv">19</span>.<span class="fl">20.</span>f)</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(aov<span class="fl">.1</span>way.rm)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Somewhat unsurprisingly here, we have gotten the same result as with the earlier paired t-test. This also suggests that we can use linear models to partition variance according to the groups in our data. Why would we want to do that?</p>
+</section>
+<section id="comparing-grouped-data-using-linear-models" class="level2">
+<h2 class="anchored" data-anchor-id="comparing-grouped-data-using-linear-models">Comparing grouped data using linear models</h2>
+<p>When we did a two-way ANOVA above, we saw some evidence that Jornada vegetation types, indicated by the <code>zone</code> variable in our dataset, have different mean values. Lets dig into this using the 2017 data and try compare the different zones. First lets subset the data and plot it by <code>zone</code>.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Subset to 2017</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>anpp<span class="fl">.2017</span> <span class="ot">&lt;-</span> anpp <span class="sc">%&gt;%</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(year <span class="sc">==</span> <span class="st">"2017"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">zone =</span> <span class="fu">factor</span>(zone))</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Graph data by zone with boxplots</span></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(anpp<span class="fl">.2017</span>, <span class="fu">aes</span>(<span class="at">x =</span> zone, <span class="at">y =</span> npp_g_m2, <span class="at">fill =</span> zone)) <span class="sc">+</span></span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>We see several things here, including some we noticed earlier. Some vegetation zones, like <code>P</code> (for Playa grassland), have high variance, and some, like <code>T</code> (for Tarbush shrubland), have low variance. We also see some pretty big differences in observed NPP between the zones.</p>
+<p>We can use a linear model to tell us about differences between those groups. As we do that, we should again check some of our linear model assumptions. Lets fit the model using <code>lm</code>. Since <code>zone</code> is a factor this will be treated as an ANOVA.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Run ANOVA with lm()</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>lm.ANOVA <span class="ot">&lt;-</span> <span class="fu">lm</span>(npp_g_m2 <span class="sc">~</span> zone, <span class="at">data =</span> anpp<span class="fl">.2017</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Lets get our ANOVA summary results a few different ways. First, lets use <code>summary()</code> to look at the fitted model.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lm.ANOVA)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>This gives us a bunch of information, including an estimated intercept with a significant t-test, indicating that we can reject the null hypothesis that the intercept is zero. We also have a global F test on <code>zone</code>, which is the p-value on the lower right, that suggests we can reject the null hypothesis that the means of different vegetation zones are all the same. The <code>summary()</code> output however, is a little funny in the case of an ANOVA. Notice that there are also t-tests for all the estimated coefficients of <code>zone</code>, EXCEPT for <code>zoneC</code>. In comparing the five groups, <code>R</code> must assume the effect of one group is zero, and thus made <code>zoneC</code> the intercept and compared the other four groups to it. These comparisons do suggest that <code>zoneP</code> is significantly different than <code>zoneC</code>, but it will be challenging to interpret the rest. So, be careful reading <code>summary()</code> outputs for ANOVA models. It is probably easier to use the options below.</p>
+<p>Another standard <code>R</code> method for evaluating an ANOVA model is to use the <code>anova()</code> function with our model.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(lm.ANOVA)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Here we see the same low p-value for the global F test for <code>zone</code> that we saw in the summary above, and notice that there is no intercept in this case.</p>
+<p>Both of the summary methods above compare the groups using Type I sums of squares. Now lets use the <code>car</code> way, which gives Type III sums of squares (Darren recommends this).</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>car<span class="sc">::</span><span class="fu">Anova</span>(lm.ANOVA, <span class="at">type =</span> <span class="st">"III"</span>, <span class="at">test.statistic =</span> <span class="st">"F"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Here we see a significant F test that the intercept of the model (overall means of the zones) are different than zero, and the same global F test for <code>zone</code> (at least one <code>zone</code> is significantly different than another). In this model, the results are same with the Type III sums of squares as with Type I.</p>
+<p>The results above are interesting, and suggest that mean NPP is different between the vegetation zones. We have more interpretation of this ahead, but first we should look a little more closely at how this model is meeting linear model assumptions. <code>R</code> gives us some nice ways to evaluate fitted <code>lm</code> models, including information about the normality of the residuals. A suite of diagnostic plots for a fitted linear model can be accessed using <code>plot()</code>. For ANOVA, however, we are primarily interested in the Q-Q normal plot, which we will use to examine the residuals of our fitted ANOVA model.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Standard lm diagnostic plots - we could put them all on one page</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="co">#par(mfrow = c(2, 2), oma = c(0, 0, 2, 0)) -&gt; opar</span></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="co">#plot(lm.ANOVA)</span></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a><span class="co"># But this gives us just the plot we need</span></span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a><span class="fu">qqnorm</span>(<span class="fu">resid</span>(lm.ANOVA))</span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a><span class="fu">qqline</span>(<span class="fu">resid</span>(lm.ANOVA))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>In this kind of plot, points that diverge from a 1:1 line suggests that the residuals of the model are not completely normal, violating one of our ANOVA assumptions. In our figure there are only a couple of outliers from the 1:1 line, so the residuals may be more-or-less normally distributed. Lets also test this directly using the Shapiro-Wilk test.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Test for normality of residuals</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="fu">resid</span>(lm.ANOVA) <span class="sc">%&gt;%</span> <span class="fu">shapiro.test</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Actually its not too bad. We don’t have enough evidence to reject the null hypothesis here (<span class="math inline">\(H_0\)</span> is that the data are normal). So, the residuals seem to be “normal enough”!</p>
+<section id="post-hoc-tests-and-pairwise-comparisons" class="level3">
+<h3 class="anchored" data-anchor-id="post-hoc-tests-and-pairwise-comparisons">Post-hoc tests and pairwise comparisons</h3>
+<p>The ANOVA we did for the 2017 data gave us some useful information. We can see that from the <code>zone</code> coefficients and p-values that vegetation type has a large effect on the mean NPP values. That is useful information, but the ANOVA summary table isn’t enough to determine which vegetation zones have means that are <em>different than each other</em>.</p>
+<p>Making comparisons between groups is typically something we do after fitting an ANOVA model, and is called a <em>post-hoc</em> comparison or test<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>. The <code>multcomp</code> and <code>emmeans</code> packages are commonly used for these types of comparisons.</p>
+<p>The first step, after loading <code>emmeans</code>, is to examine the estimated marginal means of the vegetation <code>zone</code> groups in our fitted ANOVA model. Note that these are equivalent to least-squares means in this model, but if there were additional effects than <code>zone</code>, the means would be adjusted for those.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(emmeans)</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Get the estimated marginal means of each zone</span></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="fu">emmeans</span>(lm.ANOVA, <span class="sc">~</span> zone)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>This gives an estimated mean and upper and lower 95% confidence levels. We can do some pairwise comparisons of these means, comparing each zone to the four other zones to determine which are “significantly different”. Note that the formula for the number if independent comparisons is always <span class="math inline">\(n(n-1)/2\)</span>, where <span class="math inline">\(n\)</span> is the number of groups.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Pairwise comparisons of least squares means</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="fu">contrast</span>(<span class="fu">emmeans</span>(lm.ANOVA, <span class="at">specs=</span> <span class="sc">~</span>zone), <span class="at">method =</span> <span class="st">"pairwise"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>This gives us ten mean comparisons using the Tukey method. Because there are ten comparisons at an <span class="math inline">\(\alpha\)</span> of 0.05, we are elevating our false positive rate to <span class="math inline">\(0.05 \times 10\)</span>, or 0.5. The Tukey method adjusts the p-values, making them stricter, to account for these multiple comparisons. So, this set of contrasts contrasts shows ten estimated differences between group means, and in some cases the adjusted p-values indicate that we can reject the null hypothesis that the differences equal zero<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a>. But, it would be nice to condense this output in a way that tells us which groups are statistically different, and which are not. We do that by adding a “compact letter display” with <code>multcomp::cld</code>. The default multiple comparisons adjustment is, again, the Tukey method.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Letter separations (efficient way to display)</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>emmeans.Tukey <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(lm.ANOVA, <span class="sc">~</span> zone) <span class="sc">%&gt;%</span></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>  multcomp<span class="sc">::</span><span class="fu">cld</span>(<span class="at">Letters =</span> LETTERS)</span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>emmeans.Tukey</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>This groups the comparisons, telling us that group <code>P</code>, or Playa grasslands are significantly more productive in 2017, while the other four groups are statistically the same.</p>
+<p>Be prepared to encounter issues with interpreting the intent and statistical meaning of some procedures in R. For example, below, <code>emmeans</code> comparisons using the <code>adjust = "Tukey"</code> parameter give us some difficult-to-parse warnings about the confidence interval adjustment. You will need to read up on issues like this and be aware that statisticians developing <code>R</code> packages don’t always agree on methods.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Problem: emmeans switches to Sidak when adjust = "Tukey" is specified</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="co"># I actually found this from Russ Lenth:</span></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="co">#    https://stats.stackexchange.com/questions/508055/unclear-why-adjust-tukey-was-changed-to-sidak</span></span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a><span class="co"># It seems the confidence limits are being adjusted when you specify adjust = </span></span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a><span class="co"># "Tukey" but not the means themselves. This is intended I guess, but I'm still</span></span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a><span class="co"># fuzzy on the statistical meaning.</span></span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a><span class="fu">emmeans</span>(lm.ANOVA, <span class="sc">~</span> zone, <span class="at">adjust =</span> <span class="st">"Tukey"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a>  multcomp<span class="sc">::</span><span class="fu">cld</span>(<span class="at">Letters =</span> LETTERS)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Should we be using the Sidak confidence interval adjustment? The statistician who wrote <code>emmeans</code> thinks so.</p>
+<p>We’ve based these mean comparison letters on the default Tukey method and its confidence intervals. However, there are other methods that might be more or less conservative. Lets compare results from Tukey and Scheffe methods, by re-doing the comparison, binding the tables, and making a figure. Sheffe is a more conservative method of comparing groups.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># First get comparisons from Scheffe</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>emmeans.Scheffe <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(lm.ANOVA, <span class="at">specs =</span> <span class="sc">~</span> zone) <span class="sc">%&gt;%</span> </span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>  multcomp<span class="sc">::</span><span class="fu">cld</span>(<span class="at">Letters =</span> LETTERS, <span class="at">adjust =</span> <span class="st">"scheffe"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tibble</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">method =</span> <span class="st">"Scheffe"</span>)</span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Put the Tukey results in a tibble</span></span>
+<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a>emmeans.Tukey <span class="ot">&lt;-</span> emmeans.Tukey <span class="sc">%&gt;%</span> <span class="fu">as_tibble</span>() <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">method =</span> <span class="st">"Tukey"</span>)</span>
+<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Look at least squares means and 95% confidence intervals for</span></span>
+<span id="cb34-11"><a href="#cb34-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Tukey and Scheffe</span></span>
+<span id="cb34-12"><a href="#cb34-12" aria-hidden="true" tabindex="-1"></a><span class="fu">bind_rows</span>(emmeans.Scheffe, emmeans.Tukey) <span class="sc">%&gt;%</span></span>
+<span id="cb34-13"><a href="#cb34-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">.group =</span> <span class="fu">trimws</span>(.group)) <span class="sc">%&gt;%</span></span>
+<span id="cb34-14"><a href="#cb34-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> zone, <span class="at">y =</span> emmean, <span class="at">col =</span> zone)) <span class="sc">+</span></span>
+<span id="cb34-15"><a href="#cb34-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb34-16"><a href="#cb34-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin=</span>lower.CL, <span class="at">ymax=</span>upper.CL), <span class="at">width=</span>.<span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb34-17"><a href="#cb34-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">x =</span> zone, <span class="at">y =</span> emmean, <span class="at">label =</span> .group),</span>
+<span id="cb34-18"><a href="#cb34-18" aria-hidden="true" tabindex="-1"></a>            <span class="at">hjust =</span> <span class="sc">-</span><span class="fl">0.5</span>, <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb34-19"><a href="#cb34-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> method, <span class="at">ncol =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb34-20"><a href="#cb34-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"2017 ANPP by Vegetation Zone"</span>, </span>
+<span id="cb34-21"><a href="#cb34-21" aria-hidden="true" tabindex="-1"></a>          <span class="at">subtitle =</span> <span class="st">"Same-letter means are not different at alpha = 0.05"</span>) <span class="sc">+</span></span>
+<span id="cb34-22"><a href="#cb34-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Model-based mean ANPP (g/m^2) +/- 95% CI"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>The Tukey and Sheffe pairwise contrast methods are similar but not the same, and you can see that the error bars, here showing the 95% confidence intervals estimated by each method, are wider for Sheffe since it is more conservative. Also note that groups that are significantly different according to the pairwise contrast (in different letter groups), can still have overlapping error bars. So, you must rely on the outcome of the pairwise contrast, not just the confidence intervals to distinguish groups.</p>
+<p>In scientific papers, the convention is to plot figures like this with standard error bars instead of confidence intervals. The meaning of standard error is an estimate of where the mean might fall if you did your experiment again. The confidence interval estimate for a fitted model or contrast is broader. Lets take a look at the difference.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Look at least squares means and standard errors</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="co"># This kind of figure is the one most commonly reported in scientific papers</span></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a><span class="fu">bind_rows</span>(emmeans.Tukey, emmeans.Scheffe) <span class="sc">%&gt;%</span></span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">.group =</span> <span class="fu">trimws</span>(.group)) <span class="sc">%&gt;%</span></span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> zone, <span class="at">y =</span> emmean, <span class="at">col =</span> zone)) <span class="sc">+</span></span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin=</span>emmean<span class="sc">-</span>SE, <span class="at">ymax=</span>emmean<span class="sc">+</span>SE), <span class="at">width=</span>.<span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">x =</span> zone, <span class="at">y =</span> emmean, <span class="at">label =</span> .group), </span>
+<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a>            <span class="at">hjust =</span> <span class="sc">-</span> <span class="fl">0.5</span>, <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb35-10"><a href="#cb35-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> method, <span class="at">ncol =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb35-11"><a href="#cb35-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"2017 ANPP by Vegetation Zone"</span>, </span>
+<span id="cb35-12"><a href="#cb35-12" aria-hidden="true" tabindex="-1"></a>          <span class="at">subtitle =</span> <span class="st">"Same-letter means are not different at alpha = 0.05"</span>) <span class="sc">+</span></span>
+<span id="cb35-13"><a href="#cb35-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Model-based mean ANPP (g/m^2) +/- S.E."</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Notice that the error bars, now showing standard errors, are much narrower. If we were ignoring the pairwise contrasts and basing our comparisons on standard error bar overlaps alone, we would draw a different conclusion about which vegetation zones had different means.</p>
+</section>
+</section>
+<section id="into-the-wilderness-with-linear-mixed-models" class="level2">
+<h2 class="anchored" data-anchor-id="into-the-wilderness-with-linear-mixed-models">Into the wilderness with linear mixed models</h2>
+<p>In the last section we learned to compare the means across all the groups in our dataset. We were using a very restricted dataset of one year, so there was no issue with independence, but we’ve already seen that we need approaches like paired t-tests and repeated measures ANOVA when observations aren’t independent. We also ignored the somewhat unequal variance among groups in our observations, even though we know that it exists. As we look at additional years of data, we will need to reconsider both of these assumptions when fitting linear models.</p>
+<p>Mixed models help us get around two of the main assumptions behind linear models. In particular they are useful for fitting linear models in cases where:</p>
+<ol type="1">
+<li>there is unequal variance between groups in the data</li>
+<li>the observations or samples are not independent, like we often see in an ecological time series</li>
+</ol>
+<p>They do this using something called <em>random effects</em>. These are different than the <em>fixed effects</em> we have been examining in ANOVA models.</p>
+<p>Mixed models are potentially very complex, and there is not perfect agreement in the statistics community on the best way to fit them. Additionally, in <code>R</code> there are more than the usual number of approaches and packages for fitting mixed models. Prepare to be a little confused sometimes, and to do your own research. Here, we will introduce some basics.</p>
+<p>There are two primary <code>R</code> packages for linear mixed modeling. <code>nlme</code> and <code>lme4</code>. Lets load them.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(nlme)</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lme4)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>To get started, lets look at a four-year NPP dataset- 2017 to 2020. First we’ll subset and plot the dataset.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Subset the data between 2017 and 2020</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>anpp.<span class="fl">17.20</span> <span class="ot">&lt;-</span> anpp <span class="sc">%&gt;%</span></span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(year <span class="sc">%in%</span> <span class="dv">2017</span><span class="sc">:</span><span class="dv">2020</span>) </span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the data</span></span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(anpp.<span class="fl">17.20</span>, <span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> npp_g_m2, <span class="at">col =</span> zone, <span class="at">group =</span> site)) <span class="sc">+</span></span>
+<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb37-8"><a href="#cb37-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">linetype=</span><span class="st">"dashed"</span>, <span class="at">size =</span> .<span class="dv">05</span>) <span class="sc">+</span></span>
+<span id="cb37-9"><a href="#cb37-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="dv">2017</span><span class="sc">:</span><span class="dv">2020</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Some summary statistics will show us that these data have unequal variance, in particular higher variance in 2017.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Variance is highest in 2017</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>anpp.<span class="fl">17.20</span> <span class="sc">%&gt;%</span></span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(year) <span class="sc">%&gt;%</span></span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean =</span> <span class="fu">mean</span>(npp_g_m2),</span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">std.dev =</span> <span class="fu">sd</span>(npp_g_m2))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Other than 2017, the other three years, 2018-2020, seem to have fairly similar variances. Perhaps we will want to model 2017 as being in its own high-variance group.</p>
+<p>Since we have a time series of non-independent measurements, and unequal variance in our samples, we should account for this when we fit a linear model. We’ll begin by fitting a repeated measures model with <code>gls</code> from the <code>nlme</code> package. The correlation structure here is unstructured, so the <code>correlation</code> parameter can be used to specify the off-diagonal values in our R matrix, while <code>weights</code> specifies heterogenous variances in the the diagonals (years here) in that matrix.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit a repeated measures model (unstructured correlated errors)</span></span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>model.un <span class="ot">&lt;-</span> <span class="fu">gls</span>(npp_g_m2 <span class="sc">~</span> zone <span class="sc">+</span> <span class="fu">factor</span>(year) <span class="sc">+</span> zone<span class="sc">*</span><span class="fu">factor</span>(year),</span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>                <span class="at">correlation =</span> <span class="fu">corSymm</span>(<span class="at">form =</span> <span class="sc">~</span> <span class="dv">1</span> <span class="sc">|</span> site),</span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>                <span class="at">weights =</span> <span class="fu">varIdent</span>(<span class="at">form=</span><span class="sc">~</span><span class="dv">1</span><span class="sc">|</span><span class="fu">factor</span>(year)),</span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>                <span class="at">data =</span> anpp.<span class="fl">17.20</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>The model above has specifies and unstructured correlation between error terms. Since this is a time series, we can also reasonably assume that each observation at a site is correlated with previous observations at the site, which is something we can also specify in this model. Using <code>corAR1</code> correlates the errors with an autoregressive structure. Lets do that and compare the fitted models.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit a repeated measures model (correlated errors with autoregressive</span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="co"># covariance structure)</span></span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>model.ar <span class="ot">&lt;-</span> <span class="fu">gls</span>(npp_g_m2 <span class="sc">~</span> zone <span class="sc">+</span> <span class="fu">factor</span>(year) <span class="sc">+</span> zone<span class="sc">*</span><span class="fu">factor</span>(year),  </span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>                <span class="at">correlation =</span> <span class="fu">corAR1</span>(<span class="at">form =</span> <span class="sc">~</span> <span class="dv">1</span> <span class="sc">|</span> site), </span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a>                <span class="at">weights =</span> <span class="fu">varIdent</span>(<span class="at">form=</span><span class="sc">~</span><span class="dv">1</span><span class="sc">|</span><span class="fu">factor</span>(year)), </span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a>                <span class="at">data =</span> anpp.<span class="fl">17.20</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Now we’ll compare these two models using the Akaike Information Criterion, or AIC (the function in <code>R</code> is <code>AIC()</code>). Comparing models this way is part of the information theoretic approach to model selection. A lower AIC value for the same data, indicates a better-fitting, and more parsimonious model.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">AIC</span>(model.un)</span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a><span class="fu">AIC</span>(model.ar)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>We can see that the model with an autoregressive covariance structure is a “better” model.</p>
+<p>To improve our model further, we could break the data into high variance and low variance groups (called <code>level</code>), since we know there is unequal variance during different years. We’ll assign 2017 to a high variance group, and the other years to a low variance group, and then fit a model that includes a random effect of the <code>level</code> variance group. We’ll also re-calculate the AIC value.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Assign 2017 to high variance group, other years to low</span></span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>anpp.<span class="fl">17.20</span> <span class="ot">&lt;-</span> anpp.<span class="fl">17.20</span> <span class="sc">%&gt;%</span></span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">anpp_level =</span> <span class="fu">if_else</span>(year <span class="sc">==</span> <span class="dv">2017</span>, <span class="st">"high"</span>, <span class="st">"low"</span>)) </span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Re-fit a model with a variance level</span></span>
+<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a>model.ar.level <span class="ot">&lt;-</span> <span class="fu">gls</span>(npp_g_m2 <span class="sc">~</span> zone <span class="sc">+</span> <span class="fu">factor</span>(year) <span class="sc">+</span> zone<span class="sc">*</span><span class="fu">factor</span>(year),  </span>
+<span id="cb42-7"><a href="#cb42-7" aria-hidden="true" tabindex="-1"></a>                      <span class="at">correlation =</span> <span class="fu">corAR1</span>(<span class="at">form =</span> <span class="sc">~</span> <span class="dv">1</span> <span class="sc">|</span> site), </span>
+<span id="cb42-8"><a href="#cb42-8" aria-hidden="true" tabindex="-1"></a>                      <span class="at">weights =</span> <span class="fu">varIdent</span>(<span class="at">form=</span><span class="sc">~</span><span class="dv">1</span><span class="sc">|</span>anpp_level), </span>
+<span id="cb42-9"><a href="#cb42-9" aria-hidden="true" tabindex="-1"></a>                      <span class="at">data =</span> anpp.<span class="fl">17.20</span>)</span>
+<span id="cb42-10"><a href="#cb42-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-11"><a href="#cb42-11" aria-hidden="true" tabindex="-1"></a><span class="fu">AIC</span>(model.ar.level)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>The AIC value dropped, which suggests that grouping by the new <code>level</code> category is improving the fit of this model. Now we can compare the estimated means from this mixed model using <code>emmeans</code> again.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">emmeans</span>(model.ar.level, <span class="sc">~</span> zone<span class="sc">*</span><span class="fu">factor</span>(year), <span class="at">lmer.df =</span> <span class="st">"kenward-roger"</span>) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>It is a little more difficult to extract correlation and variance estimates.</p>
+<p>Now lets compare the fit of three different mixed models that are specified similarly, but using 2 different functions from <code>nlme</code>, and one from <code>lme4</code>. Take note of how the models are specified differently in the arguments to each function.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co"># R-side model from nlme::gls()</span></span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>model.ar.level.gls <span class="ot">&lt;-</span> <span class="fu">gls</span>(npp_g_m2 <span class="sc">~</span> zone <span class="sc">+</span> <span class="fu">factor</span>(year) <span class="sc">+</span> zone<span class="sc">*</span><span class="fu">factor</span>(year),  </span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>                          <span class="at">correlation =</span> <span class="fu">corAR1</span>(<span class="at">form =</span> <span class="sc">~</span> <span class="dv">1</span> <span class="sc">|</span> site), </span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a>                          <span class="at">weights =</span> <span class="fu">varIdent</span>(<span class="at">form=</span><span class="sc">~</span><span class="dv">1</span><span class="sc">|</span>anpp_level), </span>
+<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a>                          <span class="at">data =</span> anpp.<span class="fl">17.20</span>,</span>
+<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a>                          <span class="at">method =</span> <span class="st">'REML'</span>)</span>
+<span id="cb44-7"><a href="#cb44-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-8"><a href="#cb44-8" aria-hidden="true" tabindex="-1"></a><span class="co"># G-side model from nlme::lme()</span></span>
+<span id="cb44-9"><a href="#cb44-9" aria-hidden="true" tabindex="-1"></a>model.ar.level.lme <span class="ot">&lt;-</span> <span class="fu">lme</span>(<span class="at">fixed =</span> npp_g_m2 <span class="sc">~</span> zone <span class="sc">+</span> <span class="fu">factor</span>(year) <span class="sc">+</span></span>
+<span id="cb44-10"><a href="#cb44-10" aria-hidden="true" tabindex="-1"></a>                            zone<span class="sc">*</span><span class="fu">factor</span>(year),  </span>
+<span id="cb44-11"><a href="#cb44-11" aria-hidden="true" tabindex="-1"></a>                          <span class="at">random =</span> <span class="sc">~</span> <span class="dv">1</span> <span class="sc">|</span> site,</span>
+<span id="cb44-12"><a href="#cb44-12" aria-hidden="true" tabindex="-1"></a>                          <span class="at">weights =</span> <span class="fu">varIdent</span>(<span class="at">form =</span> <span class="sc">~</span> <span class="dv">1</span> <span class="sc">|</span> anpp_level),</span>
+<span id="cb44-13"><a href="#cb44-13" aria-hidden="true" tabindex="-1"></a>                          <span class="at">data =</span> anpp.<span class="fl">17.20</span>,</span>
+<span id="cb44-14"><a href="#cb44-14" aria-hidden="true" tabindex="-1"></a>                          <span class="at">method =</span> <span class="st">'REML'</span>)</span>
+<span id="cb44-15"><a href="#cb44-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-16"><a href="#cb44-16" aria-hidden="true" tabindex="-1"></a><span class="co"># G-side model from lme4::lmer()</span></span>
+<span id="cb44-17"><a href="#cb44-17" aria-hidden="true" tabindex="-1"></a>model.ar.level.lmer <span class="ot">&lt;-</span> <span class="fu">lmer</span>(npp_g_m2 <span class="sc">~</span> zone <span class="sc">+</span> <span class="fu">factor</span>(year) <span class="sc">+</span> zone<span class="sc">*</span><span class="fu">factor</span>(year) <span class="sc">+</span> </span>
+<span id="cb44-18"><a href="#cb44-18" aria-hidden="true" tabindex="-1"></a>                              (anpp_level <span class="sc">|</span> site),</span>
+<span id="cb44-19"><a href="#cb44-19" aria-hidden="true" tabindex="-1"></a>                            <span class="at">data =</span> anpp.<span class="fl">17.20</span>)</span>
+<span id="cb44-20"><a href="#cb44-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-21"><a href="#cb44-21" aria-hidden="true" tabindex="-1"></a><span class="fu">AIC</span>(model.ar.level.gls)</span>
+<span id="cb44-22"><a href="#cb44-22" aria-hidden="true" tabindex="-1"></a><span class="fu">AIC</span>(model.ar.level.lme)</span>
+<span id="cb44-23"><a href="#cb44-23" aria-hidden="true" tabindex="-1"></a><span class="fu">AIC</span>(model.ar.level.lmer)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>These are not compared with Kenward-Rogers method because this is not available in <code>gls</code> yet.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>mod.compare <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(model.ar.level.gls, <span class="sc">~</span>zone<span class="sc">*</span><span class="fu">factor</span>(year),</span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>                       <span class="at">lmer.df =</span> <span class="st">"satterthwaite"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>  multcomp<span class="sc">::</span><span class="fu">cld</span>(<span class="at">alpha =</span> <span class="fl">0.05</span>, <span class="at">Letters =</span> LETTERS) <span class="sc">%&gt;%</span></span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">model =</span> <span class="st">"gls"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">bind_rows</span>(<span class="fu">emmeans</span>(model.ar.level.lme, <span class="sc">~</span>zone<span class="sc">*</span><span class="fu">factor</span>(year),</span>
+<span id="cb45-6"><a href="#cb45-6" aria-hidden="true" tabindex="-1"></a>                    <span class="at">lmer.df =</span> <span class="st">"satterthwaite"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb45-7"><a href="#cb45-7" aria-hidden="true" tabindex="-1"></a>              multcomp<span class="sc">::</span><span class="fu">cld</span>(<span class="at">alpha =</span> <span class="fl">0.05</span>, <span class="at">Letters =</span> LETTERS) <span class="sc">%&gt;%</span></span>
+<span id="cb45-8"><a href="#cb45-8" aria-hidden="true" tabindex="-1"></a>              <span class="fu">mutate</span>(<span class="at">model =</span> <span class="st">"lme"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb45-9"><a href="#cb45-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">bind_rows</span>(<span class="fu">emmeans</span>(model.ar.level.lmer, <span class="sc">~</span>zone<span class="sc">*</span><span class="fu">factor</span>(year),</span>
+<span id="cb45-10"><a href="#cb45-10" aria-hidden="true" tabindex="-1"></a>                    <span class="at">lmer.df =</span> <span class="st">"satterthwaite"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb45-11"><a href="#cb45-11" aria-hidden="true" tabindex="-1"></a>              multcomp<span class="sc">::</span><span class="fu">cld</span>(<span class="at">alpha =</span> <span class="fl">0.05</span>, <span class="at">Letters =</span> LETTERS) <span class="sc">%&gt;%</span></span>
+<span id="cb45-12"><a href="#cb45-12" aria-hidden="true" tabindex="-1"></a>              <span class="fu">mutate</span>(<span class="at">model =</span> <span class="st">"lmer"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>They compare.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Compare means ... should all be the same</span></span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>mod.compare <span class="sc">%&gt;%</span></span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(zone, year, emmean, model) <span class="sc">%&gt;%</span></span>
+<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">spread</span>(model, emmean)</span>
+<span id="cb46-5"><a href="#cb46-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-6"><a href="#cb46-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Compare standard errors</span></span>
+<span id="cb46-7"><a href="#cb46-7" aria-hidden="true" tabindex="-1"></a>mod.compare <span class="sc">%&gt;%</span></span>
+<span id="cb46-8"><a href="#cb46-8" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(zone, year, SE, model) <span class="sc">%&gt;%</span></span>
+<span id="cb46-9"><a href="#cb46-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">spread</span>(model, SE)</span>
+<span id="cb46-10"><a href="#cb46-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-11"><a href="#cb46-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Compare mean comparison results</span></span>
+<span id="cb46-12"><a href="#cb46-12" aria-hidden="true" tabindex="-1"></a>mod.compare <span class="sc">%&gt;%</span></span>
+<span id="cb46-13"><a href="#cb46-13" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(zone, year, .group, model) <span class="sc">%&gt;%</span></span>
+<span id="cb46-14"><a href="#cb46-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">spread</span>(model, .group)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Overall they agree, but we are finding some small differences between the different methods.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>pd <span class="ot">&lt;-</span> <span class="fu">position_dodge</span>(<span class="fl">0.5</span>)</span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mod.compare, <span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> emmean, <span class="at">group =</span> zone, <span class="at">colour =</span> zone)) <span class="sc">+</span></span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">position=</span>pd) <span class="sc">+</span></span>
+<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">position=</span>pd) <span class="sc">+</span></span>
+<span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> emmean <span class="sc">-</span> SE , <span class="at">ymax =</span> emmean <span class="sc">+</span> SE), <span class="at">width=</span><span class="fl">0.2</span>, <span class="at">position=</span>pd) <span class="sc">+</span></span>
+<span id="cb47-6"><a href="#cb47-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> .group, <span class="at">y =</span> emmean), </span>
+<span id="cb47-7"><a href="#cb47-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">position =</span> pd, <span class="at">hjust =</span> <span class="sc">-</span><span class="fl">0.1</span>, <span class="at">col =</span> <span class="st">"black"</span>, <span class="at">size =</span> <span class="fl">2.5</span>) <span class="sc">+</span></span>
+<span id="cb47-8"><a href="#cb47-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> model, <span class="at">ncol =</span> <span class="dv">1</span>, <span class="at">strip.position =</span> <span class="st">"right"</span>) <span class="sc">+</span></span>
+<span id="cb47-9"><a href="#cb47-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"top"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>The three models specified in the three different packages give the same estimates, only some standard errors and the mean comparisons were slightly different.</p>
+
+
+</section>
+
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>A fourth assumption is that the continuous predictor variables, or covariates, are measured without error, but that one is pretty tough to meet.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>Ramsey, Fred, and Daniel Schafer. The statistical sleuth: a course in methods of data analysis. Cengage Learning, 2012.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>As with other statistical procedures, post-hoc comparisons have other names, like <em>pairwise comparisons</em> or <em>multiple comparisons</em>.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>This should be equivalent to using <code>TukeyHSD()</code> with an <code>aov</code> object, if you are used to that.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/jornada-im\.github\.io\/jeds\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../../docs/lessons/setup.html" class="pagination-link" aria-label="JEDS Introduction and Setup">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">JEDS Introduction and Setup</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../../docs/lessons/teaching-datasets.html" class="pagination-link" aria-label="Teaching Datasets">
+        <span class="nav-page-text">Teaching Datasets</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/jornada-im/jeds/edit/main/docs/lessons/statistical-inference-linear-and-mixed.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/jornada-im/jeds/issues/new/choose" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>
