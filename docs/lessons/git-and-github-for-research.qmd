@@ -2,6 +2,9 @@
 title: "Git and GitHub for researchers"
 author: "Greg Maurer"
 date: '2022-09-01'
+execute:
+  #eval: false
+  echo: true
 #output:
   #ioslides_presentation
 #  html_document:
@@ -11,14 +14,8 @@ date: '2022-09-01'
 #toc: yes
 ---
 
-```{r}
-#| label: setup1
-#| include: false
-knitr::opts_chunk$set(echo = TRUE)
-```
-
 ```{bash}
-#| label: setup2
+#| label: setup1
 #| include: false
 mkdir ~/awesomeproject
 touch ~/awesomeproject/data.csv ~/awesomeproject/analysis_script_final.1.R \
@@ -203,11 +200,10 @@ touch ~/my_repo/script.R
 cd ~/my_repo
 ```
 ```{r}
-#| label: setup3
+#| label: setup2
 #| include: false
 # Have to change working directory
 knitr::opts_knit$set(root.dir = '~/my_repo')
-#setwd('~/my_repo')
 ```
 
 Now that we are in our project directory, lets make it a Git repository
@@ -319,7 +315,7 @@ We can see our progress so far. There are two commits, with the first adding the
 new `script.R` file, and the second one adding a couple of lines to it.
 
 ```{r}
-#| label: setup_4
+#| label: setup_3
 #| include: false
 knitr::opts_knit$set(root.dir = '~/GitHub/jeds/docs/lessons')
 ```
@@ -423,7 +419,7 @@ made that is ready to work with in your local `GitHub/` directory. Lets enter
 that directory and look around.
 
 ```{r}
-#| label: setup_5
+#| label: setup_4
 #| include: false
 # Keep the correct path
 knitr::opts_knit$set(root.dir = '~/GitHub')
@@ -447,7 +443,7 @@ folder and add a couple new lines of text. Once you do, Git should notice the
 change when checking the repository status.
 
 ```{r}
-#| label: setup_6
+#| label: setup5
 #| include: false
 # Keep the correct path
 knitr::opts_knit$set(root.dir = '~/GitHub/my_gh_repo/')
@@ -546,7 +542,7 @@ file will be added to the GitHub repository, thus syncing up the local and
 remote versions of our files.
 
 ```{r}
-#| label: setup_7
+#| label: setup_6
 #| include: false
 knitr::opts_knit$set(root.dir = '~/GitHub/jeds/docs/lessons')
 ```
@@ -591,7 +587,7 @@ git clone https://github.com/gremau/jeds.git jeds_fork #jeds_fork is optional
 ```
 
 ```{r}
-#| label: setup_8
+#| label: setup_7
 #| include: false
 knitr::opts_knit$set(root.dir = '~/GitHub/jeds_fork')
 ```
