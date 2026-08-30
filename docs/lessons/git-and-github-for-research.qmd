@@ -317,7 +317,7 @@ new `script.R` file, and the second one adding a couple of lines to it.
 ```{r}
 #| label: setup_3
 #| include: false
-knitr::opts_knit$set(root.dir = '~/GitHub/jeds/docs/lessons')
+knitr::opts_knit$set(root.dir = '~/')
 ```
 
 ```{r}
@@ -544,7 +544,7 @@ remote versions of our files.
 ```{r}
 #| label: setup_6
 #| include: false
-knitr::opts_knit$set(root.dir = '~/GitHub/jeds/docs/lessons')
+knitr::opts_knit$set(root.dir = '~/GitHub/')
 ```
 
 ```{r}
@@ -731,7 +731,7 @@ git branch -D my_changes
 ```{r }
 #| label: setup_9
 #| include: false
-knitr::opts_knit$set(root.dir = '~/GitHub/jeds/docs/lessons')
+knitr::opts_knit$set(root.dir = '~/GitHub/')
 ```
 
 ```{r}
