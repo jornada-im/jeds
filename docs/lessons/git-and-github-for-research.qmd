@@ -394,8 +394,8 @@ you clone from GitHub.
 
 ```{bash}
 #| label: mkdir_GitHub
-#| eval: false
-mkdir GitHub
+#| eval: true
+mkdir -p GitHub # -p option is "if it doesn't exist already"
 ```
 
 Now you need to use `git` to clone `my_gh_repo` from GitHub using its web
@@ -409,7 +409,7 @@ system clipboard. Return to your shell, navigate to the `GitHub` directory, and
 
 ```{bash}
 #| label: clone_my_gh_repo
-#| eval: !expr T
+#| eval: true
 cd ~/GitHub/ #Note: you can put GitHub/ somewhere other than the home directory (~)
 git clone https://github.com/gremau/my_gh_repo.git
 ```
@@ -427,7 +427,7 @@ knitr::opts_knit$set(root.dir = '~/GitHub')
 
 ```{bash}
 #| label: look_at_clone
-#| eval: !expr T
+#| eval: true
 cd my_gh_repo/
 ls -a
 ```
