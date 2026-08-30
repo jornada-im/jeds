@@ -3,8 +3,8 @@ project:
   output-dir: _site
 
 website:
-  title: "Jornada Environmental Data Science"
-  description: "Data resources for researchers and data managers at the Jornada Basin LTER and USDA-ARS Jornada Experimental Range. Contact: jornada.data@nmsu.edu."
+  title: "Jornada Data Commons: Ed Pages"
+  description: "Environmental data science education for the Jornada Basin LTER and USDA-ARS Jornada Experimental Range. Contact: jornada.data@nmsu.edu."
   favicon: img/jrn-logo-light.png
   site-url: https://jornada-im.github.io/jeds/
   repo-url: https://github.com/jornada-im/jeds
@@ -30,16 +30,12 @@ website:
         href: docs/slides/index.qmd
       - text: "Workshops"
         href: workshops/index.qmd
-      - text: "More"
-        menu:
-          - downloads/index.qmd
-          - docs/project-procedures/index.qmd
-          - docs/proposals-and-reports/index.qmd
-          - archive/index.qmd
+      - text: "Commons Home"
+        href: https://jornada-im.github.io
     tools:
       - icon: github
         href: https://github.com/jornada-im/jeds
-        text: The JEDS repository
+        text: The Jornada Ed Pages GitHub repository
 
   sidebar:
     - title: "Lessons"

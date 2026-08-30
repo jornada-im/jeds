@@ -1,12 +1,12 @@
 ---
-title: JEDS!
+title: Welcome to the Jornada Environmental Data Science pages (JEDS)
 format:
   html:
     css: styles.css
 from: markdown+emoji
 ---
 
-Our aim is to teach environmental data science concepts and skills to Jornada researchers using accessible methods and relatable data.
+These pages contain media and hands-on lessons for environmental data science education at the [Jornada Basin LTER (JRN)]({{< var url.jrn_website >}}) and [Jornada Experimental Range (JER)]({{< var url.jer_website >}}) programs. Our aim is to teach environmental data science concepts and skills to Jornada researchers using accessible methods and relatable data.
 
 ::: {.callout-caution collapse="false" appearance="default"}
 ## WARNING! This site is under construction

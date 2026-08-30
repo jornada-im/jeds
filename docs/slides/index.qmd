@@ -1,5 +1,5 @@
 ---
-title: "JEDS Presentations"
+title: "Presentation listing"
 listing: 
   contents: ./*.qmd
   #sort: "date desc"
