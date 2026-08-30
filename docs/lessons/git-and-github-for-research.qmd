@@ -581,7 +581,7 @@ with the overlapping squares). Now clone that into your GitHub directory.
 
 ```{bash}
 #| label: clone_jeds2
-#| eval: !expr T
+#| eval: true
 cd ~/GitHub/
 git clone https://github.com/gremau/jeds.git jeds_fork #jeds_fork is optional
 ```
@@ -606,7 +606,7 @@ and check the status of our remote repositories.
 
 ```{bash}
 #| label: remotes_jeds2
-#| eval: !expr T
+#| eval: true
 git remote -v
 ```
 
@@ -632,7 +632,7 @@ the branch to begin work there.
 
 ```{bash}
 #| label: branch_jeds2
-#| eval: !expr T
+#| eval: true
 git branch my_changes
 git checkout my_changes
 ```
@@ -648,7 +648,7 @@ Now lets make those changes. Look inside the `docs/lessons` folder and find the
 
 ```{bash}
 #| label: find_jeds2_file
-#| eval: !expr T
+#| eval: true
 ls docs/lessons/
 ``` 
 
@@ -663,7 +663,7 @@ echo "This repository does that" >> docs/lessons/learner_changes.md
 ```
 ```{bash}
 #| label: commit_jeds2_file
-#| eval: !expr T
+#| eval: true
 git add docs/lessons/learner_changes.md
 git commit -m 'I made this file better'
 ``` 
@@ -676,7 +676,7 @@ the origin repository (again - `your_username/jeds`).
 
 ```{bash}
 #| label: push_jeds2_file
-#| eval: !expr T
+#| eval: false
 git push --set-upstream origin my_changes
 ``` 
 
