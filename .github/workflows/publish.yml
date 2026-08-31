@@ -28,6 +28,7 @@ jobs:
             any::car
             any::emmeans
             any::lme4
+            any::EDIutils
 
       #This is for rendering mermaid to SVG in advance (w/in panels). Could drop it
       # if issue gets fixed someday.

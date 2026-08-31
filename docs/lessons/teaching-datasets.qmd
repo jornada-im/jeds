@@ -3,7 +3,7 @@ title: "Teaching Datasets"
 author: "Greg Maurer, Darren James"
 date: '2022-06-19'
 execute:
-  eval: false
+  eval: true
 ---
 
 ```{r}
@@ -55,7 +55,7 @@ dataframe.
 ```{r}
 #| label: load_ds1
 # Assign the address for the csv file hosted on EDI to a variable
-infile <- "https://pasta.lternet.edu/package/data/eml/knb-lter-jrn/210011003/105/127124b0f04a1c71f34148e3d40a5c72"
+infile <- paste0("https://pasta.lternet.edu/package/data/eml/knb-lter-jrn/210011003/105/127124b0f04a1c71f34148e3d40a5c72?key=", Sys.getenv("EDI_API_KEY"))
 
 # Read this file into a tibble with `tidyverse::read_csv()`
 anpp.annual <- read_csv(infile, na=c('NA', '', '.'))
@@ -77,5 +77,6 @@ Now, lets output this into our `data/` directory so that we can load it easily
 next time.
 
 ```{r}
+#| eval: false
 write_csv(anpp.annual, '../data/td01_anpp.annual.csv')
 ```

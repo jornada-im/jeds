@@ -3,7 +3,7 @@ title: "Accessing Jornada data in EDI"
 author: "Greg Maurer, Darren James"
 date: '2026-07-31'
 execute:
-  eval: false
+  eval: true
   echo: true
 ---
 
@@ -39,8 +39,9 @@ library('EDIutils')
 
 # Data access at EDI requires authentication. The easiest way is to create
 # an API key at https://auth.edirepository.org. Once you have that, place 
-# it in your script.
-mykey <- "<my EDI API key>"
+# it in your script. Below, we're getting it from an environmental variable,
+# but you can replace the "Sys.getenv" part with your actual key.
+mykey <- Sys.getenv("EDI_API_KEY")
 
 # Log in to EDI rogrammatically with an API key
 EDIutils::login(key = mykey)
