@@ -286,20 +286,37 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Then, load a comma-separated value file from the EDI repository. At the EDI repository, each file in a dataset is assigned a download URL. This can be passed to the <code>tidyverse::read_csv()</code> function to read that file into a dataframe.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Assign the address for the csv file hosted on EDI to a variable</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>infile <span class="ot">&lt;-</span> <span class="st">"https://pasta.lternet.edu/package/data/eml/knb-lter-jrn/210011003/105/127124b0f04a1c71f34148e3d40a5c72"</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>infile <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"https://pasta.lternet.edu/package/data/eml/knb-lter-jrn/210011003/105/127124b0f04a1c71f34148e3d40a5c72?key="</span>, <span class="fu">Sys.getenv</span>(<span class="st">"EDI_API_KEY"</span>))</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Read this file into a tibble with `tidyverse::read_csv()`</span></span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>anpp.annual <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(infile, <span class="at">na=</span><span class="fu">c</span>(<span class="st">'NA'</span>, <span class="st">''</span>, <span class="st">'.'</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 465 Columns: 4
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr (2): zone, site
+dbl (2): year, npp_g_m2
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
 </div>
 <p>R tells us that we have two character data columns (<code>zone</code> and <code>site</code>), and two floating point (<code>dbl</code>) columns that contain the year of measurement - <code>year</code> - and estimated annual NPP values (<code>npp_g_m2</code>). Lets make a simple plot to look at the data. To do this we are using the <code>ggplot()</code> function, which is part of the <code>ggplot2</code> library that was attached when we loaded the <code>tidyverse</code> package`</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(anpp.annual, <span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> npp_g_m2, <span class="at">col =</span> site, <span class="at">group =</span> site)) <span class="sc">+</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">vjust =</span> <span class="fl">0.5</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(anpp.annual, <span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> npp_g_m2, <span class="at">col =</span> site, <span class="at">group =</span> site)) <span class="sc">+</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">vjust =</span> <span class="fl">0.5</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="teaching-datasets_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
 </div>
 <p>Now, lets output this into our <code>data/</code> directory so that we can load it easily next time.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(anpp.annual, <span class="st">'../data/td01_anpp.annual.csv'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(anpp.annual, <span class="st">'../data/td01_anpp.annual.csv'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 
 
