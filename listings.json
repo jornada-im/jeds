@@ -2,11 +2,11 @@
   {
     "listing": "/docs/lessons/index.html",
     "items": [
-      "/docs/lessons/access_EDI_data.html",
+      "/docs/lessons/access-edi-data.html",
       "/docs/lessons/data-viz-with-ggplot.html",
       "/docs/lessons/git-and-github-for-research.html",
       "/docs/lessons/setup.html",
-      "/docs/lessons/jrn_datasets_tour.html",
+      "/docs/lessons/jrn-npp-rap-demo.html",
       "/docs/lessons/statistical-inference-linear-and-mixed.html",
       "/docs/lessons/teaching-datasets.html"
     ]

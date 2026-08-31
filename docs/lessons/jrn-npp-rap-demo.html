@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Greg Maurer, Darren James">
+<meta name="dcterms.date" content="2026-07-31">
+
+<title>Rangeland Analysis Platform (RAP) &amp; JRN NPP – Jornada Data Commons: Training</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../docs/lessons/setup.html" rel="next">
+<link href="../../docs/lessons/git-and-github-for-research.html" rel="prev">
+<link href="../../img/jrn-logo-light.png" rel="icon" type="image/png">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-aced932c6eb97d642153b8e218288f9f.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-33c54f292d46a1421402a05ca36be767.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="../../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../../img/jrn-logo-light.png" alt="" class="navbar-logo light-content">
+    <img src="../../img/jrn-logo-light.png" alt="" class="navbar-logo dark-content">
+    </a>
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Jornada Data Commons: Training</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../docs/lessons/index.html"> 
+<span class="menu-text">Lessons</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../docs/slides/index.html"> 
+<span class="menu-text">Presentations</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../workshops/index.html"> 
+<span class="menu-text">Workshops</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://jornada-im.github.io"> 
+<span class="menu-text">Commons Home</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+    <a href="https://github.com/jornada-im/jeds" title="The Jornada Ed Pages GitHub repository" class="quarto-navigation-tool px-1" aria-label="The Jornada Ed Pages GitHub repository"><i class="bi bi-github"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../docs/lessons/jrn-npp-rap-demo.html">Rangeland Analysis Platform (RAP) &amp; JRN NPP</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../docs/lessons/access-edi-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Accessing Jornada data in EDI</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../docs/lessons/data-viz-with-ggplot.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Data visualization with ggplot</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../docs/lessons/git-and-github-for-research.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Git and GitHub for researchers</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../docs/lessons/jrn-npp-rap-demo.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Rangeland Analysis Platform (RAP) &amp; JRN NPP</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../docs/lessons/setup.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">JEDS Introduction and Setup</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../docs/lessons/statistical-inference-linear-and-mixed.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Statistical inference with general linear models and mixed models</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../docs/lessons/teaching-datasets.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Teaching Datasets</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#data-access-at-edi-requires-authentication.-the-easiest-way-is-to-create" id="toc-data-access-at-edi-requires-authentication.-the-easiest-way-is-to-create" class="nav-link active" data-scroll-target="#data-access-at-edi-requires-authentication.-the-easiest-way-is-to-create">Data access at EDI requires authentication. The easiest way is to create</a></li>
+  <li><a href="#an-api-key-at-httpsauth.edirepository.org.-once-you-have-that-place" id="toc-an-api-key-at-httpsauth.edirepository.org.-once-you-have-that-place" class="nav-link" data-scroll-target="#an-api-key-at-httpsauth.edirepository.org.-once-you-have-that-place">an API key at https://auth.edirepository.org. Once you have that, place</a></li>
+  <li><a href="#it-in-your-script." id="toc-it-in-your-script." class="nav-link" data-scroll-target="#it-in-your-script.">it in your script.</a></li>
+  <li><a href="#log-in-to-edi-rogrammatically-with-an-api-key" id="toc-log-in-to-edi-rogrammatically-with-an-api-key" class="nav-link" data-scroll-target="#log-in-to-edi-rogrammatically-with-an-api-key">Log in to EDI rogrammatically with an API key</a></li>
+  <li><a href="#set-the-dataset-id" id="toc-set-the-dataset-id" class="nav-link" data-scroll-target="#set-the-dataset-id">Set the dataset ID</a></li>
+  <li><a href="#read-the-list-of-entities-in-the-dataset" id="toc-read-the-list-of-entities-in-the-dataset" class="nav-link" data-scroll-target="#read-the-list-of-entities-in-the-dataset">Read the list of “entities” in the dataset</a></li>
+  <li><a href="#read-the-raw-entity-data" id="toc-read-the-raw-entity-data" class="nav-link" data-scroll-target="#read-the-raw-entity-data">Read the raw entity data</a></li>
+  <li><a href="#now-read-the-raw-data-as-a-csv" id="toc-now-read-the-raw-data-as-a-csv" class="nav-link" data-scroll-target="#now-read-the-raw-data-as-a-csv">Now read the raw data as a CSV</a></li>
+  <li><a href="#explore-the-data-a-little" id="toc-explore-the-data-a-little" class="nav-link" data-scroll-target="#explore-the-data-a-little">Explore the data a little</a></li>
+  <li><a href="#now-make-a-simple-plot" id="toc-now-make-a-simple-plot" class="nav-link" data-scroll-target="#now-make-a-simple-plot">Now make a simple plot</a></li>
+  <li><a href="#show-it" id="toc-show-it" class="nav-link" data-scroll-target="#show-it">Show it</a></li>
+  <li><a href="#now-lets-subset-and-plot-siteibpe" id="toc-now-lets-subset-and-plot-siteibpe" class="nav-link" data-scroll-target="#now-lets-subset-and-plot-siteibpe">Now lets subset and plot site==IBPE</a></li>
+  <li><a href="#set-working-directory-to-location-where-script-is-saved" id="toc-set-working-directory-to-location-where-script-is-saved" class="nav-link" data-scroll-target="#set-working-directory-to-location-where-script-is-saved">Set working directory to location where script is saved</a></li>
+  <li><a href="#import-total-annual-anpp-data" id="toc-import-total-annual-anpp-data" class="nav-link" data-scroll-target="#import-total-annual-anpp-data">Import total annual ANPP data</a></li>
+  <li><a href="#downloaded-from-httpsportal.edirepository.orgnismapbrowsescopeknb-lter-jrnidentifier210011003" id="toc-downloaded-from-httpsportal.edirepository.orgnismapbrowsescopeknb-lter-jrnidentifier210011003" class="nav-link" data-scroll-target="#downloaded-from-httpsportal.edirepository.orgnismapbrowsescopeknb-lter-jrnidentifier210011003">downloaded from https://portal.edirepository.org/nis/mapbrowse?scope=knb-lter-jrn&amp;identifier=210011003</a></li>
+  <li><a href="#subset-ibpe-total-anpp-data" id="toc-subset-ibpe-total-anpp-data" class="nav-link" data-scroll-target="#subset-ibpe-total-anpp-data">Subset IBPE total ANPP data</a></li>
+  <li><a href="#check-avialble-years" id="toc-check-avialble-years" class="nav-link" data-scroll-target="#check-avialble-years">Check avialble years</a></li>
+  <li><a href="#quick-graph-of-the-data" id="toc-quick-graph-of-the-data" class="nav-link" data-scroll-target="#quick-graph-of-the-data">Quick graph of the data</a></li>
+  <li><a href="#import-shapefile-of-npp-sites" id="toc-import-shapefile-of-npp-sites" class="nav-link" data-scroll-target="#import-shapefile-of-npp-sites">Import shapefile of NPP sites</a></li>
+  <li><a href="#this-can-be-downloaded-from-the-jornada-geoportal-if-you-already" id="toc-this-can-be-downloaded-from-the-jornada-geoportal-if-you-already" class="nav-link" data-scroll-target="#this-can-be-downloaded-from-the-jornada-geoportal-if-you-already">This can be downloaded from the Jornada Geoportal if you already</a></li>
+  <li><a href="#have-access" id="toc-have-access" class="nav-link" data-scroll-target="#have-access">have access</a></li>
+  <li><a href="#look-at-the-columns-of-the-data-in-the-shapefile" id="toc-look-at-the-columns-of-the-data-in-the-shapefile" class="nav-link" data-scroll-target="#look-at-the-columns-of-the-data-in-the-shapefile">Look at the columns of the data in the shapefile</a></li>
+  <li><a href="#subset-ibpe-site" id="toc-subset-ibpe-site" class="nav-link" data-scroll-target="#subset-ibpe-site">Subset IBPE site</a></li>
+  <li><a href="#check-coordinate-reference-system" id="toc-check-coordinate-reference-system" class="nav-link" data-scroll-target="#check-coordinate-reference-system">Check coordinate reference system</a></li>
+  <li><a href="#quick-figure-of-ibpe-site-polygon" id="toc-quick-figure-of-ibpe-site-polygon" class="nav-link" data-scroll-target="#quick-figure-of-ibpe-site-polygon">Quick figure of IBPE site polygon</a></li>
+  <li><a href="#use-raprget_rap-function-to-access-rap-data" id="toc-use-raprget_rap-function-to-access-rap-data" class="nav-link" data-scroll-target="#use-raprget_rap-function-to-access-rap-data">Use rapr::get_rap() function to access RAP data</a></li>
+  <li><a href="#note-that-our-shapefile-is-already-in-the-espg4326-coordinate-reference-system" id="toc-note-that-our-shapefile-is-already-in-the-espg4326-coordinate-reference-system" class="nav-link" data-scroll-target="#note-that-our-shapefile-is-already-in-the-espg4326-coordinate-reference-system">Note that our shapefile is already in the “ESPG:4326” coordinate reference system</a></li>
+  <li><a href="#currently-rap-biomass-and-production-data-are-only-available-as-a-30m-pixel-product" id="toc-currently-rap-biomass-and-production-data-are-only-available-as-a-30m-pixel-product" class="nav-link" data-scroll-target="#currently-rap-biomass-and-production-data-are-only-available-as-a-30m-pixel-product">Currently, RAP biomass and production data are only available as a 30m pixel product</a></li>
+  <li><a href="#each-pixel-is-approximately-30m-x-3m-900m2-in-size" id="toc-each-pixel-is-approximately-30m-x-3m-900m2-in-size" class="nav-link" data-scroll-target="#each-pixel-is-approximately-30m-x-3m-900m2-in-size">Each pixel is approximately 30m X 3m = 900m^2 in size</a></li>
+  <li><a href="#buffer-ibpe-area-by-30m-to-ensure-complete-coverage" id="toc-buffer-ibpe-area-by-30m-to-ensure-complete-coverage" class="nav-link" data-scroll-target="#buffer-ibpe-area-by-30m-to-ensure-complete-coverage">Buffer IBPE area by 30m to ensure complete coverage</a></li>
+  <li><a href="#note-that-the-lengthunit-is-already-in-meters" id="toc-note-that-the-lengthunit-is-already-in-meters" class="nav-link" data-scroll-target="#note-that-the-lengthunit-is-already-in-meters">Note that the LENGTHUNIT is already in meters</a></li>
+  <li><a href="#figure-of-ibpe-site-with-30m-buffer" id="toc-figure-of-ibpe-site-with-30m-buffer" class="nav-link" data-scroll-target="#figure-of-ibpe-site-with-30m-buffer">Figure of IBPE site with 30m buffer</a></li>
+  <li><a href="#import-30m-landsat-production-data" id="toc-import-30m-landsat-production-data" class="nav-link" data-scroll-target="#import-30m-landsat-production-data">Import 30m Landsat production data</a></li>
+  <li><a href="#inspect-the-spatraster" id="toc-inspect-the-spatraster" class="nav-link" data-scroll-target="#inspect-the-spatraster">Inspect the SpatRaster</a></li>
+  <li><a href="#check-the-names" id="toc-check-the-names" class="nav-link" data-scroll-target="#check-the-names">Check the names</a></li>
+  <li><a href="#use-the-default-terraplot-function-to-explore-the-data" id="toc-use-the-default-terraplot-function-to-explore-the-data" class="nav-link" data-scroll-target="#use-the-default-terraplot-function-to-explore-the-data">Use the default terra::plot() function to explore the data</a></li>
+  <li><a href="#plots-the-first-16-rasters" id="toc-plots-the-first-16-rasters" class="nav-link" data-scroll-target="#plots-the-first-16-rasters">Plots the first 16 rasters</a></li>
+  <li><a href="#graph-the-second-raster-with-ggplot-and-geom_spatraster" id="toc-graph-the-second-raster-with-ggplot-and-geom_spatraster" class="nav-link" data-scroll-target="#graph-the-second-raster-with-ggplot-and-geom_spatraster">Graph the second raster with ggplot and geom_spatraster()</a></li>
+  <li><a href="#overlay-the-ibpe-site-polygon" id="toc-overlay-the-ibpe-site-polygon" class="nav-link" data-scroll-target="#overlay-the-ibpe-site-polygon">Overlay the IBPE site polygon</a></li>
+  <li><a href="#use-the-terraextract-function-to-calculate-mean-biomass-at-the-ibpe-site-for-each-raster" id="toc-use-the-terraextract-function-to-calculate-mean-biomass-at-the-ibpe-site-for-each-raster" class="nav-link" data-scroll-target="#use-the-terraextract-function-to-calculate-mean-biomass-at-the-ibpe-site-for-each-raster">Use the terra::extract() function to calculate mean biomass at the IBPE site for each raster</a></li>
+  <li><a href="#using-exact-true-will-caclualte-a-weigthed-mean-that-uses-partial-pixels-in-the-site-boundary" id="toc-using-exact-true-will-caclualte-a-weigthed-mean-that-uses-partial-pixels-in-the-site-boundary" class="nav-link" data-scroll-target="#using-exact-true-will-caclualte-a-weigthed-mean-that-uses-partial-pixels-in-the-site-boundary">Using exact = TRUE will caclualte a weigthed mean that uses partial pixels in the site boundary</a></li>
+  <li><a href="#using-exact-false-default-will-only-use-the-pixels-whose-centroids-are-within-the-site-boundary-4-pixels-in-this-case" id="toc-using-exact-false-default-will-only-use-the-pixels-whose-centroids-are-within-the-site-boundary-4-pixels-in-this-case" class="nav-link" data-scroll-target="#using-exact-false-default-will-only-use-the-pixels-whose-centroids-are-within-the-site-boundary-4-pixels-in-this-case">Using exact = FALSE (default) will only use the pixels whose centroids are within the site boundary (4 pixels in this case)</a></li>
+  <li><a href="#check-the-names-of-the-extracted-values" id="toc-check-the-names-of-the-extracted-values" class="nav-link" data-scroll-target="#check-the-names-of-the-extracted-values">Check the names of the extracted values</a></li>
+  <li><a href="#use-tidyrpivot_longer-to-transpose-the-date-from-wide-to-long" id="toc-use-tidyrpivot_longer-to-transpose-the-date-from-wide-to-long" class="nav-link" data-scroll-target="#use-tidyrpivot_longer-to-transpose-the-date-from-wide-to-long">Use tidyr::pivot_longer() to transpose the date from wide to long</a></li>
+  <li><a href="#check-the-text-strings-of-raster-names" id="toc-check-the-text-strings-of-raster-names" class="nav-link" data-scroll-target="#check-the-text-strings-of-raster-names">Check the text strings of raster names</a></li>
+  <li><a href="#we-need-to-find-a-way-to-extract-the-year-from-each-of-thes-text-strings" id="toc-we-need-to-find-a-way-to-extract-the-year-from-each-of-thes-text-strings" class="nav-link" data-scroll-target="#we-need-to-find-a-way-to-extract-the-year-from-each-of-thes-text-strings">We need to find a way to extract the year from each of thes text strings</a></li>
+  <li><a href="#we-can-use-the-paste-function-to-construct-a-vector-of-all-our-years" id="toc-we-can-use-the-paste-function-to-construct-a-vector-of-all-our-years" class="nav-link" data-scroll-target="#we-can-use-the-paste-function-to-construct-a-vector-of-all-our-years">We can use the paste() function to construct a vector of all our years</a></li>
+  <li><a href="#separated-by-the-bar-symbol-which-functions-as-a-n-or-operator" id="toc-separated-by-the-bar-symbol-which-functions-as-a-n-or-operator" class="nav-link" data-scroll-target="#separated-by-the-bar-symbol-which-functions-as-a-n-or-operator">separated by the “bar” symbol which functions as a n “OR” operator</a></li>
+  <li><a href="#use-stringrstr_extract-to-extract-the-year-from-the-raster-name-then-covert-to-numeric" id="toc-use-stringrstr_extract-to-extract-the-year-from-the-raster-name-then-covert-to-numeric" class="nav-link" data-scroll-target="#use-stringrstr_extract-to-extract-the-year-from-the-raster-name-then-covert-to-numeric">Use stringr::str_extract() to extract the year from the raster name, then covert to numeric</a></li>
+  <li><a href="#for-each-year-sum-the-biomass-for-annual-forbs-and-grasses-and-perennial-forbs-and-grasses" id="toc-for-each-year-sum-the-biomass-for-annual-forbs-and-grasses-and-perennial-forbs-and-grasses" class="nav-link" data-scroll-target="#for-each-year-sum-the-biomass-for-annual-forbs-and-grasses-and-perennial-forbs-and-grasses">For each year, sum the biomass for annual forbs and grasses and perennial forbs and grasses</a></li>
+  <li><a href="#quick-plot-of-the-data" id="toc-quick-plot-of-the-data" class="nav-link" data-scroll-target="#quick-plot-of-the-data">Quick plot of the data</a></li>
+  <li><a href="#we-want-to-join-this-data-by-year-to-the-filed-based-anpp-data" id="toc-we-want-to-join-this-data-by-year-to-the-filed-based-anpp-data" class="nav-link" data-scroll-target="#we-want-to-join-this-data-by-year-to-the-filed-based-anpp-data">We want to join this data (by year) to the filed-based ANPP data</a></li>
+  <li><a href="#convert-rap-from-lbsacre-to-gramsm2" id="toc-convert-rap-from-lbsacre-to-gramsm2" class="nav-link" data-scroll-target="#convert-rap-from-lbsacre-to-gramsm2">Convert RAP from lbs/acre to grams/m^2</a></li>
+  <li><a href="#now-merge-and-transpose-from-wide-to-long" id="toc-now-merge-and-transpose-from-wide-to-long" class="nav-link" data-scroll-target="#now-merge-and-transpose-from-wide-to-long">Now merge and transpose from wide to long</a></li>
+  <li><a href="#quick-graph-of-the-data-1" id="toc-quick-graph-of-the-data-1" class="nav-link" data-scroll-target="#quick-graph-of-the-data-1">Quick graph of the data</a></li>
+  <li><a href="#make-the-graph-prettier" id="toc-make-the-graph-prettier" class="nav-link" data-scroll-target="#make-the-graph-prettier">Make the graph prettier</a></li>
+  <li><a href="#check-the-range-of-the-production-values" id="toc-check-the-range-of-the-production-values" class="nav-link" data-scroll-target="#check-the-range-of-the-production-values">Check the range of the production values</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/jornada-im/jeds/edit/main/docs/lessons/jrn-npp-rap-demo.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/jornada-im/jeds/issues/new/choose" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Rangeland Analysis Platform (RAP) &amp; JRN NPP</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Greg Maurer, Darren James </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">July 31, 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>library(tidyverse) library(EDIutils) library(sf) library(terra) library(rapr) library(tidyterra)</p>
+<section id="data-access-at-edi-requires-authentication.-the-easiest-way-is-to-create" class="level1">
+<h1>Data access at EDI requires authentication. The easiest way is to create</h1>
+</section>
+<section id="an-api-key-at-httpsauth.edirepository.org.-once-you-have-that-place" class="level1">
+<h1>an API key at https://auth.edirepository.org. Once you have that, place</h1>
+</section>
+<section id="it-in-your-script." class="level1">
+<h1>it in your script.</h1>
+<p>mykey &lt;- “<my edi="" api="" key="">”</my></p>
+</section>
+<section id="log-in-to-edi-rogrammatically-with-an-api-key" class="level1">
+<h1>Log in to EDI rogrammatically with an API key</h1>
+<p>EDIutils::login(key = mykey)</p>
+</section>
+<section id="set-the-dataset-id" class="level1">
+<h1>Set the dataset ID</h1>
+<p>datasetID &lt;- “knb-lter-jrn.210011003.106”</p>
+</section>
+<section id="read-the-list-of-entities-in-the-dataset" class="level1">
+<h1>Read the list of “entities” in the dataset</h1>
+<p>ents &lt;- read_data_entity_names(datasetID)</p>
+</section>
+<section id="read-the-raw-entity-data" class="level1">
+<h1>Read the raw entity data</h1>
+<p>raw &lt;- read_data_entity(datasetID, ents[1, “entityId”])</p>
+</section>
+<section id="now-read-the-raw-data-as-a-csv" class="level1">
+<h1>Now read the raw data as a CSV</h1>
+<p>anpp_data &lt;- readr::read_csv(file = raw)</p>
+</section>
+<section id="explore-the-data-a-little" class="level1">
+<h1>Explore the data a little</h1>
+<p>head(anpp_data) unique(anpp_data<span class="math inline">\(site)
+length(unique(anpp_data\)</span>site))</p>
+</section>
+<section id="now-make-a-simple-plot" class="level1">
+<h1>Now make a simple plot</h1>
+<p>g &lt;- ggplot(data=anpp_data, aes(x=year, y=npp_g_m2, col=site)) + geom_line()</p>
+</section>
+<section id="show-it" class="level1">
+<h1>Show it</h1>
+<p>g</p>
+</section>
+<section id="now-lets-subset-and-plot-siteibpe" class="level1">
+<h1>Now lets subset and plot site==IBPE</h1>
+<p>ibpe_anpp &lt;- anpp_data |&gt; filter(site==“IBPE”) g2 &lt;- ggplot(data=ibpe_anpp, aes(x=year, y=npp_g_m2, col=site)) + geom_line()</p>
+<p>g2</p>
+</section>
+<section id="set-working-directory-to-location-where-script-is-saved" class="level1">
+<h1>Set working directory to location where script is saved</h1>
+<p>#setwd(dirname(rstudioapi::getActiveDocumentContext()$path)) #dir(“data”)</p>
+</section>
+<section id="import-total-annual-anpp-data" class="level1">
+<h1>Import total annual ANPP data</h1>
+</section>
+<section id="downloaded-from-httpsportal.edirepository.orgnismapbrowsescopeknb-lter-jrnidentifier210011003" class="level1">
+<h1>downloaded from https://portal.edirepository.org/nis/mapbrowse?scope=knb-lter-jrn&amp;identifier=210011003</h1>
+<p>#anpp_data &lt;- read_csv(“data/JRN011003_NPP_annual_site_summary.csv”)</p>
+</section>
+<section id="subset-ibpe-total-anpp-data" class="level1">
+<h1>Subset IBPE total ANPP data</h1>
+<p>#ibpe_anpp &lt;- anpp_data %&gt;% # dplyr::filter(site == “IBPE”)</p>
+</section>
+<section id="check-avialble-years" class="level1">
+<h1>Check avialble years</h1>
+<p>range(ibpe_anpp$year) # 1990 to 2022</p>
+</section>
+<section id="quick-graph-of-the-data" class="level1">
+<h1>Quick graph of the data</h1>
+<p>ggplot(ibpe_anpp, aes(x = year, y = npp_g_m2)) + geom_line()</p>
+</section>
+<section id="import-shapefile-of-npp-sites" class="level1">
+<h1>Import shapefile of NPP sites</h1>
+</section>
+<section id="this-can-be-downloaded-from-the-jornada-geoportal-if-you-already" class="level1">
+<h1>This can be downloaded from the Jornada Geoportal if you already</h1>
+</section>
+<section id="have-access" class="level1">
+<h1>have access</h1>
+<p>NPP_sf &lt;- st_read(“shp/Jornada_LTER_net_primary_production_study_sites_NPP_study_prj011__polygons.shp”)</p>
+</section>
+<section id="look-at-the-columns-of-the-data-in-the-shapefile" class="level1">
+<h1>Look at the columns of the data in the shapefile</h1>
+<p>glimpse(NPP_sf)</p>
+</section>
+<section id="subset-ibpe-site" class="level1">
+<h1>Subset IBPE site</h1>
+<p>IBPE_sf &lt;- NPP_sf %&gt;% dplyr::filter(site == “IBPE”) %&gt;% st_transform(“EPSG:4326”)</p>
+</section>
+<section id="check-coordinate-reference-system" class="level1">
+<h1>Check coordinate reference system</h1>
+<p>st_crs(IBPE_sf)</p>
+</section>
+<section id="quick-figure-of-ibpe-site-polygon" class="level1">
+<h1>Quick figure of IBPE site polygon</h1>
+<p>ggplot(IBPE_sf) + geom_sf()</p>
+</section>
+<section id="use-raprget_rap-function-to-access-rap-data" class="level1">
+<h1>Use rapr::get_rap() function to access RAP data</h1>
+</section>
+<section id="note-that-our-shapefile-is-already-in-the-espg4326-coordinate-reference-system" class="level1">
+<h1>Note that our shapefile is already in the “ESPG:4326” coordinate reference system</h1>
+<p>?get_rap</p>
+</section>
+<section id="currently-rap-biomass-and-production-data-are-only-available-as-a-30m-pixel-product" class="level1">
+<h1>Currently, RAP biomass and production data are only available as a 30m pixel product</h1>
+</section>
+<section id="each-pixel-is-approximately-30m-x-3m-900m2-in-size" class="level1">
+<h1>Each pixel is approximately 30m X 3m = 900m^2 in size</h1>
+<p>st_area(IBPE_sf) / 900 # The IBPE site is about 5.4 RAP pixels in size</p>
+</section>
+<section id="buffer-ibpe-area-by-30m-to-ensure-complete-coverage" class="level1">
+<h1>Buffer IBPE area by 30m to ensure complete coverage</h1>
+</section>
+<section id="note-that-the-lengthunit-is-already-in-meters" class="level1">
+<h1>Note that the LENGTHUNIT is already in meters</h1>
+<p>IBPE_buffer &lt;- IBPE_sf %&gt;% st_buffer(dist = 30)</p>
+</section>
+<section id="figure-of-ibpe-site-with-30m-buffer" class="level1">
+<h1>Figure of IBPE site with 30m buffer</h1>
+<p>ggplot() + geom_sf(data = IBPE_buffer) + geom_sf(data = IBPE_sf)</p>
+</section>
+<section id="import-30m-landsat-production-data" class="level1">
+<h1>Import 30m Landsat production data</h1>
+<p>IBPE_prod30m &lt;- get_rap( x = IBPE_buffer, years = c(1990:2022), product = “vegetation-biomass”, source = “rap-30m”, sds = FALSE, verbose = TRUE )</p>
+</section>
+<section id="inspect-the-spatraster" class="level1">
+<h1>Inspect the SpatRaster</h1>
+<p>IBPE_prod30m</p>
+</section>
+<section id="check-the-names" class="level1">
+<h1>Check the names</h1>
+<p>names(IBPE_prod30m)</p>
+</section>
+<section id="use-the-default-terraplot-function-to-explore-the-data" class="level1">
+<h1>Use the default terra::plot() function to explore the data</h1>
+</section>
+<section id="plots-the-first-16-rasters" class="level1">
+<h1>Plots the first 16 rasters</h1>
+<p>plot(IBPE_prod30m)</p>
+</section>
+<section id="graph-the-second-raster-with-ggplot-and-geom_spatraster" class="level1">
+<h1>Graph the second raster with ggplot and geom_spatraster()</h1>
+</section>
+<section id="overlay-the-ibpe-site-polygon" class="level1">
+<h1>Overlay the IBPE site polygon</h1>
+<p>ggplot() + geom_spatraster(data = IBPE_prod30m[[2]]) + geom_sf(data = IBPE_sf, col = “black”, fill = NA) + labs(title = “Single Layer from SpatRaster”)</p>
+</section>
+<section id="use-the-terraextract-function-to-calculate-mean-biomass-at-the-ibpe-site-for-each-raster" class="level1">
+<h1>Use the terra::extract() function to calculate mean biomass at the IBPE site for each raster</h1>
+</section>
+<section id="using-exact-true-will-caclualte-a-weigthed-mean-that-uses-partial-pixels-in-the-site-boundary" class="level1">
+<h1>Using exact = TRUE will caclualte a weigthed mean that uses partial pixels in the site boundary</h1>
+</section>
+<section id="using-exact-false-default-will-only-use-the-pixels-whose-centroids-are-within-the-site-boundary-4-pixels-in-this-case" class="level1">
+<h1>Using exact = FALSE (default) will only use the pixels whose centroids are within the site boundary (4 pixels in this case)</h1>
+<p>rap_biomass_extract &lt;- terra::extract(IBPE_prod30m, IBPE_sf, fun = “mean”, exact = TRUE)</p>
+</section>
+<section id="check-the-names-of-the-extracted-values" class="level1">
+<h1>Check the names of the extracted values</h1>
+<p>names(rap_biomass_extract)</p>
+</section>
+<section id="use-tidyrpivot_longer-to-transpose-the-date-from-wide-to-long" class="level1">
+<h1>Use tidyr::pivot_longer() to transpose the date from wide to long</h1>
+<p>rap_biomass_df &lt;- rap_biomass_extract %&gt;% pivot_longer(cols = starts_with(“vegetation”), names_to = “raster”, values_to = “biomass”)</p>
+</section>
+<section id="check-the-text-strings-of-raster-names" class="level1">
+<h1>Check the text strings of raster names</h1>
+</section>
+<section id="we-need-to-find-a-way-to-extract-the-year-from-each-of-thes-text-strings" class="level1">
+<h1>We need to find a way to extract the year from each of thes text strings</h1>
+<p>unique(rap_biomass_df$raster)</p>
+</section>
+<section id="we-can-use-the-paste-function-to-construct-a-vector-of-all-our-years" class="level1">
+<h1>We can use the paste() function to construct a vector of all our years</h1>
+</section>
+<section id="separated-by-the-bar-symbol-which-functions-as-a-n-or-operator" class="level1">
+<h1>separated by the “bar” symbol which functions as a n “OR” operator</h1>
+<p>paste(1990:2022, collapse = “|”)</p>
+</section>
+<section id="use-stringrstr_extract-to-extract-the-year-from-the-raster-name-then-covert-to-numeric" class="level1">
+<h1>Use stringr::str_extract() to extract the year from the raster name, then covert to numeric</h1>
+<p>rap_biomass_df &lt;- rap_biomass_extract %&gt;% pivot_longer(cols = starts_with(“vegetation”), names_to = “raster”, values_to = “biomass”) %&gt;% mutate(year = str_extract(string = raster, pattern = paste(1990:2022, collapse = “|”)) %&gt;% as.numeric())</p>
+</section>
+<section id="for-each-year-sum-the-biomass-for-annual-forbs-and-grasses-and-perennial-forbs-and-grasses" class="level1">
+<h1>For each year, sum the biomass for annual forbs and grasses and perennial forbs and grasses</h1>
+<p>rap_biomass_year &lt;- rap_biomass_df %&gt;% group_by(year) %&gt;% summarise(rap_herb_biomass = sum(biomass))</p>
+</section>
+<section id="quick-plot-of-the-data" class="level1">
+<h1>Quick plot of the data</h1>
+<p>ggplot(rap_biomass_year, aes(x = year, y = rap_herb_biomass)) + geom_line()</p>
+</section>
+<section id="we-want-to-join-this-data-by-year-to-the-filed-based-anpp-data" class="level1">
+<h1>We want to join this data (by year) to the filed-based ANPP data</h1>
+<p>ibpe_anpp %&gt;% left_join(rap_biomass_year)</p>
+</section>
+<section id="convert-rap-from-lbsacre-to-gramsm2" class="level1">
+<h1>Convert RAP from lbs/acre to grams/m^2</h1>
+<p>rap_biomass_convert &lt;- rap_biomass_year %&gt;% mutate(rap_g_m2 = rap_herb_biomass * 453.59237 / 4046.85642)</p>
+</section>
+<section id="now-merge-and-transpose-from-wide-to-long" class="level1">
+<h1>Now merge and transpose from wide to long</h1>
+<p>ibpe_biomass_merge &lt;- ibpe_anpp %&gt;% left_join(rap_biomass_convert %&gt;% dplyr::select(year, rap_g_m2)) %&gt;% pivot_longer(cols = c(npp_g_m2, rap_g_m2), names_to = “production_type”, values_to = “production_g_m2”)</p>
+</section>
+<section id="quick-graph-of-the-data-1" class="level1">
+<h1>Quick graph of the data</h1>
+<p>ggplot(ibpe_biomass_merge, aes(x = year, y = production_g_m2, col = production_type)) + geom_line()</p>
+</section>
+<section id="make-the-graph-prettier" class="level1">
+<h1>Make the graph prettier</h1>
+<p>ibpe_biomass_figure &lt;- ibpe_biomass_merge %&gt;% mutate(source = case_when(production_type == “npp_g_m2” ~ “Field-based total ANPP (all vegetation except Yucca elata”, production_type == “rap_g_m2” ~ “RAP-based herbaceous biomass (forbs and grasses only)”))</p>
+</section>
+<section id="check-the-range-of-the-production-values" class="level1">
+<h1>Check the range of the production values</h1>
+<p>range(ibpe_biomass_figure$production_g_m2)</p>
+<p>ggplot(data = ibpe_biomass_figure, aes(x = year, y = production_g_m2, col = source)) + theme_bw() + geom_line(linewidth = 1) + scale_x_continuous(limits = c(1989.5, 2022.5), expand = c(0, 0), breaks = seq(from = 1990, to = 2022, by = 5), minor_breaks = 1990:2022) + theme(legend.position = “bottom”, legend.direction = “vertical”) + xlab(““) + ylab(bquote(”Production (g<em>” </em> m^-2 * “)”)) + ggtitle(“Comparison of RAP and field-based production at IBPE site”, subtitle = “Years: 1990-2022”) + theme(legend.title = element_text(size = 14), legend.text = element_text(size = 13)) + theme(axis.text = element_text(size = 11)) + theme(axis.title = element_text(size = 13)) + scale_color_manual(values = c(“turquoise”, “darksalmon”)) + scale_y_continuous(limits = c(0, 340), expand = c(0,0)) ````</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/jornada-im\.github\.io\/jeds\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../../docs/lessons/git-and-github-for-research.html" class="pagination-link" aria-label="Git and GitHub for researchers">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Git and GitHub for researchers</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../../docs/lessons/setup.html" class="pagination-link" aria-label="JEDS Introduction and Setup">
+        <span class="nav-page-text">JEDS Introduction and Setup</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/jornada-im/jeds/edit/main/docs/lessons/jrn-npp-rap-demo.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/jornada-im/jeds/issues/new/choose" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>
