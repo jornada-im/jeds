@@ -3,10 +3,12 @@ title: "Working with the long-term data of the Jornada Basin"
 subtitle: "A guided tour & hands-on workshop"
 format:
   revealjs:
-    theme: default
+    theme: solarized
     slide-number: true
+    logo: ../../img/jrn-logo.png
     transition: fade
     incremental: false
+    footer: "Key Jornada datasets"
 header-includes: |
   <style>
   .reveal .slides section {
@@ -162,24 +164,30 @@ header-includes: |
 
 - Biomass or carbon accumulation by primary producers (plants, usually)
 - **Variable:** Gross or net primary production, aboveground or belowground
-- **Units:** _g biomass · m-2 · day -1_ or _g C · m-2 · day -1_
+- **Units:** _g biomass · m^-2^ · day^-1^_ or _g C · m^-2^ · day^-1^_
 
 
+## The Jornada NPP study {.smaller}
 
-## Jornada NPP: a non-destructive NPP method for drylands
+**A non-destructive ANPP method for drylands**
 
-- 1m2 long-term quadrats installed at 15 Jornada sites in 1989
+:::: {.columns}
+
+::: {.column width="60%"}
+- 1m^2^ long-term quadrats installed at 15 Jornada sites in 1989
 - Field datasets:
-- Replicate species harvests (dimensions & biomass)
-- Plant dimensions (only) collected in long-term quadrats
+  - Replicate species harvests (dimensions & biomass)
+  - Plant dimensions (only) collected in long-term quadrats
 - Allometric method to estimate biomass
-- Huenneke, Clason, and Muldavin described the method in 2001
+- Huenneke, Clason, and Muldavin described the method in [
+:::
 
-<div style="display:flex; justify-content:center; align-items:center; gap:20px; flex-wrap:wrap;">
-  <img src="img/slide13_img1.jpg" style="max-height:30vh; max-width:48%; object-fit:contain;">
-  <img src="img/slide13_img2.jpg" style="max-height:30vh; max-width:48%; object-fit:contain;">
-</div>
+::: {.column width="40%"}
+![John Anderson measuring vegetation cover in the Jornada NPP quadrats.](./img/slide13_img1.jpg)
+![](./img/slide13_img2.jpg)
+:::
 
+::::
 
 
 ## Used in numerous JRN pubs & cross-site syntheses

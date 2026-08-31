@@ -1,5 +1,5 @@
 ---
-title: Welcome to the Jornada Environmental Data Science pages (JEDS)
+title: Training resources for Jornada data users
 format:
   html:
     css: styles.css

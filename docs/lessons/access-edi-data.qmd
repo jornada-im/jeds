@@ -1,0 +1,85 @@
+---
+title: "Accessing Jornada data in EDI"
+author: "Greg Maurer, Darren James"
+date: '2026-07-31'
+execute:
+  eval: false
+---
+
+```{r}
+#| label = "setup",
+#| include = FALSE
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Introduction
+
+This lesson will teach you several methods for accessing Jornada data at the
+[Environmental Data Initiative (EDI) repository](https://edirepository.org). 
+EDI has recently become more strict about data access and now requires authentication
+for downloading data files.
+
+## 1. Downloading from the portal
+
+The EDI Portal ([portal.edirepository.org](https://portal.edirepository.org)) is the
+main graphical interface to the repository. It provides a search interface and landing
+pages for all datasets, and provides a way to download the files published as a part
+of any dataset.
+
+Downloading data requires "authentication" - i.e. you have to be logged in with a
+non-anonymous account. EDI makes it easy to use your pre-existing Google or GitHub account
+to authenticate.
+
+## 2. EDIutils
+
+The [EDIutils](https://docs.ropensci.org/EDIutils/) R package is a wrapper around the EDI
+repository's API. It provides functions to search and access the data published in 
+EDI from the comfort of your R scripts
+
+```{r}
+# Access Jornada data from the EDI repository
+
+library('tidyverse')
+library('EDIutils')
+
+# Data access at EDI requires authentication. The easiest way is to create
+# an API key at https://auth.edirepository.org. Once you have that, place 
+# it in your script.
+mykey <- "<my EDI API key>"
+
+# Log in to EDI rogrammatically with an API key
+EDIutils::login(key = mykey)
+
+# Set the dataset ID
+datasetID <- "knb-lter-jrn.210011003.106"
+
+
+# Read the list of "entities" in the dataset
+ents <- read_data_entity_names(datasetID)
+
+# Read the raw entity data
+raw <- read_data_entity(datasetID, ents[1, "entityId"])
+
+# Now read the raw data as a CSV
+df <- readr::read_csv(file = raw)
+
+# Explore the data a little
+head(df)
+unique(df$site)
+length(unique(df$site))
+
+
+# Now make a simple plot
+g <- ggplot(data=df, aes(x=year, y=npp_g_m2, col=site)) + 
+  geom_line()
+
+# Show it
+g
+
+# Now lets subset and plot site==IBPE
+df_ibpe <- df |> filter(site=="IBPE")
+g2 <- ggplot(data=df_ibpe, aes(x=year, y=npp_g_m2, col=site)) + 
+  geom_line()
+
+g2
+```

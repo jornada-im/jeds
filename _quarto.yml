@@ -3,8 +3,8 @@ project:
   output-dir: _site
 
 website:
-  title: "Jornada Data Commons: Ed Pages"
-  description: "Environmental data science education for the Jornada Basin LTER and USDA-ARS Jornada Experimental Range. Contact: jornada.data@nmsu.edu."
+  title: "Jornada Data Commons: Training"
+  description: "Environmental data science education materials for the Jornada Basin LTER and USDA-ARS Jornada Experimental Range. Contact: jornada.data@nmsu.edu."
   favicon: img/jrn-logo-light.png
   site-url: https://jornada-im.github.io/jeds/
   repo-url: https://github.com/jornada-im/jeds
