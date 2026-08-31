@@ -4,13 +4,8 @@ author: "Greg Maurer, Darren James"
 date: '2026-07-31'
 execute:
   eval: false
+  echo: true
 ---
-
-```{r}
-#| label = "setup",
-#| include = FALSE
-knitr::opts_chunk$set(echo = TRUE)
-```
 
 ## Introduction
 
