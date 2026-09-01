@@ -30,7 +30,7 @@ jobs:
             any::multcomp
             any::multcompView
             any::lme4
-            any:lmerTest
+            any::lmerTest
             any::EDIutils
             any::sf
             any::terra
