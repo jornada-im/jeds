@@ -27,6 +27,7 @@ jobs:
             any::ggpmisc
             any::car
             any::emmeans
+            any::multcomp
             any::lme4
             any::EDIutils
             any::sf

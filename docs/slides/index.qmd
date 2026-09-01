@@ -3,7 +3,7 @@ title: "Presentation listing"
 listing: 
   contents: ./*.qmd
   #sort: "date desc"
-  type: table
+  type: default
   categories: true
 sidebar: slides_sb
 ---
