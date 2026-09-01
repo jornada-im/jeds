@@ -1,7 +1,10 @@
 ---
-title: "Statistical inference with general linear models and mixed models"
-author: "Greg Maurer, Darren James"
-date: '2022-06-19'
+title: Statistical inference with general linear models and mixed models
+author: 
+  - Greg Maurer
+  - Darren James
+date: 2022-06-19
+description: Statistical inference and hypothesis testing in R
 execute:
   eval: true
   echo: true

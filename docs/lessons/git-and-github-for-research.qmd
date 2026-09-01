@@ -1,11 +1,14 @@
 ---
 title: "Git and GitHub for researchers"
-author: "Greg Maurer"
-date: '2022-09-01'
+author: Greg Maurer
+date: 2022-09-01
+description: A fairly simple Git and GitHub tutorial
 execute:
   eval: true
   echo: true
 ---
+
+This is a simple git and GitHub tutorial to teach you the basics of working with version control.
 
 ```{bash}
 #| label: setup1

@@ -1,14 +1,14 @@
 ---
 title: "JEDS Introduction and Setup"
-author: "Greg Maurer, Darren James"
-date: '2022-09-01'
+author: 
+  - Greg Maurer
+  - Darren James
+date: 2022-09-01
+description: Get ready to rock & roll with these data training materials
+execute:
+  eval: true
+  echo: true
 ---
-
-```{r}
-#| label: setup
-#| include: false
-knitr::opts_chunk$set(echo = TRUE)
-```
 
 ## Introduction
 

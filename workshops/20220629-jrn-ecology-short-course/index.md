@@ -3,8 +3,9 @@ title: "JEDS @ 2022 Jornada Ecology Short Course"
 author:
   - Darren James
   - Gregory Maurer
-date: "2022-06-29"
-date-modified: "2026-08-29"
+date: 2022-06-29
+date-modified: 2026-08-29
+description: Statistical inference and modeling at the Desert Ecology Short Course
 draft: False
 ---
 

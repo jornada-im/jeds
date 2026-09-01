@@ -1,7 +1,10 @@
 ---
 title: "Teaching Datasets"
-author: "Greg Maurer, Darren James"
-date: '2022-06-19'
+author: 
+  - Greg Maurer
+  - Darren James
+date: 2022-06-19
+description: An introduction to some of the datasets used in these lessons.
 execute:
   eval: true
   echo: true

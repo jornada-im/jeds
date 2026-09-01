@@ -2,9 +2,10 @@
 title: "2022 Data Therapy: Git/GitHub Sessions"
 author:
   - Gregory Maurer
-date: "2022-09-08"
-date-modified: "2026-08-29"
-draft: False
+date: 2022-09-08
+date-modified: 2026-08-29
+description: The Git and GitHub tutorials at Data Therapy
+draft: false
 ---
 
 # 2022 Data Therapy: Git/GitHub Sessions

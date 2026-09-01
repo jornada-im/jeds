@@ -1,7 +1,10 @@
 ---
 title: "Accessing Jornada data in EDI"
-author: "Greg Maurer, Darren James"
-date: '2026-07-31'
+author: 
+  - Greg Maurer
+  - Darren James
+date: 2026-07-31
+description: The basics on how to get data from the EDI repository
 execute:
   eval: true
   echo: true

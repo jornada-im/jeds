@@ -1,7 +1,8 @@
 ---
 title: "Data visualization with ggplot"
-author: "Darren James"
-date: '2025-08-06'
+author: Darren James
+date: 2025-08-06
+description: Learn how to make your `ggplot` graphs prettier.
 execute:
   eval: true
   echo: true

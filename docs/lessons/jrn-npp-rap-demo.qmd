@@ -1,11 +1,16 @@
 ---
 title: "Rangeland Analysis Platform (RAP) & JRN NPP"
-author: "Greg Maurer, Darren James"
-date: '2026-07-31'
+author: 
+  - Greg Maurer
+  - Darren James
+date: 2026-07-31
+description: Comparing field-collected NPP data to production from the Rangeland Analysis Platform (RAP)
 execute:
   eval: true
   echo: true
 ---
+
+This tutorial introduces the JRN NPP data and does some comparisons with data from the Rangeland Analysis Platform (RAP). Originally presented in the 2026 Shortcourse workshop.
 
 ```{r}
 library(tidyverse)
