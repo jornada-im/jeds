@@ -63,7 +63,7 @@ ggplot(ibpe_anpp, aes(x = year, y = npp_g_m2)) +
 # Import shapefile of NPP sites
 # This can be downloaded from the Jornada Geoportal if you already
 # have access
-NPP_sf <- st_read("../../data/Jornada_prj011_polygons")
+NPP_sf <- st_read("../../data/Jornada_prj011_polygons.shp")
 
 # Look at the columns of the data in the shapefile
 glimpse(NPP_sf)
