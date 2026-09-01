@@ -4,13 +4,8 @@ author: "Greg Maurer, Darren James"
 date: '2022-06-19'
 execute:
   eval: true
+  echo: true
 ---
-
-```{r}
-#| label: setup
-#| include: false
-knitr::opts_chunk$set(echo = TRUE)
-```
 
 ## Introduction
 
@@ -50,15 +45,23 @@ library(tidyverse)
 Then, load a comma-separated value file from the EDI repository. At the EDI
 repository, each file in a dataset is assigned a download URL. This can be 
 passed to the `tidyverse::read_csv()` function to read that file into a
-dataframe.
+dataframe. You must also provide an API access key at the end of the URL, so
+the URL will look something like `https://pasta.lternet.edu/<path_to_data_file>?key=<my_API_key>`.
+To get an API access key, visit the [EDI authentication portal](https://auth.edirepository.org).
 
 ```{r}
 #| label: load_ds1
 # Assign the address for the csv file hosted on EDI to a variable
-infile <- paste0("https://pasta.lternet.edu/package/data/eml/knb-lter-jrn/210011003/105/127124b0f04a1c71f34148e3d40a5c72?key=", Sys.getenv("EDI_API_KEY"))
+file_url <- "https://pasta.lternet.edu/package/data/eml/knb-lter-jrn/210011003/105/127124b0f04a1c71f34148e3d40a5c72"
+# Once you have an API key, assign it to a variable too.  Below, 
+# we're getting it from an environmental variable,  but you can 
+# replace the "Sys.getenv" part with your actual key.
+my_key <- Sys.getenv("EDI_API_KEY")
+# Put it all together
+input_file <- paste0(file_url, "?key=", my_key)
 
 # Read this file into a tibble with `tidyverse::read_csv()`
-anpp.annual <- read_csv(infile, na=c('NA', '', '.'))
+anpp.annual <- read_csv(input_file, na=c('NA', '', '.'))
 ```
 
 R tells us that we have two character data columns (`zone` and `site`), and two

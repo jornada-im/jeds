@@ -29,6 +29,10 @@ jobs:
             any::emmeans
             any::lme4
             any::EDIutils
+            any::sf
+            any::terra
+            any::tidyterra
+            any::rapr
 
       #This is for rendering mermaid to SVG in advance (w/in panels). Could drop it
       # if issue gets fixed someday.

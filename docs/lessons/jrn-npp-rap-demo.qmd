@@ -3,7 +3,7 @@ title: "Rangeland Analysis Platform (RAP) & JRN NPP"
 author: "Greg Maurer, Darren James"
 date: '2026-07-31'
 execute:
-  eval: false
+  eval: true
   echo: true
 ---
 
@@ -17,8 +17,9 @@ library(tidyterra)
 
 # Data access at EDI requires authentication. The easiest way is to create
 # an API key at https://auth.edirepository.org. Once you have that, place 
-# it in your script.
-mykey <- "<my EDI API key>"
+# it in your script. Below, we're getting it from an environmental variable,
+# but you can replace the "Sys.getenv" part with your actual key.
+mykey <- Sys.getenv("EDI_API_KEY")
 
 # Log in to EDI rogrammatically with an API key
 EDIutils::login(key = mykey)
@@ -52,18 +53,6 @@ g
 # Now lets subset and plot site==IBPE
 ibpe_anpp <- anpp_data |> filter(site=="IBPE")
 
-# Set working directory to location where script is saved
-#setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
-#dir("data")
-
-# Import total annual ANPP data
-# downloaded from https://portal.edirepository.org/nis/mapbrowse?scope=knb-lter-jrn&identifier=210011003
-#anpp_data <- read_csv("data/JRN011003_NPP_annual_site_summary.csv")
-
-# Subset IBPE total ANPP data
-#ibpe_anpp <- anpp_data %>%
-# dplyr::filter(site == "IBPE")
-
 # Check avialble years
 range(ibpe_anpp$year) # 1990 to 2022
 
@@ -74,7 +63,7 @@ ggplot(ibpe_anpp, aes(x = year, y = npp_g_m2)) +
 # Import shapefile of NPP sites
 # This can be downloaded from the Jornada Geoportal if you already
 # have access
-NPP_sf <- st_read("shp/Jornada_LTER_net_primary_production_study_sites_NPP_study_prj011__polygons.shp")
+NPP_sf <- st_read("../../data/Jornada_prj011_polygons")
 
 # Look at the columns of the data in the shapefile
 glimpse(NPP_sf)

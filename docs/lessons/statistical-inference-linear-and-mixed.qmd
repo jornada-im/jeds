@@ -3,17 +3,9 @@ title: "Statistical inference with general linear models and mixed models"
 author: "Greg Maurer, Darren James"
 date: '2022-06-19'
 execute:
-  eval: false
-# output:
-#     html_document:
-#       toc: true
+  eval: true
+  echo: true
 ---
-
-```{r}
-#| label: setup
-#| include: false
-knitr::opts_chunk$set(echo = TRUE)
-```
 
 ## Introduction
 
@@ -56,8 +48,19 @@ structure of this data.
 # Get tidyverse & the NPP data
 library(tidyverse)
 
-anpp <- read_csv('https://pasta.lternet.edu/package/data/eml/knb-lter-jrn/210011003/105/127124b0f04a1c71f34148e3d40a5c72')
+# Assign the address for the csv file hosted on EDI to a variable
+file_url <- "https://pasta.lternet.edu/package/data/eml/knb-lter-jrn/210011003/105/127124b0f04a1c71f34148e3d40a5c72"
+# Once you have an API key, assign it to a variable too.  Below, 
+# we're getting it from an environmental variable,  but you can 
+# replace the "Sys.getenv" part with your actual key.
+my_key <- Sys.getenv("EDI_API_KEY")
+# Put it all together
+input_file <- paste0(file_url, "?key=", my_key)
 
+# Now load it
+anpp <- read_csv(input_file)
+
+# Now look at the strucdture of the data
 str(anpp)
 ```
 
@@ -870,6 +873,7 @@ same data, indicates a better-fitting, and more parsimonious model.
 AIC(model.un)
 AIC(model.ar)
 ```
+
 We can see that the model with an autoregressive covariance structure is a
 "better" model.
 

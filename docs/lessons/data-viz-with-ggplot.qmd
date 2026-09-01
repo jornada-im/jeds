@@ -2,18 +2,14 @@
 title: "Data visualization with ggplot"
 author: "Darren James"
 date: '2025-08-06'
-#execute:
-#  eval: false
-# output:
-#     html_document:
-#       toc: true
+execute:
+  eval: true
+  echo: true
 ---
 
-```{r}
-#| label: setup
-#| include: false
-knitr::opts_chunk$set(echo = TRUE)
-```
+## Data visualization tips and tricks!
+
+First lets load some packages. The `ratdat` package will be our example data for this lesson. It has rodent data from the Portal project in Arizona.
 
 ```{r}
 #| label: load_packages
