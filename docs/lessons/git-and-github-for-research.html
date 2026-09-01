@@ -8,6 +8,7 @@
 
 <meta name="author" content="Greg Maurer">
 <meta name="dcterms.date" content="2022-09-01">
+<meta name="description" content="A fairly simple Git and GitHub tutorial">
 
 <title>Git and GitHub for researchers – Jornada Data Commons: Training</title>
 <style>
@@ -273,6 +274,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h1 class="title">Git and GitHub for researchers</h1>
 </div>
 
+<div>
+  <div class="description">
+    A fairly simple Git and GitHub tutorial
+  </div>
+</div>
 
 
 <div class="quarto-title-meta">
@@ -299,6 +305,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
+<p>This is a simple git and GitHub tutorial to teach you the basics of working with version control.</p>
 <section id="getting-to-know-git" class="level1">
 <h1>1. Getting to know Git</h1>
 <section id="what-is-git" class="level2">
@@ -386,27 +393,27 @@ data.csv</code></pre>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> <span class="at">-C</span> ~/awesomeproject_git/ log</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>commit 9703620c08c304dd8cdfbc4f9ff693664d7598cb
+<pre><code>commit 45feefce8a906b22740b6958d42edf4f72e071b7
 Author: Quarto GHA Workflow Runner &lt;quarto-github-actions-publish@example.com&gt;
-Date:   Tue Sep 1 02:02:28 2026 +0000
+Date:   Tue Sep 1 03:33:17 2026 +0000
 
     Statistics and figures for report 1
 
-commit b9590650100e55ecd9b9c6004fa2e979eaa10e47
+commit 311a529cb96c356909437fe6d15e165759f25cca
 Author: Quarto GHA Workflow Runner &lt;quarto-github-actions-publish@example.com&gt;
-Date:   Tue Sep 1 02:02:28 2026 +0000
+Date:   Tue Sep 1 03:33:17 2026 +0000
 
     Fit polynomial model
 
-commit 3a4eed1798f86e9c735fbf8586a751046bccd394
+commit e5463b04dbfc161f843e54e9dc564ac5bdbc9f34
 Author: Quarto GHA Workflow Runner &lt;quarto-github-actions-publish@example.com&gt;
-Date:   Tue Sep 1 02:02:28 2026 +0000
+Date:   Tue Sep 1 03:33:17 2026 +0000
 
     Fit linear model to the data
 
-commit dcabf015a2d2cbdbd9516947cc53dad71479c1bd
+commit 632b473a1d66e2865e47fafa5d046532166d039e
 Author: Quarto GHA Workflow Runner &lt;quarto-github-actions-publish@example.com&gt;
-Date:   Tue Sep 1 02:02:28 2026 +0000
+Date:   Tue Sep 1 03:33:17 2026 +0000
 
     Initial commit - add analysis script</code></pre>
 </div>
@@ -523,7 +530,7 @@ Changes to be committed:
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">'Adding the first R script'</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[master (root-commit) 4e8de58] Adding the first R script
+<pre><code>[master (root-commit) 6e46346] Adding the first R script
  1 file changed, 0 insertions(+), 0 deletions(-)
  create mode 100644 script.R</code></pre>
 </div>
@@ -559,7 +566,7 @@ index e69de29..4cd5370 100644
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add script.R</span>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">'I updated the script with 2 lines'</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[master c9cc97f] I updated the script with 2 lines
+<pre><code>[master a7407f4] I updated the script with 2 lines
  1 file changed, 2 insertions(+)</code></pre>
 </div>
 </div>
@@ -568,15 +575,15 @@ index e69de29..4cd5370 100644
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> log</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>commit c9cc97f43e6a6a86a409a0fcae9097f09b18096e
+<pre><code>commit a7407f421445735744f148823613dd10cce86c64
 Author: Quarto GHA Workflow Runner &lt;quarto-github-actions-publish@example.com&gt;
-Date:   Tue Sep 1 02:02:29 2026 +0000
+Date:   Tue Sep 1 03:33:17 2026 +0000
 
     I updated the script with 2 lines
 
-commit 4e8de58dc6fa78c322231fd617ba45043c599c3b
+commit 6e463468740a14b1afb587643637f1d67fd9538e
 Author: Quarto GHA Workflow Runner &lt;quarto-github-actions-publish@example.com&gt;
-Date:   Tue Sep 1 02:02:29 2026 +0000
+Date:   Tue Sep 1 03:33:17 2026 +0000
 
     Adding the first R script</code></pre>
 </div>
@@ -711,7 +718,7 @@ origin  https://github.com/gremau/my_gh_repo.git (push)</code></pre>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb45"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add README.md</span>
 <span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"Added two lines to the README file"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[main f9c5aa7] Added two lines to the README file
+<pre><code>[main b543b8c] Added two lines to the README file
  1 file changed, 2 insertions(+)</code></pre>
 </div>
 </div>
@@ -807,7 +814,7 @@ teaching-datasets.qmd</code></pre>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb59"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add docs/lessons/learner_changes.md</span>
 <span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">'I made this file better'</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[my_changes 4ad566d] I made this file better
+<pre><code>[my_changes 0c27d2f] I made this file better
  1 file changed, 2 insertions(+)</code></pre>
 </div>
 </div>
