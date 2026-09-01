@@ -283,13 +283,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>Then, load a comma-separated value file from the EDI repository. At the EDI repository, each file in a dataset is assigned a download URL. This can be passed to the <code>tidyverse::read_csv()</code> function to read that file into a dataframe.</p>
+<p>Then, load a comma-separated value file from the EDI repository. At the EDI repository, each file in a dataset is assigned a download URL. This can be passed to the <code>tidyverse::read_csv()</code> function to read that file into a dataframe. You must also provide an API access key at the end of the URL, so the URL will look something like <code>https://pasta.lternet.edu/&lt;path_to_data_file&gt;?key=&lt;my_API_key&gt;</code>. To get an API access key, visit the <a href="https://auth.edirepository.org">EDI authentication portal</a>.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Assign the address for the csv file hosted on EDI to a variable</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>infile <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"https://pasta.lternet.edu/package/data/eml/knb-lter-jrn/210011003/105/127124b0f04a1c71f34148e3d40a5c72?key="</span>, <span class="fu">Sys.getenv</span>(<span class="st">"EDI_API_KEY"</span>))</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Read this file into a tibble with `tidyverse::read_csv()`</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>anpp.annual <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(infile, <span class="at">na=</span><span class="fu">c</span>(<span class="st">'NA'</span>, <span class="st">''</span>, <span class="st">'.'</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>file_url <span class="ot">&lt;-</span> <span class="st">"https://pasta.lternet.edu/package/data/eml/knb-lter-jrn/210011003/105/127124b0f04a1c71f34148e3d40a5c72"</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Once you have an API key, assign it to a variable too.  Below, </span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># we're getting it from an environmental variable,  but you can </span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co"># replace the "Sys.getenv" part with your actual key.</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>my_key <span class="ot">&lt;-</span> <span class="fu">Sys.getenv</span>(<span class="st">"EDI_API_KEY"</span>)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Put it all together</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>input_file <span class="ot">&lt;-</span> <span class="fu">paste0</span>(file_url, <span class="st">"?key="</span>, my_key)</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Read this file into a tibble with `tidyverse::read_csv()`</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>anpp.annual <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(input_file, <span class="at">na=</span><span class="fu">c</span>(<span class="st">'NA'</span>, <span class="st">''</span>, <span class="st">'.'</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Rows: 465 Columns: 4
 ── Column specification ────────────────────────────────────────────────────────

@@ -85,9 +85,9 @@ ul.task-list li input[type="checkbox"] {
     }
 
     const options = {
-      valueNames: ['listing-date','listing-title','listing-author',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-title-sort'] }],
+      valueNames: ['listing-date','listing-title','listing-author','listing-image','listing-description','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
       
-      searchColumns: ["listing-date","listing-title","listing-author"],
+      searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description","listing-categories"],
     };
 
     window['quarto-listings'] = window['quarto-listings'] || {};
@@ -274,145 +274,189 @@ window.Quarto = {
 
 
 
-<div class="quarto-listing quarto-listing-container-table" id="listing-listing">
-<div class="listing-actions-group">
-   <div class="input-group input-group-sm quarto-listing-sort">
-    <span class="input-group-text"><i class="bi bi-sort-down"></i></span>
-    <select id="listing-listing-sort" class="form-select" aria-label="Order By" onchange="window['quarto-listings']['listing-listing'].sort(this.options[this.selectedIndex].value, { order: this.options[this.selectedIndex].getAttribute('data-direction')})">
-      <option value="" disabled="" selected="" hidden="">Order By</option>
-      <option value="index" data-direction="asc">Default</option>
-      <option value="listing-date-sort" data-direction="asc">
-        Date - Oldest
-      </option>
-      <option value="listing-date-sort" data-direction="desc">
-        Date - Newest
-      </option>
-      <option value="listing-title-sort" data-direction="asc">
-        Title
-      </option>
-      <option value="listing-author" data-direction="asc">
-        Author
-      </option>
-    </select>
-  </div>
-    <div class="input-group input-group-sm quarto-listing-filter">
-      <span class="input-group-text"><i class="bi bi-search"></i></span>
-      <input type="text" class="search form-control" placeholder="Filter">
-    </div>
+<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
+<div class="list quarto-listing-default">
+<div class="quarto-post image-right" data-index="0" data-listing-date-sort="1785456000000" data-listing-file-modified-sort="1788227957524" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="273">
+<div class="thumbnail"><a href="../../docs/lessons/access-edi-data.html" class="no-external">
+
+<p class="card-img-top"><img loading='lazy' src="access-edi-data_files/figure-html/unnamed-chunk-1-1.png"  class="thumbnail-image card-img"/></p>
+
+</a></div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="../../docs/lessons/access-edi-data.html" class="no-external">Accessing Jornada data in EDI</a>
+</h3>
+<div class="delink listing-description"><a href="../../docs/lessons/access-edi-data.html" class="no-external">
+This lesson will teach you several methods for accessing Jornada data at the Environmental Data Initiative (EDI) repository. EDI has recently become more strict about data…
+</a></div>
 </div>
-<table class="quarto-listing-table table">
-<thead>
-<tr>
+<div class="metadata">
+<a href="../../docs/lessons/access-edi-data.html" class="no-external">
+<div class="listing-date">
+Jul 31, 2026
+</div>
+<div class="listing-author">
+Greg Maurer, Darren James
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="1" data-listing-date-sort="1754438400000" data-listing-file-modified-sort="1788227957524" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="7" data-listing-word-count-sort="1319">
+<div class="thumbnail"><a href="../../docs/lessons/data-viz-with-ggplot.html" class="no-external">
 
-<th>
-<a class="sort" data-sort="listing-date-sort" onclick="if (this.classList.contains('sort-asc')) { this.classList.add('sort-desc'); this.classList.remove('sort-asc') } else { this.classList.add('sort-asc'); this.classList.remove('sort-desc')} return false;">Date</a>
-</th>
+<p class="card-img-top"><img loading='lazy' src="data-viz-with-ggplot_files/figure-html/load_data-1.png"  class="thumbnail-image card-img"/></p>
 
-<th>
-<a class="sort" data-sort="listing-title-sort" onclick="if (this.classList.contains('sort-asc')) { this.classList.add('sort-desc'); this.classList.remove('sort-asc') } else { this.classList.add('sort-asc'); this.classList.remove('sort-desc')} return false;">Title</a>
-</th>
+</a></div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="../../docs/lessons/data-viz-with-ggplot.html" class="no-external">Data visualization with ggplot</a>
+</h3>
+<div class="delink listing-description"><a href="../../docs/lessons/data-viz-with-ggplot.html" class="no-external">
+First lets load some packages. The <code>ratdat</code> package will be our example data for this lesson. It has rodent data from the Portal project in Arizona.
+</a></div>
+</div>
+<div class="metadata">
+<a href="../../docs/lessons/data-viz-with-ggplot.html" class="no-external">
+<div class="listing-date">
+Aug 6, 2025
+</div>
+<div class="listing-author">
+Darren James
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="2" data-listing-date-sort="1661990400000" data-listing-file-modified-sort="1788227957524" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="17" data-listing-word-count-sort="3390">
+<div class="thumbnail"><a href="../../docs/lessons/git-and-github-for-research.html" class="no-external">
 
-<th>
-<a class="sort" data-sort="listing-author" onclick="if (this.classList.contains('sort-asc')) { this.classList.add('sort-desc'); this.classList.remove('sort-asc') } else { this.classList.add('sort-asc'); this.classList.remove('sort-desc')} return false;">Author</a>
-</th>
+<p class="card-img-top"><img loading='lazy' src="img/git_diagram1.png" alt="Schematic of a git-based workflow"  class="thumbnail-image card-img"/></p>
 
-</tr>
-</thead>
-<tbody class="list">
+</a></div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="../../docs/lessons/git-and-github-for-research.html" class="no-external">Git and GitHub for researchers</a>
+</h3>
+<div class="delink listing-description"><a href="../../docs/lessons/git-and-github-for-research.html" class="no-external">
+Research can become a “garden of forking paths”
+</a></div>
+</div>
+<div class="metadata">
+<a href="../../docs/lessons/git-and-github-for-research.html" class="no-external">
+<div class="listing-date">
+Sep 1, 2022
+</div>
+<div class="listing-author">
+Greg Maurer
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="3" data-listing-date-sort="1661990400000" data-listing-file-modified-sort="1788227957524" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="744">
+<div class="thumbnail"><a href="../../docs/lessons/setup.html" class="no-external">
 
-<tr data-index="0" data-listing-date-sort="1785456000000" data-listing-file-modified-sort="1788218655338" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="273" data-listing-title-sort="Accessing Jornada data in EDI" data-listing-filename-sort="access-edi-data.qmd">
-<td>
-<span class="listing-date">Jul 31, 2026</span>
-</td>
-<td>
-<a href="../../docs/lessons/access-edi-data.html" class="title listing-title">Accessing Jornada data in EDI</a>
-</td>
-<td>
-<span class="listing-author">Greg Maurer, Darren James</span>
-</td>
+<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
 
-</tr>
+</a></div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="../../docs/lessons/setup.html" class="no-external">JEDS Introduction and Setup</a>
+</h3>
+<div class="delink listing-description"><a href="../../docs/lessons/setup.html" class="no-external">
+Welcome to the Jornada Environmental Data Science education site (JEDS!). Our aim is to teach introductory and intermediate elements of data science (data management…
+</a></div>
+</div>
+<div class="metadata">
+<a href="../../docs/lessons/setup.html" class="no-external">
+<div class="listing-date">
+Sep 1, 2022
+</div>
+<div class="listing-author">
+Greg Maurer, Darren James
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="4" data-listing-date-sort="1785456000000" data-listing-file-modified-sort="1788227957524" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6" data-listing-word-count-sort="1094">
+<div class="thumbnail"><a href="../../docs/lessons/jrn-npp-rap-demo.html" class="no-external">
 
-<tr data-index="1" data-listing-date-sort="1754438400000" data-listing-file-modified-sort="1788218655338" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="7" data-listing-word-count-sort="1300" data-listing-title-sort="Data visualization with ggplot" data-listing-filename-sort="data-viz-with-ggplot.qmd">
-<td>
-<span class="listing-date">Aug 6, 2025</span>
-</td>
-<td>
-<a href="../../docs/lessons/data-viz-with-ggplot.html" class="title listing-title">Data visualization with ggplot</a>
-</td>
-<td>
-<span class="listing-author">Darren James</span>
-</td>
+<p class="card-img-top"><img loading='lazy' src="jrn-npp-rap-demo_files/figure-html/unnamed-chunk-1-1.png"  class="thumbnail-image card-img"/></p>
 
-</tr>
+</a></div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="../../docs/lessons/jrn-npp-rap-demo.html" class="no-external">Rangeland Analysis Platform (RAP) &amp; JRN NPP</a>
+</h3>
+<div class="delink listing-description"><a href="../../docs/lessons/jrn-npp-rap-demo.html" class="no-external">
 
-<tr data-index="2" data-listing-date-sort="1661990400000" data-listing-file-modified-sort="1788218655338" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="17" data-listing-word-count-sort="3390" data-listing-title-sort="Git and GitHub for researchers" data-listing-filename-sort="git-and-github-for-research.qmd">
-<td>
-<span class="listing-date">Sep 1, 2022</span>
-</td>
-<td>
-<a href="../../docs/lessons/git-and-github-for-research.html" class="title listing-title">Git and GitHub for researchers</a>
-</td>
-<td>
-<span class="listing-author">Greg Maurer</span>
-</td>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu">library</span>(tidyverse)</span></code></pre></div></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.2.1     ✔ readr     2.2.0
+✔ forcats   1.0.1     ✔ stringr…</code></pre></div><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><span class="fu"></span></span><span id="cb3-2"><span class="fu"></span></span></code></pre></div></div><div class="cell-output cell-output-stderr"><pre><code></code></pre></div><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><span class="fu"></span></span></code></pre></div></div><div class="cell-output cell-output-stderr"><pre><code></code></pre></div><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><span class="fu"></span></span><span id="cb7-2"><span class="fu"></span></span></code></pre></div></div><div class="cell-output cell-output-stderr"><pre><code></code></pre></div><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><span class="co"></span></span><span id="cb9-2"><span class="co"></span></span><span id="cb9-3"><span class="co"></span></span><span id="cb9-4"><span class="co"></span></span><span id="cb9-5"><span class="ot"></span><span class="fu"></span><span class="st"></span></span><span id="cb9-6"></span><span id="cb9-7"><span class="co"></span></span><span id="cb9-8"><span class="sc"></span><span class="fu"></span><span class="at"></span></span></code></pre></div></div><div class="cell-output cell-output-stderr"><pre><code></code></pre></div><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><span class="co"></span></span><span id="cb11-2"><span class="ot"></span><span class="st"></span></span><span id="cb11-3"></span><span id="cb11-4"></span><span id="cb11-5"><span class="co"></span></span><span id="cb11-6"><span class="ot"></span><span class="fu"></span></span><span id="cb11-7"></span><span id="cb11-8"><span class="co"></span></span><span id="cb11-9"><span class="ot"></span><span class="fu"></span><span class="dv"></span><span class="st"></span></span><span id="cb11-10"></span><span id="cb11-11"><span class="co"></span></span><span id="cb11-12"><span class="ot"></span><span class="sc"></span><span class="fu"></span><span class="at"></span></span></code></pre></div></div><div class="cell-output cell-output-stderr"><pre><code></code></pre></div><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><span class="co"></span></span><span id="cb13-2"><span class="fu"></span></span></code></pre></div></div><div class="cell-output cell-output-stdout"><pre><code></code></pre></div><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><span class="fu"></span><span class="sc"></span></span></code></pre></div></div><div class="cell-output cell-output-stdout"><pre><code></code></pre></div><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><span class="fu"></span><span class="fu"></span><span class="sc"></span></span></code></pre></div></div><div class="cell-output cell-output-stdout"><pre><code></code></pre></div><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><span class="co"></span></span><span id="cb19-2"><span class="ot"></span><span class="fu"></span><span class="at"></span><span class="fu"></span><span class="at"></span><span class="at"></span><span class="at"></span><span class="sc"></span></span><span id="cb19-3"><span class="fu"></span></span><span id="cb19-4"></span><span id="cb19-5"><span class="co"></span></span><span id="cb19-6"></span></code></pre></div></div><div class="cell-output-display"><div><figure class="figure"><p></p></figure></div></div><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><span class="co"></span></span><span id="cb20-2"><span class="ot"></span><span class="sc"></span><span class="fu"></span><span class="sc"></span><span class="st"></span></span><span id="cb20-3"></span><span id="cb20-4"><span class="co"></span></span><span id="cb20-5"><span class="fu"></span><span class="sc"></span><span class="co"></span></span></code></pre></div></div><div class="cell-output cell-output-stdout"><pre><code></code></pre></div><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><span class="co"></span></span><span id="cb22-2"><span class="fu"></span><span class="fu"></span><span class="at"></span><span class="at"></span><span class="sc"></span></span><span id="cb22-3"><span class="fu"></span></span></code></pre></div></div><div class="cell-output-display"><div><figure class="figure"><p></p></figure></div></div><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><span class="co"></span></span><span id="cb23-2"><span class="co"></span></span><span id="cb23-3"><span class="co"></span></span><span id="cb23-4"><span class="ot"></span><span class="fu"></span><span class="st"></span></span></code></pre></div></div><div class="cell-output cell-output-stdout"><pre><code></code></pre></div><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><span class="co"></span></span><span id="cb25-2"><span class="fu"></span></span></code></pre></div></div><div class="cell-output cell-output-stdout"><pre><code></code></pre></div><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><span class="co"></span></span><span id="cb27-2"><span class="ot"></span><span class="sc"></span></span><span id="cb27-3"><span class="sc"></span><span class="fu"></span><span class="sc"></span><span class="st"></span><span class="sc"></span></span><span id="cb27-4"><span class="fu"></span><span class="st"></span></span><span id="cb27-5"></span><span id="cb27-6"><span class="co"></span></span><span id="cb27-7"><span class="fu"></span></span></code></pre></div></div><div class="cell-output cell-output-stdout"><pre><code></code></pre></div><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><span class="co"></span></span><span id="cb29-2"><span class="fu"></span><span class="sc"></span></span><span id="cb29-3"><span class="fu"></span></span></code></pre></div></div><div class="cell-output-display"><div><figure class="figure"><p></p></figure></div></div><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><span class="co"></span></span><span id="cb30-2"><span class="co"></span></span><span id="cb30-3"></span><span id="cb30-4"></span><span id="cb30-5"><span class="co"></span></span><span id="cb30-6"><span class="co"></span></span><span id="cb30-7"><span class="fu"></span><span class="sc"></span><span class="dv"></span><span class="co"></span></span></code></pre></div></div><div class="cell-output cell-output-stdout"><pre><code></code></pre></div><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><span class="co"></span></span><span id="cb32-2"><span class="co"></span></span><span id="cb32-3"><span class="ot"></span><span class="sc"></span></span><span id="cb32-4"><span class="fu"></span><span class="at"></span><span class="dv"></span></span><span id="cb32-5"></span><span id="cb32-6"><span class="co"></span></span><span id="cb32-7"><span class="fu"></span><span class="sc"></span></span><span id="cb32-8"><span class="fu"></span><span class="at"></span><span class="sc"></span></span><span id="cb32-9"><span class="fu"></span><span class="at"></span></span></code></pre></div></div><div class="cell-output-display"><div><figure class="figure"><p></p></figure></div></div><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><span class="co"></span></span><span id="cb33-2"><span class="ot"></span><span class="fu"></span></span><span id="cb33-3"><span class="at"></span></span><span id="cb33-4"><span class="at"></span><span class="fu"></span><span class="dv"></span><span class="sc"></span><span class="dv"></span></span><span id="cb33-5"><span class="at"></span><span class="st"></span></span><span id="cb33-6"><span class="at"></span><span class="st"></span></span><span id="cb33-7"><span class="at"></span><span class="cn"></span></span><span id="cb33-8"><span class="at"></span><span class="cn"></span></span><span id="cb33-9"></span></code></pre></div></div><div class="cell-output cell-output-stderr"><pre><code></code></pre></div><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><span class="co"></span></span><span id="cb35-2"></span></code></pre></div></div><div class="cell-output cell-output-stdout"><pre><code></code></pre></div><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><span class="co"></span></span><span id="cb37-2"><span class="fu"></span></span></code></pre></div></div><div class="cell-output cell-output-stdout"><pre><code></code></pre></div><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><span class="co"></span></span><span id="cb39-2"><span class="co"></span></span><span id="cb39-3"><span class="fu"></span></span></code></pre></div></div><div class="cell-output-display"><div><figure class="figure"><p></p></figure></div></div><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><span class="co"></span></span><span id="cb40-2"><span class="co"></span></span><span id="cb40-3"><span class="fu"></span><span class="sc"></span></span><span id="cb40-4"><span class="fu"></span><span class="at"></span><span class="dv"></span><span class="sc"></span></span><span id="cb40-5"><span class="fu"></span><span class="at"></span><span class="at"></span><span class="st"></span><span class="at"></span><span class="cn"></span><span class="sc"></span></span><span id="cb40-6"><span class="fu"></span><span class="at"></span><span class="st"></span></span></code></pre></div></div><div class="cell-output-display"><div><figure class="figure"><p></p></figure></div></div><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><span class="co"></span></span><span id="cb41-2"><span class="co"></span></span><span id="cb41-3"><span class="co"></span></span><span id="cb41-4"><span class="ot"></span><span class="sc"></span><span class="fu"></span><span class="at"></span><span class="st"></span><span class="at"></span><span class="cn"></span></span><span id="cb41-5"></span><span id="cb41-6"><span class="co"></span></span><span id="cb41-7"><span class="fu"></span></span></code></pre></div></div><div class="cell-output cell-output-stdout"><pre><code></code></pre></div><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><span class="co"></span></span><span id="cb43-2"><span class="ot"></span><span class="sc"></span></span><span id="cb43-3"><span class="fu"></span><span class="at"></span><span class="fu"></span><span class="st"></span></span><span id="cb43-4"><span class="at"></span><span class="st"></span></span><span id="cb43-5"><span class="at"></span><span class="st"></span></span><span id="cb43-6"></span><span id="cb43-7"><span class="co"></span></span><span id="cb43-8"><span class="co"></span></span><span id="cb43-9"><span class="fu"></span><span class="sc"></span></span></code></pre></div></div><div class="cell-output cell-output-stdout"><pre><code></code></pre></div><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><span class="co"></span></span><span id="cb45-2"><span class="co"></span></span><span id="cb45-3"><span class="fu"></span><span class="dv"></span><span class="sc"></span><span class="dv"></span><span class="at"></span><span class="st"></span></span></code></pre></div></div><div class="cell-output cell-output-stdout"><pre><code></code></pre></div><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><span class="co"></span></span><span id="cb47-2"><span class="ot"></span><span class="sc"></span></span><span id="cb47-3"><span class="fu"></span><span class="at"></span><span class="fu"></span><span class="st"></span></span><span id="cb47-4"><span class="at"></span><span class="st"></span></span><span id="cb47-5"><span class="at"></span><span class="st"></span><span class="sc"></span></span><span id="cb47-6"><span class="fu"></span><span class="at"></span><span class="fu"></span><span class="at"></span><span class="at"></span><span class="fu"></span><span class="dv"></span><span class="sc"></span><span class="dv"></span><span class="at"></span><span class="st"></span><span class="sc"></span></span><span id="cb47-7"><span class="fu"></span></span><span id="cb47-8"></span><span id="cb47-9"><span class="co"></span></span><span id="cb47-10"><span class="ot"></span><span class="sc"></span></span><span id="cb47-11"><span class="fu"></span><span class="sc"></span></span><span id="cb47-12"><span class="fu"></span><span class="at"></span><span class="fu"></span></span><span id="cb47-13"></span><span id="cb47-14"><span class="co"></span></span><span id="cb47-15"><span class="fu"></span><span class="fu"></span><span class="at"></span><span class="at"></span><span class="sc"></span></span><span id="cb47-16"><span class="fu"></span></span></code></pre></div></div><div class="cell-output-display"><div><figure class="figure"><p></p></figure></div></div><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><span class="co"></span></span><span id="cb48-2"><span class="sc"></span></span><span id="cb48-3"><span class="fu"></span></span></code></pre></div></div><div class="cell-output cell-output-stderr"><pre><code></code></pre></div><div class="cell-output cell-output-stdout"><pre><code></code></pre></div><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><span class="co"></span></span><span id="cb51-2"><span class="ot"></span><span class="sc"></span></span><span id="cb51-3"><span class="fu"></span><span class="at"></span><span class="sc"></span><span class="fl"></span><span class="sc"></span><span class="fl"></span></span><span id="cb51-4"></span><span id="cb51-5"><span class="co"></span></span><span id="cb51-6"><span class="ot"></span><span class="sc"></span></span><span id="cb51-7"><span class="fu"></span><span class="sc"></span></span><span id="cb51-8"><span class="sc"></span><span class="fu"></span><span class="sc"></span></span><span id="cb51-9"><span class="fu"></span><span class="at"></span><span class="fu"></span></span><span id="cb51-10"><span class="at"></span><span class="st"></span></span><span id="cb51-11"><span class="at"></span><span class="st"></span></span></code></pre></div></div><div class="cell-output cell-output-stderr"><pre><code></code></pre></div><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><span class="co"></span></span><span id="cb53-2"><span class="fu"></span><span class="fu"></span><span class="at"></span><span class="at"></span><span class="at"></span><span class="sc"></span></span><span id="cb53-3"><span class="fu"></span></span></code></pre></div></div><div class="cell-output-display"><div><figure class="figure"><p></p></figure></div></div><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><span class="co"></span></span><span id="cb54-2"><span class="ot"></span><span class="sc"></span></span><span id="cb54-3"><span class="fu"></span><span class="at"></span><span class="fu"></span><span class="sc"></span><span class="st"></span><span class="sc"></span><span class="st"></span></span><span id="cb54-4"><span class="sc"></span><span class="st"></span><span class="sc"></span><span class="st"></span></span><span id="cb54-5"></span><span id="cb54-6"><span class="co"></span></span><span id="cb54-7"><span class="fu"></span><span class="sc"></span></span></code></pre></div></div><div class="cell-output cell-output-stdout"><pre><code></code></pre></div><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><span class="fu"></span><span class="at"></span><span class="fu"></span><span class="at"></span><span class="at"></span><span class="at"></span><span class="sc"></span></span><span id="cb56-2"><span class="fu"></span><span class="sc"></span></span><span id="cb56-3"><span class="fu"></span><span class="at"></span><span class="dv"></span><span class="sc"></span></span><span id="cb56-4"><span class="fu"></span><span class="at"></span><span class="fu"></span><span class="fl"></span><span class="fl"></span></span><span id="cb56-5"><span class="at"></span><span class="fu"></span><span class="dv"></span><span class="dv"></span></span><span id="cb56-6"><span class="at"></span><span class="fu"></span><span class="at"></span><span class="dv"></span><span class="at"></span><span class="dv"></span><span class="at"></span><span class="dv"></span></span><span id="cb56-7"><span class="at"></span><span class="dv"></span><span class="sc"></span><span class="dv"></span><span class="sc"></span></span><span id="cb56-8"><span class="fu"></span><span class="at"></span><span class="st"></span><span class="at"></span><span class="st"></span><span class="sc"></span></span><span id="cb56-9"><span class="fu"></span><span class="st"></span><span class="sc"></span></span><span id="cb56-10"><span class="fu"></span><span class="fu"></span><span class="st"></span><span class="sc"></span><span class="sc"></span><span class="dv"></span><span class="sc"></span><span class="st"></span><span class="sc"></span></span><span id="cb56-11"><span class="fu"></span><span class="st"></span></span><span id="cb56-12"><span class="at"></span><span class="st"></span><span class="sc"></span></span><span id="cb56-13"><span class="fu"></span><span class="at"></span><span class="fu"></span><span class="at"></span><span class="dv"></span></span><span id="cb56-14"><span class="at"></span><span class="fu"></span><span class="at"></span><span class="dv"></span><span class="sc"></span></span><span id="cb56-15"><span class="fu"></span><span class="at"></span><span class="fu"></span><span class="at"></span><span class="dv"></span><span class="sc"></span></span><span id="cb56-16"><span class="fu"></span><span class="at"></span><span class="fu"></span><span class="at"></span><span class="dv"></span><span class="sc"></span></span><span id="cb56-17"><span class="fu"></span><span class="at"></span><span class="fu"></span><span class="st"></span><span class="st"></span><span class="sc"></span></span><span id="cb56-18"><span class="fu"></span><span class="at"></span><span class="fu"></span><span class="dv"></span><span class="dv"></span><span class="at"></span><span class="fu"></span><span class="dv"></span><span class="dv"></span></span></code></pre></div></div><div class="cell-output-display"><div><figure class="figure"><p></p></figure></div></div>
+</a></div>
+</div>
+<div class="metadata">
+<a href="../../docs/lessons/jrn-npp-rap-demo.html" class="no-external">
+<div class="listing-date">
+Jul 31, 2026
+</div>
+<div class="listing-author">
+Greg Maurer, Darren James
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="5" data-listing-date-sort="1655596800000" data-listing-file-modified-sort="1788227957524" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="33" data-listing-word-count-sort="6474">
+<div class="thumbnail"><a href="../../docs/lessons/statistical-inference-linear-and-mixed.html" class="no-external">
 
-</tr>
+<p class="card-img-top"><img loading='lazy' src="statistical-inference-linear-and-mixed_files/figure-html/unnamed-chunk-1-1.png"  class="thumbnail-image card-img"/></p>
 
-<tr data-index="3" data-listing-date-sort="1661990400000" data-listing-file-modified-sort="1788218655338" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="744" data-listing-title-sort="JEDS Introduction and Setup" data-listing-filename-sort="setup.qmd">
-<td>
-<span class="listing-date">Sep 1, 2022</span>
-</td>
-<td>
-<a href="../../docs/lessons/setup.html" class="title listing-title">JEDS Introduction and Setup</a>
-</td>
-<td>
-<span class="listing-author">Greg Maurer, Darren James</span>
-</td>
+</a></div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="../../docs/lessons/statistical-inference-linear-and-mixed.html" class="no-external">Statistical inference with general linear models and mixed models</a>
+</h3>
+<div class="delink listing-description"><a href="../../docs/lessons/statistical-inference-linear-and-mixed.html" class="no-external">
+This lesson introduces statistical inference using a sequence of approaches building from mean comparison procedures (t-tests), to simple linear models (often called general…
+</a></div>
+</div>
+<div class="metadata">
+<a href="../../docs/lessons/statistical-inference-linear-and-mixed.html" class="no-external">
+<div class="listing-date">
+Jun 19, 2022
+</div>
+<div class="listing-author">
+Greg Maurer, Darren James
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="6" data-listing-date-sort="1655596800000" data-listing-file-modified-sort="1788227957524" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="493">
+<div class="thumbnail"><a href="../../docs/lessons/teaching-datasets.html" class="no-external">
 
-</tr>
+<p class="card-img-top"><img loading='lazy' src="teaching-datasets_files/figure-html/unnamed-chunk-2-1.png"  class="thumbnail-image card-img"/></p>
 
-<tr data-index="4" data-listing-date-sort="1785456000000" data-listing-file-modified-sort="1788218655338" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6" data-listing-word-count-sort="1108" data-listing-title-sort="Rangeland Analysis Platform (RAP) &amp; JRN NPP" data-listing-filename-sort="jrn-npp-rap-demo.qmd">
-<td>
-<span class="listing-date">Jul 31, 2026</span>
-</td>
-<td>
-<a href="../../docs/lessons/jrn-npp-rap-demo.html" class="title listing-title">Rangeland Analysis Platform (RAP) &amp; JRN NPP</a>
-</td>
-<td>
-<span class="listing-author">Greg Maurer, Darren James</span>
-</td>
-
-</tr>
-
-<tr data-index="5" data-listing-date-sort="1655596800000" data-listing-file-modified-sort="1788218655338" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="33" data-listing-word-count-sort="6409" data-listing-title-sort="Statistical inference with general linear models and mixed models" data-listing-filename-sort="statistical-inference-linear-and-mixed.qmd">
-<td>
-<span class="listing-date">Jun 19, 2022</span>
-</td>
-<td>
-<a href="../../docs/lessons/statistical-inference-linear-and-mixed.html" class="title listing-title">Statistical inference with general linear models and mixed models</a>
-</td>
-<td>
-<span class="listing-author">Greg Maurer, Darren James</span>
-</td>
-
-</tr>
-
-<tr data-index="6" data-listing-date-sort="1655596800000" data-listing-file-modified-sort="1788218655338" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="424" data-listing-title-sort="Teaching Datasets" data-listing-filename-sort="teaching-datasets.qmd">
-<td>
-<span class="listing-date">Jun 19, 2022</span>
-</td>
-<td>
-<a href="../../docs/lessons/teaching-datasets.html" class="title listing-title">Teaching Datasets</a>
-</td>
-<td>
-<span class="listing-author">Greg Maurer, Darren James</span>
-</td>
-
-</tr>
-
-</tbody>
-</table>
+</a></div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="../../docs/lessons/teaching-datasets.html" class="no-external">Teaching Datasets</a>
+</h3>
+<div class="delink listing-description"><a href="../../docs/lessons/teaching-datasets.html" class="no-external">
+This page contains descriptions and the reproducible workflows used to create and load the teaching datasets used in our lessons. In general these start as Jornada data…<code></code>
+</a></div>
+</div>
+<div class="metadata">
+<a href="../../docs/lessons/teaching-datasets.html" class="no-external">
+<div class="listing-date">
+Jun 19, 2022
+</div>
+<div class="listing-author">
+Greg Maurer, Darren James
+</div>
+</a>
+</div>
+</div>
+</div>
 <div class="listing-no-matching d-none">No matching items</div>
 </div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
