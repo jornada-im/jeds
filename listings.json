@@ -12,17 +12,18 @@
     ]
   },
   {
+    "listing": "/docs/slides/index.html",
+    "items": [
+      "/docs/slides/finding-data-slides.html",
+      "/docs/slides/JornadaDatasetsTour.html"
+    ]
+  },
+  {
     "listing": "/workshops/index.html",
     "items": [
       "/workshops/2023-data-therapy-geospatial/index.html",
       "/workshops/2022-data-therapy-git-github/index.html",
       "/workshops/20220629-jrn-ecology-short-course/index.html"
-    ]
-  },
-  {
-    "listing": "/docs/slides/index.html",
-    "items": [
-      "/docs/slides/JornadaDatasetsTour.html"
     ]
   }
 ]
