@@ -1,0 +1,291 @@
+---
+title: "Finding Data for Synthesis"
+subtitle: "Search terms, repositories, and the search loop"
+format:
+  revealjs:
+    theme: default
+    slide-number: true
+    incremental: false
+    fig-align: center
+---
+
+# Choosing search terms
+
+## Learning objectives
+
+- **Understand** the concepts and terms useful when searching for research data
+- **Refine** your synthesis group's research question into the terms of a data query
+
+## Synthesis starts with data discovery
+
+![](img/figure_data-search-venn.png){width=40% fig-align="center" fig-alt="A venn diagram with outer circle 'All available data' and inner circle 'Data that can answer my question'"}
+
+- Synthesis questions are formulated with limited data in-hand
+- The intent is to scale up to "all the available data"
+- A clear research question maps directly to search criteria
+
+## Questions and datasets share the same elements
+
+- **Observational units** — a thing or phenomenon measured → *rows*
+- **Variables** — an attribute that takes different values → *columns*
+
+. . .
+
+- **Groups** — treatments, taxonomic groups, functional types
+- **Temporal dimensions** — when things happen, effect of time
+- **Spatial dimensions** — where things happen, effect of location
+
+## Mapping a question {.smaller}
+
+> *Does species richness increase or decrease after disturbance?*
+
+- **Variables:** presence/absence, richness (# species)
+- **Obs. units:** sampling area w/ known disturbance time
+- **Groups:** maybe?
+- **Temporal:** time since disturbance
+
+## Mapping a question {.smaller}
+
+> *Are forests or deserts more sensitive to vapor pressure deficit?*
+
+- **Variables:** VPD, NPP, evapotranspiration rate
+- **Obs. units:** site meteorology & ecosystem processes
+- **Groups:** forest ecosystems, desert ecosystems
+- **Temporal:** probably — processes vary over time
+
+## Mapping a question {.smaller}
+
+> *Is the latitudinal gradient in small mammal body size changing?*
+
+- **Variables:** body length, mass, capture location
+- **Obs. units:** individual small mammals
+- **Groups:** species? functional group? year captured?
+- **Temporal:** yes, at least two time periods
+- **Spatial:** yes, need a latitudinal gradient
+
+## {{< fa rocket >}} Activity {background-color="#fdf6e3"}
+
+**Map your research question to data search terms**
+
+1. What variables and observational units are of interest?
+2. Will you be comparing groups within the data?
+3. Temporal dimensions?
+4. Spatial dimensions?
+
+# Data repositories
+
+## Learning objectives
+
+- **Understand** the differences between generalist repositories, specialized repositories, and search aggregators
+- **Identify** repositories "known for" particular types of data
+
+## The landscape
+
+- Repositories store and manage research data
+- [re3data.org](https://www.re3data.org/) lists **3,526** repositories
+- You can't search them all — know the landscape and search efficiently
+
+## You are searching metadata, not data
+
+:::: {.columns}
+::: {.column width="55%"}
+Metadata tells you:
+
+- **who** collected the data
+- **what** was collected
+- **when**, **where**, **how**, and **why**
+
+. . .
+
+The essential unit is the **dataset** — data *and* metadata together.
+:::
+::: {.column width="45%"}
+![](img/figure_a-dataset.png){fig-alt="A figure showing a folder with data and metadata files inside"}
+:::
+::::
+
+## Three flavors of repository
+
+- **Generalist** — all kinds of data, lax metadata requirements
+- **Domain-specific** — a discipline, location, or network; higher metadata standards
+- **Data-specific / specialized** — few data types, strict formatting
+
+. . .
+
+Specialization affects how long you spend **finding** data *and* **preparing** it.
+
+## A gradient of specialization
+
+![Adapted from Gries et al. 2023](img/figure_data-repos-conceptual.png){width=75% fig-align="center" fig-alt="Research data repositories as circles along a spectrum of specialization and FAIR-ness"}
+
+## Domain-specific repositories
+
+:::: {.columns}
+::: {.column width="50%"}
+- Arctic Data Center
+- BCO-DMO
+- EDI
+- ESS-DIVE
+:::
+::: {.column width="50%"}
+- NASA
+- ORNL DAAC
+- PANGAEA
+- USGS
+:::
+::::
+
+. . .
+
+R packages: `dataone`, `EDIutils`, `nasadata`, `pangaear`, `dataRetrieval`
+
+## Specialized repositories
+
+:::: {.columns}
+::: {.column width="50%"}
+- AmeriFlux
+- FLUXNET
+- GBIF
+- Google Earth Engine
+- ICOS
+- Microsoft Planetary Computer
+- Movebank
+:::
+::: {.column width="50%"}
+- NCBI
+- NEON
+- NOAA
+- TERN
+- OBIS
+- OpenTopography
+:::
+::::
+
+. . .
+
+R packages: `amerifluxr`, `rgbif`, `rgee`, `rstac`, `move2`, `rentrez`, `neonUtilities`, `ausplotsR`, `robis`
+
+## Generalist repositories
+
+- **Dryad** — data underlying publications; CC0, DOIs
+- **Figshare** — figures, datasets, posters, preprints
+- **Harvard Dataverse** — all disciplines; versioning, DOIs
+- **Zenodo** — any file type; GitHub integration
+
+. . .
+
+Be aware: it can be difficult to separate the wheat from the chaff.
+
+## Searching *across* repositories
+
+Aggregators index metadata from many repositories and link out to the source.
+
+- **DataONE** — environmental and ecological data
+- **Google Dataset Search** — crawls schema.org metadata broadly
+- **OpenAIRE EXPLORE** — thousands of repositories, journals, registries
+- **Open Traits Network** — inventory of trait data repositories
+
+# The Search → Evaluate → Refine loop
+
+## Learning objectives
+
+- **Explain** strategies for searching repositories, aggregators, and search engines
+- **Evaluate** search results and judge whether they can answer a research question
+
+## Searching is iterative
+
+![](img/figure_search-eval-refine.png){width=38% fig-align="center" fig-alt="A circle of pastel arrows labeled Search, Evaluate, and Refine"}
+
+Start simple → evaluate → refine → search again.
+
+You may go around several times.
+
+## Evaluation is the key step
+
+- **Did the search find datasets you know are present?** A basic sanity check on your terms.
+- **Do spot-checked results look fit-for-use?** Are your obs. units, variables, groups, and dimensions present?
+- **Too many results to evaluate?** Add or exclude terms; winnow systematically.
+- **Too few results?** Expand terms, or search elsewhere.
+
+## Refine: expand your search terms
+
+Authors use heterogeneous terms; curators don't always standardize them.
+
+- **Synonyms and acronyms**
+  - "soil respiration" / "soil CO~2~ efflux"
+  - "net primary production" / "NPP"
+  - "grasses" / "Poaceae"
+- **Related concepts**
+  - "fertilization" / "N addition"
+  - "percent cover" / "community composition"
+
+## Refine: go broader
+
+- **Derived metrics** — Simpson's diversity index, vapor pressure deficit
+- **Taxonomic** — genus, family, or functional group instead of binomials
+- **Higher-level processes** — "forest carbon cycle" surfaces "litterfall"
+- **Spatial** — "North Atlantic Ocean" as well as "NES LTER"
+
+## Refine: advanced queries {.smaller}
+
+| Operator | Does | Example |
+|:---|:---|:---|
+| `""` | exact phrase | `"reef biodiversity"` |
+| `*` | wildcard placeholder | `Pinus * data` |
+| `OR` `\|` | either term — broadens | `"prairie pollinator" OR "grassland pollinator"` |
+| `AND` `&` `+` | both terms — narrows | `bat + cactus` |
+| `NOT` `-` `!` | exclude a term | `marine biodiversity data -fishery` |
+
+## Refine: search indexed metadata {.smaller}
+
+Most interfaces expose indexed metadata fields as operators.
+
+| Operator | Does | Example |
+|:---|:---|:---|
+| `site:` | search one domain | `site:.gov bird data` |
+| `filetype:` | specific file extension | `filetype:tif precipitation data` |
+| `intitle:` | word in the title | `intitle:"lithology"` |
+| `inurl:` | word in the URL | `inurl:data soil chemistry` |
+
+## Refine: winnow huge results
+
+- Keep the original search result for reproducibility
+- Document the criteria used to exclude datasets
+- Distribute the work equitably — reviewing is tedious
+
+## {{< fa robot >}} GenAI considerations {background-color="#fdf0e6"}
+
+Useful for long, repetitive metadata extraction and filtering — with guidelines:
+
+1. Download **metadata** for the model to iterate over, not every dataset
+2. Give the agent a clear plan to follow for each dataset
+3. Save all prompts and outputs for reproducibility and disclosure
+
+## Refine: search in new places
+
+1. **More repositories** — revisit the generalist, domain-specific, and specialized lists; script your searches via repository APIs
+2. **Reach out to people** — data managers and researchers can connect you with unpublished data
+
+::: {.fragment}
+GenAI writes API search scripts well — but ask whether you want to learn it yourself, and whether the code will overburden the API.
+:::
+
+## Reproducibility applies to search too
+
+Document as you go:
+
+- What repositories, aggregators, or sources you searched
+- Your queries and results for each round
+- How you filtered results afterward
+- Datasets that were fit for use → your **Data Inventory**
+- What you *didn't* find
+
+## Contingency plans
+
+Little data found isn't the end of the project. It may mean a truly novel question, or a real gap in the research community.
+
+The focus can shift toward:
+
+- A perspective piece highlighting the data gap
+- Proposing a new research network or program
+
