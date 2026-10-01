@@ -18,16 +18,23 @@ format:
 
 ## Synthesis starts with data discovery
 
-![](img/figure_data-search-venn.png){width=40% fig-align="center" fig-alt="A venn diagram with outer circle 'All available data' and inner circle 'Data that can answer my question'"}
-
-- Synthesis questions are formulated with limited data in-hand
+:::: {.columns}
+::: {.column width="50%"}
+- Synthesis questions are often formulated with limited data in-hand
 - The intent is to scale up to "all the available data"
 - A clear research question maps directly to search criteria
+:::
+::: {.column width="50%"}
+![](img/figure_data-search-venn.png){width=75% fig-align="center" fig-alt="A venn diagram with outer circle 'All available data' and inner circle 'Data that can answer my question'"}
+:::
+::::
 
-## Questions and datasets share the same elements
+## Questions and datasets share the same elements {.smaller}
 
-- **Observational units** — a thing or phenomenon measured → *rows*
-- **Variables** — an attribute that takes different values → *columns*
+- **Observational units** — a thing or phenomenon to be measured
+  - → *rows* in a table
+- **Variables** — an attribute/characteristic that can take different values
+  - → *columns* in a table
 
 . . .
 
@@ -43,6 +50,8 @@ format:
 
 > Does variable X increase or decrease with time?
 
+. . .
+
 - **Variables:** species occurrence or richness (#)
 - **Obs. units:** a community w/ known disturbance time
 - **Groups:** _unspecified_ 
@@ -56,6 +65,8 @@ format:
 . . .
 
 > Is group 1 or group 2 more strongly related to variable X?
+
+. . . 
 
 - **Variables:** VPD, primary production (or similar)
 - **Obs. units:** site meteorology & organisms/processes
@@ -71,6 +82,8 @@ format:
 
 > Is the relationship between variable X and variable Y changing?
 
+. . .
+
 - **Variables:** body length or mass, capture location
 - **Obs. units:** individual small mammals
 - **Groups:** _unspecified_
@@ -81,7 +94,7 @@ format:
 
 **With your group (10 min)**
 
-Get into project groups and distill your research questions down to a conceptual mapping like the ones above. Once you have a conceptual map, answer these questions in your group's notes document:
+Get into project groups and distill your research questions down to a conceptual mapping like the ones above. Once you have that, answer these questions in your group's notes document:
 
 1. What observational units is the group asking questions about?
 2. What variables are of interest?
@@ -137,19 +150,23 @@ The essential unit is the **dataset** — data *and* metadata together.
 :::
 ::::
 
-## Three categories of repository
+## Three categories of repository {.smaller}
 
-- **Generalist** — all kinds of data, lax metadata requirements
+:::: {.columns}
+::: {.column width="45%"}
+- **Generalist** — all kinds of data; looser metadata requirements
 - **Domain-specific** — a discipline, location, or network; higher metadata standards
-- **Data-specialist** — few data types, strict metadata and data formatting rules
+- **Data-specialist** — specific data types; strict metadata & data formatting rules
 
 . . .
 
 Specialization affects how long you spend **finding** data *and* **preparing** it.
+:::
+::: {.column width="55%"}
+![A gradient in specialization. Adapted from Gries et al. 2023](img/figure_data-repos-conceptual.png){width=100% fig-align="right" fig-alt="Research data repositories as circles along a spectrum of specialization and FAIR-ness"}
+:::
+::::
 
-## A gradient of specialization
-
-![Adapted from Gries et al. 2023](img/figure_data-repos-conceptual.png){width=75% fig-align="center" fig-alt="Research data repositories as circles along a spectrum of specialization and FAIR-ness"}
 
 ## Domain-specific repositories
 
@@ -220,7 +237,7 @@ Aggregators index metadata from many repositories and link out to the source.
 
 ## Don't double count with aggregators
 
-Many repositories, including **Arctic Data Center**, **BCO-DMO**, **Dryad**, **EDI**, **ESS-DIVE**, **NEON**, **NOAA**, **PANGAEA** and more are tracked by DataONE.
+Many repositories, including **Arctic Data Center**, **BCO-DMO**, **Dryad**, **EDI**, **ESS-DIVE**, **NEON**, **NOAA**, **PANGAEA** and more, are tracked by DataONE.
 
 Be careful to filter out duplicates when searching aggregators AND the repositories they index.
 
@@ -307,7 +324,7 @@ Useful for long, repetitive metadata extraction and filtering. But follow these 
 2. **Reach out to people** — data managers and researchers can connect you with unpublished data
 
 ::: {.fragment}
-GenAI writes API search scripts well — but ask whether you want to learn it yourself, and whether the code will overburden the API.
+`GenAI writes API search scripts well, but ask whether you want to learn it yourself, and whether the code will overburden the API.`
 :::
 
 ## Reproducibility applies to search too
@@ -322,7 +339,9 @@ Document as you go:
 
 ## Contingency plans
 
-Finding little to no data isn't the end. It may mean a truly novel question, or a real gap in the scientific community's research. The focus can shift toward:
+Finding little to no data isn't the end. It may mean a truly novel question, or a real gap in the scientific community's research.
+
+The focus can shift toward:
 
 - A perspective piece highlighting the data gap
-- Proposing a new research network or program
+- Proposing a new research program or network
