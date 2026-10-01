@@ -180,47 +180,75 @@
 <blockquote>
 <p><em>Does species richness increase or decrease after disturbance?</em></p>
 </blockquote>
+<div class="fragment">
+<blockquote>
+<p>Does variable X increase or decrease with time?</p>
+</blockquote>
 <ul>
-<li><strong>Variables:</strong> presence/absence, richness (# species)</li>
-<li><strong>Obs. units:</strong> sampling area w/ known disturbance time</li>
-<li><strong>Groups:</strong> maybe?</li>
+<li><strong>Variables:</strong> species occurrence or richness (#)</li>
+<li><strong>Obs. units:</strong> a community w/ known disturbance time</li>
+<li><strong>Groups:</strong> <em>unspecified</em></li>
 <li><strong>Temporal:</strong> time since disturbance</li>
+<li><strong>Spatial:</strong> <em>unspecified</em></li>
 </ul>
+</div>
 </section>
 <section id="mapping-a-question-1" class="slide level2 smaller">
 <h2>Mapping a question</h2>
 <blockquote>
 <p><em>Are forests or deserts more sensitive to vapor pressure deficit?</em></p>
 </blockquote>
+<div class="fragment">
+<blockquote>
+<p>Is group 1 or group 2 more strongly related to variable X?</p>
+</blockquote>
 <ul>
-<li><strong>Variables:</strong> VPD, NPP, evapotranspiration rate</li>
-<li><strong>Obs. units:</strong> site meteorology &amp; ecosystem processes</li>
+<li><strong>Variables:</strong> VPD, primary production (or similar)</li>
+<li><strong>Obs. units:</strong> site meteorology &amp; organisms/processes</li>
 <li><strong>Groups:</strong> forest ecosystems, desert ecosystems</li>
-<li><strong>Temporal:</strong> probably — processes vary over time</li>
+<li><strong>Temporal:</strong> <em>unspecified (but probably)</em></li>
+<li><strong>Spatial:</strong> <em>unspecified</em></li>
 </ul>
+</div>
 </section>
 <section id="mapping-a-question-2" class="slide level2 smaller">
 <h2>Mapping a question</h2>
 <blockquote>
 <p><em>Is the latitudinal gradient in small mammal body size changing?</em></p>
 </blockquote>
+<div class="fragment">
+<blockquote>
+<p>Is the relationship between variable X and variable Y changing?</p>
+</blockquote>
 <ul>
-<li><strong>Variables:</strong> body length, mass, capture location</li>
+<li><strong>Variables:</strong> body length or mass, capture location</li>
 <li><strong>Obs. units:</strong> individual small mammals</li>
-<li><strong>Groups:</strong> species? functional group? year captured?</li>
-<li><strong>Temporal:</strong> yes, at least two time periods</li>
-<li><strong>Spatial:</strong> yes, need a latitudinal gradient</li>
+<li><strong>Groups:</strong> <em>unspecified</em></li>
+<li><strong>Temporal:</strong> at least two time periods</li>
+<li><strong>Spatial:</strong> latitude gradient</li>
 </ul>
+</div>
 </section>
-<section id="b58fc729-690b-4000-b19f-365a4093b2ff7b7b3c20666120726f636b6574203e7d7d-activity" class="slide level2" data-background-color="#fdf6e3">
-<h2>{{&lt; fa rocket &gt;}} Activity</h2>
-<p><strong>Map your research question to data search terms</strong></p>
+<section id="activity" class="slide level2" data-background-color="#fdf6e3">
+<h2>Activity</h2>
+<p><strong>With your group (10 min)</strong></p>
+<p>Get into project groups and distill your research questions down to a conceptual mapping like the ones above. Once you have a conceptual map, answer these questions in your group’s notes document:</p>
 <ol type="1">
-<li>What variables and observational units are of interest?</li>
-<li>Will you be comparing groups within the data?</li>
-<li>Temporal dimensions?</li>
-<li>Spatial dimensions?</li>
+<li>What observational units is the group asking questions about?</li>
+<li>What variables are of interest?</li>
+<li>Are there any distinct groups to compare?</li>
+<li>Is time or space important? If so, how?</li>
 </ol>
+</section>
+<section id="activity-1" class="slide level2" data-background-color="#fdf6e3">
+<h2>Activity</h2>
+<p><strong>Class discussion (5-10 min)</strong></p>
+<p>Lets spend a few minutes comparing notes on potential search strategies.</p>
+<ul>
+<li>Were there any unresolved questions or stumbling blocks?</li>
+<li>What search terms will the group use?</li>
+<li>Any thoughts on query structure or where to search?</li>
+</ul>
 </section></section>
 <section>
 <section id="data-repositories" class="title-slide slide level1 center">
@@ -242,6 +270,14 @@
 <li>You can’t search them all — know the landscape and search efficiently</li>
 </ul>
 </section>
+<section id="search-methods" class="slide level2">
+<h2>Search methods</h2>
+<ul>
+<li>Graphical web interface <em>or</em> <strong>API</strong> (application programming interface)</li>
+<li>Many repositories have an API “wrapper” in your favorite language</li>
+<li>Nowadays, be prepared to make an account and secure your credentials</li>
+</ul>
+</section>
 <section id="you-are-searching-metadata-not-data" class="slide level2">
 <h2>You are searching metadata, not data</h2>
 <div class="columns">
@@ -259,12 +295,12 @@
 <p><img data-src="img/figure_a-dataset.png" alt="A figure showing a folder with data and metadata files inside"></p>
 </div></div>
 </section>
-<section id="three-flavors-of-repository" class="slide level2">
-<h2>Three flavors of repository</h2>
+<section id="three-categories-of-repository" class="slide level2">
+<h2>Three categories of repository</h2>
 <ul>
 <li><strong>Generalist</strong> — all kinds of data, lax metadata requirements</li>
 <li><strong>Domain-specific</strong> — a discipline, location, or network; higher metadata standards</li>
-<li><strong>Data-specific / specialized</strong> — few data types, strict formatting</li>
+<li><strong>Data-specialist</strong> — few data types, strict metadata and data formatting rules</li>
 </ul>
 <div class="fragment">
 <p>Specialization affects how long you spend <strong>finding</strong> data <em>and</em> <strong>preparing</strong> it.</p>
@@ -296,8 +332,8 @@
 <p>R packages: <code>dataone</code>, <code>EDIutils</code>, <code>nasadata</code>, <code>pangaear</code>, <code>dataRetrieval</code></p>
 </div>
 </section>
-<section id="specialized-repositories" class="slide level2">
-<h2>Specialized repositories</h2>
+<section id="data-specialist-repositories" class="slide level2">
+<h2>Data specialist repositories</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
 <ul>
@@ -363,8 +399,8 @@
 <img data-src="img/figure_search-eval-refine.png" class="quarto-figure quarto-figure-center r-stretch" style="width:38.0%" alt="A circle of pastel arrows labeled Search, Evaluate, and Refine"><p>Start simple → evaluate → refine → search again.</p>
 <p>You may go around several times.</p>
 </section>
-<section id="evaluation-is-the-key-step" class="slide level2">
-<h2>Evaluation is the key step</h2>
+<section id="evaluation-is-key" class="slide level2">
+<h2>Evaluation is key</h2>
 <ul>
 <li><strong>Did the search find datasets you know are present?</strong> A basic sanity check on your terms.</li>
 <li><strong>Do spot-checked results look fit-for-use?</strong> Are your obs. units, variables, groups, and dimensions present?</li>
@@ -372,27 +408,23 @@
 <li><strong>Too few results?</strong> Expand terms, or search elsewhere.</li>
 </ul>
 </section>
-<section id="refine-expand-your-search-terms" class="slide level2">
-<h2>Refine: expand your search terms</h2>
-<p>Authors use heterogeneous terms; curators don’t always standardize them.</p>
+<section id="refine-add-synonyms-and-acronyms" class="slide level2">
+<h2>Refine: add synonyms and acronyms</h2>
+<p>Scientific language is full of closely-related terms</p>
 <ul>
-<li><strong>Synonyms and acronyms</strong>
-<ul>
-<li>“soil respiration” / “soil CO<sub>2</sub> efflux”</li>
-<li>“net primary production” / “NPP”</li>
-<li>“grasses” / “Poaceae”</li>
-</ul></li>
-<li><strong>Related concepts</strong>
-<ul>
-<li>“fertilization” / “N addition”</li>
-<li>“percent cover” / “community composition”</li>
-</ul></li>
+<li>“water” and “H<sub>2</sub>O” are the same thing</li>
+<li>“grasses” and “Poaceae” refer to the same taxonomic group</li>
+<li>“net primary production” is commonly called “NPP”</li>
+<li>“Nitrogen addition” is a kind of “fertilization”</li>
+<li>“soil CO<sub>2</sub> efflux” is mostly equivalent to “soil respiration”</li>
+<li>“relative abundance” is one measure of “community composition”</li>
+<li>“Simpson’s diversity index” is derived from “species abundance” data</li>
+<li>“vapor pressure deficit” is derived from “air temperature” and “humidity”</li>
 </ul>
 </section>
-<section id="refine-go-broader" class="slide level2">
-<h2>Refine: go broader</h2>
+<section id="refine-find-broader-terms" class="slide level2">
+<h2>Refine: find broader terms</h2>
 <ul>
-<li><strong>Derived metrics</strong> — Simpson’s diversity index, vapor pressure deficit</li>
 <li><strong>Taxonomic</strong> — genus, family, or functional group instead of binomials</li>
 <li><strong>Higher-level processes</strong> — “forest carbon cycle” surfaces “litterfall”</li>
 <li><strong>Spatial</strong> — “North Atlantic Ocean” as well as “NES LTER”</li>
@@ -422,7 +454,7 @@
 <tr class="even">
 <td style="text-align: left;"><code>*</code></td>
 <td style="text-align: left;">wildcard placeholder</td>
-<td style="text-align: left;"><code>Pinus * data</code></td>
+<td style="text-align: left;"><code>primary produc*</code></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;"><code>OR</code> <code>\|</code></td>
@@ -437,7 +469,7 @@
 <tr class="odd">
 <td style="text-align: left;"><code>NOT</code> <code>-</code> <code>!</code></td>
 <td style="text-align: left;">exclude a term</td>
-<td style="text-align: left;"><code>marine biodiversity data -fishery</code></td>
+<td style="text-align: left;"><code>marine biodiversity -fishery</code></td>
 </tr>
 </tbody>
 </table>
@@ -490,13 +522,14 @@
 <li>Distribute the work equitably — reviewing is tedious</li>
 </ul>
 </section>
-<section id="b58fc729-690b-4000-b19f-365a4093b2ff7b7b3c20666120726f626f74203e7d7d-genai-considerations" class="slide level2" data-background-color="#fdf0e6">
-<h2>{{&lt; fa robot &gt;}} GenAI considerations</h2>
-<p>Useful for long, repetitive metadata extraction and filtering — with guidelines:</p>
+<section id="genai-considerations" class="slide level2" data-background-color="#fdf0e6">
+<h2>GenAI considerations</h2>
+<p>Useful for long, repetitive metadata extraction and filtering. But follow these guidelines:</p>
 <ol type="1">
 <li>Download <strong>metadata</strong> for the model to iterate over, not every dataset</li>
 <li>Give the agent a clear plan to follow for each dataset</li>
 <li>Save all prompts and outputs for reproducibility and disclosure</li>
+<li>Validate the genAI’s results with some spot checking (at a minumum).</li>
 </ol>
 </section>
 <section id="refine-search-in-new-places" class="slide level2">
@@ -522,8 +555,7 @@
 </section>
 <section id="contingency-plans" class="slide level2">
 <h2>Contingency plans</h2>
-<p>Little data found isn’t the end of the project. It may mean a truly novel question, or a real gap in the research community.</p>
-<p>The focus can shift toward:</p>
+<p>Finding little to no data isn’t the end. It may mean a truly novel question, or a real gap in the scientific community’s research. The focus can shift toward:</p>
 <ul>
 <li>A perspective piece highlighting the data gap</li>
 <li>Proposing a new research network or program</li>
