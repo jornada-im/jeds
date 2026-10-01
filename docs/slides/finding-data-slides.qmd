@@ -218,6 +218,12 @@ Aggregators index metadata from many repositories and link out to the source.
 - **OpenAIRE EXPLORE** — thousands of repositories, journals, registries
 - **Open Traits Network** — inventory of trait data repositories
 
+## Don't double count with aggregators
+
+Many repositories, including **Arctic Data Center**, **BCO-DMO**, **Dryad**, **EDI**, **ESS-DIVE**, **NEON**, **NOAA**, **PANGAEA** and more are tracked by DataONE.
+
+Be careful to filter out duplicates when searching aggregators AND the repositories they index.
+
 # The Search → Evaluate → Refine loop
 
 ## Learning objectives
@@ -240,7 +246,7 @@ You may go around several times.
 - **Too many results to evaluate?** Add or exclude terms; winnow systematically.
 - **Too few results?** Expand terms, or search elsewhere.
 
-## Refine: add synonyms and acronyms
+## Refine: add synonyms and acronyms {.smaller}
 
 Scientific language is full of closely-related terms
 
@@ -265,9 +271,9 @@ Scientific language is full of closely-related terms
 |:---|:---|:---|
 | `""` | exact phrase | `"reef biodiversity"` |
 | `*` | wildcard placeholder | `primary produc*` |
-| `OR` `\|` | either term — broadens | `"prairie pollinator" OR "grassland pollinator"` |
-| `AND` `&` `+` | both terms — narrows | `bat + cactus` |
-| `NOT` `-` `!` | exclude a term | `marine biodiversity -fishery` |
+| `OR`, `|` | either term — broadens | `"prairie pollinator" OR "grassland pollinator"` |
+| `AND`, `&`, `+` | both terms — narrows | `bat + cactus` |
+| `NOT`, `-`, `!` | exclude a term | `marine biodiversity -fishery` |
 
 ## Refine: search indexed metadata {.smaller}
 
