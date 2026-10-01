@@ -39,38 +39,64 @@ format:
 
 > *Does species richness increase or decrease after disturbance?*
 
-- **Variables:** presence/absence, richness (# species)
-- **Obs. units:** sampling area w/ known disturbance time
-- **Groups:** maybe?
+. . .
+
+> Does variable X increase or decrease with time?
+
+- **Variables:** species occurrence or richness (#)
+- **Obs. units:** a community w/ known disturbance time
+- **Groups:** _unspecified_ 
 - **Temporal:** time since disturbance
+- **Spatial:** _unspecified_ 
 
 ## Mapping a question {.smaller}
 
 > *Are forests or deserts more sensitive to vapor pressure deficit?*
 
-- **Variables:** VPD, NPP, evapotranspiration rate
-- **Obs. units:** site meteorology & ecosystem processes
+. . .
+
+> Is group 1 or group 2 more strongly related to variable X?
+
+- **Variables:** VPD, primary production (or similar)
+- **Obs. units:** site meteorology & organisms/processes
 - **Groups:** forest ecosystems, desert ecosystems
-- **Temporal:** probably — processes vary over time
+- **Temporal:** _unspecified (but probably)_
+- **Spatial:** _unspecified_
 
 ## Mapping a question {.smaller}
 
 > *Is the latitudinal gradient in small mammal body size changing?*
 
-- **Variables:** body length, mass, capture location
+. . .
+
+> Is the relationship between variable X and variable Y changing?
+
+- **Variables:** body length or mass, capture location
 - **Obs. units:** individual small mammals
-- **Groups:** species? functional group? year captured?
-- **Temporal:** yes, at least two time periods
-- **Spatial:** yes, need a latitudinal gradient
+- **Groups:** _unspecified_
+- **Temporal:** at least two time periods
+- **Spatial:** latitude gradient
 
-## {{< fa rocket >}} Activity {background-color="#fdf6e3"}
+## Activity {background-color="#fdf6e3"}
 
-**Map your research question to data search terms**
+**With your group (10 min)**
 
-1. What variables and observational units are of interest?
-2. Will you be comparing groups within the data?
-3. Temporal dimensions?
-4. Spatial dimensions?
+Get into project groups and distill your research questions down to a conceptual mapping like the ones above. Once you have a conceptual map, answer these questions in your group's notes document:
+
+1. What observational units is the group asking questions about?
+2. What variables are of interest?
+3. Are there any distinct groups to compare?
+4. Is time or space important? If so, how?
+
+## Activity {background-color="#fdf6e3"}
+
+**Class discussion (5-10 min)**
+
+Lets spend a few minutes comparing notes on potential search strategies.
+
+- Were there any unresolved questions or stumbling blocks?
+- What search terms will the group use?
+- Any thoughts on query structure or where to search?
 
 # Data repositories
 
@@ -84,6 +110,13 @@ format:
 - Repositories store and manage research data
 - [re3data.org](https://www.re3data.org/) lists **3,526** repositories
 - You can't search them all — know the landscape and search efficiently
+
+## Search methods
+
+- Graphical web interface _or_ **API** (application programming interface)
+- Many repositories have an API "wrapper" in your favorite language
+- Nowadays, be prepared to make an account and secure your credentials
+
 
 ## You are searching metadata, not data
 
@@ -104,11 +137,11 @@ The essential unit is the **dataset** — data *and* metadata together.
 :::
 ::::
 
-## Three flavors of repository
+## Three categories of repository
 
 - **Generalist** — all kinds of data, lax metadata requirements
 - **Domain-specific** — a discipline, location, or network; higher metadata standards
-- **Data-specific / specialized** — few data types, strict formatting
+- **Data-specialist** — few data types, strict metadata and data formatting rules
 
 . . .
 
@@ -139,7 +172,7 @@ Specialization affects how long you spend **finding** data *and* **preparing** i
 
 R packages: `dataone`, `EDIutils`, `nasadata`, `pangaear`, `dataRetrieval`
 
-## Specialized repositories
+## Data specialist repositories
 
 :::: {.columns}
 ::: {.column width="50%"}
@@ -200,28 +233,28 @@ Start simple → evaluate → refine → search again.
 
 You may go around several times.
 
-## Evaluation is the key step
+## Evaluation is key
 
 - **Did the search find datasets you know are present?** A basic sanity check on your terms.
 - **Do spot-checked results look fit-for-use?** Are your obs. units, variables, groups, and dimensions present?
 - **Too many results to evaluate?** Add or exclude terms; winnow systematically.
 - **Too few results?** Expand terms, or search elsewhere.
 
-## Refine: expand your search terms
+## Refine: add synonyms and acronyms
 
-Authors use heterogeneous terms; curators don't always standardize them.
+Scientific language is full of closely-related terms
 
-- **Synonyms and acronyms**
-  - "soil respiration" / "soil CO~2~ efflux"
-  - "net primary production" / "NPP"
-  - "grasses" / "Poaceae"
-- **Related concepts**
-  - "fertilization" / "N addition"
-  - "percent cover" / "community composition"
+- "water" and "H~2~O" are the same thing
+- "grasses" and "Poaceae" refer to the same taxonomic group
+- "net primary production" is commonly called "NPP"
+- "Nitrogen addition" is a kind of "fertilization"
+- "soil CO~2~ efflux" is mostly equivalent to "soil respiration" 
+- "relative abundance" is one measure of "community composition"
+- "Simpson's diversity index" is derived from "species abundance" data
+- "vapor pressure deficit" is derived from "air temperature" and "humidity"
 
-## Refine: go broader
+## Refine: find broader terms
 
-- **Derived metrics** — Simpson's diversity index, vapor pressure deficit
 - **Taxonomic** — genus, family, or functional group instead of binomials
 - **Higher-level processes** — "forest carbon cycle" surfaces "litterfall"
 - **Spatial** — "North Atlantic Ocean" as well as "NES LTER"
@@ -231,10 +264,10 @@ Authors use heterogeneous terms; curators don't always standardize them.
 | Operator | Does | Example |
 |:---|:---|:---|
 | `""` | exact phrase | `"reef biodiversity"` |
-| `*` | wildcard placeholder | `Pinus * data` |
+| `*` | wildcard placeholder | `primary produc*` |
 | `OR` `\|` | either term — broadens | `"prairie pollinator" OR "grassland pollinator"` |
 | `AND` `&` `+` | both terms — narrows | `bat + cactus` |
-| `NOT` `-` `!` | exclude a term | `marine biodiversity data -fishery` |
+| `NOT` `-` `!` | exclude a term | `marine biodiversity -fishery` |
 
 ## Refine: search indexed metadata {.smaller}
 
@@ -253,13 +286,14 @@ Most interfaces expose indexed metadata fields as operators.
 - Document the criteria used to exclude datasets
 - Distribute the work equitably — reviewing is tedious
 
-## {{< fa robot >}} GenAI considerations {background-color="#fdf0e6"}
+## GenAI considerations {background-color="#fdf0e6"}
 
-Useful for long, repetitive metadata extraction and filtering — with guidelines:
+Useful for long, repetitive metadata extraction and filtering. But follow these guidelines:
 
 1. Download **metadata** for the model to iterate over, not every dataset
 2. Give the agent a clear plan to follow for each dataset
 3. Save all prompts and outputs for reproducibility and disclosure
+4. Validate the genAI's results with some spot checking (at a minumum).
 
 ## Refine: search in new places
 
@@ -282,10 +316,7 @@ Document as you go:
 
 ## Contingency plans
 
-Little data found isn't the end of the project. It may mean a truly novel question, or a real gap in the research community.
-
-The focus can shift toward:
+Finding little to no data isn't the end. It may mean a truly novel question, or a real gap in the scientific community's research. The focus can shift toward:
 
 - A perspective piece highlighting the data gap
 - Proposing a new research network or program
-
