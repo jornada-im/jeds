@@ -154,18 +154,32 @@
 </section>
 <section id="synthesis-starts-with-data-discovery" class="slide level2">
 <h2>Synthesis starts with data discovery</h2>
-
-<img data-src="img/figure_data-search-venn.png" class="quarto-figure quarto-figure-center r-stretch" style="width:40.0%" alt="A venn diagram with outer circle 'All available data' and inner circle 'Data that can answer my question'"><ul>
-<li>Synthesis questions are formulated with limited data in-hand</li>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li>Synthesis questions are often formulated with limited data in-hand</li>
 <li>The intent is to scale up to “all the available data”</li>
 <li>A clear research question maps directly to search criteria</li>
 </ul>
+</div><div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/figure_data-search-venn.png" class="quarto-figure quarto-figure-center" style="width:75.0%" alt="A venn diagram with outer circle 'All available data' and inner circle 'Data that can answer my question'"></p>
+</figure>
+</div>
+</div></div>
 </section>
-<section id="questions-and-datasets-share-the-same-elements" class="slide level2">
+<section id="questions-and-datasets-share-the-same-elements" class="slide level2 smaller">
 <h2>Questions and datasets share the same elements</h2>
 <ul>
-<li><strong>Observational units</strong> — a thing or phenomenon measured → <em>rows</em></li>
-<li><strong>Variables</strong> — an attribute that takes different values → <em>columns</em></li>
+<li><strong>Observational units</strong> — a thing or phenomenon to be measured
+<ul>
+<li>→ <em>rows</em> in a table</li>
+</ul></li>
+<li><strong>Variables</strong> — an attribute/characteristic that can take different values
+<ul>
+<li>→ <em>columns</em> in a table</li>
+</ul></li>
 </ul>
 <div class="fragment">
 <ul>
@@ -184,6 +198,8 @@
 <blockquote>
 <p>Does variable X increase or decrease with time?</p>
 </blockquote>
+</div>
+<div class="fragment">
 <ul>
 <li><strong>Variables:</strong> species occurrence or richness (#)</li>
 <li><strong>Obs. units:</strong> a community w/ known disturbance time</li>
@@ -202,6 +218,8 @@
 <blockquote>
 <p>Is group 1 or group 2 more strongly related to variable X?</p>
 </blockquote>
+</div>
+<div class="fragment">
 <ul>
 <li><strong>Variables:</strong> VPD, primary production (or similar)</li>
 <li><strong>Obs. units:</strong> site meteorology &amp; organisms/processes</li>
@@ -220,6 +238,8 @@
 <blockquote>
 <p>Is the relationship between variable X and variable Y changing?</p>
 </blockquote>
+</div>
+<div class="fragment">
 <ul>
 <li><strong>Variables:</strong> body length or mass, capture location</li>
 <li><strong>Obs. units:</strong> individual small mammals</li>
@@ -232,7 +252,7 @@
 <section id="activity" class="slide level2" data-background-color="#fdf6e3">
 <h2>Activity</h2>
 <p><strong>With your group (10 min)</strong></p>
-<p>Get into project groups and distill your research questions down to a conceptual mapping like the ones above. Once you have a conceptual map, answer these questions in your group’s notes document:</p>
+<p>Get into project groups and distill your research questions down to a conceptual mapping like the ones above. Once you have that, answer these questions in your group’s notes document:</p>
 <ol type="1">
 <li>What observational units is the group asking questions about?</li>
 <li>What variables are of interest?</li>
@@ -295,21 +315,27 @@
 <p><img data-src="img/figure_a-dataset.png" alt="A figure showing a folder with data and metadata files inside"></p>
 </div></div>
 </section>
-<section id="three-categories-of-repository" class="slide level2">
+<section id="three-categories-of-repository" class="slide level2 smaller">
 <h2>Three categories of repository</h2>
+<div class="columns">
+<div class="column" style="width:45%;">
 <ul>
-<li><strong>Generalist</strong> — all kinds of data, lax metadata requirements</li>
+<li><strong>Generalist</strong> — all kinds of data; looser metadata requirements</li>
 <li><strong>Domain-specific</strong> — a discipline, location, or network; higher metadata standards</li>
-<li><strong>Data-specialist</strong> — few data types, strict metadata and data formatting rules</li>
+<li><strong>Data-specialist</strong> — specific data types; strict metadata &amp; data formatting rules</li>
 </ul>
 <div class="fragment">
 <p>Specialization affects how long you spend <strong>finding</strong> data <em>and</em> <strong>preparing</strong> it.</p>
 </div>
+</div><div class="column" style="width:55%;">
+<div class="quarto-figure quarto-figure-right">
+<figure>
+<p><img data-src="img/figure_data-repos-conceptual.png" style="width:100.0%" alt="Research data repositories as circles along a spectrum of specialization and FAIR-ness"></p>
+<figcaption>A gradient in specialization. Adapted from Gries et al.&nbsp;2023</figcaption>
+</figure>
+</div>
+</div></div>
 </section>
-<section id="a-gradient-of-specialization" class="slide level2">
-<h2>A gradient of specialization</h2>
-
-<img data-src="img/figure_data-repos-conceptual.png" style="width:75.0%" alt="Research data repositories as circles along a spectrum of specialization and FAIR-ness" class="r-stretch quarto-figure-center"><p class="caption">Adapted from Gries et al.&nbsp;2023</p></section>
 <section id="domain-specific-repositories" class="slide level2">
 <h2>Domain-specific repositories</h2>
 <div class="columns">
@@ -383,7 +409,7 @@
 </section>
 <section id="dont-double-count-with-aggregators" class="slide level2">
 <h2>Don’t double count with aggregators</h2>
-<p>Many repositories, including <strong>Arctic Data Center</strong>, <strong>BCO-DMO</strong>, <strong>Dryad</strong>, <strong>EDI</strong>, <strong>ESS-DIVE</strong>, <strong>NEON</strong>, <strong>NOAA</strong>, <strong>PANGAEA</strong> and more are tracked by DataONE.</p>
+<p>Many repositories, including <strong>Arctic Data Center</strong>, <strong>BCO-DMO</strong>, <strong>Dryad</strong>, <strong>EDI</strong>, <strong>ESS-DIVE</strong>, <strong>NEON</strong>, <strong>NOAA</strong>, <strong>PANGAEA</strong> and more, are tracked by DataONE.</p>
 <p>Be careful to filter out duplicates when searching aggregators AND the repositories they index.</p>
 </section></section>
 <section>
@@ -544,7 +570,7 @@
 <li><strong>Reach out to people</strong> — data managers and researchers can connect you with unpublished data</li>
 </ol>
 <div class="fragment">
-<p>GenAI writes API search scripts well — but ask whether you want to learn it yourself, and whether the code will overburden the API.</p>
+<p><code>GenAI writes API search scripts well, but ask whether you want to learn it yourself, and whether the code will overburden the API.</code></p>
 </div>
 </section>
 <section id="reproducibility-applies-to-search-too" class="slide level2">
@@ -560,10 +586,11 @@
 </section>
 <section id="contingency-plans" class="slide level2">
 <h2>Contingency plans</h2>
-<p>Finding little to no data isn’t the end. It may mean a truly novel question, or a real gap in the scientific community’s research. The focus can shift toward:</p>
+<p>Finding little to no data isn’t the end. It may mean a truly novel question, or a real gap in the scientific community’s research.</p>
+<p>The focus can shift toward:</p>
 <ul>
 <li>A perspective piece highlighting the data gap</li>
-<li>Proposing a new research network or program</li>
+<li>Proposing a new research program or network</li>
 </ul>
 
 
