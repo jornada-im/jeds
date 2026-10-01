@@ -380,6 +380,11 @@
 <li><strong>OpenAIRE EXPLORE</strong> — thousands of repositories, journals, registries</li>
 <li><strong>Open Traits Network</strong> — inventory of trait data repositories</li>
 </ul>
+</section>
+<section id="dont-double-count-with-aggregators" class="slide level2">
+<h2>Don’t double count with aggregators</h2>
+<p>Many repositories, including <strong>Arctic Data Center</strong>, <strong>BCO-DMO</strong>, <strong>Dryad</strong>, <strong>EDI</strong>, <strong>ESS-DIVE</strong>, <strong>NEON</strong>, <strong>NOAA</strong>, <strong>PANGAEA</strong> and more are tracked by DataONE.</p>
+<p>Be careful to filter out duplicates when searching aggregators AND the repositories they index.</p>
 </section></section>
 <section>
 <section id="the-search-evaluate-refine-loop" class="title-slide slide level1 center">
@@ -408,7 +413,7 @@
 <li><strong>Too few results?</strong> Expand terms, or search elsewhere.</li>
 </ul>
 </section>
-<section id="refine-add-synonyms-and-acronyms" class="slide level2">
+<section id="refine-add-synonyms-and-acronyms" class="slide level2 smaller">
 <h2>Refine: add synonyms and acronyms</h2>
 <p>Scientific language is full of closely-related terms</p>
 <ul>
@@ -457,17 +462,17 @@
 <td style="text-align: left;"><code>primary produc*</code></td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;"><code>OR</code> <code>\|</code></td>
+<td style="text-align: left;"><code>OR</code>, <code>|</code></td>
 <td style="text-align: left;">either term — broadens</td>
 <td style="text-align: left;"><code>"prairie pollinator" OR "grassland pollinator"</code></td>
 </tr>
 <tr class="even">
-<td style="text-align: left;"><code>AND</code> <code>&amp;</code> <code>+</code></td>
+<td style="text-align: left;"><code>AND</code>, <code>&amp;</code>, <code>+</code></td>
 <td style="text-align: left;">both terms — narrows</td>
 <td style="text-align: left;"><code>bat + cactus</code></td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;"><code>NOT</code> <code>-</code> <code>!</code></td>
+<td style="text-align: left;"><code>NOT</code>, <code>-</code>, <code>!</code></td>
 <td style="text-align: left;">exclude a term</td>
 <td style="text-align: left;"><code>marine biodiversity -fishery</code></td>
 </tr>
