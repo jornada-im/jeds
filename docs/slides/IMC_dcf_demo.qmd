@@ -19,7 +19,7 @@ execute:
 
 - Citation data is scattered across several scholarly databases
 - No single source has every citation
-- **dataset-citation-finder** queries several sources and merges the results,
+- [**dataset-citation-finder**](https://github.com/jornada-im/dataset-citation-finder) queries several sources and merges the results,
   recording which source reported each citation
 
 ## Some history
