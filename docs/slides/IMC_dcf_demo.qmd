@@ -1,0 +1,261 @@
+---
+title: "dataset-citation-finder"
+subtitle: "Finding the papers that cite EDI datasets"
+author: "Gregory Maurer"
+date: today
+format:
+  revealjs:
+    theme: default
+    slide-number: true
+    code-line-numbers: false
+    highlight-style: github
+execute:
+  eval: false
+---
+
+## How do we know when people use data?
+
+> Data citations!
+
+- Citation data is scattered across several scholarly databases
+- No single source has every citation
+- **dataset-citation-finder** queries several sources and merges the results,
+  recording which source reported each citation
+
+## Some history
+
+- EDI repository has a dataset citation database
+- You can upload your own dataset citations to EDI
+- EDI staff used to monitor for and add Google Scholar citations, but no longer
+
+EDI is looking for ways to do this automagically...
+
+## Citation databases
+
+1. [DataCite events](https://support.datacite.org/docs/eventdata-guide) - indexes citations of DataCite DOIs (including EDI's)
+2. [OpenAlex](https://openalex.org) - an open scholarly publication/citation graph
+3. [OpenCitations](https://opencitations.net/) - open registry of scholarly citations
+
+Numbers 2 & 3 pull data from multiple sources, including Crossref, PubMed, OpenAIRE, and more...
+
+## Demo for today
+
+First a basic example with 2 DOIs, then a more complex example:
+
+1. **List** every DOI in one EDI scope (`knb-lter-nes`)
+2. **Search** DataCite Events and OpenAlex for papers citing them
+3. **Explore** the merged results
+4. **Export** to CSV
+
+## Basic usage example {.smaller}
+
+After downloading the package, navigate there and create a synced python environment with `uv`
+
+```{.bash}
+uv sync
+```
+
+```
+Resolved 24 packages in 26ms
+Checked 11 packages in 5ms
+```
+
+Now run `uv run python3` (or `python` if that works on your system) to get to the Python
+interpreter and enter these commands:
+
+```python
+from dataset_citation_finder import find_citations
+df = find_citations(("10.6073/pasta/18dad6748af96c98b72cea3436bf7fe4","10\
+.6073/pasta/5a17c5689767d95056ec63842b981998"), email="gmaurer@nmsu.edu")
+df.to_csv("citations.csv", index=False)
+```
+
+```
+datacite_events: querying 2 DOIs...
+openalex: querying 2 DOIs...
+opencitations: querying 2 DOIs...
+openalex: done (2 answered, 0 failed).
+opencitations: done (2 answered, 0 failed).
+datacite_events: done (2 answered, 0 failed).
+```
+
+# Now for a full EDI scope
+
+(but a pretty small one)
+
+## Step 1 · List the scope's DOIs
+
+EDI DOIs all look like `10.6073/pasta/<hash>`, so the DOI doesn't say which
+scope it's in.
+
+. . .
+
+DataCite *does* store each record's PASTA URL, so `fetch_scope_dois.py` uses that:
+
+```{.bash}
+python demo/fetch_scope_dois.py knb-lter-nes
+```
+
+```
+71 DOIs written to knb-lter-nes_dois.txt
+```
+
+::: aside
+Citation databases list citations per DOI, so we need every EDI package revision to be listed. 71 is the revision count.
+:::
+
+
+## Step 2 · Find citations {.smaller}
+
+```{.python}
+from dataset_citation_finder import find_citations
+
+dois = open("knb-lter-nes_dois.txt").read().split()
+
+cited = find_citations(
+    dois, db_path="nes_demo.sqlite",
+    sources=["datacite_events", "openalex", "opencitations"],
+    email="gmaurer@nmsu.edu",
+    # api_keys={"openalex": "..."},   # optional, raises rate limit
+)
+```
+
+```
+datacite_events: querying 71 DOIs...
+openalex: querying 71 DOIs...
+opencitations: querying 71 DOIs...
+opencitations: done (71 answered, 0 failed).
+openalex: done (71 answered, 0 failed).
+datacite_events: done (71 answered, 0 failed).
+```
+
+::: aside
+Takes a few minutes depending on connection speed. Each DOI's results are saved to an SQLite
+database store as soon as they arrive, so an interrupted run can be resumed.
+:::
+
+## What's in the database?
+
+| Table | Contents |
+|---|---|
+| `citations` | one row per source's report of a citation, with first & last seen dates |
+| `queried` | one row per DOI/source and when each pair was last checked |
+
+## Step 3 · Explore
+
+```{.python}
+from dataset_citation_finder import read_citations
+
+cited = read_citations("nes_demo.sqlite")   # no querying, just the saved results
+cited["cited_doi"].nunique()
+len(cited)
+```
+| **Stat** | **n** |
+|---|---:|
+| At least one citation | 29 |
+| Total unique citations | 58 |
+
+## Each source finds different citations
+
+```{.python}
+cited["sources"].value_counts()
+```
+
+| Found by | Citations |
+|---|---:|
+| DataCite Events only | 25 |
+| OpenAlex only | 4 |
+| All sources | 5 |
+
+- Using only one source would miss some citations  
+- Still not sure which citations are most useful & trustworthy
+
+## Uncited datasets
+
+Not everything gets cited, but we should make sure whether a database answered first.
+
+```{.python}
+queried = read_citations("nes_demo.sqlite", table="queried")   # read in the 'queried' table
+answered = set(queried.dropna(subset=["queried_at"])["cited_doi"]) # drop any not found in a database
+
+uncited = answered - set(cited["cited_doi"])
+len(uncited)
+```
+
+```
+42 # DOIs in the scope that have never been cited
+```
+
+## Step 4 · Export
+
+This is how to export the citations (58 rows, 1 for each cited dataset)
+
+```{.python}
+cited.to_csv("nes_citations.csv", index=False)
+```
+
+::: aside
+`read_citations("nes_demo.sqlite", raw=True)` gives one row per source
+instead (96 rows), with first/last seen dates.
+:::
+
+## The database is re-freshable
+
+```{.python}
+  from dataset_citation_finder import find_citations, read_citations
+
+  db = "nes_demo.sqlite"
+
+  # 1. Get your DOI list and the time of the last check from the store.
+  queried = read_citations(db, table="queried")
+  dois = queried["cited_doi"].unique().tolist()
+  last_run = queried["queried_at"].max() 
+
+  # 2. Re-check every DOI against every source.
+  df = find_citations(dois, db_path=db, email="you@example.org")
+
+  # 3. Citations found for the first time in this run.
+  new = df[df["first_seen"] > last_run]
+  len(new)
+  ```
+
+::: aside
+This updates the database **in place**, and you can pass `refresh_after=timedelta(days=30)` to only check DOIs that haven't been checked for a month or more.
+:::
+
+## Scaling up
+
+This small scope takes a few minutes, but we can improve performance a bit
+with API keys.
+
+| Scope | DOIs |
+|---|---:|
+| `knb-lter-nes` | 71 |
+| `knb-lter-ble` | 132 |
+| `knb-lter-kbs` | 188 |
+| `knb-lter-cap` | 510 |
+| `knb-lter-sev` | 626 |
+
+Theoretically we can do all of EDI, but it is ~83k DOIs, so will probably need
+to run on a server.
+
+::: {.notes}
+OpenAlex dominates runtime (about 2 requests per DOI, throttled). With an
+API key, a large sweep can still hit the daily cap; re-run the next day with
+refresh_after and it picks up where it stopped.
+:::
+
+## Questions for EDI
+
+Should EDI populate DataCite events and Openalex/OpenCitations records automatically?
+
+Remember that EDIutils has a function to add new citations.
+
+## Summary
+
+- Works with **one DOI** or an arbitrary **list** (like a whole EDI scope)
+- Sources so far: **DataCite Events**, **OpenAlex**, **OpenCitations**
+- Records which source reported each citation
+- Results go into a **SQLite** store you can resume, then export to CSV
+
+
